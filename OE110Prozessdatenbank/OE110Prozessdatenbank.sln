@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OE110Prozessdatenbank", "OE110Prozessdatenbank\OE110Prozessdatenbank.csproj", "{D276BCB3-D570-4AA9-9D62-A7AEA722C1F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDCore", "PDCore\PDCore.csproj", "{AC8241A9-B3FD-4828-8164-89AC411B9934}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D276BCB3-D570-4AA9-9D62-A7AEA722C1F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D276BCB3-D570-4AA9-9D62-A7AEA722C1F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D276BCB3-D570-4AA9-9D62-A7AEA722C1F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC8241A9-B3FD-4828-8164-89AC411B9934}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC8241A9-B3FD-4828-8164-89AC411B9934}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC8241A9-B3FD-4828-8164-89AC411B9934}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC8241A9-B3FD-4828-8164-89AC411B9934}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
