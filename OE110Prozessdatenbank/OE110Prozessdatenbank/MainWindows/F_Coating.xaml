@@ -1,7 +1,7 @@
-﻿<Window x:Class="OE110Prozessdatenbank.MainWindows.F_Grinding"
+﻿<Window x:Class="OE110Prozessdatenbank.MainWindows.F_Coating"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="OE 110 Prozessdatenbank - Probenvorbereitung" Height="539" Width="1074" Icon="/OE110Prozessdatenbank;component/icon.ico">
+        Title="OE 110 Prozessdatenbank - Beschichtung" Height="539" Width="1074" Icon="/OE110Prozessdatenbank;component/icon.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -13,7 +13,7 @@
                 <ColumnDefinition Width="296*"/>
             </Grid.ColumnDefinitions>
             <Grid x:Name="g_raw">
-                <ListView Name="LV_Raw" Margin="10,51,10,10" DataContext="{Binding DataRaw, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Table}" SelectionMode="Single" MouseDoubleClick="LV_Raw_DoubvleClick">
+                <ListView Name="LD_Polished" Margin="10,51,10,10" DataContext="{Binding DataPolished, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Table}" SelectionMode="Single" MouseDoubleClick="LV_Raw_DoubvleClick">
                     <ListView.Background>
                         <LinearGradientBrush>
                             <GradientStop  Offset="0" Color="#FFE8E8E8"/>
@@ -56,18 +56,19 @@
                     </ListView.ItemContainerStyle>
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Werkstück" DisplayMemberBinding="{Binding Path=Label}" Width="130"/>
-                            <GridViewColumn Header="Material" DisplayMemberBinding="{Binding Path=Name}" Width="130"/>
+                            <GridViewColumn Header="V-Nr." DisplayMemberBinding="{Binding Path=ReferenceNumber}" Width="50"/>
+                            <GridViewColumn Header="Werkstück" DisplayMemberBinding="{Binding Path=Label}" Width="115"/>
+                            <GridViewColumn Header="Material" DisplayMemberBinding="{Binding Path=Name}" Width="115"/>
                         </GridView>
 
                     </ListView.View>
                 </ListView>
-                <TextBox x:Name="tb_raw" Height="23" Margin="70,23,10,0" TextWrapping="Wrap" Text="{Binding RawFilter, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
+                <TextBox x:Name="tb_raw" Height="23" Margin="70,23,10,0" TextWrapping="Wrap" Text="{Binding PolishedFilter, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
                 <Label Content="Suche:" HorizontalAlignment="Left" Margin="10,19,0,0" VerticalAlignment="Top"/>
                 <Label Content="Suche:" HorizontalAlignment="Left" Margin="323,19,-77,0" VerticalAlignment="Top"/>
             </Grid>
             <Grid Grid.Column="1">
-                <ListView Name="LV_Polished" Margin="10,51,10,10" DataContext="{Binding DataPolished, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Table}" SelectionMode="Single" MouseDoubleClick="MaterialListView_MouseDoubleClick">
+                <ListView Name="LV_Coated" Margin="10,51,10,10" DataContext="{Binding DataCoated, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Table}" SelectionMode="Single" MouseDoubleClick="MaterialListView_MouseDoubleClick">
                     <ListView.Background>
                         <LinearGradientBrush>
                             <GradientStop  Offset="0" Color="#FFE8E8E8"/>
@@ -115,23 +116,20 @@
                             <GridViewColumn Header="Material" DisplayMemberBinding="{Binding Path=Name}" Width="130"/>
                             <GridViewColumn Header="Projekt" DisplayMemberBinding="{Binding Path=ProjectName}" Width="130"/>
                             <GridViewColumn Header="Bearbeiter" DisplayMemberBinding="{Binding Path=Token}" Width="130"/>
-                            <GridViewColumn Header="Datum" DisplayMemberBinding="{Binding Path=ProcessDate}" Width="130"/>
+                            <GridViewColumn Header="Datum" DisplayMemberBinding="{Binding Path=Date}" Width="130"/>
                         </GridView>
 
                     </ListView.View>
                 </ListView>
-                <ComboBox ItemsSource="{Binding Machines}" SelectedItem="{Binding Machine}" DisplayMemberPath="Name" Margin="0,23,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="173"/>
                 <TextBox x:Name="tb_polished" HorizontalAlignment="Left" Height="23" Margin="72,22,0,0" TextWrapping="Wrap" Text="{Binding PolishedFilter, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="220"/>
                 <ComboBox HorizontalAlignment="Left" Margin="297,22,0,0" VerticalAlignment="Top" Width="161" SelectedIndex="0">
                     <ComboBoxItem Content="Projekt"/>
                     <ComboBoxItem Content="Werkstück"/>
                 </ComboBox>
-                <Label Content="Maschine:" HorizontalAlignment="Right" Margin="0,20,187,0" VerticalAlignment="Top"/>
             </Grid>
         </Grid>
         <Grid Background="#FFDEDEDE">
-            <Button Content="Werkstück anlegen" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="143" Click="Button_Click" Margin="10,0,0,10" Height="30" RenderTransformOrigin="-0.373,0.038"/>
-            <Button Content="Material anlegen" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="143" Click="Button_WP_Click" Margin="158,0,0,10" Height="30" RenderTransformOrigin="-0.373,0.038"/>
+            <Button Content="Beschichtungsprozess anlegen" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="197" Margin="10,0,0,10" Height="30" Click="Button_Click"/>
 
         </Grid>
 

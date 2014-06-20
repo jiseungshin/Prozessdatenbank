@@ -8,6 +8,12 @@ namespace PDCore.Processes
 {
     public class PTurningMoore : BaseProcess
     {
+        public PTurningMoore()
+        {
+            UserID = -1;
+            ProjectID = -1;
+            Processing = 1;
+        }
         public int? Radius { get; set; }
         public int? Feed { get; set; }
         public int? CuttingAngle { get; set; }

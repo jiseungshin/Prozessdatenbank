@@ -1,0 +1,8 @@
+﻿<Window x:Class="OE110Prozessdatenbank.ProcessWindows.GenericWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="GenericWindow" Height="300" Width="300" ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+    <Grid x:Name="contentGrid">
+        
+    </Grid>
+</Window>

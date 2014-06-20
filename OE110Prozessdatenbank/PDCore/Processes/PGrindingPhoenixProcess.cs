@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PDCore.BusinessObjects
+namespace PDCore.Processes
 {
-    public class Issue : BusinessObject
+    public class PGrindingPhoenixProcess : BaseProcess
     {
         public string Description { get; set; }
-        public int ProjectID { get; set; }
     }
 }

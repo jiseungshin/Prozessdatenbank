@@ -8,6 +8,12 @@ namespace PDCore.Processes
 {
     public class PGrindingMoore : BaseProcess
     {
+        public PGrindingMoore()
+        {
+            UserID = -1;
+            ProjectID = -1;
+        }
+
         public int? ToolRadius { get; set; }
         public int? Feed { get; set; }
         public int? TippRadius { get; set; }

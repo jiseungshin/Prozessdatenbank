@@ -1,0 +1,23 @@
+﻿<Window x:Class="OE110Prozessdatenbank.Controls.CoatingStandardProcessWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Beschichtung - Standardprozesse" Height="327" Width="425" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <TextBox Height="23" Margin="124,41,10,0" TextWrapping="Wrap" Text="{Binding ProgramNumber}" VerticalAlignment="Top"/>
+        <Label Content="Programmnummer" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.395,-0.808"/>
+        <TextBox Height="23" Margin="124,67,10,0" TextWrapping="Wrap" Text="{Binding Protective}" VerticalAlignment="Top"/>
+        <Label Content="Schutzschicht" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top"/>
+        <TextBox Height="23" Margin="124,93,10,0" TextWrapping="Wrap" Text="{Binding Adherent}" VerticalAlignment="Top"/>
+        <Label Content="Haftschicht" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top"/>
+        <TextBox Height="23" Margin="124,119,10,0" TextWrapping="Wrap" Text="{Binding Thickness}" VerticalAlignment="Top"/>
+        <Label Content="Schichtdicke" HorizontalAlignment="Left" Margin="10,116,0,0" VerticalAlignment="Top"/>
+        <TextBox Height="73" Margin="124,145,10,0" TextWrapping="Wrap" Text="{Binding Remark}" VerticalAlignment="Top"/>
+        <Label Content="Bemerkung" HorizontalAlignment="Left" Margin="10,142,0,0" VerticalAlignment="Top"/>
+        <DatePicker SelectedDate="{Binding Date}" Margin="124,12,10,0" VerticalAlignment="Top"/>
+        <Label Content="Stand" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.395,-0.808"/>
+        <Button x:Name="bt_save" Content="speichern" Command="{Binding SaveProcess}" IsEnabled="{Binding SaveProcess.CanSave}" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Click="bt_save_Click"/>
+        <Button x:Name="bt_cancel" Content="abbrechen" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75" Click="bt_cancel_Click"/>
+        <CheckBox Content="Decoatingprozess" IsChecked="{Binding isDecoating}" HorizontalAlignment="Left" Margin="124,223,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

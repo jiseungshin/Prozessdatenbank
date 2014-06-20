@@ -33,9 +33,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -53,9 +58,75 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Controls\AddWorkpiece.xaml.cs">
+      <DependentUpon>AddWorkpiece.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CCoatingCemecon.xaml.cs">
+      <DependentUpon>CCoatingCemecon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CGrindingMoore.xaml.cs">
+      <DependentUpon>CGrindingMoore.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CGrindingOther.xaml.cs">
+      <DependentUpon>CGrindingOther.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CGrindingPhoenix.xaml.cs">
+      <DependentUpon>CGrindingPhoenix.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CoatingStandardProcessWindow.xaml.cs">
+      <DependentUpon>CoatingStandardProcessWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MaterialWindow.xaml.cs">
+      <DependentUpon>MaterialWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindows\F_Coating.xaml.cs">
+      <DependentUpon>F_Coating.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProcessWindows\GenericWindow.xaml.cs">
+      <DependentUpon>GenericWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\F_CoatingVM.cs" />
+    <Compile Include="ViewModels\F_GrindingVM.cs" />
+    <Compile Include="ViewModels\OMaterialVM.cs" />
+    <Compile Include="ViewModels\OProjectVM.cs" />
+    <Compile Include="ViewModels\OWorkpieceVM.cs" />
+    <Compile Include="ViewModels\PCemeconStandarProcessVM.cs" />
+    <Compile Include="ViewModels\PCoatingCemeconVM.cs" />
+    <Compile Include="ViewModels\PGrindingMooreVM.cs" />
+    <Compile Include="ViewModels\PGrindingOtherVM.cs" />
+    <Compile Include="ViewModels\PGrindingPhoenixVMcs.cs" />
     <Compile Include="ViewModels\PTurningMooreVM.cs" />
+    <Page Include="Controls\AddWorkpiece.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CCoatingCemecon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CGrindingMoore.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CGrindingOther.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CGrindingPhoenix.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CoatingStandardProcessWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\CTurningMoore.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MaterialWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -74,7 +145,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MainWindows\F_Coating.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindows\F_Grinding.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProcessWindows\GenericWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -110,7 +189,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ProcessWindows\" />
+    <Resource Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PDCore\PDCore.csproj">

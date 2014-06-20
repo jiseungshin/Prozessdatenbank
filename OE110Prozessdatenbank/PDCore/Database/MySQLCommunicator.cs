@@ -211,7 +211,11 @@ namespace PDCore.Database
                 m_mySqlCommand = new MySqlCommand("SELECT MAX(" + Field + ") FROM " + Table + ";");
                 m_mySqlCommand.Connection = m_mySqlConnection;
                 m_mySqlConnection.Open();
-                return Convert.ToInt32(m_mySqlCommand.ExecuteScalar()) + 1;
+                object res = m_mySqlCommand.ExecuteScalar();
+                //System.Windows.MessageBox.Show(res.ToString());
+                if (res.ToString() == "")
+                    res = 0;
+                return Convert.ToInt32(res) + 1;
             }
             catch (MySqlException ex)
             {
@@ -333,4 +337,29 @@ namespace PDCore.Database
 
         
     }
+
+    public static class ObjectExtensions
+    {
+        public static string ToDBObject(this object obj)
+        {
+            if (obj == null)
+            {
+                return "NULL";
+            }
+            else
+                if (obj is bool)
+                {
+                    return obj.ToString();
+                }
+            if (obj is int || obj is double)
+            {
+                return obj.ToString();
+            }
+            else
+            {
+                return "'" + obj + "'";
+            }
+
+        }
+    }   
 }

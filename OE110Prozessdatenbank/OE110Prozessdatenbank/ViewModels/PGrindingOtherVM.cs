@@ -13,30 +13,27 @@ using System.Data;
 
 namespace OE110Prozessdatenbank.ViewModels
 {
-    public class PTurningMooreVM : BaseViewModel
+    public  class PGrindingOtherVM : BaseViewModel
     {
-
-        private PTurningMoore m_process;
+        private PGrindingOther m_process;
         private bool m_update = false;
         private Workpiece _wp;
 
-        public PTurningMooreVM(int RefID, bool update)
+        public PGrindingOtherVM(int RefID, bool update)
         {
-            //Update: RefID = WorkPieceID
             ObjectManager.Instance.update();
             SaveProcess = new RelayCommand(Save, CanSave);
             m_update = update;
 
             if (!update)
             {
-                m_process = new PTurningMoore();
+                m_process = new PGrindingOther();
                 _wp = ObjectManager.Instance.getWorkpiece(RefID);
                 m_process.Date = DateTime.Now;
             }
             else
             {
-                m_process = ProcessManager.Instance.getProcessByReference(RefID, 1) as PTurningMoore;
-                _wp = ObjectManager.Instance.getWorkpieceByProcessID(m_process.ID);
+                m_process = ProcessManager.Instance.getProcessByReference(RefID, 4) as PGrindingOther;             
             }           
             
             
@@ -49,16 +46,7 @@ namespace OE110Prozessdatenbank.ViewModels
         public ObservableCollection<Project> Projects { get { return new ObservableCollection<PDCore.BusinessObjects.Project>(ObjectManager.Instance.Projects); } }
 
         public DateTime Date { get { return m_process.Date; } set { m_process.Date = value; } } 
-        public int? Radius { get { return m_process.Radius; } set { m_process.Radius = value; } }
-        public int? Feed { get { return m_process.Feed; } set { m_process.Feed = value; } }
-        public int? CuttingAngle { get { return m_process.CuttingAngle; } set { m_process.CuttingAngle = value; } }
-        public int? CutDepth { get { return m_process.CuttingDepth; } set { m_process.CuttingDepth = value; } }
-        public int? Speed { get { return m_process.Speed; } set { m_process.Speed = value; } }
-        public bool isFinish { get { return m_process.isFinish; } set { m_process.isFinish = value; } }
-        public int Processing { get { return m_process.Processing; } set { m_process.Processing = value; } }
-        public string ToolID { get { return m_process.ToolID; } set { m_process.ToolID = value; } }
-        public int? PV { get { return m_process.PV; } set { m_process.PV = value; } }
-        public int? RA { get { return m_process.RA; } set { m_process.RA = value; } } 
+
         public string Remark { get { return m_process.Remark; } set { m_process.Remark = value; } }
 
         public string WorkpieceLabel
@@ -73,80 +61,25 @@ namespace OE110Prozessdatenbank.ViewModels
             }
         }
 
-        public Workpiece Workpiece
-        { get { return _wp; } }
-
-        public bool ProcessingKonv
-        {
-            get
-            {
-                if (m_process.Processing == 1)
-                    return true;
-                else
-                    return false;
-            }
-
-            set 
-            {
-                if (value == true)
-                    m_process.Processing = 1;
-                else
-                    m_process.Processing = 2;
-            }
-        }
-
-        public bool ProcessingUltra
-        {
-            get
-            {
-                if (m_process.Processing == 2)
-                    return true;
-                else
-                    return false;
-            }
-
-            set
-            {
-                if (value == true)
-                    m_process.Processing = 2;
-                else
-                    m_process.Processing = 1;
-            }
-        }
 
         public DataTable AvailableProcesses
         {
-            get { return ProcessManager.Instance.getData(Queries.QueryTurningMoore).Tables[0]; }
+            get { return ProcessManager.Instance.getData(Queries.QueryGrindingOther).Tables[0]; }
         }
 
         public DataRowView SelectedProcess
         {
             set 
             {
-                int ID = value.Row.Field<int>(DBTurningMoore.ID);
+                int ID = value.Row.Field<int>(DBGrindingOther.ID);
                 int _refID = ProcessManager.Instance.getReference(ID)[0];
-                PTurningMoore _p = ProcessManager.Instance.getProcessByProcessID(ID,_refID, 1) as PTurningMoore;
+                PGrindingOther _p = ProcessManager.Instance.getProcessByProcessID(ID,_refID, 4) as PGrindingOther;
 
-                m_process.CuttingAngle = _p.CuttingAngle;
-                m_process.CuttingDepth = _p.CuttingDepth;
-                m_process.Feed = _p.Feed;
-                m_process.isFinish = _p.isFinish;
-                m_process.Processing = _p.Processing;
-                m_process.Radius = _p.Radius;
-                m_process.Speed = _p.Speed;
-                m_process.ToolID = _p.ToolID;
+                m_process.Remark = _p.Remark;
                 m_process.UserID = _p.UserID;
                 m_process.ProjectID = _p.ProjectID;
 
-                NotifyPropertyChanged("CuttingAngle");
-                NotifyPropertyChanged("CutDepth");
-                NotifyPropertyChanged("Feed");
-                NotifyPropertyChanged("isFinish");
-                NotifyPropertyChanged("ProcessingKonv");
-                NotifyPropertyChanged("ProcessingUltra");
-                NotifyPropertyChanged("Radius");
-                NotifyPropertyChanged("Speed");
-                NotifyPropertyChanged("ToolID");
+                NotifyPropertyChanged("UserID");
                 NotifyPropertyChanged("User");
                 NotifyPropertyChanged("Project");
 
@@ -211,7 +144,6 @@ namespace OE110Prozessdatenbank.ViewModels
         }
 
         #endregion
-
-
+    
     }
 }

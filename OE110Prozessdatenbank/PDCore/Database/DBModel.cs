@@ -66,7 +66,7 @@ namespace PDCore.Database
     {
         public static string Table { get { return "Grinding_Phoenix"; } }
         public static string ID { get { return "Grinding_Phoenix_ID"; } }
-        public static string ProcessID { get { return "Grinding_PhoenixProcess_ID"; } }
+        public static string ProcessID { get { return "Grinding_PhoenixProcesses_ID"; } }
         public static string UserID { get { return "User_ID"; } }
         public static string Remark { get { return "Remark"; } }
         public static string Date { get { return "ProcessDate"; } }
@@ -88,6 +88,12 @@ namespace PDCore.Database
         public static string Status { get { return "Status"; } }
         public static string Label { get { return "Label"; } }
         public static string MaterialID { get { return "Material_ID"; } }
+        public static string PurchaseDate { get { return "PurchaseDate"; } }
+        public static string Geometry { get { return "Geometry"; } }
+        public static string KindOfProbe { get { return "KindOfProbe"; } }
+        public static string BatchNumber { get { return "BatchNumber"; } }
+        public static string isOneWay { get { return "isOneWay"; } }
+
     }
 
     public static class DBProjects
@@ -101,6 +107,14 @@ namespace PDCore.Database
         public static string Remark { get { return "Remark"; } }
         public static string DirPath { get { return "ProjectDirPath"; } }
     }
+    public static class DBIssues
+    {
+        public static string Table { get { return "Issues"; } }
+        public static string ID { get { return "Issue_ID"; } }
+        public static string Description { get { return "Description"; } }
+        public static string ProjectID { get { return "Project_ID"; } }
+        public static string Remark { get { return "Remark"; } }
+    }
 
     public static class DBUser
     {
@@ -110,5 +124,52 @@ namespace PDCore.Database
         public static string FirstName { get { return "FirstName"; } }
         public static string LastName { get { return "LastName"; } }
         public static string isActive { get { return "isActive"; } }
+    }
+
+    public static class DBMAterial
+    {
+        public static string Table { get { return "Materials"; } }
+        public static string ID { get { return "Material_ID"; } }
+        public static string Name { get { return "Name"; } }
+    }
+
+    public static class DBMachine
+    {
+        public static string Table { get { return "Machines"; } }
+        public static string ID { get { return "Machine_ID"; } }
+        public static string Name { get { return "Name"; } }
+        public static string Process { get { return "Process"; } }
+    }
+
+    public static class DBPhoenixProcesses
+    {
+        public static string Table { get { return "Grinding_PhoenixProcesses"; } }
+        public static string ID { get { return "GrindingPhoenixProcesses_ID"; } }
+        public static string Description { get { return "Name"; } }
+    }
+
+    public static class DBCoatingCemecon
+    {
+        public static string Table { get { return "Coating_CemeCon"; } }
+        public static string ID { get { return "Coating_CemeCon_ID"; } }
+        public static string UserID { get { return "User_ID"; } }
+        public static string CoatingProcessID { get { return "CoatingProcess_ID"; } }
+        public static string Date { get { return "Date"; } }
+        public static string Abnormalities { get { return "Abnormalities"; } }
+        public static string Remark { get { return "Remark"; } }
+    }
+
+    public static class DBCoatingCemeconProcess
+    {
+        public static string Table { get { return "Coating_CemeConProcesses"; } }
+        public static string ID { get { return "Coating_CemeConProcesses_ID"; } }
+        public static string ProgramNumber { get { return "MachineProgramNumber"; } }
+        public static string AdherentLayer { get { return "AdherentLayer"; } }
+        public static string ProtectiveLayer { get { return "ProtectiveLayer"; } }
+        public static string Thickness { get { return "Thickness"; } }
+        public static string Remark { get { return "Remark"; } }
+        public static string Date { get { return "Date"; } }
+        public static string IsDecoating { get { return "IsDecoating"; } }
+
     }
 }

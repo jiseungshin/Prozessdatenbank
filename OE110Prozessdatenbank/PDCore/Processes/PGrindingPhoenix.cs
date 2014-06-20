@@ -6,9 +6,16 @@ using System.Threading.Tasks;
 
 namespace PDCore.Processes
 {
-    class PGrindingPhoenix : BaseProcess
+    public class PGrindingPhoenix : BaseProcess
     {
-        public int ID { get; set; }
+
+        public PGrindingPhoenix()
+        {
+            UserID = -1;
+            ProjectID = -1;
+            ProcessID = -1;
+        }
+
         public int? ProcessID { get; set; }
     }
 }

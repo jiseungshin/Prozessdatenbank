@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PDCore.BusinessObjects
+namespace OE110Prozessdatenbank.ViewModels
 {
-    public class Project : BusinessObject
+    public class OProjectVM : BaseViewModel
     {
-        public string Description { get; set; }
-        
+        public OProjectVM()
+        { }
     }
 }

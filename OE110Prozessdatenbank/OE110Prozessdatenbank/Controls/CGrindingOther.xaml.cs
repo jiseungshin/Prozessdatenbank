@@ -16,21 +16,19 @@ using System.Windows.Shapes;
 namespace OE110Prozessdatenbank.Controls
 {
     /// <summary>
-    /// Interaktionslogik für CTurningMoore.xaml
+    /// Interaktionslogik für CGrindingOther.xaml
     /// </summary>
-    public partial class CTurningMoore : UserControl
+    public partial class CGrindingOther : UserControl
     {
-
-        ViewModels.PTurningMooreVM m_vm;
-        public CTurningMoore(int refID, bool update)
+        ViewModels.PGrindingOtherVM m_vm;
+        public CGrindingOther(int refID, bool update)
         {
-            InitializeComponent();
-            m_vm = new ViewModels.PTurningMooreVM(refID, update);
+             InitializeComponent();
+            m_vm = new ViewModels.PGrindingOtherVM(refID, update);
             DataContext = m_vm;
 
             if (update)
                 cb_process.IsEnabled = false;
-           
         }
 
         private void bt_save_Click(object sender, RoutedEventArgs e)
@@ -41,14 +39,6 @@ namespace OE110Prozessdatenbank.Controls
         private void bt_cancel_Click(object sender, RoutedEventArgs e)
         {
             Window.GetWindow(this).Close();
-        }
-
-        private void lb_workpiece_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            AddWorkpiece tt = new Controls.AddWorkpiece(m_vm.Workpiece.ID);
-            tt.g_content.IsEnabled = false;
-            tt.Title = m_vm.Workpiece.Label;
-            tt.ShowDialog();
         }
     }
 }

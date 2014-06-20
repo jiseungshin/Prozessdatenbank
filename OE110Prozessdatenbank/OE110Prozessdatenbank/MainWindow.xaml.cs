@@ -22,9 +22,17 @@ namespace OE110Prozessdatenbank
     /// </summary>
     public partial class MainWindow : Window
     {
+        MainWindows.F_Grinding gg;
+        MainWindows.F_Coating ff;
         public MainWindow()
         {
             InitializeComponent();
+            ff = new MainWindows.F_Coating();
+            ff.Show();
+            gg = new MainWindows.F_Grinding();
+            gg.Show();
+            //this.Close();
+            //Environment.Exit(0);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -44,9 +52,12 @@ namespace OE110Prozessdatenbank
            // tt.Speed = 33;
 
            // PDCore.Manager.ProcessManager.Instance.saveProcess(tt, null, true);
-
-            new MainWindows.F_Grinding().ShowDialog();
+            //MainWindows.F_Grinding ff = new MainWindows.F_Grinding();
+            //new MainWindows.F_Grinding().ShowDialog();
+            ff.ShowDialog();
 
         }
+
+
     }
 }

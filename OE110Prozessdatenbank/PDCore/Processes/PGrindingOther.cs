@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace PDCore.Processes
 {
-    class PGrindingOther : BaseProcess
+    public class PGrindingOther : BaseProcess
     {
-        public int ID { get; set; }
+        public PGrindingOther()
+        {
+            UserID = -1;
+            ProjectID = -1;
+        }
     }
 }

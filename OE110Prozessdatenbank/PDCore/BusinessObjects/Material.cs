@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace PDCore.BusinessObjects
 {
-    public class Issue : BusinessObject
+    public class Material : BusinessObject
     {
-        public string Description { get; set; }
-        public int ProjectID { get; set; }
+        public string Name { get; set; }
     }
 }
