@@ -3,36 +3,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Height="157.343" Width="371.329">
+             mc:Ignorable="d" Height="120" Width="420">
     <Grid>
-        <CheckBox Content="Kratzer auf Glas" IsChecked="{Binding GlassScratches}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <CheckBox Content="Glasablösung" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
-        <CheckBox Content="Glasbruch" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top"/>
-        <ComboBox Margin="276,10,10,0" VerticalAlignment="Top">
+        <ComboBox Margin="128,57,0,0" VerticalAlignment="Top" SelectedIndex="{Binding MoldScratches}" HorizontalAlignment="Left" Width="84">
             <ComboBoxItem Content="keine"/>
             <ComboBoxItem Content="wenig"/>
             <ComboBoxItem Content="viele"/>
         </ComboBox>
-        <ComboBox Margin="276,125,10,0" VerticalAlignment="Top">
+        <ComboBox Margin="331,84,0,0" VerticalAlignment="Top" SelectedIndex="{Binding MoldScratches}" HorizontalAlignment="Left" Width="84">
             <ComboBoxItem Content="sehr gut"/>
             <ComboBoxItem Content="gut"/>
             <ComboBoxItem Content="mäßig"/>
             <ComboBoxItem Content="schlecht"/>
         </ComboBox>
-        <Label Content="Kratzer auf Mold" HorizontalAlignment="Left" Margin="178,10,0,0" VerticalAlignment="Top"/>
-        <Label Content="Korrosion" HorizontalAlignment="Left" Margin="178,39,0,0" VerticalAlignment="Top"/>
-        <Label Content="Glasanhaftung" HorizontalAlignment="Left" Margin="178,75,0,0" VerticalAlignment="Top"/>
-        <Label Content="Gesamturteil" HorizontalAlignment="Left" Margin="178,121,0,0" VerticalAlignment="Top"/>
-        <ComboBox Margin="276,43,10,0" VerticalAlignment="Top">
+        <Label Content="Kratzer auf Mold" HorizontalAlignment="Left" Margin="0,57,0,0" VerticalAlignment="Top"/>
+        <Label Content="Korrosion" HorizontalAlignment="Left" Margin="0,83,0,0" VerticalAlignment="Top"/>
+        <Label Content="Glasanhaftung" HorizontalAlignment="Left" Margin="239,57,0,0" VerticalAlignment="Top"/>
+        <Label Content="Gesamturteil" HorizontalAlignment="Left" Margin="239,84,0,0" VerticalAlignment="Top"/>
+        <ComboBox Margin="128,84,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84" SelectedIndex="{Binding Corrosion}" >
             <ComboBoxItem Content="keine"/>
             <ComboBoxItem Content="wenig"/>
             <ComboBoxItem Content="viele"/>
         </ComboBox>
-        <ComboBox Margin="276,75,10,0" VerticalAlignment="Top">
+        <ComboBox Margin="331,57,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84" SelectedIndex="{Binding GlassAdherence}" >
             <ComboBoxItem Content="keine"/>
             <ComboBoxItem Content="wenig"/>
             <ComboBoxItem Content="viele"/>
         </ComboBox>
+        <Label Content="Werkstück:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Vorgangsnummer:" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top"/>
+        <Label Content="{Binding Label}" HorizontalAlignment="Left" Margin="138,0,0,0" VerticalAlignment="Top" Height="26" Width="88"/>
+        <Label Content="{Binding Reference}" HorizontalAlignment="Left" Margin="138,25,0,0" VerticalAlignment="Top" Height="26" Width="88"/>
 
     </Grid>
 </UserControl>

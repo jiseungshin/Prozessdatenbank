@@ -12,24 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using PDCore.BusinessObjects;
+using PDCore.Processes;
 
 namespace OE110Prozessdatenbank.Controls
 {
     /// <summary>
     /// Interaktionslogik für CQuality.xaml
     /// </summary>
-    public partial class CQuality : UserControl
+    public partial class CProcessQuality : UserControl
     {
-        ViewModels.WorkpieceQualityVM m_vm;
-        public CQuality(Workpiece wp)
+        public CProcessQuality(BaseProcess process)
         {
             InitializeComponent();
-            m_vm = new ViewModels.WorkpieceQualityVM(wp);
-            DataContext = m_vm;
+            DataContext = new ViewModels.ProcessQualityVM(process);
         }
-
-        public void foo()
-        { }
     }
 }

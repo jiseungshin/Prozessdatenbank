@@ -13,7 +13,7 @@ namespace PDCore.Processes
         public DateTime Date { get; set; }
         public string Remark { get; set; }
         public List<Workpiece> Workpieces { get; set; }
-        public QualityObject Quality { get; set; }
+        public ProcessQuality Quality { get; set; }
 
     }
 

@@ -14,7 +14,7 @@ namespace PDCore.Processes
             UserID = -1;
             ProjectID = -1;
             ProcessID = -1;
-            Quality = new BusinessObjects.QualityObject();
+            Quality = new BusinessObjects.ProcessQuality();
             Workpieces = new List<BusinessObjects.Workpiece>();
         }
 

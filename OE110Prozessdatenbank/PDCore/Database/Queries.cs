@@ -1,7 +1,7 @@
 ﻿using System;
 using PDCore.Database;
 
-namespace PDCore.Manager
+namespace PDCore.Database
 {
     public static class Queries
     {
@@ -12,7 +12,6 @@ namespace PDCore.Manager
                             "WHERE Workpieces.Status='raw'";
 }
         }
-
 
         public static string QueryTurningMoore
         {
@@ -225,7 +224,6 @@ namespace PDCore.Manager
         {
             get
             {
-
                 return "SELECT * FROM " + DBCoatingCemecon.Table +
 
                                           //join ReferenceRelations
@@ -263,6 +261,22 @@ namespace PDCore.Manager
                                           " On " + DBIssues.Table + "." + DBIssues.ID +
                                           "=" + DBProcessReferences.Table + "." + DBProcessReferences.IssueID +
                                           " WHERE " + DBWorkpieces.Table + "." + DBWorkpieces.Status + "='coated'";
+
+            }
+        }
+
+        public static string QueryCoatedReferences
+        {
+            get
+            {
+                return "SELECT * FROM " + DBProcessReferences.Table +
+
+                                                 //join Workpiece
+                                                 " LEFT JOIN " + DBWorkpieces.Table +
+                                                 " On " + DBWorkpieces.Table + "." + DBWorkpieces.ID +
+                                                 "=" + DBProcessReferences.Table + "." + DBProcessReferences.WorkpiceID +
+                                                 " WHERE " + DBProcessReferences.Table + "." + DBProcessReferences.Status + "='coated'";
+
 
             }
         }

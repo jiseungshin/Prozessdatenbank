@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Height="623" Width="914">
+             mc:Ignorable="d" Height="623" Width="883">
     <Grid>
         <ComboBox x:Name="cb_user" ItemsSource="{Binding Users}" SelectedItem="{Binding User}" DisplayMemberPath="Description" Margin="166,62,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
         <ComboBox x:Name="cb_project" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" Margin="166,89,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
@@ -43,8 +43,13 @@
         <TextBox HorizontalAlignment="Left" Height="23" Margin="166,476,0,0" TextWrapping="Wrap" Text="{Binding Cycles}" VerticalAlignment="Top" Width="266"/>
         <Label Content="Anzahl Presszyklen" HorizontalAlignment="Left" Margin="10,472,0,0" VerticalAlignment="Top" Width="151"/>
         <TextBox x:Name="tb_remark" Height="69" Margin="166,512,0,0" TextWrapping="Wrap" Text="{Binding Remark}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
-        <Grid x:Name="g_quality" HorizontalAlignment="Left" Height="370" Margin="528,197,-26,0" VerticalAlignment="Top" Width="412" Background="#FFAEAEAE"/>
-        <ComboBox x:Name="cb_Issue_Copy1" Margin="639,128,0,0" SelectedIndex="{Binding WPP}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266">
+        <Grid x:Name="g_quality" Height="240" Margin="454,197,0,0" VerticalAlignment="Top" Background="#FFAEAEAE" HorizontalAlignment="Left" Width="420">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <ComboBox x:Name="cb_Issue_Copy1" Margin="561,101,0,0" SelectedIndex="{Binding WPP}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266">
             <ComboBoxItem Content="innen"/>
             <ComboBoxItem Content="mitte"/>
             <ComboBoxItem Content="außen"/>

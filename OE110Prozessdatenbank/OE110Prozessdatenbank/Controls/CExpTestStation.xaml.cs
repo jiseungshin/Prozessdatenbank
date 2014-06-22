@@ -26,7 +26,6 @@ namespace OE110Prozessdatenbank.Controls
             InitializeComponent();
             m_vm = new ViewModels.PExpTestStationVM(ID, update);
             DataContext = m_vm;
-            g_quality.Children.Add(new CQuality(m_vm.Process));
             
         }
 

@@ -68,6 +68,9 @@
     <Compile Include="Controls\CExpCemeCon.xaml.cs">
       <DependentUpon>CExpCemeCon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CExpMoore.xaml.cs">
+      <DependentUpon>CExpMoore.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CIssue.xaml.cs">
       <DependentUpon>CIssue.xaml</DependentUpon>
     </Compile>
@@ -95,6 +98,9 @@
     <Compile Include="Controls\CoatingStandardProcessWindow.xaml.cs">
       <DependentUpon>CoatingStandardProcessWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CProcessQuality.xaml.cs">
+      <DependentUpon>CProcessQuality.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CQuality.xaml.cs">
       <DependentUpon>CQuality.xaml</DependentUpon>
     </Compile>
@@ -115,6 +121,7 @@
     <Compile Include="ViewModels\OWorkpieceVM.cs" />
     <Compile Include="ViewModels\PCemeconStandarProcessVM.cs" />
     <Compile Include="ViewModels\PCoatingCemeconVM.cs" />
+    <Compile Include="ViewModels\PExpMooreVM.cs" />
     <Compile Include="ViewModels\PExpTestStationVM.cs" />
     <Compile Include="ViewModels\PExpCemeConVM.cs" />
     <Compile Include="ViewModels\PExpOtherVM.cs" />
@@ -132,6 +139,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\CExpCemeCon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CExpMoore.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -170,6 +181,10 @@
     <Page Include="Controls\CoatingStandardProcessWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CProcessQuality.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\CQuality.xaml">
       <SubType>Designer</SubType>

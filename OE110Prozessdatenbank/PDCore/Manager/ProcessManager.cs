@@ -66,7 +66,7 @@ namespace PDCore.Manager
         {
             getCemeconStandardProcesses();
         }
-        //[Obsolete ("Use new Base Process Workpiece Relation")]
+
         public void saveProcess(BaseProcess process, bool update)
         {
             string test = process.GetType().ToString();
@@ -99,6 +99,9 @@ namespace PDCore.Manager
                 case "PDCore.Processes.PExpTestStation":
                     saveExpTestStationProcess(process, update);
                     break;
+                case "PDCore.Processes.PExpMoore":
+                    saveExpMooreProcess(process, update);
+                    break;
             }
         }
 
@@ -117,6 +120,8 @@ namespace PDCore.Manager
                     return getGrindingOtherProcess(PID);
                 case 5:
                     return getCoatingCemeConProcess(PID);
+                case 6:
+                    return getExpMooreProcess(PID);
                 case 7:
                     return getExpTestStationProcess(PID);
                 case 8:
@@ -448,6 +453,49 @@ namespace PDCore.Manager
             return _p;
         }
 
+        private BaseProcess getExpMooreProcess(int PID)
+        {
+            DataRow _dr = (_myCommunicator.getDataSet("SELECT * from " + DBExpMoore.Table +
+                                                               " where " + DBExpMoore.ID + "=" + PID)).Tables[0].Rows[0];
+
+            List<int> _references = getReference(PID);
+
+            DataRow _dr2 = (_myCommunicator.getDataSet("SELECT * from " + DBProcessReferences.Table +
+                                                               " where " + DBProcessReferences.RefNumber + "=" + _references[0])).Tables[0].Rows[0];
+
+            PExpMoore _p = new PExpMoore();
+
+            //get Workpieces 
+            for (int i = 0; i < _references.Count; i++)
+            {
+                _p.Workpieces.Add(ObjectManager.Instance.getWorkpieceByReference(_references[i]));
+            }
+
+
+            _p.ID = PID;
+            _p.Date = _dr.Field<DateTime>(DBExpMoore.Date);
+            _p.UserID = _dr.Field<int>(DBExpMoore.UserID);
+            _p.Remark = _dr.Field<string>(DBExpMoore.Remark);
+            _p.Atmosphere = _dr.Field<string>(DBExpMoore.Atmosphere);
+            _p.Cycles = _dr.Field<int?>(DBExpMoore.Cycles);
+            _p.GlassID = _dr.Field<int?>(DBExpMoore.GlassID);
+            _p.LowerWP = _dr.Field<int?>(DBExpMoore.LowerWorkpieceID);
+            _p.Force = _dr.Field<double?>(DBExpMoore.Force);
+            _p.PressTime = _dr.Field<double?>(DBExpMoore.PressTime);
+            _p.ProgramTitle = _dr.Field<string>(DBExpMoore.ProgramTitle);
+            _p.ResultID = _dr.Field<int?>(DBExpMoore.ResultID);
+            _p.ROI = _dr.Field<string>(DBExpMoore.RegionOfInterest);
+            _p.Tmax = _dr.Field<double?>(DBExpMoore.Tmax);
+            _p.Tmin = _dr.Field<double?>(DBExpMoore.Tmin);
+            _p.TOut = _dr.Field<double?>(DBExpMoore.TOut);
+            _p.UpperWP = _dr.Field<int?>(DBExpMoore.UpperWorkpieceID);
+
+            _p.ProjectID = _dr2.Field<int?>(DBProcessReferences.ProjectID);
+            _p.IssueID = _dr2.Field<int?>(DBProcessReferences.IssueID);
+
+            return _p;
+        }
+
 
         #endregion
 
@@ -492,11 +540,13 @@ namespace PDCore.Manager
             foreach (Workpiece wp in Process.Workpieces)
             {
                 _ref = getNextRefNumber();
-                _queries.Add("INSERT INTO " + DBProcessReferences.Table + " (" + DBProcessReferences.RefNumber + "," + DBProcessReferences.WorkpiceID + "," + DBProcessReferences.ProjectID + "," + DBProcessReferences.IssueID +
-                                ") VALUES (" + _ref + ", " + wp.ID + ", " + Process.ProjectID.ToDBObject() + ", " + Process.IssueID.ToDBObject() + ")");
+                _queries.Add("INSERT INTO " + DBProcessReferences.Table + " (" + DBProcessReferences.RefNumber + "," + DBProcessReferences.WorkpiceID + "," + DBProcessReferences.ProjectID + "," + DBProcessReferences.IssueID + "," + DBProcessReferences.Status +
+                                ") VALUES (" + _ref + ", " + wp.ID + ", " + Process.ProjectID.ToDBObject() + ", " + Process.IssueID.ToDBObject() + ", " + status.ToDBObject() + ")");
 
                 _queries.Add("INSERT INTO " + DBProcessReferenceRelation.Table + " (" + DBProcessReferenceRelation.PID + "," + DBProcessReferenceRelation.MachineID + "," + DBProcessReferenceRelation.RefNumber +
                                ") VALUES (" + ProcessID + ", " + MachineID + "," + _ref + ")");
+
+                _queries.Add("INSERT INTO " + DBWorkpieceQuality.Table + " (" + DBProcessReferences.RefNumber +") VALUES (" + _ref + ")");
 
                 _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.Status + " = '"+status+"' WHERE " + DBWorkpieces.ID + "=" + wp.ID);
             
@@ -748,6 +798,7 @@ namespace PDCore.Manager
 
 
                     _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.Status + " = 'coated' WHERE " + DBWorkpieces.ID + "=" + wp.ID);
+                    _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.Status + " = 'coated' WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
                     _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.ProjectID + " = " + process.ProjectID + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
                     _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.IssueID + " = " + process.IssueID + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
                 }
@@ -793,7 +844,13 @@ namespace PDCore.Manager
                 _queries.Add("Update " + DBExpCemeCon.Table + " Set " + DBExpCemeCon.ProcessID + " = " + Process.ProcessID.ToDBObject() + " WHERE " + DBExpCemeCon.ID + "=" + Process.ID);
                 _queries.Add("Update " + DBExpCemeCon.Table + " Set " + DBExpCemeCon.ResultID + " = " + Process.ResultID.ToDBObject() + " WHERE " + DBExpCemeCon.ID + "=" + Process.ID);
                 _queries.Add("Update " + DBExpCemeCon.Table + " Set " + DBExpCemeCon.Temperature + " = " + Process.Temperature.ToDBObject() + " WHERE " + DBExpCemeCon.ID + "=" + Process.ID);
-                
+
+                foreach (Workpiece wp in Process.Workpieces)
+                {
+                    _queries.Add("Update " + DBWorkpieceQuality.Table + " Set " + DBWorkpieceQuality.Corrosion + " = " + wp.Quality.Corrosion.ToDBObject() + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + wp.CurrentRefereneNumber);
+                    _queries.Add("Update " + DBWorkpieceQuality.Table + " Set " + DBWorkpieceQuality.GlassAdherence + " = " + wp.Quality.GlassAdherence.ToDBObject() + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + wp.CurrentRefereneNumber);
+                    _queries.Add("Update " + DBWorkpieceQuality.Table + " Set " + DBWorkpieceQuality.MoldScratches + " = " + wp.Quality.MoldScratches.ToDBObject() + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + wp.CurrentRefereneNumber);
+                }
 
             }
             else
@@ -807,10 +864,16 @@ namespace PDCore.Manager
 
 
                     _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.Status + " = 'processed' WHERE " + DBWorkpieces.ID + "=" + wp.ID);
+                    _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.Status + " = 'processed' WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
                     _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.ProjectID + " = " + process.ProjectID + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
                     _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.IssueID + " = " + process.IssueID + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
+
+                    _queries.Add("Update " + DBWorkpieceQuality.Table + " Set " + DBWorkpieceQuality.Corrosion + " = " + wp.Quality.Corrosion.ToDBObject() + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + wp.CurrentRefereneNumber);
+                    _queries.Add("Update " + DBWorkpieceQuality.Table + " Set " + DBWorkpieceQuality.GlassAdherence + " = " + wp.Quality.GlassAdherence.ToDBObject() + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + wp.CurrentRefereneNumber);
+                    _queries.Add("Update " + DBWorkpieceQuality.Table + " Set " + DBWorkpieceQuality.MoldScratches + " = " + wp.Quality.MoldScratches.ToDBObject() + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + wp.CurrentRefereneNumber);
                 }
 
+                _queries.Add(saveProcessQuality(process));
 
                 _queries.Add("INSERT INTO " + DBExpCemeCon.Table + " (" + DBExpCemeCon.ID + "," +
                                                                         DBExpCemeCon.UserID + "," +
@@ -834,8 +897,6 @@ namespace PDCore.Manager
                                                                              Process.ResultID.ToDBObject() + "," +
                                                                              Process.Temperature.ToDBObject() + "," +
                                                                                Process.Remark.ToDBObject() + ")");
-
-
 
 
             }
@@ -867,6 +928,13 @@ namespace PDCore.Manager
                 _queries.Add("Update " + DBExpTestStation.Table + " Set " + DBExpTestStation.PressTemperature + " = " + Process.PressTemperature.ToDBObject() + " WHERE " + DBExpTestStation.ID + "=" + Process.ID);
                 _queries.Add("Update " + DBExpTestStation.Table + " Set " + DBExpTestStation.SecForce + " = " + Process.SecondForce.ToDBObject() + " WHERE " + DBExpTestStation.ID + "=" + Process.ID);
                 _queries.Add("Update " + DBExpTestStation.Table + " Set " + DBExpTestStation.WPPosition + " = " + Process.WPPosition.ToDBObject() + " WHERE " + DBExpTestStation.ID + "=" + Process.ID);
+
+                foreach (Workpiece wp in Process.Workpieces)
+                {
+                    _queries.Add("Update " + DBWorkpieceQuality.Table + " Set " + DBWorkpieceQuality.Corrosion + " = " + wp.Quality.Corrosion.ToDBObject() + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + wp.CurrentRefereneNumber);
+                    _queries.Add("Update " + DBWorkpieceQuality.Table + " Set " + DBWorkpieceQuality.GlassAdherence + " = " + wp.Quality.GlassAdherence.ToDBObject() + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + wp.CurrentRefereneNumber);
+                    _queries.Add("Update " + DBWorkpieceQuality.Table + " Set " + DBWorkpieceQuality.MoldScratches + " = " + wp.Quality.MoldScratches.ToDBObject() + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + wp.CurrentRefereneNumber);
+                }
             }
             else
             {
@@ -878,9 +946,16 @@ namespace PDCore.Manager
                                    ") VALUES (" + _pro + ", " + 1 + "," + wp.CurrentRefereneNumber + ")");
 
                     _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.Status + " = 'processed' WHERE " + DBWorkpieces.ID + "=" + wp.ID);
+                    _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.Status + " = 'processed' WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
                     _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.ProjectID + " = " + process.ProjectID + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
                     _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.IssueID + " = " + process.IssueID + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
+
+                    _queries.Add("Update " + DBWorkpieceQuality.Table + " Set " + DBWorkpieceQuality.Corrosion + " = " + wp.Quality.Corrosion.ToDBObject() + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + wp.CurrentRefereneNumber);
+                    _queries.Add("Update " + DBWorkpieceQuality.Table + " Set " + DBWorkpieceQuality.GlassAdherence + " = " + wp.Quality.GlassAdherence.ToDBObject() + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + wp.CurrentRefereneNumber);
+                    _queries.Add("Update " + DBWorkpieceQuality.Table + " Set " + DBWorkpieceQuality.MoldScratches + " = " + wp.Quality.MoldScratches.ToDBObject() + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + wp.CurrentRefereneNumber);
                 }
+
+                _queries.Add(saveProcessQuality(process));
 
                 _queries.Add("INSERT INTO " + DBExpTestStation.Table + " (" + DBExpTestStation.ID + "," +
                                                                           DBExpTestStation.UserID + "," +
@@ -943,9 +1018,12 @@ namespace PDCore.Manager
                                    ") VALUES (" + _pro + ", " + 1 + "," + wp.CurrentRefereneNumber + ")");
 
                     _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.Status + " = 'processed' WHERE " + DBWorkpieces.ID + "=" + wp.ID);
+                    _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.Status + " = 'processed' WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
                     _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.ProjectID + " = " + process.ProjectID + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
                     _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.IssueID + " = " + process.IssueID + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
                 }
+
+                _queries.Add(saveProcessQuality(process));
 
                 _queries.Add("INSERT INTO " + DBExpOther.Table + " (" + DBExpOther.ID + "," +
                                                                           DBExpOther.UserID + "," +
@@ -958,6 +1036,112 @@ namespace PDCore.Manager
             }
 
             _myCommunicator.executeTransactedQueries(_queries);
+        }
+
+        private void saveExpMooreProcess(BaseProcess process, bool update)
+        {
+            List<string> _queries = new List<string>();
+
+            PExpMoore Process = process as PExpMoore;
+
+            if (update)
+            {
+                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Atmosphere + " = " + Process.Atmosphere.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Date + " = " + Process.Date.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Remark + " = " + Process.Remark.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.UserID + " = " + Process.UserID.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.GlassID + " = " + Process.GlassID.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.ResultID + " = " + Process.ResultID.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Cycles + " = " + Process.Cycles.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Force + " = " + Process.Force.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.PressTime + " = " + Process.PressTime.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.ProgramTitle + " = " + Process.ProgramTitle.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.RegionOfInterest + " = " + Process.ROI.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Tmax + " = " + Process.Tmax.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Tmin + " = " + Process.Tmin.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.TOut + " = " + Process.TOut.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+
+                foreach (Workpiece wp in Process.Workpieces)
+                {
+                    _queries.Add("Update " + DBWorkpieceQuality.Table + " Set " + DBWorkpieceQuality.Corrosion + " = " + wp.Quality.Corrosion.ToDBObject() + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + wp.CurrentRefereneNumber);
+                    _queries.Add("Update " + DBWorkpieceQuality.Table + " Set " + DBWorkpieceQuality.GlassAdherence + " = " + wp.Quality.GlassAdherence.ToDBObject() + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + wp.CurrentRefereneNumber);
+                    _queries.Add("Update " + DBWorkpieceQuality.Table + " Set " + DBWorkpieceQuality.MoldScratches + " = " + wp.Quality.MoldScratches.ToDBObject() + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + wp.CurrentRefereneNumber);
+                }
+           
+            }
+            else
+            {
+                int _pro = getNextProcessIndex();
+
+                foreach (Workpiece wp in Process.Workpieces)
+                {
+                    _queries.Add("INSERT INTO " + DBProcessReferenceRelation.Table + " (" + DBProcessReferenceRelation.PID + "," + DBProcessReferenceRelation.MachineID + "," + DBProcessReferenceRelation.RefNumber +
+                                   ") VALUES (" + _pro + ", " + 1 + "," + wp.CurrentRefereneNumber + ")");
+
+                    _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.Status + " = 'processed' WHERE " + DBWorkpieces.ID + "=" + wp.ID);
+                    _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.Status + " = 'processed' WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
+                    _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.ProjectID + " = " + process.ProjectID + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
+                    _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.IssueID + " = " + process.IssueID + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
+
+                    _queries.Add("Update " + DBWorkpieceQuality.Table + " Set " + DBWorkpieceQuality.Corrosion + " = " + wp.Quality.Corrosion.ToDBObject() + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + wp.CurrentRefereneNumber);
+                    _queries.Add("Update " + DBWorkpieceQuality.Table + " Set " + DBWorkpieceQuality.GlassAdherence + " = " + wp.Quality.GlassAdherence.ToDBObject() + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + wp.CurrentRefereneNumber);
+                    _queries.Add("Update " + DBWorkpieceQuality.Table + " Set " + DBWorkpieceQuality.MoldScratches + " = " + wp.Quality.MoldScratches.ToDBObject() + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + wp.CurrentRefereneNumber);
+                }
+
+                _queries.Add(saveProcessQuality(process));
+
+                _queries.Add("INSERT INTO " + DBExpMoore.Table + " (" + DBExpMoore.ID + "," +
+                                                                          DBExpMoore.UserID + "," +
+                                                                          DBExpMoore.Date + "," +
+                                                                          DBExpMoore.Atmosphere + "," +
+                                                                          DBExpMoore.Cycles + "," +
+                                                                          DBExpMoore.GlassID + "," +
+                                                                          DBExpMoore.Force + "," +
+                                                                          DBExpMoore.LowerWorkpieceID + "," +
+                                                                          DBExpMoore.PressTime + "," +
+                                                                          DBExpMoore.ProgramTitle + "," +
+                                                                          DBExpMoore.RegionOfInterest + "," +
+                                                                          DBExpMoore.ResultID + "," +
+                                                                          DBExpMoore.Tmax + "," +
+                                                                          DBExpMoore.Tmin + "," +
+                                                                          DBExpMoore.TOut + "," +
+                                                                          DBExpMoore.UpperWorkpieceID + "," +
+                                                                          DBExpMoore.Remark + ") Values (" +
+                                                                             _pro + "," +
+                                                                             Process.UserID.ToDBObject() + "," +
+                                                                             Process.Date.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + "," +
+                                                                             Process.Atmosphere.ToDBObject() + "," +
+                                                                             Process.Cycles.ToDBObject() + "," +
+                                                                             Process.GlassID.ToDBObject() + "," +
+                                                                             Process.Force.ToDBObject() + "," +
+                                                                             Process.LowerWP.ToDBObject() + "," +
+                                                                             Process.PressTime.ToDBObject() + "," +
+                                                                             Process.ProgramTitle.ToDBObject() + "," +
+                                                                             Process.ROI.ToDBObject() + "," +
+                                                                             Process.ResultID.ToDBObject() + "," +
+                                                                             Process.Tmax.ToDBObject() + "," +
+                                                                             Process.Tmin.ToDBObject() + "," +
+                                                                             Process.TOut.ToDBObject() + "," +
+                                                                             Process.UpperWP.ToDBObject() + "," +
+                                                                             Process.Remark.ToDBObject() + ")");
+            }
+
+            _myCommunicator.executeTransactedQueries(_queries);
+        }
+
+        private string saveProcessQuality(BaseProcess Process)
+        {
+
+            return "INSERT INTO " + DBProcessQuality.Table + " (" + DBProcessQuality.PID + "," +
+                                                                          DBProcessQuality.GlassBreakage + "," +
+                                                                          DBProcessQuality.GlassPeeling + "," +
+                                                                          DBProcessQuality.GlassScratches + "," +
+                                                                          DBProcessQuality.OverallResult + ") Values (" +
+                                                                          Process.ID + "," +
+                                                                           Process.Quality.GlassBreakage.ToDBObject() + "," +
+                                                                            Process.Quality.GlassPeeling.ToDBObject() + "," +
+                                                                             Process.Quality.GlassSratches.ToDBObject() + "," +
+                                                                               Process.Quality.OverallResult.ToDBObject() + ")";
         }
 
         #endregion

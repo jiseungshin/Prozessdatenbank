@@ -13,7 +13,7 @@ namespace PDCore.Processes
             UserID = -1;
             ProjectID = -1;
             Workpieces = new List<BusinessObjects.Workpiece>();
-            Quality = new BusinessObjects.QualityObject();
+            Quality = new BusinessObjects.ProcessQuality();
         }
 
         public int? ToolRadius { get; set; }

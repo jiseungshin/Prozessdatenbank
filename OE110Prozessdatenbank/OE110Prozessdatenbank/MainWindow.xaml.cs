@@ -38,12 +38,12 @@ namespace OE110Prozessdatenbank
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
-            //ProcessWindows.GenericWindow gq = new ProcessWindows.GenericWindow();
-            //gq.contentGrid.Children.Add(new Controls.CExpTestStation(18,true));
-            //gq.ShowDialog();
+            ProcessWindows.GenericWindow gq = new ProcessWindows.GenericWindow();
+            gq.contentGrid.Children.Add(new Controls.CExpMoore(5));
+            gq.ShowDialog();
 
             //new Controls.CProject(5).ShowDialog();
-            new Controls.CoatingSPAdministration().ShowDialog();
+            //new Controls.CoatingSPAdministration().ShowDialog();
             //List<int?> test = PDCore.Manager.ObjectManager.Instance.getProjectIssueIDS(2);
             //// MessageBox.Show(PDCore.Manager.ProcessManager.Instance.getNextProcessIndex().ToString());
            //// PDCore.Manager.ProcessManager.Instance

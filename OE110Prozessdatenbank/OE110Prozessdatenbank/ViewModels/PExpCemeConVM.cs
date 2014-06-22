@@ -101,7 +101,7 @@ namespace OE110Prozessdatenbank.ViewModels
 
             set
             {
-                m_process.ProjectID = value.ID;
+                m_process.GlassID = value.ID;
             }
         }
 

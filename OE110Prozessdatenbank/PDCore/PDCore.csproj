@@ -56,12 +56,13 @@
     <Compile Include="Database\MySQLCommunicator.cs" />
     <Compile Include="Manager\ObjectManager.cs" />
     <Compile Include="Manager\ProcessManager.cs" />
-    <Compile Include="Manager\Queries.cs" />
+    <Compile Include="Database\Queries.cs" />
     <Compile Include="Manager\Updater.cs" />
     <Compile Include="Processes\PCoatingCemecon.cs" />
     <Compile Include="Processes\PCoatingCemeconProcess.cs" />
     <Compile Include="Processes\PExpCemeCon.cs" />
     <Compile Include="Processes\PExpOther.cs" />
+    <Compile Include="Processes\PExpMoore.cs" />
     <Compile Include="Processes\PExpTestStation.cs" />
     <Compile Include="Processes\PGrindingMoore.cs" />
     <Compile Include="Processes\PGrindingOther.cs" />

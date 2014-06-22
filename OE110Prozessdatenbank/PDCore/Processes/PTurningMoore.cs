@@ -14,7 +14,7 @@ namespace PDCore.Processes
             ProjectID = -1;
             Processing = 1;
             Workpieces = new List<BusinessObjects.Workpiece>();
-            Quality = new BusinessObjects.QualityObject();
+            Quality = new BusinessObjects.ProcessQuality();
         }
         public int? Radius { get; set; }
         public int? Feed { get; set; }

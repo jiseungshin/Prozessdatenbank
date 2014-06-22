@@ -22,6 +22,7 @@ namespace PDCore.Database
         public static string ProjectID { get { return "Project_ID"; } }
         public static string IssueID { get { return "Issue_ID"; } }
         public static string WorkpiceID { get { return "Workpiece_ID"; } }
+        public static string Status { get { return "Status"; } }
     }
     public static class DBTurningMoore
     {
@@ -90,6 +91,25 @@ namespace PDCore.Database
         public static string isOneWay { get { return "isOneWay"; } }
 
     }
+    public static class DBWorkpieceQuality
+    {
+        public static string Table { get { return "WorkpieceQualityParameters"; } }
+        public static string ID { get { return "WorkpieceQualityParameter_ID"; } }
+        public static string ReferenceNumber { get { return "ReferenceNumber"; } }
+        public static string Corrosion { get { return "Corrosion"; } }
+        public static string MoldScratches { get { return "MoldScratches"; } }
+        public static string GlassAdherence { get { return "GlassAdherence"; } }
+    }
+    public static class DBProcessQuality
+    {
+        public static string Table { get { return "ProcessQualityParameters"; } }
+        public static string ID { get { return "ProcessQualityParameter_ID"; } }
+        public static string PID { get { return "Process_ID"; } }
+        public static string GlassScratches { get { return "GlassScratches"; } }
+        public static string GlassPeeling { get { return "GlassPeeling"; } }
+        public static string GlassBreakage { get { return "GlassBreakage"; } }
+        public static string OverallResult { get { return "OverallResult"; } }
+    }
     public static class DBProjects
     {
         public static string Table { get { return "Projects"; } }
@@ -109,7 +129,6 @@ namespace PDCore.Database
         public static string ProjectID { get { return "Project_ID"; } }
         public static string Remark { get { return "Remark"; } }
     }
-
     public static class DBUser
     {
         public static string Table { get { return "User"; } }
@@ -211,6 +230,28 @@ namespace PDCore.Database
         public static string PressFeed { get { return "PressFeed"; } }
         public static string PenDepth { get { return "PenDepth"; } }
         public static string Duration { get { return "Duration"; } }
+        public static string Cycles { get { return "Cycles"; } }
+    }
+
+    public static class DBExpMoore
+    {
+        public static string Table { get { return "Exp_Moore"; } }
+        public static string ID { get { return "Exp_Moore_ID"; } }
+        public static string UserID { get { return "User_ID"; } }
+        public static string Date { get { return "Date"; } }
+        public static string Remark { get { return "Remark"; } }
+        public static string GlassID { get { return "Glass_ID"; } }
+        public static string ResultID { get { return "Exp_Result_ID"; } }
+        public static string UpperWorkpieceID { get { return "UpperWorkpiece_ID"; } }
+        public static string LowerWorkpieceID { get { return "LowerWorkpiece_ID"; } }
+        public static string ProgramTitle { get { return "ProgramTitle"; } }
+        public static string RegionOfInterest { get { return "ROI"; } }
+        public static string Tmin { get { return "Tmin"; } }
+        public static string Tmax { get { return "Tmax"; } }
+        public static string TOut { get { return "Tout"; } }
+        public static string Atmosphere { get { return "Atmosphere"; } }
+        public static string Force { get { return "PressForce"; } }
+        public static string PressTime { get { return "PressTime"; } }
         public static string Cycles { get { return "Cycles"; } }
     }
 }

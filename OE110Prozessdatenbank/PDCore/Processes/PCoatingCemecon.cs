@@ -12,7 +12,7 @@ namespace PDCore.Processes
         {
             CoatingProcessID = -1;
             Workpieces = new List<BusinessObjects.Workpiece>();
-            Quality = new BusinessObjects.QualityObject();
+            Quality = new BusinessObjects.ProcessQuality();
         }
         public int CoatingProcessID { get; set; }
         public string Abnormalities { get; set; }

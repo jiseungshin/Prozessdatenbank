@@ -13,7 +13,7 @@ namespace PDCore.Processes
             Date = DateTime.Now;
             Workpieces = new List<BusinessObjects.Workpiece>();
             UserID = -1;
-            Quality = new BusinessObjects.QualityObject();
+            Quality = new BusinessObjects.ProcessQuality();
         }
     }
 }

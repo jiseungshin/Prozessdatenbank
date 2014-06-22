@@ -14,7 +14,7 @@ namespace PDCore.Processes
             Date = DateTime.Now;
             Workpieces = new List<BusinessObjects.Workpiece>();
             WPPosition = 0;
-            Quality = new BusinessObjects.QualityObject();
+            Quality = new BusinessObjects.ProcessQuality();
         }
 
         public int? GlassID { get; set; }

@@ -12,6 +12,7 @@ namespace PDCore.BusinessObjects
         {
             Material = new Material();
             PurchaseDate = DateTime.Now;
+            Quality = new WorkpieceQuality();
         }
         public string Label { get; set; }
         public Material Material { get; set; }
@@ -21,6 +22,7 @@ namespace PDCore.BusinessObjects
         public DateTime PurchaseDate { get; set; }
         public bool isOneWay { get; set; }
         public int CurrentRefereneNumber { get; set; }
+        public BusinessObjects.WorkpieceQuality Quality { get; set; }
 
     }
 }

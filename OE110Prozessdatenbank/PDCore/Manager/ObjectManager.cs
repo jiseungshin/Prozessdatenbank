@@ -243,8 +243,6 @@ namespace PDCore.Manager
 
         public Workpiece getWorkpieceByProcessID(int PID)
         {
-            //DataSet _ds = _myCommunicator.getDataSet("SELECT * from " + DBProcessReferenceRelation.Table +
-            //                                                " where " + DBProcessReferences.RefNumber + "=" + RefNumber);
 
             DataSet _ds = _myCommunicator.getDataSet("SELECT * FROM " + DBProcessReferenceRelation.Table +
 
@@ -263,11 +261,19 @@ namespace PDCore.Manager
         {
 
             DataSet _ds = _myCommunicator.getDataSet("SELECT * FROM " + DBProcessReferences.Table +" where " + DBProcessReferences.RefNumber + "=" + RefNumber);
+            DataRow _dsWPQuality = _myCommunicator.getDataSet("SELECT * FROM " + DBWorkpieceQuality.Table + " where " + DBWorkpieceQuality.ReferenceNumber + "=" + RefNumber).Tables[0].Rows[0];
 
             int wp_ID = _ds.Tables[0].Rows[0].Field<int>(DBProcessReferences.WorkpiceID);
 
             Workpiece _wp = getWorkpiece(wp_ID);
             _wp.CurrentRefereneNumber = RefNumber;
+
+            _wp.Quality = new WorkpieceQuality()
+            {
+                Corrosion = _dsWPQuality.Field<int>(DBWorkpieceQuality.Corrosion),
+                MoldScratches = _dsWPQuality.Field<int>(DBWorkpieceQuality.MoldScratches),
+                GlassAdherence = _dsWPQuality.Field<int>(DBWorkpieceQuality.GlassAdherence)
+            };
 
             return _wp;
         }
@@ -406,6 +412,19 @@ namespace PDCore.Manager
             }
 
             _myCommunicator.executeTransactedQueries(_queries);
+        }
+
+        public List<Workpiece> getCoatedWorkpieces()
+        {
+            List<Workpiece> m_wps = new List<Workpiece>();
+            DataSet _ds = _myCommunicator.getDataSet(Queries.QueryCoatedReferences);
+
+            foreach (DataRow dr in _ds.Tables[0].Rows)
+            {
+                m_wps.Add(getWorkpieceByReference(dr.Field<int>(DBProcessReferences.RefNumber)));
+            }
+
+            return m_wps;
         }
 
         
