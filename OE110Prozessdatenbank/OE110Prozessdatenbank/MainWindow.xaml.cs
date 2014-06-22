@@ -39,7 +39,7 @@ namespace OE110Prozessdatenbank
         {
 
             ProcessWindows.GenericWindow gq = new ProcessWindows.GenericWindow();
-            gq.contentGrid.Children.Add(new Controls.CExpMoore(5));
+            gq.contentGrid.Children.Add(new Controls.CExpMoore(9));
             gq.ShowDialog();
 
             //new Controls.CProject(5).ShowDialog();

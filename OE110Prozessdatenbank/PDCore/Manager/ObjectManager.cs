@@ -89,11 +89,23 @@ namespace PDCore.Manager
             getMaterials();
             getWorkpieces();
             getIssues();
+            getGlasses();
         }
 
         private void getGlasses()
-        { 
-            
+        {
+            m_glasses.Clear();
+            DataSet _ds = _myCommunicator.getDataSet("SELECT * FROM " + DBGlasses.Table + " ORDER BY " + DBGlasses.Description);
+
+            foreach (DataRow dr in _ds.Tables[0].Rows)
+            {
+                m_glasses.Add(new Glass()
+                {
+                    ID = dr.Field<int>(DBGlasses.ID),
+                    Name = dr.Field<string>(DBGlasses.Description),
+                    Comapany = dr.Field<string>(DBGlasses.Company)
+                });
+            }
         }
 
         private void getProjects()

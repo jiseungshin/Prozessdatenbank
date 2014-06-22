@@ -463,8 +463,11 @@ namespace PDCore.Manager
             DataRow _dr2 = (_myCommunicator.getDataSet("SELECT * from " + DBProcessReferences.Table +
                                                                " where " + DBProcessReferences.RefNumber + "=" + _references[0])).Tables[0].Rows[0];
 
-            PExpMoore _p = new PExpMoore();
+            DataRow _dr3 = (_myCommunicator.getDataSet("SELECT * from " + DBProcessQuality.Table +
+                                                               " where " + DBProcessQuality.PID + "=" + PID)).Tables[0].Rows[0];
 
+            PExpMoore _p = new PExpMoore();
+            
             //get Workpieces 
             for (int i = 0; i < _references.Count; i++)
             {
@@ -492,6 +495,14 @@ namespace PDCore.Manager
 
             _p.ProjectID = _dr2.Field<int?>(DBProcessReferences.ProjectID);
             _p.IssueID = _dr2.Field<int?>(DBProcessReferences.IssueID);
+
+            _p.Quality = new ProcessQuality()
+            {
+                GlassBreakage = _dr3.Field<bool>(DBProcessQuality.GlassBreakage),
+                GlassSratches = _dr3.Field<bool>(DBProcessQuality.GlassScratches),
+                GlassPeeling = _dr3.Field<bool>(DBProcessQuality.GlassPeeling),
+                OverallResult = _dr3.Field<int>(DBProcessQuality.OverallResult)
+            };
 
             return _p;
         }
@@ -1087,6 +1098,8 @@ namespace PDCore.Manager
                     _queries.Add("Update " + DBWorkpieceQuality.Table + " Set " + DBWorkpieceQuality.GlassAdherence + " = " + wp.Quality.GlassAdherence.ToDBObject() + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + wp.CurrentRefereneNumber);
                     _queries.Add("Update " + DBWorkpieceQuality.Table + " Set " + DBWorkpieceQuality.MoldScratches + " = " + wp.Quality.MoldScratches.ToDBObject() + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + wp.CurrentRefereneNumber);
                 }
+
+                Process.ID = _pro;
 
                 _queries.Add(saveProcessQuality(process));
 

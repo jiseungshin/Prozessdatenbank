@@ -6,8 +6,16 @@
              mc:Ignorable="d" Height="80" Width="420">
     <Grid>
         <CheckBox Content="Kratzer auf Glas" IsChecked="{Binding GlassScratches}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <CheckBox Content="Glasablösung" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
-        <CheckBox Content="Glasbruch" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="Glasablösung" IsChecked="{Binding GlassPeeling}" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="Glasbruch" IsChecked="{Binding GlassBreakage}" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top"/>
+        <ComboBox Margin="326,43,0,0" VerticalAlignment="Top" SelectedIndex="{Binding OverallResult}" HorizontalAlignment="Left" Width="84">
+            <ComboBoxItem Content="sehr gut"/>
+            <ComboBoxItem Content="gut"/>
+            <ComboBoxItem Content="mäßig"/>
+            <ComboBoxItem Content="schlecht"/>
+        </ComboBox>
+
+        <Label Content="Gesamturteil" HorizontalAlignment="Left" Margin="244,39,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </UserControl>

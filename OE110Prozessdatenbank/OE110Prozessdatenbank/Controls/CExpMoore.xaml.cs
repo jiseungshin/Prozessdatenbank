@@ -51,23 +51,65 @@ namespace OE110Prozessdatenbank.Controls
 
         private void cb_lowerWP_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int count = g_quality.Children.Count;
-            
-            g_quality.Children.Add(m_vm.WP_LowerControl);
-            Grid.SetRow(m_vm.WP_LowerControl, count);
 
-            g_quality.Height = (count+1) * 120;
+            if (!m_set.Contains(1))
+            {
+                m_set.Add(1);
+                setQualityControls();
+            }
+            setQualityControls();
             
         }
 
         private void cb_upperWP_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int count = g_quality.Children.Count;
 
-            g_quality.Children.Add(m_vm.WP_UpperControl);
-            Grid.SetRow(m_vm.WP_UpperControl, count);
+            if (!m_set.Contains(2))
+            {
+                m_set.Add(2);
+            }
 
-            g_quality.Height = (count + 1) * 120;
+            setQualityControls();
         }
+
+        private void cb_glass_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!m_set.Contains(3))
+            {
+                m_set.Add(3);
+            }
+
+            setQualityControls();
+        }
+
+        private List<int> m_set = new List<int>();
+
+        private void setQualityControls()
+        {
+            g_quality.Children.Clear();
+            for (int i = 0; i < m_set.Count; i++)
+            { 
+                if (m_set[i]==1)
+                {
+                    g_quality.Children.Add(m_vm.WP_LowerControl);
+                    Grid.SetRow(m_vm.WP_LowerControl, i);
+                    continue;
+                }
+                if (m_set[i] == 2)
+                {
+                    g_quality.Children.Add(m_vm.WP_UpperControl);
+                    Grid.SetRow(m_vm.WP_UpperControl, i);
+                    continue;
+                }
+                if (m_set[i] == 3)
+                {
+                    g_quality.Children.Add(m_vm.ProcessQualityControl);
+                    Grid.SetRow(m_vm.ProcessQualityControl, i);
+                    continue;
+                }
+            }
+        }
+
+       
     }
 }

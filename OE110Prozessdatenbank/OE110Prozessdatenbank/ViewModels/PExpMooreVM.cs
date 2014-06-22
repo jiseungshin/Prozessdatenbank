@@ -19,8 +19,10 @@ namespace OE110Prozessdatenbank.ViewModels
         private bool m_update = false;
         public PExpMooreVM(int PID)
         {
+            ObjectManager.Instance.update();
             m_update = true;
             m_process = ProcessManager.Instance.getProcess(PID, 6) as PExpMoore;
+            ProcessQualityControl = new Controls.CProcessQuality(m_process);
             if (m_process.UpperWP !=null)
                 UpperWP = ObjectManager.Instance.getWorkpiece(Convert.ToInt32(m_process.UpperWP));
             if (m_process.LowerWP != null)
@@ -30,8 +32,10 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public PExpMooreVM()
         {
+            ObjectManager.Instance.update();
             m_process = new PExpMoore();
             SaveProcess = new RelayCommand(Save, CanSave);
+            ProcessQualityControl = new Controls.CProcessQuality(m_process);
         }
 
         public RelayCommand SaveProcess { get; set; }
@@ -41,6 +45,7 @@ namespace OE110Prozessdatenbank.ViewModels
         public Controls.CQuality WP_UpperControl { get; set; }
         
         public Controls.CQuality WP_LowerControl { get; set; }
+        public Controls.CProcessQuality ProcessQualityControl { get; set; }
 
         public ObservableCollection<Workpiece> Workpieces
         {
@@ -55,7 +60,14 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public Workpiece UpperWP
         {
-            get { return Workpieces.Single(item => item.ID == m_upper.ID); }
+            get 
+            {
+                try
+                {
+                    return Workpieces.Single(item => item.ID == m_upper.ID);
+                }
+                catch { return null; }
+            }
             set
             {
                 m_upper = new Workpiece();
@@ -69,7 +81,14 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public Workpiece LowerWP
         {
-            get { return Workpieces.Single(item => item.ID == m_lower.ID); }
+            get
+            {
+                try
+                {
+                    return Workpieces.Single(item => item.ID == m_lower.ID);
+                }
+                catch { return null; }
+            }
             set
             {
                 m_lower = new Workpiece();

@@ -129,6 +129,13 @@ namespace PDCore.Database
         public static string ProjectID { get { return "Project_ID"; } }
         public static string Remark { get { return "Remark"; } }
     }
+    public static class DBGlasses
+    {
+        public static string Table { get { return "Glasses"; } }
+        public static string ID { get { return "Glass_ID"; } }
+        public static string Description { get { return "GlassName"; } }
+        public static string Company { get { return "Company"; } }
+    }
     public static class DBUser
     {
         public static string Table { get { return "User"; } }

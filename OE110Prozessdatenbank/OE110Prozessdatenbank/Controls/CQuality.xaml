@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Height="120" Width="420">
+             mc:Ignorable="d" Height="120" Width="420" Background="White">
     <Grid>
         <ComboBox Margin="128,57,0,0" VerticalAlignment="Top" SelectedIndex="{Binding MoldScratches}" HorizontalAlignment="Left" Width="84">
             <ComboBoxItem Content="keine"/>
@@ -34,6 +34,7 @@
         <Label Content="Vorgangsnummer:" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top"/>
         <Label Content="{Binding Label}" HorizontalAlignment="Left" Margin="138,0,0,0" VerticalAlignment="Top" Height="26" Width="88"/>
         <Label Content="{Binding Reference}" HorizontalAlignment="Left" Margin="138,25,0,0" VerticalAlignment="Top" Height="26" Width="88"/>
+        <Rectangle Stroke="#FF4D4D4D"/>
 
     </Grid>
 </UserControl>

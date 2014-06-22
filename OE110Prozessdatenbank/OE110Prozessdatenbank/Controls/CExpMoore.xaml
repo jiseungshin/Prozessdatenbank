@@ -22,7 +22,7 @@
         <Label Content="Oberes Werkstück" HorizontalAlignment="Left" Margin="10,161,0,0" VerticalAlignment="Top" Width="151"/>
         <Label Content="Atmosphäre" HorizontalAlignment="Left" Margin="10,401,0,0" VerticalAlignment="Top" Width="151"/>
         <Label Content="Temperatur min [°C]" HorizontalAlignment="Left" Margin="10,277,0,0" VerticalAlignment="Top" Width="151"/>
-        <Label Content="Werkstückqualität" HorizontalAlignment="Left" Margin="478,31,0,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
+        <Label Content="Qualitätsmerkmale" HorizontalAlignment="Left" Margin="478,31,0,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
         <DatePicker SelectedDate="{Binding Date}" Margin="187,33,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
         <ComboBox x:Name="cb_user" ItemsSource="{Binding Users}" SelectedItem="{Binding User}" DisplayMemberPath="Description" Margin="187,62,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
         <ComboBox x:Name="cb_project" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" Margin="187,89,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
@@ -47,7 +47,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox x:Name="cb_glass" ItemsSource="{Binding Glasses}" SelectedItem="{Binding Glass}" DisplayMemberPath="Description" Margin="187,223,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
+        <ComboBox x:Name="cb_glass" ItemsSource="{Binding Glasses}" SelectedItem="{Binding Glass}" DisplayMemberPath="VisualName" Margin="187,223,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266" SelectionChanged="cb_glass_SelectionChanged"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="187,250,0,0" TextWrapping="Wrap" Text="{Binding Force}" VerticalAlignment="Top" Width="266"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="187,281,0,0" TextWrapping="Wrap" Text="{Binding Tmin}" VerticalAlignment="Top" Width="266"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="187,312,0,0" TextWrapping="Wrap" Text="{Binding Tmax}" VerticalAlignment="Top" Width="266"/>
@@ -61,7 +61,7 @@
 
         <Button x:Name="bt_save" Content="speichern" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Command="{Binding SaveProcess}" IsEnabled="{Binding SaveProcess.CanSave}" Click="bt_save_Click"/>
         <Button x:Name="bt_cancel" Content="abbrechen" HorizontalAlignment="Right" Margin="0,0,92,10" VerticalAlignment="Bottom" Width="75" Click="bt_cancel_Click"/>
-        <Grid x:Name="g_quality" Height="1" Margin="478,66,0,0" VerticalAlignment="Top" Background="#FFBBB3B3" HorizontalAlignment="Left" Width="420">
+        <Grid x:Name="g_quality" Height="485" Margin="478,66,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="420">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
