@@ -20,7 +20,7 @@ namespace PDCore.BusinessObjects
         public string BatchNumber { get; set; }
         public DateTime PurchaseDate { get; set; }
         public bool isOneWay { get; set; }
-        public int RefereneNumber { get; set; }
+        public int CurrentRefereneNumber { get; set; }
 
     }
 }

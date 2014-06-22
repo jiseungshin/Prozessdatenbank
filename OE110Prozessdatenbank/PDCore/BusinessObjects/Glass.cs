@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PDCore.BusinessObjects
 {
-    class Glass : BusinessObject
+    public class Glass : BusinessObject
     {
     }
 }

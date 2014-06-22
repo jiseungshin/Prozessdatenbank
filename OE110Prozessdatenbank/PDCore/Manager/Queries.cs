@@ -14,7 +14,7 @@ namespace PDCore.Manager
         }
 
 
-        public static String QueryTurningMoore
+        public static string QueryTurningMoore
         {
             get
             {
@@ -54,11 +54,6 @@ namespace PDCore.Manager
                                           " LEFT JOIN " + DBIssues.Table +
                                           " On " + DBIssues.Table + "." + DBIssues.ID +
                                           "=" + DBProcessReferences.Table + "." + DBProcessReferences.IssueID;
-                                          
-
-                //return "SELECT ProcessReferenceRelation.ReferenceNumber, Workpieces.Label, Materials.Name, Projects.ProjectName, Turning_Moore.*, User.Token " +
-                //        "FROM (Turning_Moore INNER JOIN (((Projects INNER JOIN ProcessReferences ON Projects.Project_ID = ProcessReferences.Project_ID) INNER JOIN (Workpieces INNER JOIN Materials ON Workpieces.Material_ID = Materials.Material_ID) ON ProcessReferences.Workpiece_ID = Workpieces.WorkPiece_ID) INNER JOIN ProcessReferenceRelation ON ProcessReferences.ReferenceNumber = ProcessReferenceRelation.ReferenceNumber) ON Turning_Moore.Turning_Moore_ID = ProcessReferenceRelation.Process_ID) INNER JOIN User ON Turning_Moore.User_ID = User.User_ID " +
-                //        "WHERE (((Workpieces.Status)='polished') AND ((ProcessReferenceRelation.Machine_ID)=1))";
 
             }
         }
@@ -67,9 +62,42 @@ namespace PDCore.Manager
         {
             get 
             {
-                return "SELECT ProcessReferenceRelation.ReferenceNumber, Workpieces.Label, Materials.Name, Projects.ProjectName, Workpieces.Status, Grinding_Moore.*, User.Token "+
-                        "FROM (Grinding_Moore INNER JOIN (Materials INNER JOIN (((ProcessReferenceRelation INNER JOIN ProcessReferences ON ProcessReferenceRelation.ReferenceNumber = ProcessReferences.ReferenceNumber) INNER JOIN Projects ON ProcessReferences.Project_ID = Projects.Project_ID) INNER JOIN Workpieces ON ProcessReferences.Workpiece_ID = Workpieces.WorkPiece_ID) ON Materials.Material_ID = Workpieces.Material_ID) ON Grinding_Moore.Grinding_Moore_ID = ProcessReferenceRelation.Process_ID) INNER JOIN User ON Grinding_Moore.User_ID = User.User_ID "+
-                        "WHERE (((Workpieces.Status)='polished'))";
+                return "SELECT * FROM " + DBGrindingMoore.Table +
+
+                                         //join ReferenceRelations
+                                         " LEFT JOIN " + DBProcessReferenceRelation.Table +
+                                         " On " + DBProcessReferenceRelation.Table + "." + DBProcessReferenceRelation.PID +
+                                         "=" + DBGrindingMoore.Table + "." + DBGrindingMoore.ID +
+
+                                         //join References
+                                         " LEFT JOIN " + DBProcessReferences.Table +
+                                         " On " + DBProcessReferences.Table + "." + DBProcessReferences.RefNumber +
+                                         "=" + DBProcessReferenceRelation.Table + "." + DBProcessReferenceRelation.RefNumber +
+
+                                         //join Workpiece
+                                         " LEFT JOIN " + DBWorkpieces.Table +
+                                         " On " + DBWorkpieces.Table + "." + DBWorkpieces.ID +
+                                         "=" + DBProcessReferences.Table + "." + DBProcessReferences.WorkpiceID +
+
+                                         //join User
+                                         " LEFT JOIN " + DBUser.Table +
+                                         " On " + DBUser.Table + "." + DBUser.ID +
+                                         "=" + DBGrindingMoore.Table + "." + DBGrindingMoore.UserID +
+
+                                         //join Material
+                                         " LEFT JOIN " + DBMAterial.Table +
+                                         " On " + DBMAterial.Table + "." + DBMAterial.ID +
+                                         "=" + DBWorkpieces.Table + "." + DBWorkpieces.MaterialID +
+
+                                         //join project
+                                         " LEFT JOIN " + DBProjects.Table +
+                                         " On " + DBProjects.Table + "." + DBProjects.ID +
+                                         "=" + DBProcessReferences.Table + "." + DBProcessReferences.ProjectID +
+
+                                         //join issues
+                                         " LEFT JOIN " + DBIssues.Table +
+                                         " On " + DBIssues.Table + "." + DBIssues.ID +
+                                         "=" + DBProcessReferences.Table + "." + DBProcessReferences.IssueID;
 
             }
         }
@@ -78,9 +106,42 @@ namespace PDCore.Manager
         {
             get
             {
-                return "SELECT ProcessReferenceRelation.ReferenceNumber, Workpieces.Label, Materials.Name, Projects.ProjectName, Workpieces.Status, Grinding_Phoenix.*, User.Token "+
-                        "FROM ((Grinding_Phoenix INNER JOIN ((Materials INNER JOIN Workpieces ON Materials.Material_ID = Workpieces.Material_ID) INNER JOIN (ProcessReferenceRelation INNER JOIN ProcessReferences ON ProcessReferenceRelation.ReferenceNumber = ProcessReferences.ReferenceNumber) ON Workpieces.WorkPiece_ID = ProcessReferences.Workpiece_ID) ON Grinding_Phoenix.Grinding_Phoenix_ID = ProcessReferenceRelation.Process_ID) INNER JOIN Projects ON ProcessReferences.Project_ID = Projects.Project_ID) INNER JOIN User ON Grinding_Phoenix.User_ID = User.User_ID "+
-                        "WHERE (((Workpieces.Status)='polished'))";
+                return "SELECT * FROM " + DBGrindingPhoenix.Table +
+
+                                        //join ReferenceRelations
+                                        " LEFT JOIN " + DBProcessReferenceRelation.Table +
+                                        " On " + DBProcessReferenceRelation.Table + "." + DBProcessReferenceRelation.PID +
+                                        "=" + DBGrindingPhoenix.Table + "." + DBGrindingPhoenix.ID +
+
+                                        //join References
+                                        " LEFT JOIN " + DBProcessReferences.Table +
+                                        " On " + DBProcessReferences.Table + "." + DBProcessReferences.RefNumber +
+                                        "=" + DBProcessReferenceRelation.Table + "." + DBProcessReferenceRelation.RefNumber +
+
+                                        //join Workpiece
+                                        " LEFT JOIN " + DBWorkpieces.Table +
+                                        " On " + DBWorkpieces.Table + "." + DBWorkpieces.ID +
+                                        "=" + DBProcessReferences.Table + "." + DBProcessReferences.WorkpiceID +
+
+                                        //join User
+                                        " LEFT JOIN " + DBUser.Table +
+                                        " On " + DBUser.Table + "." + DBUser.ID +
+                                        "=" + DBGrindingPhoenix.Table + "." + DBGrindingPhoenix.UserID +
+
+                                        //join Material
+                                        " LEFT JOIN " + DBMAterial.Table +
+                                        " On " + DBMAterial.Table + "." + DBMAterial.ID +
+                                        "=" + DBWorkpieces.Table + "." + DBWorkpieces.MaterialID +
+
+                                        //join project
+                                        " LEFT JOIN " + DBProjects.Table +
+                                        " On " + DBProjects.Table + "." + DBProjects.ID +
+                                        "=" + DBProcessReferences.Table + "." + DBProcessReferences.ProjectID +
+
+                                        //join issues
+                                        " LEFT JOIN " + DBIssues.Table +
+                                        " On " + DBIssues.Table + "." + DBIssues.ID +
+                                        "=" + DBProcessReferences.Table + "." + DBProcessReferences.IssueID;
 
             }
         }
@@ -89,9 +150,42 @@ namespace PDCore.Manager
         {
             get
             {
-                return "SELECT ProcessReferenceRelation.ReferenceNumber, Workpieces.Label, Materials.Name, Projects.ProjectName, Grinding_Other.*, User.Token "+
-                        "FROM (Grinding_Other INNER JOIN ((((ProcessReferenceRelation INNER JOIN ProcessReferences ON ProcessReferenceRelation.ReferenceNumber = ProcessReferences.ReferenceNumber) INNER JOIN Projects ON ProcessReferences.Project_ID = Projects.Project_ID) INNER JOIN Workpieces ON ProcessReferences.Workpiece_ID = Workpieces.WorkPiece_ID) INNER JOIN Materials ON Workpieces.Material_ID = Materials.Material_ID) ON Grinding_Other.Grinding_Other_ID = ProcessReferenceRelation.Process_ID) INNER JOIN User ON Grinding_Other.User_ID = User.User_ID "+
-                        "WHERE (((Workpieces.Status)='polished'))";
+                return "SELECT * FROM " + DBGrindingOther.Table +
+
+                                        //join ReferenceRelations
+                                        " LEFT JOIN " + DBProcessReferenceRelation.Table +
+                                        " On " + DBProcessReferenceRelation.Table + "." + DBProcessReferenceRelation.PID +
+                                        "=" + DBGrindingOther.Table + "." + DBGrindingOther.ID +
+
+                                        //join References
+                                        " LEFT JOIN " + DBProcessReferences.Table +
+                                        " On " + DBProcessReferences.Table + "." + DBProcessReferences.RefNumber +
+                                        "=" + DBProcessReferenceRelation.Table + "." + DBProcessReferenceRelation.RefNumber +
+
+                                        //join Workpiece
+                                        " LEFT JOIN " + DBWorkpieces.Table +
+                                        " On " + DBWorkpieces.Table + "." + DBWorkpieces.ID +
+                                        "=" + DBProcessReferences.Table + "." + DBProcessReferences.WorkpiceID +
+
+                                        //join User
+                                        " LEFT JOIN " + DBUser.Table +
+                                        " On " + DBUser.Table + "." + DBUser.ID +
+                                        "=" + DBGrindingOther.Table + "." + DBGrindingOther.UserID +
+
+                                        //join Material
+                                        " LEFT JOIN " + DBMAterial.Table +
+                                        " On " + DBMAterial.Table + "." + DBMAterial.ID +
+                                        "=" + DBWorkpieces.Table + "." + DBWorkpieces.MaterialID +
+
+                                        //join project
+                                        " LEFT JOIN " + DBProjects.Table +
+                                        " On " + DBProjects.Table + "." + DBProjects.ID +
+                                        "=" + DBProcessReferences.Table + "." + DBProcessReferences.ProjectID +
+
+                                        //join issues
+                                        " LEFT JOIN " + DBIssues.Table +
+                                        " On " + DBIssues.Table + "." + DBIssues.ID +
+                                        "=" + DBProcessReferences.Table + "." + DBProcessReferences.IssueID;
 
             }
         }

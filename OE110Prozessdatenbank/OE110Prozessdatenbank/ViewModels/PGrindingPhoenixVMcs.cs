@@ -18,7 +18,6 @@ namespace OE110Prozessdatenbank.ViewModels
     {
         private PGrindingPhoenix m_process;
         private bool m_update = false;
-        private Workpiece _wp;
 
         public PGrindingPhoenixVMcs(int RefID, bool update)
         {
@@ -29,12 +28,13 @@ namespace OE110Prozessdatenbank.ViewModels
             if (!update)
             {
                 m_process = new PGrindingPhoenix();
-                _wp = ObjectManager.Instance.getWorkpiece(RefID);
                 m_process.Date = DateTime.Now;
+
+                m_process.Workpieces.Add(ObjectManager.Instance.getWorkpiece(RefID));
             }
             else
             {
-                m_process = ProcessManager.Instance.getProcessByReference(RefID, 3) as PGrindingPhoenix;             
+                m_process = ProcessManager.Instance.getProcess(RefID, 3) as PGrindingPhoenix;             
             }           
             
             
@@ -57,7 +57,7 @@ namespace OE110Prozessdatenbank.ViewModels
             {
                 try
                 {
-                    return _wp.Label;
+                    return m_process.Workpieces[0].Label;
                 }
                 catch { return ""; }
             }
@@ -74,8 +74,8 @@ namespace OE110Prozessdatenbank.ViewModels
             set 
             {
                 int ID = value.Row.Field<int>(DBGrindingPhoenix.ID);
-                int _refID = ProcessManager.Instance.getReference(ID)[0];
-                PGrindingPhoenix _p = ProcessManager.Instance.getProcessByProcessID(ID,_refID, 3) as PGrindingPhoenix;
+                //int _refID = ProcessManager.Instance.getReference(ID)[0];
+                PGrindingPhoenix _p = ProcessManager.Instance.getProcess(ID, 3) as PGrindingPhoenix;
 
                 m_process.Remark = _p.Remark;
                 m_process.UserID = _p.UserID;
@@ -149,9 +149,9 @@ namespace OE110Prozessdatenbank.ViewModels
         public void Save()
         {
             if (m_update)
-                ProcessManager.Instance.saveProcess(m_process, null, true);
+                ProcessManager.Instance.saveProcess(m_process, true);
             else
-                ProcessManager.Instance.saveProcess(m_process,new List<Workpiece>(){ _wp}, false);
+                ProcessManager.Instance.saveProcess(m_process, false);
 
             Updater.Instance.forceUpdate();
         }

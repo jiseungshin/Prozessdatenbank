@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="OE110Prozessdatenbank.Controls.CQuality"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Height="157.343" Width="371.329">
+    <Grid>
+        <CheckBox Content="Kratzer auf Glas" IsChecked="{Binding GlassScratches}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="Glasablösung" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="Glasbruch" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top"/>
+        <ComboBox Margin="276,10,10,0" VerticalAlignment="Top">
+            <ComboBoxItem Content="keine"/>
+            <ComboBoxItem Content="wenig"/>
+            <ComboBoxItem Content="viele"/>
+        </ComboBox>
+        <ComboBox Margin="276,125,10,0" VerticalAlignment="Top">
+            <ComboBoxItem Content="sehr gut"/>
+            <ComboBoxItem Content="gut"/>
+            <ComboBoxItem Content="mäßig"/>
+            <ComboBoxItem Content="schlecht"/>
+        </ComboBox>
+        <Label Content="Kratzer auf Mold" HorizontalAlignment="Left" Margin="178,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Korrosion" HorizontalAlignment="Left" Margin="178,39,0,0" VerticalAlignment="Top"/>
+        <Label Content="Glasanhaftung" HorizontalAlignment="Left" Margin="178,75,0,0" VerticalAlignment="Top"/>
+        <Label Content="Gesamturteil" HorizontalAlignment="Left" Margin="178,121,0,0" VerticalAlignment="Top"/>
+        <ComboBox Margin="276,43,10,0" VerticalAlignment="Top">
+            <ComboBoxItem Content="keine"/>
+            <ComboBoxItem Content="wenig"/>
+            <ComboBoxItem Content="viele"/>
+        </ComboBox>
+        <ComboBox Margin="276,75,10,0" VerticalAlignment="Top">
+            <ComboBoxItem Content="keine"/>
+            <ComboBoxItem Content="wenig"/>
+            <ComboBoxItem Content="viele"/>
+        </ComboBox>
+
+    </Grid>
+</UserControl>

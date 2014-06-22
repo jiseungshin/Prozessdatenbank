@@ -34,10 +34,17 @@ namespace PDCore.Manager
             //Recieve database-errors
             _myCommunicator.MessageThrown += _myCommunicator_MessageThrown;
 
+            Updater.Instance.newData += Instance_newData;
+
             if (_myCommunicator.checkConnection())
             { 
             }
 
+        }
+
+        void Instance_newData()
+        {
+            update();
         }
 
          void _myCommunicator_MessageThrown(Communicator.MessageType mType, Exception Message)
@@ -71,6 +78,7 @@ namespace PDCore.Manager
 
          private List<Workpiece> m_worlpieces = new List<Workpiece>();
          private List<Material> m_materials = new List<Material>();
+         private List<Glass> m_glasses = new List<Glass>();
 
         public void update()
         {
@@ -83,13 +91,37 @@ namespace PDCore.Manager
             getIssues();
         }
 
+        private void getGlasses()
+        { 
+            
+        }
+
         private void getProjects()
         {
             DataSet _ds = _myCommunicator.getDataSet("SELECT * FROM " + DBProjects.Table + " ORDER BY " + DBProjects.Name);
             m_projects.Clear();
             foreach (DataRow row in _ds.Tables[0].Rows)
             {
-                m_projects.Add(new Project() { ID = row.Field<int>(DBProjects.ID), Description = row.Field<string>(DBProjects.Name) });
+                
+                Project _p = new Project() { ID = row.Field<int>(DBProjects.ID), Description = row.Field<string>(DBProjects.Name) };
+                _p.UserID = row.Field<int>(DBProjects.UserID);
+                _p.Remark = row.Field<string>(DBProjects.Remark);
+
+                DataSet _dsIssue = _myCommunicator.getDataSet("SELECT * FROM " + DBIssues.Table + " WHERE " + DBIssues.ProjectID + "=" + _p.ID);
+
+                foreach (DataRow dr in _dsIssue.Tables[0].Rows)
+                {
+                    _p.Issues.Add(new Issue()
+                    {
+                        ID = dr.Field<int>(DBIssues.ID),
+                        Description = dr.Field<string>(DBIssues.Description),
+                        ProjectID = dr.Field<int>(DBIssues.ProjectID),
+                        Remark = dr.Field<string>(DBIssues.Remark)
+                    });
+                    
+                }
+                
+                m_projects.Add(_p);
             }
 
         }
@@ -179,6 +211,8 @@ namespace PDCore.Manager
         }
 
 
+        public List<Glass> Glasses
+        { get { return m_glasses; } }
 
         public List<Material> Materials
         { get { return m_materials; } }
@@ -232,7 +266,10 @@ namespace PDCore.Manager
 
             int wp_ID = _ds.Tables[0].Rows[0].Field<int>(DBProcessReferences.WorkpiceID);
 
-            return getWorkpiece(wp_ID);
+            Workpiece _wp = getWorkpiece(wp_ID);
+            _wp.CurrentRefereneNumber = RefNumber;
+
+            return _wp;
         }
         public Material getMaterial(int MatID)
         {
@@ -296,6 +333,82 @@ namespace PDCore.Manager
 
             _myCommunicator.executeTransactedQueries(_queries);
         }
+
+        public int? getProjectID(int RefNumber)
+        {
+            DataSet _ds = _myCommunicator.getDataSet("SELECT * FROM " + DBProcessReferences.Table + " where " + DBProcessReferences.RefNumber + "=" + RefNumber);
+
+            return _ds.Tables[0].Rows[0].Field<int?>(DBProcessReferences.ProjectID);
+        }
+
+        public int? getIssueID(int RefNumber)
+        {
+            DataSet _ds = _myCommunicator.getDataSet("SELECT * FROM " + DBProcessReferences.Table + " where " + DBProcessReferences.RefNumber + "=" + RefNumber);
+
+            return _ds.Tables[0].Rows[0].Field<int?>(DBProcessReferences.IssueID);
+        }
+
+        public void saveProject(Project project, bool update)
+        {
+            List<string> _queries = new List<string>();
+
+            if (update)
+            {
+                _queries.Add("Update " + DBProjects.Table + " Set " + DBProjects.Name + " = " + project.Description.ToDBObject() + " WHERE " + DBProjects.ID + "=" + project.ID);
+                _queries.Add("Update " + DBProjects.Table + " Set " + DBProjects.Remark + " = " + project.Remark.ToDBObject() + " WHERE " + DBProjects.ID + "=" + project.ID);
+                _queries.Add("Update " + DBProjects.Table + " Set " + DBProjects.Finished + " = " + project.Finished.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + " WHERE " + DBProjects.ID + "=" + project.ID);
+                _queries.Add("Update " + DBProjects.Table + " Set " + DBProjects.Started + " = " + project.Started.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + " WHERE " + DBProjects.ID + "=" + project.ID);
+            }
+            else
+            {
+                _queries.Add("INSERT INTO " + DBProjects.Table + " (" + DBProjects.Name + "," +
+                                                                        DBProjects.UserID + "," +
+                                                                           DBProjects.Remark + "," +
+                                                                           DBProjects.Started + "," +
+                                                                                     DBProjects.Finished + ") Values (" +
+                                                                            project.Description.ToDBObject() + "," +
+                                                                            project.UserID.ToDBObject() + "," +
+                                                                            project.Remark.ToDBObject() + "," +
+                                                                            project.Started.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + "," +
+                                                                             project.Finished.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject()+")");
+
+
+
+
+            }
+
+            _myCommunicator.executeTransactedQueries(_queries);
+        }
+
+        public void saveIssue(Issue issue, bool update)
+        {
+            List<string> _queries = new List<string>();
+
+            if (update)
+            {
+                _queries.Add("Update " + DBIssues.Table + " Set " + DBIssues.Description + " = " + issue.Description.ToDBObject() + " WHERE " + DBIssues.ID + "=" + issue.ID);
+                _queries.Add("Update " + DBIssues.Table + " Set " + DBIssues.Remark + " = " + issue.Remark.ToDBObject() + " WHERE " + DBIssues.ID + "=" + issue.ID);
+                _queries.Add("Update " + DBIssues.Table + " Set " + DBIssues.ProjectID + " = " + issue.ProjectID.ToDBObject() + " WHERE " + DBIssues.ID + "=" + issue.ID);
+                
+            }
+            else
+            {
+                _queries.Add("INSERT INTO " + DBIssues.Table + " (" + DBIssues.Description + "," +
+                                                                           DBIssues.Remark + "," +
+                                                                                     DBIssues.ProjectID + ") Values (" +
+                                                                            issue.Description.ToDBObject() + "," +
+                                                                            issue.Remark.ToDBObject() + "," +
+                                                                             issue.ProjectID.ToDBObject() + ")");
+
+
+
+
+            }
+
+            _myCommunicator.executeTransactedQueries(_queries);
+        }
+
+        
 
 
     }

@@ -37,7 +37,15 @@ namespace OE110Prozessdatenbank
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-           //// MessageBox.Show(PDCore.Manager.ProcessManager.Instance.getNextProcessIndex().ToString());
+
+            //ProcessWindows.GenericWindow gq = new ProcessWindows.GenericWindow();
+            //gq.contentGrid.Children.Add(new Controls.CExpTestStation(18,true));
+            //gq.ShowDialog();
+
+            //new Controls.CProject(5).ShowDialog();
+            new Controls.CoatingSPAdministration().ShowDialog();
+            //List<int?> test = PDCore.Manager.ObjectManager.Instance.getProjectIssueIDS(2);
+            //// MessageBox.Show(PDCore.Manager.ProcessManager.Instance.getNextProcessIndex().ToString());
            //// PDCore.Manager.ProcessManager.Instance
            // PTurningMoore tt = PDCore.Manager.ProcessManager.Instance.getProcessByReference(9, 1) as PTurningMoore;
 
@@ -54,7 +62,7 @@ namespace OE110Prozessdatenbank
            // PDCore.Manager.ProcessManager.Instance.saveProcess(tt, null, true);
             //MainWindows.F_Grinding ff = new MainWindows.F_Grinding();
             //new MainWindows.F_Grinding().ShowDialog();
-            ff.ShowDialog();
+            //ff.ShowDialog();
 
         }
 

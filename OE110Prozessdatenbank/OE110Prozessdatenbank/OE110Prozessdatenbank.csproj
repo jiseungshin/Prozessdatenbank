@@ -65,6 +65,24 @@
     <Compile Include="Controls\CCoatingCemecon.xaml.cs">
       <DependentUpon>CCoatingCemecon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CExpCemeCon.xaml.cs">
+      <DependentUpon>CExpCemeCon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CIssue.xaml.cs">
+      <DependentUpon>CIssue.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CoatingSPAdministration.xaml.cs">
+      <DependentUpon>CoatingSPAdministration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CProject.xaml.cs">
+      <DependentUpon>CProject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CExpOther.xaml.cs">
+      <DependentUpon>CExpOther.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CExpTestStation.xaml.cs">
+      <DependentUpon>CExpTestStation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CGrindingMoore.xaml.cs">
       <DependentUpon>CGrindingMoore.xaml</DependentUpon>
     </Compile>
@@ -76,6 +94,9 @@
     </Compile>
     <Compile Include="Controls\CoatingStandardProcessWindow.xaml.cs">
       <DependentUpon>CoatingStandardProcessWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CQuality.xaml.cs">
+      <DependentUpon>CQuality.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\MaterialWindow.xaml.cs">
       <DependentUpon>MaterialWindow.xaml</DependentUpon>
@@ -94,15 +115,43 @@
     <Compile Include="ViewModels\OWorkpieceVM.cs" />
     <Compile Include="ViewModels\PCemeconStandarProcessVM.cs" />
     <Compile Include="ViewModels\PCoatingCemeconVM.cs" />
+    <Compile Include="ViewModels\PExpTestStationVM.cs" />
+    <Compile Include="ViewModels\PExpCemeConVM.cs" />
+    <Compile Include="ViewModels\PExpOtherVM.cs" />
     <Compile Include="ViewModels\PGrindingMooreVM.cs" />
     <Compile Include="ViewModels\PGrindingOtherVM.cs" />
     <Compile Include="ViewModels\PGrindingPhoenixVMcs.cs" />
     <Compile Include="ViewModels\PTurningMooreVM.cs" />
+    <Compile Include="ViewModels\QualityVM.cs" />
     <Page Include="Controls\AddWorkpiece.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\CCoatingCemecon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CExpCemeCon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CIssue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CoatingSPAdministration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CProject.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CExpOther.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CExpTestStation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -119,6 +168,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\CoatingStandardProcessWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CQuality.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

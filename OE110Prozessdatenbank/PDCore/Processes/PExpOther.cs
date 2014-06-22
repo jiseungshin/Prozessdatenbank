@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace PDCore.Processes
 {
-    public class PCoatingCemecon : BaseProcess
+    public class PExpOther : BaseProcess
     {
-        public PCoatingCemecon()
+        public PExpOther()
         {
-            CoatingProcessID = -1;
+            Date = DateTime.Now;
             Workpieces = new List<BusinessObjects.Workpiece>();
+            UserID = -1;
             Quality = new BusinessObjects.QualityObject();
         }
-        public int CoatingProcessID { get; set; }
-        public string Abnormalities { get; set; }
     }
 }

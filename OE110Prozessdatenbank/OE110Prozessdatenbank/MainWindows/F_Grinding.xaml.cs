@@ -44,23 +44,27 @@ namespace OE110Prozessdatenbank.MainWindows
             {
                 gw = new ProcessWindows.GenericWindow();
                 gw.contentGrid.Children.Clear();
-                int ID = Convert.ToInt32((LV_Polished.SelectedItem as System.Data.DataRowView)[DBProcessReferences.RefNumber]);
+                int ID =-1; 
 
                 switch (m_vm.Machine.ID)
                 {
                     case 1:
+                        ID = Convert.ToInt32((LV_Polished.SelectedItem as System.Data.DataRowView)[DBTurningMoore.ID]);
                         gw.contentGrid.Children.Add(new Controls.CTurningMoore(ID, true));
                         gw.Title = "Prozessdaten " + m_vm.Machine.Name;
                         break;
                     case 2:
+                        ID = Convert.ToInt32((LV_Polished.SelectedItem as System.Data.DataRowView)[DBGrindingMoore.ID]);
                         gw.contentGrid.Children.Add(new Controls.CGrindingMoore(ID, true));
                         gw.Title = "Prozessdaten " + m_vm.Machine.Name;
                         break;
                     case 3:
+                        ID = Convert.ToInt32((LV_Polished.SelectedItem as System.Data.DataRowView)[DBGrindingPhoenix.ID]);
                          gw.contentGrid.Children.Add(new Controls.CGrindingPhoenix(ID, true));
                         gw.Title = "Prozessdaten " + m_vm.Machine.Name;
                         break;
                     case 4:
+                        ID = Convert.ToInt32((LV_Polished.SelectedItem as System.Data.DataRowView)[DBGrindingOther.ID]);
                         gw.contentGrid.Children.Add(new Controls.CGrindingOther(ID, true));
                         gw.Title = "Prozessdaten " + m_vm.Machine.Name;
                         break;

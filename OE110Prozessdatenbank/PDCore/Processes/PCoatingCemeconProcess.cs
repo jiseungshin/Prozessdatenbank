@@ -14,6 +14,7 @@ namespace PDCore.Processes
             AdherentLayer = "";
             ProtectiveLayer = "";
             Date = DateTime.Now;
+
         }
         public int ProgramNumber { get; set; }
         public string AdherentLayer { get; set; }

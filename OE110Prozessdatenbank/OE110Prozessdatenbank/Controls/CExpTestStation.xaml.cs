@@ -10,36 +10,34 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using PDCore.Processes;
 
 namespace OE110Prozessdatenbank.Controls
 {
     /// <summary>
-    /// Interaktionslogik für CoatingStandardProcessWindow.xaml
+    /// Interaktionslogik für CExpTestStation.xaml
     /// </summary>
-    public partial class CoatingStandardProcessWindow : Window
+    public partial class CExpTestStation : UserControl
     {
-        public CoatingStandardProcessWindow()
+        ViewModels.PExpTestStationVM m_vm;
+        public CExpTestStation(int ID, bool update)
         {
             InitializeComponent();
-            DataContext = new ViewModels.PCemeconStandarProcessVM();
-        }
-
-        public CoatingStandardProcessWindow(PCoatingCemeconProcess process)
-        {
-            InitializeComponent();
-            DataContext = new ViewModels.PCemeconStandarProcessVM(process);
-        }
-
-        private void bt_save_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
+            m_vm = new ViewModels.PExpTestStationVM(ID, update);
+            DataContext = m_vm;
+            g_quality.Children.Add(new CQuality(m_vm.Process));
+            
         }
 
         private void bt_cancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Window.GetWindow(this).Close();
+        }
+
+        private void bt_save_Click(object sender, RoutedEventArgs e)
+        {
+            Window.GetWindow(this).Close();
         }
     }
 }

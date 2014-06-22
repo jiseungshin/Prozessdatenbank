@@ -15,7 +15,6 @@ namespace PDCore.Database
         public static string PID { get { return "Process_ID"; } }
         public static string MachineID { get { return "Machine_ID"; } }
     }
-
     public static class DBProcessReferences
     {
         public static string Table { get { return "ProcessReferences"; } }
@@ -42,7 +41,6 @@ namespace PDCore.Database
         public static string PV { get { return "PV"; } }
         public static string ToolID { get { return "ToolID"; } }
     }
-
     public static class DBGrindingMoore
     {
         public static string Table { get { return "Grinding_Moore"; } }
@@ -61,7 +59,6 @@ namespace PDCore.Database
         public static string GrindingWheelSpeed { get { return "GrindingWheelSpeed"; } }
         public static string PostProduction { get { return "PostProduction"; } }
     }
-
     public static class DBGrindingPhoenix
     {
         public static string Table { get { return "Grinding_Phoenix"; } }
@@ -71,7 +68,6 @@ namespace PDCore.Database
         public static string Remark { get { return "Remark"; } }
         public static string Date { get { return "ProcessDate"; } }
     }
-
     public static class DBGrindingOther
     {
         public static string Table { get { return "Grinding_Other"; } }
@@ -80,7 +76,6 @@ namespace PDCore.Database
         public static string Remark { get { return "Remark"; } }
         public static string Date { get { return "ProcessDate"; } }
     }
-
     public static class DBWorkpieces
     {
         public static string Table { get { return "Workpieces"; } }
@@ -95,7 +90,6 @@ namespace PDCore.Database
         public static string isOneWay { get { return "isOneWay"; } }
 
     }
-
     public static class DBProjects
     {
         public static string Table { get { return "Projects"; } }
@@ -171,5 +165,52 @@ namespace PDCore.Database
         public static string Date { get { return "Date"; } }
         public static string IsDecoating { get { return "IsDecoating"; } }
 
+    }
+
+    public static class DBExpOther
+    {
+        public static string Table { get { return "Exp_Other"; } }
+        public static string ID { get { return "Exp_Other_ID"; } }
+        public static string UserID { get { return "User_ID"; } }
+        public static string Date { get { return "Date"; } }
+        public static string Remark { get { return "Remark"; } }
+    }
+
+    public static class DBExpCemeCon
+    {
+        public static string Table { get { return "Exp_CemeCon"; } }
+        public static string ID { get { return "Exp_CemeCon_ID"; } }
+        public static string UserID { get { return "User_ID"; } }
+        public static string Date { get { return "Date"; } }
+        public static string Remark { get { return "Remark"; } }
+        public static string GlassID { get { return "Glass_ID"; } }
+        public static string ResultID { get { return "Exp_Result_ID"; } }
+        public static string Temperature { get { return "Temperature"; } }
+        public static string Pressure { get { return "Pressure"; } }
+        public static string Atmosphere { get { return "Atmosphere"; } }
+        public static string Duration { get { return "Duration"; } }
+        public static string ProcessID { get { return "Process_ID"; } }
+    }
+
+    public static class DBExpTestStation
+    {
+        public static string Table { get { return "Exp_TestStation"; } }
+        public static string ID { get { return "Exp_TestStation_ID"; } }
+        public static string UserID { get { return "User_ID"; } }
+        public static string Date { get { return "Date"; } }
+        public static string Remark { get { return "Remark"; } }
+        public static string GlassID { get { return "Glass_ID"; } }
+        public static string ResultID { get { return "Exp_Result_ID"; } }
+        public static string CellTemperature { get { return "CellTemperature"; } }
+        public static string Atmosphere { get { return "Atmosphere"; } }
+        public static string WPPosition { get { return "WorkpiecePosition"; } }
+        public static string PressTemperature { get { return "PressTemperature"; } }
+        public static string CoolingTemperature { get { return "CoolingTemperature"; } }
+        public static string MaxForce { get { return "MaxForce"; } }
+        public static string SecForce { get { return "SecForce"; } }
+        public static string PressFeed { get { return "PressFeed"; } }
+        public static string PenDepth { get { return "PenDepth"; } }
+        public static string Duration { get { return "Duration"; } }
+        public static string Cycles { get { return "Cycles"; } }
     }
 }

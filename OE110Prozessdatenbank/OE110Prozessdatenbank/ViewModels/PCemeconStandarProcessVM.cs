@@ -22,10 +22,10 @@ namespace OE110Prozessdatenbank.ViewModels
             SaveProcess = new RelayCommand(Save, CanSave);
         }
 
-        public PCemeconStandarProcessVM(int ProcessID)
+        public PCemeconStandarProcessVM(PCoatingCemeconProcess process)
         {
             ProcessManager.Instance.update();
-            m_process = ProcessManager.Instance.CemeConStandardProcesses.Find(item => item.ID == ProcessID);
+            m_process = process;
             m_update = true;
             SaveProcess = new RelayCommand(Save, CanSave);
         }
@@ -58,9 +58,9 @@ namespace OE110Prozessdatenbank.ViewModels
         public void Save()
         {
             if (m_update)
-                ProcessManager.Instance.saveProcess(m_process, null, true);
+                ProcessManager.Instance.saveProcess(m_process, true);
             else
-                ProcessManager.Instance.saveProcess(m_process, null, false);
+                ProcessManager.Instance.saveProcess(m_process, false);
 
             Updater.Instance.forceUpdate();
         }

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PDCore.BusinessObjects;
 
 namespace PDCore.Processes
 {
@@ -14,6 +12,8 @@ namespace PDCore.Processes
         public int? IssueID { get; set; }
         public DateTime Date { get; set; }
         public string Remark { get; set; }
+        public List<Workpiece> Workpieces { get; set; }
+        public QualityObject Quality { get; set; }
 
     }
 

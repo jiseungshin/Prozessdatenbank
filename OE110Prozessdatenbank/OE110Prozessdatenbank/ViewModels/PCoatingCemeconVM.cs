@@ -19,34 +19,35 @@ namespace OE110Prozessdatenbank.ViewModels
         private bool m_update = false;
         private PCoatingCemecon m_process;
         private ObservableCollection<Issue> m_issues = new ObservableCollection<Issue>();
-        private Workpiece _wp;
 
         public PCoatingCemeconVM(int refID, bool update)
         {
             ObjectManager.Instance.update();
             ProcessManager.Instance.update();
             m_update = update;
+            //newProcess
             if (!update)
             {
                 m_process = new PCoatingCemecon();
-                _wp = ObjectManager.Instance.getWorkpieceByReference(refID);
-                _wp.RefereneNumber = refID;
+                m_process.Workpieces.Add(ObjectManager.Instance.getWorkpieceByReference(refID));
+                m_process.ProjectID = ObjectManager.Instance.getProjectID(refID);
+                m_process.IssueID = ObjectManager.Instance.getIssueID(refID);
+                
                 m_process.Date = DateTime.Now;
             }
+            //update
             else
             {
-
-                int reference = ProcessManager.Instance.getReference(refID)[0];
-
-                m_process = ProcessManager.Instance.getProcessByProcessID(refID, reference, 5) as PCoatingCemecon;
-                _wp = ObjectManager.Instance.getWorkpieceByProcessID(m_process.ID);
-                _wp.RefereneNumber = refID;
+                m_process = ProcessManager.Instance.getProcess(refID, 5) as PCoatingCemecon;
 
                 m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == m_process.ProjectID));
                 NotifyPropertyChanged("Issue");
             }
 
             SaveProcess = new RelayCommand(Save, CanSave);
+
+            m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == m_process.ProjectID));
+            NotifyPropertyChanged("Issues");
 
            
         }
@@ -91,15 +92,20 @@ namespace OE110Prozessdatenbank.ViewModels
             set
             {
                 int ID = value.Row.Field<int>(DBCoatingCemecon.ID);
-                int _refID = ProcessManager.Instance.getReference(ID)[0];
-                PCoatingCemecon _p = ProcessManager.Instance.getProcessByProcessID(ID, _refID, 5) as PCoatingCemecon;
+                //int _refID = ProcessManager.Instance.getReference(ID)[0];
+                PCoatingCemecon _p = ProcessManager.Instance.getProcess(ID, 5) as PCoatingCemecon;
 
+
+                Project = new PDCore.BusinessObjects.Project() { ID = Convert.ToInt32(_p.ProjectID) };
+                NotifyPropertyChanged("Project");
+                Issue = new PDCore.BusinessObjects.Issue() { ID = Convert.ToInt32(_p.IssueID) };
+                NotifyPropertyChanged("Issue");
                 m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == _p.ProjectID));
 
                 m_process.CoatingProcessID = _p.CoatingProcessID;
                 m_process.UserID = _p.UserID;
-                m_process.ProjectID = _p.ProjectID;
-                m_process.IssueID = _p.IssueID;
+
+                
 
                 NotifyPropertyChanged("Process");
                 NotifyPropertyChanged("User");
@@ -167,6 +173,18 @@ namespace OE110Prozessdatenbank.ViewModels
             }
         }
 
+        public string WorkpieceLabel
+        {
+            get
+            {
+                try
+                {
+                    return m_process.Workpieces[0].Label;
+                }
+                catch { return ""; }
+            }
+        }
+
         public string Abnormalities
         { get { return m_process.Abnormalities; } set { m_process.Abnormalities = value; } }
 
@@ -178,9 +196,9 @@ namespace OE110Prozessdatenbank.ViewModels
         public void Save()
         {
             if (m_update)
-                ProcessManager.Instance.saveProcess(m_process, null, true);
+                ProcessManager.Instance.saveProcess(m_process, true);
             else
-                ProcessManager.Instance.saveProcess(m_process, new List<Workpiece>(){_wp}, false);
+                ProcessManager.Instance.saveProcess(m_process, false);
 
             Updater.Instance.forceUpdate();
         }

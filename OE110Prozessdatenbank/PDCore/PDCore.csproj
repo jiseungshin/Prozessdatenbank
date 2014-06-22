@@ -45,10 +45,10 @@
   <ItemGroup>
     <Compile Include="BusinessObjects\BusinessObject.cs" />
     <Compile Include="BusinessObjects\Glass.cs" />
-    <Compile Include="BusinessObjects\Issue.cs" />
     <Compile Include="BusinessObjects\Machine.cs" />
     <Compile Include="BusinessObjects\Material.cs" />
     <Compile Include="BusinessObjects\Project.cs" />
+    <Compile Include="BusinessObjects\QualityObject.cs" />
     <Compile Include="BusinessObjects\User.cs" />
     <Compile Include="BusinessObjects\Workpiece.cs" />
     <Compile Include="Database\Communicator.cs" />
@@ -60,6 +60,9 @@
     <Compile Include="Manager\Updater.cs" />
     <Compile Include="Processes\PCoatingCemecon.cs" />
     <Compile Include="Processes\PCoatingCemeconProcess.cs" />
+    <Compile Include="Processes\PExpCemeCon.cs" />
+    <Compile Include="Processes\PExpOther.cs" />
+    <Compile Include="Processes\PExpTestStation.cs" />
     <Compile Include="Processes\PGrindingMoore.cs" />
     <Compile Include="Processes\PGrindingOther.cs" />
     <Compile Include="Processes\PGrindingPhoenix.cs" />
