@@ -156,7 +156,13 @@ namespace PDCore.Manager
 
             foreach (DataRow row in _ds.Tables[0].Rows)
             {
-                m_users.Add(new User() { ID = row.Field<int>(DBUser.ID), FirstName = row.Field<string>(DBUser.FirstName), LastName = row.Field<string>(DBUser.LastName), Token = row.Field<string>(DBUser.Token) });
+                m_users.Add(new User() { 
+                    ID = row.Field<int>(DBUser.ID), 
+                    FirstName = row.Field<string>(DBUser.FirstName),
+                    LastName = row.Field<string>(DBUser.LastName), 
+                    Token = row.Field<string>(DBUser.Token),
+                    isActive = row.Field<bool>(DBUser.isActive)
+                });
             }
 
         }
@@ -424,6 +430,77 @@ namespace PDCore.Manager
             }
 
             _myCommunicator.executeTransactedQueries(_queries);
+        }
+
+        public void saveUser(User user, bool update)
+        {
+            List<string> _queries = new List<string>();
+
+            if (update)
+            {
+                _queries.Add("Update " + DBUser.Table + " Set " + DBUser.FirstName + " = " + user.FirstName.ToDBObject() + " WHERE " + DBUser.ID + "=" + user.ID);
+                _queries.Add("Update " + DBUser.Table + " Set " + DBUser.LastName + " = " + user.LastName.ToDBObject() + " WHERE " + DBUser.ID + "=" + user.ID);
+                _queries.Add("Update " + DBUser.Table + " Set " + DBUser.Token + " = " + user.Token.ToDBObject() + " WHERE " + DBUser.ID + "=" + user.ID);
+                _queries.Add("Update " + DBUser.Table + " Set " + DBUser.isActive + " = " + user.isActive.ToDBObject() + " WHERE " + DBUser.ID + "=" + user.ID);
+
+            }
+            else
+            {
+                _queries.Add("INSERT INTO " + DBUser.Table + " (" + DBUser.FirstName + "," +
+                                                                           DBUser.LastName + "," +
+                                                                           DBUser.Token + "," +
+                                                                                     DBUser.isActive + ") Values (" +
+                                                                            user.FirstName.ToDBObject() + "," +
+                                                                            user.LastName.ToDBObject() + "," +
+                                                                            user.Token.ToDBObject() + "," +
+                                                                             user.isActive.ToDBObject() + ")");
+
+
+
+
+            }
+
+            _myCommunicator.executeTransactedQueries(_queries);
+        }
+
+        public void saveGlass(Glass glass, bool update)
+        {
+            List<string> _queries = new List<string>();
+
+            if (update)
+            {
+                _queries.Add("Update " + DBGlasses.Table + " Set " + DBGlasses.Description + " = " + glass.Name.ToDBObject() + " WHERE " + DBGlasses.ID + "=" + glass.ID);
+                _queries.Add("Update " + DBGlasses.Table + " Set " + DBGlasses.Company + " = " + glass.Comapany.ToDBObject() + " WHERE " + DBGlasses.ID + "=" + glass.ID);
+
+            }
+            else
+            {
+                _queries.Add("INSERT INTO " + DBUser.Table + " (" + DBGlasses.Description + "," +
+                                                                                     DBGlasses.Company + ") Values (" +
+                                                                            glass.Name.ToDBObject() + "," +
+                                                                             glass.Comapany.ToDBObject() + ")");
+
+
+
+
+            }
+
+            _myCommunicator.executeTransactedQueries(_queries);
+        }
+
+        public User getUser(int UID)
+        {
+            DataRow _dr = _myCommunicator.getDataSet("SELECT * FROM " + DBUser.Table + " WHERE " + DBUser.ID + "=" + UID).Tables[0].Rows[0];
+
+            return new User()
+            {
+                ID = _dr.Field<int>(DBUser.ID),
+                FirstName = _dr.Field<string>(DBUser.FirstName),
+                LastName = _dr.Field<string>(DBUser.LastName),
+                Token = _dr.Field<string>(DBUser.Token),
+                isActive = _dr.Field<bool>(DBUser.isActive),
+            };
+
         }
 
         public List<Workpiece> getCoatedWorkpieces()

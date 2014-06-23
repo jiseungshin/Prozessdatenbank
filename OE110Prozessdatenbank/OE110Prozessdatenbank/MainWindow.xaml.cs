@@ -38,9 +38,11 @@ namespace OE110Prozessdatenbank
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
-            ProcessWindows.GenericWindow gq = new ProcessWindows.GenericWindow();
-            gq.contentGrid.Children.Add(new Controls.CExpMoore(9));
-            gq.ShowDialog();
+            //ProcessWindows.GenericWindow gq = new ProcessWindows.GenericWindow();
+            //gq.contentGrid.Children.Add(new Controls.CExpMoore(9));
+            //gq.ShowDialog();
+
+            new Controls.WorkpieceAdministration().ShowDialog();
 
             //new Controls.CProject(5).ShowDialog();
             //new Controls.CoatingSPAdministration().ShowDialog();

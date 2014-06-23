@@ -37,7 +37,14 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public Material Material
         {
-            get { return m_workpiece.Material; }
+            get
+            {
+                try
+                {
+                    return Materials.Single(item => item.ID == m_workpiece.Material.ID);
+                }
+                catch { return null; }
+            }
             set { m_workpiece.Material = value; }
         }
 

@@ -59,6 +59,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Controls\AddGlass.xaml.cs">
+      <DependentUpon>AddGlass.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AddUser.xaml.cs">
+      <DependentUpon>AddUser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\AddWorkpiece.xaml.cs">
       <DependentUpon>AddWorkpiece.xaml</DependentUpon>
     </Compile>
@@ -104,8 +110,17 @@
     <Compile Include="Controls\CQuality.xaml.cs">
       <DependentUpon>CQuality.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GlassAdministration.xaml.cs">
+      <DependentUpon>GlassAdministration.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MaterialWindow.xaml.cs">
       <DependentUpon>MaterialWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UserAdministration.xaml.cs">
+      <DependentUpon>UserAdministration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WorkpieceAdministration.xaml.cs">
+      <DependentUpon>WorkpieceAdministration.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindows\F_Coating.xaml.cs">
       <DependentUpon>F_Coating.xaml</DependentUpon>
@@ -118,6 +133,8 @@
     <Compile Include="ViewModels\F_GrindingVM.cs" />
     <Compile Include="ViewModels\OMaterialVM.cs" />
     <Compile Include="ViewModels\OProjectVM.cs" />
+    <Compile Include="ViewModels\OGlassVM.cs" />
+    <Compile Include="ViewModels\OUserVM.cs" />
     <Compile Include="ViewModels\OWorkpieceVM.cs" />
     <Compile Include="ViewModels\PCemeconStandarProcessVM.cs" />
     <Compile Include="ViewModels\PCoatingCemeconVM.cs" />
@@ -130,6 +147,14 @@
     <Compile Include="ViewModels\PGrindingPhoenixVMcs.cs" />
     <Compile Include="ViewModels\PTurningMooreVM.cs" />
     <Compile Include="ViewModels\QualityVM.cs" />
+    <Page Include="Controls\AddGlass.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AddUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\AddWorkpiece.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -194,7 +219,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\GlassAdministration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\MaterialWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UserAdministration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\WorkpieceAdministration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
