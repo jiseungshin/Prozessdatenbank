@@ -16,6 +16,8 @@ namespace OE110Prozessdatenbank.ViewModels
     {
 
         private string m_polishedFilter = "";
+        private string m_coatedFilter = "";
+        private FilterCriteria m_CoatedCriterium = ProcessManager.Instance.FilterCriteria[0];
 
         public F_CoatingVM()
         {
@@ -34,7 +36,7 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public DataSet DataCoated
         {
-            get { return ProcessManager.Instance.getData(Queries.QueryCoated); }
+            get { return ProcessManager.Instance.getData(Queries.QueryCoated + m_coatedFilter); }
         }
 
         public string PolishedFilter
@@ -52,6 +54,30 @@ namespace OE110Prozessdatenbank.ViewModels
 
                 NotifyPropertyChanged("DataPolished");
             }
+        }
+
+        public string CoatedFilter
+        {
+            set
+            {
+                if (value != "")
+                {
+                    m_coatedFilter = " AND " + m_CoatedCriterium.DatabaseField + " LIKE ('%" + value + "%')";
+                }
+                else
+                    m_coatedFilter = value;
+
+                NotifyPropertyChanged("DataCoated");
+            }
+        } 
+
+        public ObservableCollection<FilterCriteria> FilterCriteria
+        { get { return new ObservableCollection<PDCore.Database.FilterCriteria>(ProcessManager.Instance.FilterCriteriaCoating); } }
+
+        public FilterCriteria Criterium
+        {
+            get { return m_CoatedCriterium; }
+            set { m_CoatedCriterium = value; }
         }
     }
 }

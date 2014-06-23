@@ -185,6 +185,9 @@ namespace OE110Prozessdatenbank.ViewModels
             }
         }
 
+        public int ProcessNumber
+        { get { return m_process.Processnumber; } set { m_process.Processnumber = value; } }
+
         public string Abnormalities
         { get { return m_process.Abnormalities; } set { m_process.Abnormalities = value; } }
 

@@ -1,0 +1,37 @@
+﻿<Window x:Class="OE110Prozessdatenbank.MainWindows.F_Processing"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="F_Processing" Height="368" Width="660" Icon="/OE110Prozessdatenbank;component/icon.ico" WindowState="Maximized">
+    <Grid>
+        <Menu Height="23" VerticalAlignment="Top">
+            <MenuItem Header="Datei">
+                <MenuItem Header="wechseln zu">
+                    <MenuItem Header="Administration"></MenuItem>
+                    <Separator />
+                    <MenuItem Header="Probenvorbereitung"></MenuItem>
+                    <MenuItem Header="Beschichtung"></MenuItem>
+                    <MenuItem Header="Analysen"></MenuItem>
+                   
+                </MenuItem>
+                <MenuItem Header="Ansicht schließen"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Bearbeiten">
+                <MenuItem Header="Einstellungen"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Werkstücke und Materialien">
+                <MenuItem Header="Material anlegen" Click="mi_AddMaterial_Click"></MenuItem>
+                <MenuItem Header="Werkstück anlegen" Click="mi_AddWorkpiece_Click"></MenuItem>
+                <Separator />
+                <MenuItem Header="Werkstückverwaltung" Click="mi_WorkpieceAdmin_Click"></MenuItem>
+                <MenuItem Header="Materialverwaltung"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Prozesse">
+                <MenuItem Header="Beschichtungsprozesse"></MenuItem>
+                <MenuItem Header="Polierprozesse (Phoenix)"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Export"></MenuItem>
+        </Menu>
+        <Grid x:Name="g_content" Margin="0,23,0,0"/>
+
+    </Grid>
+</Window>

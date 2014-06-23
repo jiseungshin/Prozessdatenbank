@@ -19,7 +19,7 @@ namespace OE110Prozessdatenbank.MainWindows
     /// <summary>
     /// Interaktionslogik für F_Grinding.xaml
     /// </summary>
-    public partial class F_Grinding : Window
+    public partial class F_Grinding : UserControl
     {
         ViewModels.F_GrindingVM m_vm;
         ProcessWindows.GenericWindow gw;
@@ -115,5 +115,32 @@ namespace OE110Prozessdatenbank.MainWindows
         {
             new Controls.AddWorkpiece().ShowDialog();
         }
+
+        private void mi_WorkpieceAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            new Controls.WorkpieceAdministration().ShowDialog();
+        }
+
+        private void mi_AddWorkpiece_Click(object sender, RoutedEventArgs e)
+        {
+            new Controls.AddWorkpiece().ShowDialog();
+        }
+
+        private void mi_AddMaterial_Click(object sender, RoutedEventArgs e)
+        {
+            new Controls.MaterialWindow().ShowDialog();
+        }
+
+        private void ToolBar_Loaded(object sender, RoutedEventArgs e)
+        {
+            ToolBar toolBar = sender as ToolBar;
+            var overflowGrid = toolBar.Template.FindName("OverflowGrid", toolBar) as FrameworkElement;
+            if (overflowGrid != null)
+            {
+                overflowGrid.Visibility = Visibility.Collapsed;
+            }
+        }
+
+
     }
 }

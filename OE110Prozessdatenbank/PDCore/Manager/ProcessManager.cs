@@ -33,6 +33,17 @@ namespace PDCore.Manager
             { 
             }
 
+            m_criteria.Add(new FilterCriteria() { DatabaseField = DBProjects.Table + "." + DBProjects.Name, Name = "Projekt" });
+            m_criteria.Add(new FilterCriteria() { DatabaseField = DBWorkpieces.Table + "." + DBWorkpieces.Label, Name = "Werkstück" });
+            m_criteria.Add(new FilterCriteria() { DatabaseField = DBProcessReferences.Table + "." + DBProcessReferences.RefNumber, Name = "Vorgangsnummer" });
+
+            m_criteriaCoating.Add(new FilterCriteria() { DatabaseField = DBProjects.Table + "." + DBProjects.Name, Name = "Projekt" });
+            m_criteriaCoating.Add(new FilterCriteria() { DatabaseField = DBWorkpieces.Table + "." + DBWorkpieces.Label, Name = "Werkstück" });
+            m_criteriaCoating.Add(new FilterCriteria() { DatabaseField = DBCoatingCemecon.Table + "." + DBCoatingCemecon.ProcessNumber, Name = "Prozessnummer" });
+            m_criteriaCoating.Add(new FilterCriteria() { DatabaseField = DBCoatingCemeconProcess.Table + "." + DBCoatingCemeconProcess.ProtectiveLayer, Name = "Schutzschicht" });
+            m_criteriaCoating.Add(new FilterCriteria() { DatabaseField = DBCoatingCemeconProcess.Table + "." + DBCoatingCemeconProcess.AdherentLayer, Name = "Haftschicht" });
+            m_criteriaCoating.Add(new FilterCriteria() { DatabaseField = DBProcessReferences.Table + "." + DBProcessReferences.RefNumber, Name = "Vorgangsnummer" });
+
         }
 
          void _myCommunicator_MessageThrown(Communicator.MessageType mType, Exception Message)
@@ -61,6 +72,8 @@ namespace PDCore.Manager
 
 
         private List<PCoatingCemeconProcess> m_CoatingProcesses = new List<PCoatingCemeconProcess>();
+        private List<FilterCriteria> m_criteria = new List<FilterCriteria>();
+        private List<FilterCriteria> m_criteriaCoating = new List<FilterCriteria>();
 
         public void update()
         {
@@ -336,6 +349,7 @@ namespace PDCore.Manager
             _p.Remark = _dr.Field<string>(DBCoatingCemecon.Remark);
             _p.Abnormalities = _dr.Field<string>(DBCoatingCemecon.Abnormalities);
             _p.CoatingProcessID = _dr.Field<int>(DBCoatingCemecon.CoatingProcessID);
+            _p.Processnumber = _dr.Field<int>(DBCoatingCemecon.ProcessNumber);
 
             _p.ProjectID = _dr2.Field<int?>(DBProcessReferences.ProjectID);
             _p.IssueID = _dr2.Field<int?>(DBProcessReferences.IssueID);
@@ -796,6 +810,7 @@ namespace PDCore.Manager
                 _queries.Add("Update " + DBCoatingCemecon.Table + " Set " + DBCoatingCemecon.Date + " = " + Process.Date.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + " WHERE " + DBCoatingCemecon.ID + "=" + Process.ID);
                 _queries.Add("Update " + DBCoatingCemecon.Table + " Set " + DBCoatingCemecon.Remark + " = " + Process.Remark.ToDBObject() + " WHERE " + DBCoatingCemecon.ID + "=" + Process.ID);
                 _queries.Add("Update " + DBCoatingCemecon.Table + " Set " + DBCoatingCemecon.UserID + " = " + Process.UserID.ToDBObject() + " WHERE " + DBCoatingCemecon.ID + "=" + Process.ID);
+                _queries.Add("Update " + DBCoatingCemecon.Table + " Set " + DBCoatingCemecon.ProcessNumber + " = " + Process.Processnumber.ToDBObject() + " WHERE " + DBCoatingCemecon.ID + "=" + Process.ID);
 
             }
             else
@@ -819,12 +834,14 @@ namespace PDCore.Manager
                                                                         DBCoatingCemecon.UserID + "," +
                                                                          DBCoatingCemecon.Date + "," +
                                                                           DBCoatingCemecon.CoatingProcessID + "," +
+                                                                          DBCoatingCemecon.ProcessNumber + "," +
                                                                           DBCoatingCemecon.Abnormalities + "," +
                                                                                    DBCoatingCemecon.Remark + ") Values (" +
                                                                           _pro + "," +
                                                                            Process.UserID.ToDBObject() + "," +
                                                                             Process.Date.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + "," +
                                                                              Process.CoatingProcessID.ToDBObject() + "," +
+                                                                             Process.Processnumber.ToDBObject() + "," +
                                                                              Process.Abnormalities.ToDBObject() + "," +
                                                                                Process.Remark.ToDBObject() + ")");
 
@@ -1203,6 +1220,92 @@ namespace PDCore.Manager
         }
 
         #endregion
+
+        public List<FilterCriteria> FilterCriteria
+        { get { return m_criteria; } }
+
+        public List<FilterCriteria> FilterCriteriaCoating
+        { get { return m_criteriaCoating; } }
+
+        public List<Analysis> getAnalysis(int RefID)
+        {
+            ObjectManager.Instance.update();
+            DataTable _dt = _myCommunicator.getDataSet("SELECT * FROM " + DBAnalyses.Table +
+                                                
+                                              //join References
+                                              " LEFT JOIN " + DBProcessReferences.Table +
+                                              " On " + DBProcessReferences.Table + "." + DBProcessReferences.RefNumber +
+                                              "=" + DBAnalyses.Table + "." + DBAnalyses.RefNumber +
+
+                                              //join Project
+                                              " LEFT JOIN " + DBProjects.Table +
+                                              " On " + DBProjects.Table + "." + DBProjects.ID +
+                                              "=" + DBProcessReferences.Table + "." + DBProcessReferences.ProjectID +
+
+                                              //join References
+                                              " LEFT JOIN " + DBIssues.Table +
+                                              " On " + DBIssues.Table + "." + DBIssues.ID +
+                                              "=" + DBProcessReferences.Table + "." + DBProcessReferences.IssueID +
+
+                                              //join References
+                                              " LEFT JOIN " + DBUser.Table +
+                                              " On " + DBUser.Table + "." + DBUser.ID +
+                                              "=" + DBAnalyses.Table + "." + DBAnalyses.UserID +
+                
+                                              " WHERE " + DBAnalyses.Table+"."+ DBAnalyses.RefNumber + "=" + RefID).Tables[0];
+
+            List<Analysis> m_analyses = new List<Analysis>();
+
+            if (_dt.Rows.Count != 0)
+            { 
+                for (int i=0; i<_dt.Rows.Count; i++)
+                {
+                    m_analyses.Add(new Analysis()
+                    {
+                        ID = _dt.Rows[i].Field<int>(DBAnalyses.ID),
+                        Started = _dt.Rows[i].Field<DateTime>(DBAnalyses.Started),
+                        Finished = _dt.Rows[i].Field<DateTime>(DBAnalyses.Finished),
+                        User = ObjectManager.Instance.Users.Find(item => item.ID == _dt.Rows[i].Field<int>(DBUser.ID)),
+                        Description = _dt.Rows[i].Field<string>(DBAnalyses.Type),
+                        ReferenceNumber = _dt.Rows[i].Field<int>(DBAnalyses.RefNumber)
+                    });
+            }}
+
+            return m_analyses;
+        }
+
+        public void SaveAnalyses(List<Analysis> Analyses)
+        {
+            List<string> _queries = new List<string>();
+
+            foreach (var ana in Analyses)
+            {
+                    //save
+                if (ana.ID == -1)
+                {
+                    _queries.Add("INSERT INTO " + DBAnalyses.Table + " (" + DBAnalyses.RefNumber + "," +
+                                                                          DBAnalyses.Started + "," +
+                                                                          DBAnalyses.Finished + "," +
+                                                                          DBAnalyses.UserID + "," +
+                                                                          DBAnalyses.Type + ") Values (" +
+                                                                          ana.ID + "," +
+                                                                           ana.Started.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + "," +
+                                                                            ana.Finished.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + "," +
+                                                                             ana.User.ID.ToDBObject() + "," +
+                                                                               ana.Description.ToDBObject() + ")");
+                }
+                    //update
+                else
+                {
+                    _queries.Add("Update " + DBAnalyses.Table + " Set " + DBAnalyses.Started + " = " + ana.Started.ToString("yyyy-MM-dd HH:mm:ss") + " WHERE " + DBAnalyses.ID + "=" + ana.ID);
+                    _queries.Add("Update " + DBAnalyses.Table + " Set " + DBAnalyses.Started + " = " + ana.Finished.ToString("yyyy-MM-dd HH:mm:ss") + " WHERE " + DBAnalyses.ID + "=" + ana.ID);
+                    _queries.Add("Update " + DBAnalyses.Table + " Set " + DBAnalyses.Started + " = " + ana.User.ID+ " WHERE " + DBAnalyses.ID + "=" + ana.ID);
+                }
+            
+            }
+
+            Updater.Instance.forceUpdate();
+        }
 
     }
 }

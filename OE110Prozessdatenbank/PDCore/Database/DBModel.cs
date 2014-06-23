@@ -177,6 +177,7 @@ namespace PDCore.Database
         public static string Date { get { return "Date"; } }
         public static string Abnormalities { get { return "Abnormalities"; } }
         public static string Remark { get { return "Remark"; } }
+        public static string ProcessNumber { get { return "ProcessNumber"; } }
     }
 
     public static class DBCoatingCemeconProcess
@@ -260,5 +261,16 @@ namespace PDCore.Database
         public static string Force { get { return "PressForce"; } }
         public static string PressTime { get { return "PressTime"; } }
         public static string Cycles { get { return "Cycles"; } }
+    }
+
+    public static class DBAnalyses
+    {
+        public static string Table { get { return "Analyses"; } }
+        public static string ID { get { return "Analyse_ID"; } }
+        public static string UserID { get { return "User_ID"; } }
+        public static string RefNumber { get { return "ReferenceNumber"; } }
+        public static string Started { get { return "Started"; } }
+        public static string Finished { get { return "Finished"; } }
+        public static string Type { get { return "Type"; } }
     }
 }

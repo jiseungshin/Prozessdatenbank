@@ -59,6 +59,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Controls\AddAnalysis.xaml.cs">
+      <DependentUpon>AddAnalysis.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\AddGlass.xaml.cs">
       <DependentUpon>AddGlass.xaml</DependentUpon>
     </Compile>
@@ -67,6 +70,9 @@
     </Compile>
     <Compile Include="Controls\AddWorkpiece.xaml.cs">
       <DependentUpon>AddWorkpiece.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CAnalyses.xaml.cs">
+      <DependentUpon>CAnalyses.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\CCoatingCemecon.xaml.cs">
       <DependentUpon>CCoatingCemecon.xaml</DependentUpon>
@@ -107,14 +113,17 @@
     <Compile Include="Controls\CProcessQuality.xaml.cs">
       <DependentUpon>CProcessQuality.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CProMoore.xaml.cs">
+      <DependentUpon>CProMoore.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CQuality.xaml.cs">
       <DependentUpon>CQuality.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\GlassAdministration.xaml.cs">
       <DependentUpon>GlassAdministration.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MaterialWindow.xaml.cs">
-      <DependentUpon>MaterialWindow.xaml</DependentUpon>
+    <Compile Include="Controls\AddMaterial.xaml.cs">
+      <DependentUpon>AddMaterial.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\UserAdministration.xaml.cs">
       <DependentUpon>UserAdministration.xaml</DependentUpon>
@@ -122,8 +131,16 @@
     <Compile Include="Controls\WorkpieceAdministration.xaml.cs">
       <DependentUpon>WorkpieceAdministration.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Conversion.cs" />
+    <Compile Include="IconManager.cs" />
     <Compile Include="MainWindows\F_Coating.xaml.cs">
       <DependentUpon>F_Coating.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindows\F_PostProcessing.xaml.cs">
+      <DependentUpon>F_PostProcessing.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindows\F_Processing.xaml.cs">
+      <DependentUpon>F_Processing.xaml</DependentUpon>
     </Compile>
     <Compile Include="ProcessWindows\GenericWindow.xaml.cs">
       <DependentUpon>GenericWindow.xaml</DependentUpon>
@@ -136,6 +153,7 @@
     <Compile Include="ViewModels\OGlassVM.cs" />
     <Compile Include="ViewModels\OUserVM.cs" />
     <Compile Include="ViewModels\OWorkpieceVM.cs" />
+    <Compile Include="ViewModels\PAnalysesVM.cs" />
     <Compile Include="ViewModels\PCemeconStandarProcessVM.cs" />
     <Compile Include="ViewModels\PCoatingCemeconVM.cs" />
     <Compile Include="ViewModels\PExpMooreVM.cs" />
@@ -147,6 +165,10 @@
     <Compile Include="ViewModels\PGrindingPhoenixVMcs.cs" />
     <Compile Include="ViewModels\PTurningMooreVM.cs" />
     <Compile Include="ViewModels\QualityVM.cs" />
+    <Page Include="Controls\AddAnalysis.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\AddGlass.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -156,6 +178,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\AddWorkpiece.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CAnalyses.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -211,6 +237,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\CProMoore.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\CQuality.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -223,7 +253,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\MaterialWindow.xaml">
+    <Page Include="Controls\AddMaterial.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -255,6 +285,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindows\F_Grinding.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindows\F_PostProcessing.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindows\F_Processing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -301,6 +339,32 @@
       <Project>{ac8241a9-b3fd-4828-8164-89ac411b9934}</Project>
       <Name>PDCore</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Component_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\process_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\action_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\folder_Open_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Analysis_9699.png" />
+    <Resource Include="Icons\FindResults1_6264.png" />
+    <Resource Include="Icons\GotoNextRow_289.png" />
+    <Resource Include="Icons\StepOver_6328.png" />
+    <Resource Include="Icons\TransparentBackground_244.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Close_16xLG.png" />
+    <Resource Include="Icons\gear_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Guage_16xLG.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

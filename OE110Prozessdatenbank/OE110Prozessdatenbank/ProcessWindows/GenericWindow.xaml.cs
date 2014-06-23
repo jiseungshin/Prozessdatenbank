@@ -23,5 +23,19 @@ namespace OE110Prozessdatenbank.ProcessWindows
         {
             InitializeComponent();
         }
+
+        public IconManager.IconType IconType
+        {
+            set
+            {
+                switch (value)
+                {
+                    case IconManager.IconType.ProcessIcon:
+                        //this.Icon = new BitmapImage(new Uri(@"pack://application:,,,/Icons/process_16xLG.png", UriKind.RelativeOrAbsolute));
+                        break;
+                }
+        
+        }
+        }
     }
 }

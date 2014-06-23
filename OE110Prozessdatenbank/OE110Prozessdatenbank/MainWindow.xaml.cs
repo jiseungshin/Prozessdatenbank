@@ -22,51 +22,106 @@ namespace OE110Prozessdatenbank
     /// </summary>
     public partial class MainWindow : Window
     {
-        MainWindows.F_Grinding gg;
-        MainWindows.F_Coating ff;
+        Brush m_selectedColor;
+        Brush m_hoverColor;
+
+        private UIElement m_grindingControl;
+        private UIElement m_coatingControl;
+        private UIElement m_processingControl;
+        private UIElement m_analysingControl;
+
+
         public MainWindow()
         {
             InitializeComponent();
-            ff = new MainWindows.F_Coating();
-            ff.Show();
-            gg = new MainWindows.F_Grinding();
-            gg.Show();
-            //this.Close();
-            //Environment.Exit(0);
+            //#FF5EB45A
+            var converter = new System.Windows.Media.BrushConverter();
+            m_selectedColor = (Brush)converter.ConvertFromString("#FF509E5E");
+            m_hoverColor = (Brush)converter.ConvertFromString("#FF5EB45A");
+
+            m_grindingControl = new MainWindows.F_Grinding();
+            m_coatingControl = new MainWindows.F_Coating();
+            m_processingControl = new Controls.CProMoore();
+
+            this.Closing += MainWindow_Closing;
+
+            g_content.Children.Add(m_grindingControl);
+            lb_1.Background = m_selectedColor;
+            lb_1.Foreground = Brushes.WhiteSmoke;
+            m_selectedLabel = lb_1;
+            
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+           Environment.Exit(0);
+        }
 
-            //ProcessWindows.GenericWindow gq = new ProcessWindows.GenericWindow();
-            //gq.contentGrid.Children.Add(new Controls.CExpMoore(9));
-            //gq.ShowDialog();
 
-            new Controls.WorkpieceAdministration().ShowDialog();
+        private void lb_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            lb_1.Background = Brushes.Transparent;
+            lb_2.Background = Brushes.Transparent;
+            lb_3.Background = Brushes.Transparent;
+            lb_4.Background = Brushes.Transparent;
 
-            //new Controls.CProject(5).ShowDialog();
-            //new Controls.CoatingSPAdministration().ShowDialog();
-            //List<int?> test = PDCore.Manager.ObjectManager.Instance.getProjectIssueIDS(2);
-            //// MessageBox.Show(PDCore.Manager.ProcessManager.Instance.getNextProcessIndex().ToString());
-           //// PDCore.Manager.ProcessManager.Instance
-           // PTurningMoore tt = PDCore.Manager.ProcessManager.Instance.getProcessByReference(9, 1) as PTurningMoore;
+            lb_1.Foreground = Brushes.Black;
+            lb_2.Foreground = Brushes.Black;
+            lb_3.Foreground = Brushes.Black;
+            lb_4.Foreground = Brushes.Black;
 
-           // Workpiece wp = new Workpiece();
-           // wp.ID = 9;
+            m_selectedLabel = (sender as Label);
 
-           // //PTurningMoore tt = new PTurningMoore();
-           // tt.UserID = 2;
-           // tt.Date = DateTime.Now;
-           // tt.Remark = "MYSQL Rocks44 Update";
-           // tt.Radius = 888;
-           // tt.Speed = 33;
+            (sender as Label).Background = m_selectedColor;
+            (sender as Label).Foreground = Brushes.WhiteSmoke;
+            
+            switch((sender as Label).Name)
+            {
+                case "lb_1":
+                    g_content.Children.Clear();
+                    g_content.Children.Add(m_grindingControl);
+                    break;
+                case "lb_2":
+                    g_content.Children.Clear();
+                    g_content.Children.Add(m_coatingControl);
+                    break;
+                case "lb_3":
+                    g_content.Children.Clear();
+                    g_content.Children.Add(m_processingControl);
+                    break;
+                case "lb_4":
+                    break;
+                default:
+                    break;
 
-           // PDCore.Manager.ProcessManager.Instance.saveProcess(tt, null, true);
-            //MainWindows.F_Grinding ff = new MainWindows.F_Grinding();
-            //new MainWindows.F_Grinding().ShowDialog();
-            //ff.ShowDialog();
+            }
 
         }
+
+        private Brush m_1;
+        private Brush m_2;
+        private Label m_selectedLabel;
+
+        private void lb_MouseEnter(object sender, MouseEventArgs e)
+        {
+            (sender as Label).Background = m_hoverColor;
+            (sender as Label).Foreground = Brushes.WhiteSmoke;
+
+            m_selectedLabel.Background = m_selectedColor;
+            m_selectedLabel.Foreground = Brushes.WhiteSmoke;
+        }
+
+        private void lb_MouseLeave(object sender, MouseEventArgs e)
+        {
+            (sender as Label).Background = Brushes.Transparent;
+            (sender as Label).Foreground = Brushes.Black;
+
+            m_selectedLabel.Background = m_selectedColor;
+            m_selectedLabel.Foreground = Brushes.WhiteSmoke;
+        }
+
+
+        
 
 
     }

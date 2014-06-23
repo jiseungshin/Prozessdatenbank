@@ -16,5 +16,6 @@ namespace PDCore.Processes
         }
         public int CoatingProcessID { get; set; }
         public string Abnormalities { get; set; }
+        public int Processnumber { get; set; }
     }
 }

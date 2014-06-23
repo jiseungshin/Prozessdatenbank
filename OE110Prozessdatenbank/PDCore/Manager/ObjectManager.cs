@@ -49,6 +49,7 @@ namespace PDCore.Manager
 
          void _myCommunicator_MessageThrown(Communicator.MessageType mType, Exception Message)
         {
+             //1062 duplicate number
             System.Windows.MessageBox.Show(Message.Message);
         }
 

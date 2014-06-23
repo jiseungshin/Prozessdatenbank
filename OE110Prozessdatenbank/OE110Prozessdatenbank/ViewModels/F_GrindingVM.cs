@@ -19,6 +19,7 @@ namespace OE110Prozessdatenbank.ViewModels
         private string m_rawFilter = "";
         private string m_PolshedFilter = "";
         private string m_PolishedKrit = DBProjects.Table + "." + DBProjects.Name;
+        private FilterCriteria m_polishedCriterium = ProcessManager.Instance.FilterCriteria[0];
 
         public F_GrindingVM()
         {
@@ -61,6 +62,35 @@ namespace OE110Prozessdatenbank.ViewModels
             get {return ProcessManager.Instance.getData(Queries.QueryRaw + m_rawFilter); }
         }
 
+        public ObservableCollection<FilterCriteria> FilterCriteria
+        { get { return new ObservableCollection<PDCore.Database.FilterCriteria>(ProcessManager.Instance.FilterCriteria); } }
+
+        public FilterCriteria Criterium
+        {
+            get { return m_polishedCriterium; }
+            set { m_polishedCriterium = value; }
+        }
+
+        public DataSet DataPolished
+        {
+            get
+            {
+                switch (Machine.ID)
+                {
+                    case 1:
+                        return ProcessManager.Instance.getData(Queries.QueryTurningMoore + m_PolshedFilter);
+                    case 2:
+                        return ProcessManager.Instance.getData(Queries.QueryGrindingMoore + m_PolshedFilter);
+                    case 3:
+                        return ProcessManager.Instance.getData(Queries.QueryGrindingPhoenix + m_PolshedFilter);
+                    case 4:
+                        return ProcessManager.Instance.getData(Queries.QueryGrindingOther + m_PolshedFilter);
+
+                }
+                return null;
+            }
+        }
+
         public string RawFilter
         {
             set 
@@ -87,7 +117,7 @@ namespace OE110Prozessdatenbank.ViewModels
             {
                 if (value != "")
                 {
-                    m_PolshedFilter = " AND " + m_PolishedKrit + " LIKE ('%" + value + "%')";
+                    m_PolshedFilter = " WHERE " + m_polishedCriterium.DatabaseField + " LIKE ('%" + value + "%')";
                 }
                 else
                     m_PolshedFilter = value;
@@ -96,24 +126,6 @@ namespace OE110Prozessdatenbank.ViewModels
             }
         }
 
-        public DataSet DataPolished
-        {
-            get
-            {
-                switch (Machine.ID)
-                { 
-                    case 1:
-                        return ProcessManager.Instance.getData(Queries.QueryTurningMoore + m_PolshedFilter);
-                    case 2:
-                        return ProcessManager.Instance.getData(Queries.QueryGrindingMoore + m_PolshedFilter);
-                    case 3:
-                        return ProcessManager.Instance.getData(Queries.QueryGrindingPhoenix + m_PolshedFilter);
-                    case 4:
-                        return ProcessManager.Instance.getData(Queries.QueryGrindingOther + m_PolshedFilter);
-
-                }
-                return null;
-            }
-        }
+        
     }
 }

@@ -13,6 +13,7 @@ namespace PDCore.BusinessObjects
             Material = new Material();
             PurchaseDate = DateTime.Now;
             Quality = new WorkpieceQuality();
+            Label = "";
         }
         public string Label { get; set; }
         public Material Material { get; set; }

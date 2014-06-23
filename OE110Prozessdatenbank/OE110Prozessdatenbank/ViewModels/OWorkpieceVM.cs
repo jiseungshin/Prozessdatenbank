@@ -91,7 +91,7 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public bool CanSave()
         {
-            if (Label != "")
+            if (Label != "" && Material != null)
                 return true;
             else
                 return false;

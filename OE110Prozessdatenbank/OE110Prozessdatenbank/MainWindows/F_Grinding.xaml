@@ -1,10 +1,10 @@
-﻿<Window x:Class="OE110Prozessdatenbank.MainWindows.F_Grinding"
+﻿<UserControl x:Class="OE110Prozessdatenbank.MainWindows.F_Grinding"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="OE 110 Prozessdatenbank - Probenvorbereitung" Height="539" Width="1074" Icon="/OE110Prozessdatenbank;component/icon.ico">
+       Height="auto" Width="auto">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="44"/>
             <RowDefinition Height="281*"/>
         </Grid.RowDefinitions>
         <Grid Margin="0,2,0,0" Grid.Row="1">
@@ -13,7 +13,7 @@
                 <ColumnDefinition Width="296*"/>
             </Grid.ColumnDefinitions>
             <Grid x:Name="g_raw">
-                <ListView Name="LV_Raw" Margin="10,51,10,10" DataContext="{Binding DataRaw, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Table}" SelectionMode="Single" MouseDoubleClick="LV_Raw_DoubvleClick">
+                <ListView Name="LV_Raw" Margin="10,36,10,10" DataContext="{Binding DataRaw, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Table}" SelectionMode="Single" MouseDoubleClick="LV_Raw_DoubvleClick">
                     <ListView.Background>
                         <LinearGradientBrush>
                             <GradientStop  Offset="0" Color="#FFE8E8E8"/>
@@ -62,12 +62,11 @@
 
                     </ListView.View>
                 </ListView>
-                <TextBox x:Name="tb_raw" Height="23" Margin="70,23,10,0" TextWrapping="Wrap" Text="{Binding RawFilter, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
-                <Label Content="Suche:" HorizontalAlignment="Left" Margin="10,19,0,0" VerticalAlignment="Top"/>
-                <Label Content="Suche:" HorizontalAlignment="Left" Margin="323,19,-77,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="tb_raw" Height="23" Margin="59,5,10,0" TextWrapping="Wrap" Text="{Binding RawFilter, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
+                <Label Content="Suche:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
             </Grid>
             <Grid Grid.Column="1">
-                <ListView Name="LV_Polished" Margin="10,51,10,10" DataContext="{Binding DataPolished, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Table}" SelectionMode="Single" MouseDoubleClick="MaterialListView_MouseDoubleClick">
+                <ListView Name="LV_Polished" Margin="10,33,10,10" DataContext="{Binding DataPolished, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Table}" SelectionMode="Single" MouseDoubleClick="MaterialListView_MouseDoubleClick">
                     <ListView.Background>
                         <LinearGradientBrush>
                             <GradientStop  Offset="0" Color="#FFE8E8E8"/>
@@ -120,20 +119,33 @@
 
                     </ListView.View>
                 </ListView>
-                <ComboBox ItemsSource="{Binding Machines}" SelectedItem="{Binding Machine}" DisplayMemberPath="Name" Margin="0,23,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="173"/>
-                <TextBox x:Name="tb_polished" HorizontalAlignment="Left" Height="23" Margin="72,22,0,0" TextWrapping="Wrap" Text="{Binding PolishedFilter, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="220"/>
-                <ComboBox HorizontalAlignment="Left" Margin="297,22,0,0" VerticalAlignment="Top" Width="161" SelectedIndex="0">
-                    <ComboBoxItem Content="Projekt"/>
-                    <ComboBoxItem Content="Werkstück"/>
+                <ComboBox ItemsSource="{Binding Machines}" SelectedItem="{Binding Machine}" DisplayMemberPath="Name" Margin="0,5,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="173"/>
+                <TextBox x:Name="tb_polished" HorizontalAlignment="Left" Height="23" Margin="59,5,0,0" TextWrapping="Wrap" Text="{Binding PolishedFilter, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="220"/>
+                <ComboBox HorizontalAlignment="Left" Margin="284,6,0,0" VerticalAlignment="Top" Width="161" ItemsSource="{Binding FilterCriteria}" SelectedItem="{Binding Criterium}" DisplayMemberPath="Name">
                 </ComboBox>
-                <Label Content="Maschine:" HorizontalAlignment="Right" Margin="0,20,187,0" VerticalAlignment="Top"/>
+                <Label Content="Maschine:" HorizontalAlignment="Right" Margin="0,2,183,0" VerticalAlignment="Top"/>
+                <Label Content="Suche:" HorizontalAlignment="Left" Margin="10,2,0,0" VerticalAlignment="Top"/>
             </Grid>
         </Grid>
-        <Grid Background="#FFDEDEDE">
-            <Button Content="Werkstück anlegen" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="143" Click="Button_Click" Margin="10,0,0,10" Height="30" RenderTransformOrigin="-0.373,0.038"/>
-            <Button Content="Material anlegen" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="143" Click="Button_WP_Click" Margin="158,0,0,10" Height="30" RenderTransformOrigin="-0.373,0.038"/>
+        <Grid Background="#FFB4B4B4">
+            <ToolBarTray Height="50" VerticalAlignment="Top" Background="#FFB4B4B4" Width="auto">
+                <ToolBar x:Name="tb_mainTool" Background="#FFB4B4B4" HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="auto" Margin="0,0,-125,-31" ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded">
+                    <Button x:Name="mbt_addWorkpieve" Height="30" Width="150" HorizontalAlignment="Right" ToolTip="Versuch durchführen" Margin="8,0,0,0" Click="mi_AddWorkpiece_Click">
+                        <StackPanel Orientation="Horizontal" Height="30" Width="150">
+                            <Image Source="/OE110Prozessdatenbank;component/Icons/action_16xLG.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Label Content="Werkstück anlegen"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="mbt_addMaterial" Height="30" Width="150" HorizontalAlignment="Right" ToolTip="Versuch durchführen" Margin="8,0,0,0" Click="mi_AddMaterial_Click">
+                        <StackPanel Orientation="Horizontal" Height="30" Width="150">
+                            <Image Source="/OE110Prozessdatenbank;component/Icons/action_16xLG.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Label Content="Material anlegen"/>
+                        </StackPanel>
+                    </Button>
+                </ToolBar>
+            </ToolBarTray>
 
         </Grid>
 
     </Grid>
-</Window>
+</UserControl>

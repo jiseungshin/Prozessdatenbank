@@ -236,6 +236,11 @@ namespace PDCore.Database
                                           " On " + DBProcessReferences.Table + "." + DBProcessReferences.RefNumber +
                                           "=" + DBProcessReferenceRelation.Table + "." + DBProcessReferenceRelation.RefNumber +
 
+                                          //join Standardprocesses
+                                          " LEFT JOIN " + DBCoatingCemeconProcess.Table +
+                                          " On " + DBCoatingCemeconProcess.Table + "." + DBCoatingCemeconProcess.ID +
+                                          "=" + DBCoatingCemecon.Table + "." + DBCoatingCemecon.CoatingProcessID +
+
                                           //join Workpiece
                                           " LEFT JOIN " + DBWorkpieces.Table +
                                           " On " + DBWorkpieces.Table + "." + DBWorkpieces.ID +
@@ -259,8 +264,8 @@ namespace PDCore.Database
                                           //join issues
                                           " LEFT JOIN " + DBIssues.Table +
                                           " On " + DBIssues.Table + "." + DBIssues.ID +
-                                          "=" + DBProcessReferences.Table + "." + DBProcessReferences.IssueID +
-                                          " WHERE " + DBWorkpieces.Table + "." + DBWorkpieces.Status + "='coated'";
+                                          "=" + DBProcessReferences.Table + "." + DBProcessReferences.IssueID;// +
+                                          //" WHERE " + DBWorkpieces.Table + "." + DBWorkpieces.Status + "='coated'";
 
             }
         }
@@ -280,6 +285,61 @@ namespace PDCore.Database
 
             }
         }
+
+        public static string QueryProcessedMoore
+        {
+            get
+            {
+                return "SELECT * FROM " + DBExpMoore.Table +
+
+                                              //join ReferenceRelations
+                                              " LEFT JOIN " + DBProcessReferenceRelation.Table +
+                                              " On " + DBProcessReferenceRelation.Table + "." + DBProcessReferenceRelation.PID +
+                                              "=" + DBExpMoore.Table + "." + DBExpMoore.ID +
+
+                                              //join References
+                                              " LEFT JOIN " + DBProcessReferences.Table +
+                                              " On " + DBProcessReferences.Table + "." + DBProcessReferences.RefNumber +
+                                              "=" + DBProcessReferenceRelation.Table + "." + DBProcessReferenceRelation.RefNumber +
+
+                                              //join Workpiece
+                                              " LEFT JOIN " + DBWorkpieces.Table +
+                                              " On " + DBWorkpieces.Table + "." + DBWorkpieces.ID +
+                                              "=" + DBProcessReferences.Table + "." + DBProcessReferences.WorkpiceID +
+
+                                               //join Material
+                                              " LEFT JOIN " + DBMAterial.Table +
+                                              " On " + DBMAterial.Table + "." + DBMAterial.ID +
+                                              "=" + DBWorkpieces.Table + "." + DBWorkpieces.MaterialID +
+
+                                               //join Glasses
+                                              " LEFT JOIN " + DBGlasses.Table +
+                                              " On " + DBGlasses.Table + "." + DBGlasses.ID +
+                                              "=" + DBExpMoore.Table + "." + DBExpMoore.GlassID +
+
+                                               //join User
+                                              " LEFT JOIN " + DBUser.Table +
+                                              " On " + DBUser.Table + "." + DBUser.ID +
+                                              "=" + DBExpMoore.Table + "." + DBExpMoore.UserID +
+
+                                              //join project
+                                              " LEFT JOIN " + DBProjects.Table +
+                                              " On " + DBProjects.Table + "." + DBProjects.ID +
+                                              "=" + DBProcessReferences.Table + "." + DBProcessReferences.ProjectID +
+
+                                              //join issues
+                                              " LEFT JOIN " + DBIssues.Table +
+                                              " On " + DBIssues.Table + "." + DBIssues.ID +
+                                              "=" + DBProcessReferences.Table + "." + DBProcessReferences.IssueID +
+                                              " WHERE " + DBWorkpieces.Table + "." + DBWorkpieces.Status + "='processed'";
+            }
+        }
+    }
+
+    public class FilterCriteria
+    {
+        public string DatabaseField { get; set; }
+        public string Name { get; set; }
     }
 
 

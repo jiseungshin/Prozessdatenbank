@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Drawing;
 
 namespace OE110Prozessdatenbank.Controls
 {
@@ -26,6 +27,7 @@ namespace OE110Prozessdatenbank.Controls
             InitializeComponent();
             m_vm = new ViewModels.PExpMooreVM();
             DataContext = m_vm;
+           
         }
 
         public CExpMoore(int PID)
@@ -41,12 +43,12 @@ namespace OE110Prozessdatenbank.Controls
 
         private void bt_cancel_Click(object sender, RoutedEventArgs e)
         {
-            
+            Window.GetWindow(this).Close();
         }
 
         private void bt_save_Click(object sender, RoutedEventArgs e)
         {
-
+            Window.GetWindow(this).Close();
         }
 
         private void cb_lowerWP_SelectionChanged(object sender, SelectionChangedEventArgs e)

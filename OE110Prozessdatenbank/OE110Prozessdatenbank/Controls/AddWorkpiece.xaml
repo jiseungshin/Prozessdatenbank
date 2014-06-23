@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Werkstück anlegen" Height="269" Width="436" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid x:Name="g_content">
-        <Label Content="Material" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Material *" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <ComboBox Margin="142,10,10,0" ItemsSource="{Binding Materials}" SelectedItem="{Binding Material}" DisplayMemberPath="Name" VerticalAlignment="Top"/>
         <ComboBox Margin="142,68,10,0"  ItemsSource="{Binding Geometries}" Text="{Binding Geometry}" VerticalAlignment="Top" IsEditable="True"/>
         <TextBox Height="23" Margin="142,37,10,0" TextWrapping="Wrap" Text="{Binding Label}" VerticalAlignment="Top"/>
@@ -13,7 +13,7 @@
         <CheckBox Content="Einwegprobe" IsChecked="{Binding isOneWay}" HorizontalAlignment="Left" Margin="142,180,0,0" VerticalAlignment="Top"/>
         <Button x:Name="bt_save" Content="speichern" Command="{Binding SaveWorkpiece}" IsEnabled="{Binding SaveWorkpiece.CanSave}" HorizontalAlignment="Right" Margin="0,0,6,7" VerticalAlignment="Bottom" Width="75" Click="bt_save_Click"/>
         <Button x:Name="bt_cancel" Content="abbrechen" HorizontalAlignment="Right" Margin="0,0,87,7" VerticalAlignment="Bottom" Width="75" Click="bt_cancel_Click"/>
-        <Label Content="Beschriftung" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top"/>
+        <Label Content="Beschriftung *" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Label Content="Geometrie" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top"/>
         <Label Content="Art der Probe" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top"/>
         <Label Content="Chargennummer" HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top"/>

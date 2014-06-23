@@ -58,6 +58,7 @@
     <Compile Include="Manager\ProcessManager.cs" />
     <Compile Include="Database\Queries.cs" />
     <Compile Include="Manager\Updater.cs" />
+    <Compile Include="Processes\PAnalyses.cs" />
     <Compile Include="Processes\PCoatingCemecon.cs" />
     <Compile Include="Processes\PCoatingCemeconProcess.cs" />
     <Compile Include="Processes\PExpCemeCon.cs" />
