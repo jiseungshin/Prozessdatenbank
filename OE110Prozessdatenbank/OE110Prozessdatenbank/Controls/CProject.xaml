@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Height="470" Width="442">
+             mc:Ignorable="d" Height="470" Width="442" Title="Projekt" Icon="/OE110Prozessdatenbank;component/Icons/manifest_16xLG.png" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <ComboBox x:Name="cb_user" ItemsSource="{Binding Users}" SelectedItem="{Binding User}" DisplayMemberPath="Description" Margin="166,115,10,0" VerticalAlignment="Top"/>
         <DatePicker SelectedDate="{Binding ProjectStarted}" Margin="166,52,10,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tb_remark" Height="23" Margin="166,155,10,0" TextWrapping="Wrap" Text="{Binding ProjectRemark}" VerticalAlignment="Top"/>
-        <Label Content="Projektleiter" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top" Width="110"/>
+        <Label Content="Projektleiter *" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
         <Label Content="Start" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="110"/>
         <Label Content="Bemerkung" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top" Width="110"/>
         <Button x:Name="bt_save" Content="speichern" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Command="{Binding save}" IsEnabled="{Binding save.CanSave}" Click="bt_save_Click"/>
@@ -16,7 +16,7 @@
         <DatePicker SelectedDate="{Binding ProjectFinished}" Margin="166,81,10,0" VerticalAlignment="Top"/>
         <Label Content="Ende" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top" Width="110"/>
         <TextBox x:Name="tb_projectName" Height="23" Margin="166,10,10,0" TextWrapping="Wrap" Text="{Binding ProjectName}" VerticalAlignment="Top"/>
-        <Label Content="Projektname" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="110"/>
+        <Label Content="Projektname *" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
 
         <ListView Name="LV_Issues" Margin="10,225,10,35" ItemsSource="{Binding Path=Issues, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" MouseDoubleClick="LV_Issues_DoubleClick">
             <ListView.Background>

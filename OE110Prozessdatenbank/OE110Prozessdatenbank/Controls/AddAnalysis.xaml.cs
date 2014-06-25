@@ -19,15 +19,29 @@ namespace OE110Prozessdatenbank.Controls
     /// </summary>
     public partial class AddAnalysis : Window
     {
-        public AddAnalysis(int RefID, bool update)
+
+        ViewModels.PAnalysisVM m_analysisVM;
+        public AddAnalysis(int RefID)
         {
             InitializeComponent();
-            DataContext = new ViewModels.PAnalysisVM(RefID);
+            m_analysisVM = new ViewModels.PAnalysisVM(RefID);
+            DataContext = m_analysisVM;
+        }
+
+        public AddAnalysis(PDCore.Processes.Analysis Analysis)
+        {
+            InitializeComponent();
+            m_analysisVM = new ViewModels.PAnalysisVM(Analysis);
+            DataContext = m_analysisVM;
+
+            cb_analysis.IsEnabled = false;
+            cb_user.IsEnabled = false;
         }
 
         private void bt_save_Click(object sender, RoutedEventArgs e)
         {
 
+            this.Close();
         }
     }
 }

@@ -8,7 +8,7 @@
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Grid x:Name="g_content" Margin="0,26,0,0"/>
-        <Menu Height="26" VerticalAlignment="Top" Background="#FFB4B4B4">
+        <Menu Height="26" VerticalAlignment="Top" Background="#FFB4B4B4" Margin="0,0,275,0">
             <MenuItem Header="Datei" Height="26">
                 <MenuItem Header="wechseln zu">
                     <MenuItem.Icon>
@@ -38,6 +38,12 @@
                     </MenuItem>
                 </MenuItem>
                 <Separator></Separator>
+                <MenuItem Header="Zur Anmeldung" Click="mi_gotoLogin_Click">
+                    <MenuItem.Icon>
+                        <Image  Source="/OE110Prozessdatenbank;component/Icons/house_16xLG.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator></Separator>
                 <MenuItem Header="Ansicht schließen">
                     <MenuItem.Icon>
                         <Image  Source="/OE110Prozessdatenbank;component/Icons/Close_16xLG.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -54,18 +60,21 @@
             <MenuItem Header="Verwaltung" Height="26">
                 <MenuItem Header="Material anlegen"></MenuItem>
                 <MenuItem Header="Werkstück anlegen" ></MenuItem>
+                <MenuItem Header="Projekt anlegen" Click="mbt_addProject_Click" ></MenuItem>
                 <Separator />
                 <MenuItem Header="Werkstückverwaltung"></MenuItem>
                 <MenuItem Header="Materialverwaltung"></MenuItem>
                 <MenuItem Header="Benutzerverwaltung"></MenuItem>
+                <MenuItem Header="Projektverwaltung"></MenuItem>
             </MenuItem>
             <MenuItem Header="Prozesse" Height="26">
                 <MenuItem Header="Beschichtungsprozesse"></MenuItem>
                 <MenuItem Header="Polierprozesse (Phoenix)"></MenuItem>
             </MenuItem>
-            <MenuItem Header="Export" Height="26"></MenuItem>
+            <MenuItem Header="Export" Click="Debug_click" Height="26"></MenuItem>
+
         </Menu>
-        <Grid Grid.Row="1">
+        <Grid x:Name="g_selector" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
@@ -74,8 +83,30 @@
             </Grid.ColumnDefinitions>
             <Label x:Name="lb_1" Content="Probenvorbereitung" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="0"  Cursor="Hand" MouseLeftButtonDown="lb_MouseDown" MouseEnter="lb_MouseEnter" MouseLeave="lb_MouseLeave"/>
             <Label x:Name="lb_2" Content="Beschichtung" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Cursor="Hand" MouseLeftButtonDown="lb_MouseDown"  MouseEnter="lb_MouseEnter" MouseLeave="lb_MouseLeave"/>
-            <Label x:Name="lb_3" Content="Versuch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="2" Cursor="Hand" MouseLeftButtonDown="lb_MouseDown"  MouseEnter="lb_MouseEnter" MouseLeave="lb_MouseLeave"/>
+            <Grid x:Name="g_maxi" Background="Transparent" Grid.Column="2" Height="auto" VerticalAlignment="Bottom" Margin="0,-145,0,0" MouseLeave="g_maxiLeave">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="lb_3" Content="Versuch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="6" Cursor="Hand" MouseEnter="lb_MouseEnter_extended" MouseLeave="lb_MouseLeave1" Height="30" VerticalAlignment="Bottom"/>
+                <Label x:Name="lb_31" Visibility="Collapsed" Background="White" Opacity="0.8" Content="Toshiba" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="5" Cursor="Hand" MouseLeftButtonDown="lb_MouseDown"  MouseEnter="lb_MouseEnter" MouseLeave="lb_MouseLeave" Height="30" VerticalAlignment="Bottom"/>             
+                <Label x:Name="lb_32" Visibility="Collapsed" Background="White" Opacity="0.8" Content="Moore" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="4" Cursor="Hand" MouseLeftButtonDown="lb_MouseDown"  MouseEnter="lb_MouseEnter" MouseLeave="lb_MouseLeave" Height="30" VerticalAlignment="Bottom"/>
+                <Label x:Name="lb_33" Visibility="Collapsed" Background="White" Opacity="0.8" Content="Füller" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="3" Cursor="Hand" MouseLeftButtonDown="lb_MouseDown"  MouseEnter="lb_MouseEnter" MouseLeave="lb_MouseLeave" Height="30" VerticalAlignment="Bottom"/>
+                <Label x:Name="lb_34" Visibility="Collapsed" Background="White" Opacity="0.8" Content="CemeCon" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="2" Cursor="Hand" MouseLeftButtonDown="lb_MouseDown"  MouseEnter="lb_MouseEnter" MouseLeave="lb_MouseLeave" Height="30" VerticalAlignment="Bottom"/>
+                <Label x:Name="lb_35" Visibility="Collapsed" Background="White" Opacity="0.8" Content="Versuchsstand" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="1" Cursor="Hand" MouseLeftButtonDown="lb_MouseDown"  MouseEnter="lb_MouseEnter" MouseLeave="lb_MouseLeave" Height="30" VerticalAlignment="Bottom"/>
+            </Grid>
+
             <Label x:Name="lb_4" Content="Analyse und Decoating" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="3" Cursor="Hand" MouseLeftButtonDown="lb_MouseDown"  MouseEnter="lb_MouseEnter" MouseLeave="lb_MouseLeave"/>
+
         </Grid>
+        <StackPanel Height="26" VerticalAlignment="Top" Background="#FFB4B4B4" HorizontalAlignment="Right" Width="275" Orientation="Horizontal">
+            <Label x:Name="lbLoginName" Content="Kilian Hammesfahr" HorizontalAlignment="Right" Width="246" Margin="0,0,0,0" FlowDirection="RightToLeft" />
+            <Image x:Name="userIcon" Source="/OE110Prozessdatenbank;component/Icons/user_16xLG.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="17" Margin="0,2,10,3" HorizontalAlignment="Right" />
+        </StackPanel>
     </Grid>
 </Window>

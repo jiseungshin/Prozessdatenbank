@@ -45,9 +45,9 @@ namespace OE110Prozessdatenbank.ViewModels
             {
                 if (value != "")
                 {
-                    m_polishedFilter = " AND " + DBWorkpieces.Table + "." + DBWorkpieces.Label + " LIKE ('%" + value + "%')" +
+                    m_polishedFilter = " AND (" + DBWorkpieces.Table + "." + DBWorkpieces.Label + " LIKE ('%" + value + "%')" +
                               " OR " + DBProcessReferences.Table + "." + DBProcessReferences.RefNumber + " LIKE ('%" + value + "%')" +
-                              " OR " + DBMAterial.Table + "." + DBMAterial.Name + " LIKE ('%" + value + "%')";
+                              " OR " + DBMAterial.Table + "." + DBMAterial.Name + " LIKE ('%" + value + "%'))";
                 }
                 else
                     m_polishedFilter = value;
@@ -62,7 +62,7 @@ namespace OE110Prozessdatenbank.ViewModels
             {
                 if (value != "")
                 {
-                    m_coatedFilter = " AND " + m_CoatedCriterium.DatabaseField + " LIKE ('%" + value + "%')";
+                    m_coatedFilter = " WHERE " + m_CoatedCriterium.DatabaseField + " LIKE ('%" + value + "%')";
                 }
                 else
                     m_coatedFilter = value;

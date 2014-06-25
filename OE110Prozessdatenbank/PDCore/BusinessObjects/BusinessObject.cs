@@ -9,5 +9,6 @@ namespace PDCore.BusinessObjects
     public class BusinessObject
     {
         public int ID { get; set; }
+
     }
 }

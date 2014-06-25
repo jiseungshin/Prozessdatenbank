@@ -37,6 +37,15 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="OxyPlot">
+      <HintPath>..\packages\OxyPlot.Core.2014.1.318.1\lib\portable-net4+sl4+wp71+win8\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf">
+      <HintPath>..\packages\OxyPlot.Wpf.2014.1.318.1\lib\NET45\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Xps">
+      <HintPath>..\packages\OxyPlot.Wpf.2014.1.318.1\lib\NET45\OxyPlot.Xps.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -77,6 +86,12 @@
     <Compile Include="Controls\CCoatingCemecon.xaml.cs">
       <DependentUpon>CCoatingCemecon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CConclusion.xaml.cs">
+      <DependentUpon>CConclusion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CDecoating.xaml.cs">
+      <DependentUpon>CDecoating.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CExpCemeCon.xaml.cs">
       <DependentUpon>CExpCemeCon.xaml</DependentUpon>
     </Compile>
@@ -113,8 +128,17 @@
     <Compile Include="Controls\CProcessQuality.xaml.cs">
       <DependentUpon>CProcessQuality.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CProToshiba.xaml.cs">
+      <DependentUpon>CProToshiba.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CProTestStation.xaml.cs">
+      <DependentUpon>CProTestStation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CProMoore.xaml.cs">
       <DependentUpon>CProMoore.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CPVControl.xaml.cs">
+      <DependentUpon>CPVControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\CQuality.xaml.cs">
       <DependentUpon>CQuality.xaml</DependentUpon>
@@ -124,6 +148,9 @@
     </Compile>
     <Compile Include="Controls\AddMaterial.xaml.cs">
       <DependentUpon>AddMaterial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ToshibaProcessEditor.xaml.cs">
+      <DependentUpon>ToshibaProcessEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\UserAdministration.xaml.cs">
       <DependentUpon>UserAdministration.xaml</DependentUpon>
@@ -142,12 +169,22 @@
     <Compile Include="MainWindows\F_Processing.xaml.cs">
       <DependentUpon>F_Processing.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainWindows\ToshibaImportProgress.xaml.cs">
+      <DependentUpon>ToshibaImportProgress.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindows\ToshibaProcessImport.xaml.cs">
+      <DependentUpon>ToshibaProcessImport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindows\Welcome.xaml.cs">
+      <DependentUpon>Welcome.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProcessWindows\GenericWindow.xaml.cs">
       <DependentUpon>GenericWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\F_CoatingVM.cs" />
     <Compile Include="ViewModels\F_GrindingVM.cs" />
+    <Compile Include="ViewModels\F_PostProcessingVM.cs" />
     <Compile Include="ViewModels\OMaterialVM.cs" />
     <Compile Include="ViewModels\OProjectVM.cs" />
     <Compile Include="ViewModels\OGlassVM.cs" />
@@ -155,6 +192,7 @@
     <Compile Include="ViewModels\OWorkpieceVM.cs" />
     <Compile Include="ViewModels\PAnalysesVM.cs" />
     <Compile Include="ViewModels\PCemeconStandarProcessVM.cs" />
+    <Compile Include="ViewModels\PDeCoatingCemeconVM.cs" />
     <Compile Include="ViewModels\PCoatingCemeconVM.cs" />
     <Compile Include="ViewModels\PExpMooreVM.cs" />
     <Compile Include="ViewModels\PExpTestStationVM.cs" />
@@ -163,6 +201,8 @@
     <Compile Include="ViewModels\PGrindingMooreVM.cs" />
     <Compile Include="ViewModels\PGrindingOtherVM.cs" />
     <Compile Include="ViewModels\PGrindingPhoenixVMcs.cs" />
+    <Compile Include="ViewModels\PToshibaImportVM.cs" />
+    <Compile Include="ViewModels\PToshibaVM.cs" />
     <Compile Include="ViewModels\PTurningMooreVM.cs" />
     <Compile Include="ViewModels\QualityVM.cs" />
     <Page Include="Controls\AddAnalysis.xaml">
@@ -186,6 +226,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\CCoatingCemecon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CConclusion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CDecoating.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -237,7 +285,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\CProToshiba.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CProTestStation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\CProMoore.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CPVControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -254,6 +314,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\AddMaterial.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ToshibaProcessEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -296,6 +360,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MainWindows\ToshibaImportProgress.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindows\ToshibaProcessImport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindows\Welcome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ProcessWindows\GenericWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -322,6 +398,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -365,6 +442,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\Guage_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\house_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\LightBulb_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\user_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\manifest_16xLG.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

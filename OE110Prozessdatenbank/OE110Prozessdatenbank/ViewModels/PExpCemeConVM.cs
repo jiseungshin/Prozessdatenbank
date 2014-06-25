@@ -34,6 +34,10 @@ namespace OE110Prozessdatenbank.ViewModels
                 m_process.ProjectID = ObjectManager.Instance.getProjectID(ID);
                 m_process.IssueID = ObjectManager.Instance.getIssueID(ID);
                 m_process.Workpieces.Add(ObjectManager.Instance.getWorkpieceByReference(ID));
+
+                //set User field if user is logged in
+                if (UserManager.CurrentUser != null)
+                    m_process.UserID = UserManager.CurrentUser.ID;
             }
 
             //NotifyPropertyChanged("Project");

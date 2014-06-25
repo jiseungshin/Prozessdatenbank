@@ -1,0 +1,18 @@
+﻿<Window x:Class="OE110Prozessdatenbank.Controls.CConclusion"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Fazit" Height="371" Width="483">
+    <Grid>
+        <Label Content="Werkstück" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Projekt" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,1.885"/>
+        <Label Content="Fragestellung" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,1.885"/>
+        <TextBox Margin="150,93,10,39" TextWrapping="Wrap" Text="{Binding Remark}"/>
+        <Label Content="Fazit *" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,1.885" FontWeight="Bold"/>
+        <Label Content="{Binding WorkpieceLabel}" HorizontalAlignment="Left" Margin="150,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.184,0.423"/>
+        <Label Content="{Binding Project.Description}" HorizontalAlignment="Left" Margin="150,36,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.184,0.423"/>
+        <Label Content="{Binding Issue.Description}" HorizontalAlignment="Left" Margin="150,62,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.184,0.423"/>
+        <Button Content="speichern" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75"/>
+        <Button Content="abbrechen" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75"/>
+
+    </Grid>
+</Window>

@@ -5,13 +5,13 @@
     <Grid>
         <DatePicker SelectedDate="{Binding Started}" Margin="129,64,10,0" VerticalAlignment="Top"/>
         <DatePicker SelectedDate="{Binding Finished}" Margin="129,93,10,0" VerticalAlignment="Top"/>
-        <ComboBox ItemsSource="{Binding AvailableAnalyses}" DisplayMemberPath="Description" Margin="129,10,10,0" VerticalAlignment="Top"/>
-        <ComboBox ItemsSource="{Binding Users}" SelectedItem="{Binding User}" DisplayMemberPath="Description" Margin="129,37,10,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cb_analysis" ItemsSource="{Binding AvailableAnalyses}" SelectedItem="{Binding Description}" DisplayMemberPath="Description" Margin="129,10,10,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cb_user" ItemsSource="{Binding Users}" SelectedItem="{Binding User}" DisplayMemberPath="Description" Margin="129,37,10,0" VerticalAlignment="Top"/>
         <Label Content="Analyse" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.447,0.115"/>
         <Label Content="Bearbeiter" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.368,1.846"/>
         <Label Content="Start" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.368,1.846"/>
         <Label Content="Ende" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.368,1.846"/>
-        <Button x:Name="bt_save" Content="speichern" Margin="0,0,10,16" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="bt_save_Click"/>
-        <Button x:Name="bt_cancel" Content="abbrechen" Margin="0,0,90,16" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75"/>
+        <Button x:Name="bt_save" Command="{Binding SaveAnalysis}" IsEnabled="{Binding SaveAnalysis.CanSave}" Content="speichern" Margin="0,0,10,16" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="bt_save_Click"/>
+        <Button x:Name="bt_cancel" Click="bt_save_Click" Content="abbrechen" Margin="0,0,90,16" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75"/>
     </Grid>
 </Window>

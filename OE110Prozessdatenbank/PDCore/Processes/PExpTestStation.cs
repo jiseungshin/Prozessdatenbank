@@ -13,15 +13,12 @@ namespace PDCore.Processes
             UserID = -1;
             Date = DateTime.Now;
             Workpieces = new List<BusinessObjects.Workpiece>();
-            WPPosition = 0;
             Quality = new BusinessObjects.ProcessQuality();
         }
 
         public int? GlassID { get; set; }
-        public int? ResultID { get; set; }
         public double? Celltemperature { get; set; }
         public string Atmosphere { get; set; }
-        public int WPPosition { get; set; }
         public double? PressTemperature { get; set; }
         public double? CoolingTempretaure { get; set; }
         public double? MaxForce { get; set; }
@@ -30,6 +27,10 @@ namespace PDCore.Processes
         public double? PenDepth { get; set; }
         public double? Duration { get; set; }
         public int? Cycles { get; set; }
+        public int? LeftWorkpieceID { get; set; }
+        public int? CenterWorkpieceID { get; set; }
+        public int? RightWorkpieceID { get; set; }
+
 
     }
 }

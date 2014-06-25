@@ -58,5 +58,14 @@ namespace PDCore.Properties {
                 return ((string)(this["Password"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\\\Prozessdatenbank\\\\")]
+        public string StandardDirPath {
+            get {
+                return ((string)(this["StandardDirPath"]));
+            }
+        }
     }
 }

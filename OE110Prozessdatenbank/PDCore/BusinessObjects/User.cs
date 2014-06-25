@@ -12,6 +12,7 @@ namespace PDCore.BusinessObjects
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public bool isActive { get; set; }
+        public int? MachineID { get; set; }
 
         public string Description { get { return FirstName + " " + LastName + " (" + Token + ")"; } }
     }

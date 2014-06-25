@@ -24,5 +24,6 @@ namespace PDCore.BusinessObjects
         public int MoldScratches { get; set; }
         public int Corrosion { get; set; }
         public int GlassAdherence { get; set; }
+        public int OverallResult { get; set; }
     }
 }

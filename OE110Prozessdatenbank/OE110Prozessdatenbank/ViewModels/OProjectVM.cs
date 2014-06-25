@@ -41,6 +41,9 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public RelayCommand save { get; set; }
 
+        public Project Project
+        { get { return m_project; } }
+
         public int ProjectID
         { get { return m_project.ID; } set { m_project.ID = value; } }
         public string ProjectName
@@ -49,7 +52,7 @@ namespace OE110Prozessdatenbank.ViewModels
         public DateTime ProjectStarted
         { get { return m_project.Started; } set { m_project.Started = value; } }
 
-        public DateTime ProjectFinished
+        public DateTime? ProjectFinished
         { get { return m_project.Finished; } set { m_project.Finished = value; } }
 
         public string ProjectRemark

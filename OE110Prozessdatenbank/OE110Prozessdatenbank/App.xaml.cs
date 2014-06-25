@@ -22,7 +22,7 @@ namespace OE110Prozessdatenbank
         protected override void OnStartup(StartupEventArgs e)
         {
 
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            //AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             
             base.OnStartup(e);
 

@@ -7,10 +7,12 @@ namespace PDCore.Database
     {
         public static string QueryRaw
         {
-            get { return "SELECT Workpieces.Label, Materials.Name, Workpieces.WorkPiece_ID FROM Workpieces "+
-                            "INNER JOIN Materials ON Workpieces.Material_ID = Materials.Material_ID "+
-                            "WHERE Workpieces.Status='raw'";
-}
+            get
+            {
+                return "SELECT Workpieces.Label, Materials.Name, Workpieces.WorkPiece_ID FROM Workpieces " +
+                          "INNER JOIN Materials ON Workpieces.Material_ID = Materials.Material_ID " +
+                          "WHERE Workpieces.Status='raw'";
+            }
         }
 
         public static string QueryTurningMoore
@@ -59,7 +61,7 @@ namespace PDCore.Database
 
         public static string QueryGrindingMoore
         {
-            get 
+            get
             {
                 return "SELECT * FROM " + DBGrindingMoore.Table +
 
@@ -216,7 +218,7 @@ namespace PDCore.Database
                                           " LEFT JOIN " + DBIssues.Table +
                                           " On " + DBIssues.Table + "." + DBIssues.ID +
                                           "=" + DBProcessReferences.Table + "." + DBProcessReferences.IssueID +
-                                          " WHERE " + DBWorkpieces.Table + "." + DBWorkpieces.Status + "='polished'";
+                                          " WHERE " + DBProcessReferences.Table + "." + DBProcessReferences.Status + "='polished'";
             }
         }
 
@@ -264,8 +266,8 @@ namespace PDCore.Database
                                           //join issues
                                           " LEFT JOIN " + DBIssues.Table +
                                           " On " + DBIssues.Table + "." + DBIssues.ID +
-                                          "=" + DBProcessReferences.Table + "." + DBProcessReferences.IssueID;// +
-                                          //" WHERE " + DBWorkpieces.Table + "." + DBWorkpieces.Status + "='coated'";
+                                          "=" + DBProcessReferences.Table + "." + DBProcessReferences.IssueID;
+
 
             }
         }
@@ -330,10 +332,87 @@ namespace PDCore.Database
                                               //join issues
                                               " LEFT JOIN " + DBIssues.Table +
                                               " On " + DBIssues.Table + "." + DBIssues.ID +
-                                              "=" + DBProcessReferences.Table + "." + DBProcessReferences.IssueID +
-                                              " WHERE " + DBWorkpieces.Table + "." + DBWorkpieces.Status + "='processed'";
+                                              "=" + DBProcessReferences.Table + "." + DBProcessReferences.IssueID ;//+
+                                              //" WHERE " + DBProcessReferences.Table + "." + DBProcessReferences.Status + "='processed'";
             }
         }
+        public static string QueryProcessedTestStation
+        {
+            get
+            {
+                return "SELECT * FROM " + DBExpTestStation.Table +
+
+                                              //join ReferenceRelations
+                                              " LEFT JOIN " + DBProcessReferenceRelation.Table +
+                                              " On " + DBProcessReferenceRelation.Table + "." + DBProcessReferenceRelation.PID +
+                                              "=" + DBExpTestStation.Table + "." + DBExpTestStation.ID +
+
+                                              //join References
+                                              " LEFT JOIN " + DBProcessReferences.Table +
+                                              " On " + DBProcessReferences.Table + "." + DBProcessReferences.RefNumber +
+                                              "=" + DBProcessReferenceRelation.Table + "." + DBProcessReferenceRelation.RefNumber +
+
+                                              //join Workpiece
+                                              " LEFT JOIN " + DBWorkpieces.Table +
+                                              " On " + DBWorkpieces.Table + "." + DBWorkpieces.ID +
+                                              "=" + DBProcessReferences.Table + "." + DBProcessReferences.WorkpiceID +
+
+                                               //join Material
+                                              " LEFT JOIN " + DBMAterial.Table +
+                                              " On " + DBMAterial.Table + "." + DBMAterial.ID +
+                                              "=" + DBWorkpieces.Table + "." + DBWorkpieces.MaterialID +
+
+                                               //join Glasses
+                                              " LEFT JOIN " + DBGlasses.Table +
+                                              " On " + DBGlasses.Table + "." + DBGlasses.ID +
+                                              "=" + DBExpTestStation.Table + "." + DBExpTestStation.GlassID +
+
+                                               //join User
+                                              " LEFT JOIN " + DBUser.Table +
+                                              " On " + DBUser.Table + "." + DBUser.ID +
+                                              "=" + DBExpTestStation.Table + "." + DBExpTestStation.UserID +
+
+                                              //join project
+                                              " LEFT JOIN " + DBProjects.Table +
+                                              " On " + DBProjects.Table + "." + DBProjects.ID +
+                                              "=" + DBProcessReferences.Table + "." + DBProcessReferences.ProjectID +
+
+                                              //join issues
+                                              " LEFT JOIN " + DBIssues.Table +
+                                              " On " + DBIssues.Table + "." + DBIssues.ID +
+                                              "=" + DBProcessReferences.Table + "." + DBProcessReferences.IssueID;
+            }
+        }
+        public static string QueryPostProcessing
+        {
+            get
+            {
+                return "SELECT * FROM " +  DBProcessReferences.Table +
+
+                                          //join Workpiece
+                                          " LEFT JOIN " + DBWorkpieces.Table +
+                                          " On " + DBWorkpieces.Table + "." + DBWorkpieces.ID +
+                                          "=" + DBProcessReferences.Table + "." + DBProcessReferences.WorkpiceID +
+
+                                           //join Material
+                                          " LEFT JOIN " + DBMAterial.Table +
+                                          " On " + DBMAterial.Table + "." + DBMAterial.ID +
+                                          "=" + DBWorkpieces.Table + "." + DBWorkpieces.MaterialID +
+
+                                          //join project
+                                          " LEFT JOIN " + DBProjects.Table +
+                                          " On " + DBProjects.Table + "." + DBProjects.ID +
+                                          "=" + DBProcessReferences.Table + "." + DBProcessReferences.ProjectID +
+
+                                          //join issues
+                                          " LEFT JOIN " + DBIssues.Table +
+                                          " On " + DBIssues.Table + "." + DBIssues.ID +
+                                          "=" + DBProcessReferences.Table + "." + DBProcessReferences.IssueID;
+
+            }
+        }
+
+
     }
 
     public class FilterCriteria

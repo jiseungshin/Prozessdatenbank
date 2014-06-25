@@ -43,13 +43,30 @@ namespace OE110Prozessdatenbank.ViewModels
             }
         }
 
+        public void setMachine(int ID)
+        {
+            try
+            {
+                Machine = Machines.Single(item => item.ID == ID);
+                
+            }
+            catch 
+            { 
+                int a = 0; 
+            }
+        }
+
         public Machine Machine
         {
             get
             {
                 return m_Machine;
             }
-            set { m_Machine = value; NotifyPropertyChanged("DataPolished"); }
+            set
+            {
+                m_Machine = value;
+                NotifyPropertyChanged("Machine"); NotifyPropertyChanged("DataPolished");
+            }
         }
 
         public ObservableCollection<Machine> Machines

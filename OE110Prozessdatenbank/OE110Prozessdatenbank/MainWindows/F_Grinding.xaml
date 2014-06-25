@@ -3,6 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
        Height="auto" Width="auto">
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="1,0.5" StartPoint="0.5,2">
+                <LinearGradientBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                        <RotateTransform Angle="-70" CenterY="0.5" CenterX="0.5"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </LinearGradientBrush.RelativeTransform>
+                <GradientStop Color="#FF3C7E48"/>
+                <GradientStop Color="White" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="44"/>
             <RowDefinition Height="281*"/>
@@ -119,7 +133,7 @@
 
                     </ListView.View>
                 </ListView>
-                <ComboBox ItemsSource="{Binding Machines}" SelectedItem="{Binding Machine}" DisplayMemberPath="Name" Margin="0,5,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="173"/>
+                <ComboBox ItemsSource="{Binding Machines}" SelectedItem="{Binding Machine,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" Margin="0,5,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="173"/>
                 <TextBox x:Name="tb_polished" HorizontalAlignment="Left" Height="23" Margin="59,5,0,0" TextWrapping="Wrap" Text="{Binding PolishedFilter, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="220"/>
                 <ComboBox HorizontalAlignment="Left" Margin="284,6,0,0" VerticalAlignment="Top" Width="161" ItemsSource="{Binding FilterCriteria}" SelectedItem="{Binding Criterium}" DisplayMemberPath="Name">
                 </ComboBox>

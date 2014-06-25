@@ -32,6 +32,9 @@ namespace OE110Prozessdatenbank.MainWindows
             gw = new ProcessWindows.GenericWindow();
         }
 
+        public void setMachineID(int MID)
+        { m_vm.setMachine(MID); }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             new Controls.MaterialWindow().ShowDialog();

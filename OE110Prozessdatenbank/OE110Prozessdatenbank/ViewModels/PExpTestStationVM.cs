@@ -19,33 +19,51 @@ namespace OE110Prozessdatenbank.ViewModels
         private PExpTestStation m_process;
         private bool m_update = false;
 
+        private Workpiece m_leftWP;
+        private Workpiece m_centerWP;
+        private Workpiece m_rightWP;
+
         public PExpTestStation Process
         { get { return m_process; } }
-        public PExpTestStationVM(int ID, bool update)
+        public PExpTestStationVM(int PID)
         {
-            m_update = update;
-            //update
-            if (update)
+            ObjectManager.Instance.update();
+            m_update = true;
+
+            m_process = ProcessManager.Instance.getProcess(PID, 7) as PExpTestStation;
+            ProcessQualityControl = new Controls.CProcessQuality(m_process);
+            if (m_process.LeftWorkpieceID != null)
             {
-                m_process = ProcessManager.Instance.getProcess(ID, 7) as PExpTestStation;
+                LeftWorkpiece = ObjectManager.Instance.getWorkpiece(Convert.ToInt32(m_process.LeftWorkpieceID));
+            }
+            if (m_process.CenterWorkpieceID != null)
+            {
+                CenterWorkpiece = ObjectManager.Instance.getWorkpiece(Convert.ToInt32(m_process.CenterWorkpieceID));
+            }
+            if (m_process.RightWorkpieceID != null)
+            {
+                RightWorkpiece = ObjectManager.Instance.getWorkpiece(Convert.ToInt32(m_process.RightWorkpieceID));
             }
 
-            //new Process
-            else 
-            {
-                m_process = new PExpTestStation();
-                m_process.ProjectID = ObjectManager.Instance.getProjectID(ID);
-                m_process.IssueID = ObjectManager.Instance.getIssueID(ID);
-                m_process.Workpieces.Add(ObjectManager.Instance.getWorkpieceByReference(ID));
-            }
-
-            //NotifyPropertyChanged("Project");
             SaveProcess = new RelayCommand(Save, CanSave);
         }
 
+        public PExpTestStationVM()
+        {
+            m_update = false;
+            ObjectManager.Instance.update();
+
+            m_process = new PExpTestStation();
+            ProcessQualityControl = new Controls.CProcessQuality(m_process);
+
+            SaveProcess = new RelayCommand(Save, CanSave);
+
+            //set User field if user is logged in
+            if (UserManager.CurrentUser != null)
+                m_process.UserID = UserManager.CurrentUser.ID;
+        }
+
         public ObservableCollection<User> Users { get { return new ObservableCollection<PDCore.BusinessObjects.User>(ObjectManager.Instance.Users); } }
-        public ObservableCollection<Project> Projects { get { return new ObservableCollection<PDCore.BusinessObjects.Project>(ObjectManager.Instance.Projects); } }
-        public ObservableCollection<Issue> Issues { get { return new ObservableCollection<Issue>(ObjectManager.Instance.Issues); } }
         public ObservableCollection<Glass> Glasses { get { return new ObservableCollection<Glass>(ObjectManager.Instance.Glasses); } }
 
         public DateTime Date
@@ -104,7 +122,7 @@ namespace OE110Prozessdatenbank.ViewModels
 
             set
             {
-                m_process.ProjectID = value.ID;
+                m_process.GlassID = value.ID;
             }
         }
 
@@ -125,8 +143,73 @@ namespace OE110Prozessdatenbank.ViewModels
             }
         }
 
-        public string WorkpieceLabel
-        { get { return m_process.Workpieces[0].Label; } }
+
+        public Controls.CQuality WP_LeftControl { get; set; }
+        public Controls.CQuality WP_CenterControl { get; set; }
+        public Controls.CQuality WP_RightControl { get; set; }
+        public Controls.CProcessQuality ProcessQualityControl { get; set; }
+
+        public ObservableCollection<Workpiece> Workpieces
+        {
+            get
+            {
+                if (m_update)
+                    return new ObservableCollection<Workpiece>(ObjectManager.Instance.Workpieces);
+                else
+                    return new ObservableCollection<Workpiece>(ObjectManager.Instance.CoatedWorkpieces);
+            }
+        }
+
+        public Workpiece LeftWorkpiece
+        {
+            get
+            {
+                try
+                {
+                    return Workpieces.Single(item => item.ID == m_leftWP.ID);
+                }
+                catch { return null; }
+            }
+            set
+            {
+                m_leftWP = value;
+                WP_LeftControl = new Controls.CQuality(value);
+            }
+        }
+
+        public Workpiece CenterWorkpiece
+        {
+            get
+            {
+                try
+                {
+                    return Workpieces.Single(item => item.ID == m_centerWP.ID);
+                }
+                catch { return null; }
+            }
+            set
+            {
+                m_centerWP = value;
+                WP_CenterControl = new Controls.CQuality(value);
+            }
+        }
+
+        public Workpiece RightWorkpiece
+        {
+            get
+            {
+                try
+                {
+                    return Workpieces.Single(item => item.ID == m_rightWP.ID);
+                }
+                catch { return null; }
+            }
+            set
+            {
+                m_rightWP = value;
+                WP_RightControl = new Controls.CQuality(value);
+            }
+        }
 
         public string Atmosphere
         { get { return m_process.Atmosphere; } set { m_process.Atmosphere = value; } }
@@ -157,9 +240,6 @@ namespace OE110Prozessdatenbank.ViewModels
         public double? SecondForce
         { get { return m_process.SecondForce; } set { m_process.SecondForce = value; } }
 
-        public int WPP
-        { get { return m_process.WPPosition; } set { m_process.WPPosition = value; } }
-
         public int? Cycles
         { get { return m_process.Cycles; } set { m_process.Cycles = value; } }
 
@@ -172,7 +252,24 @@ namespace OE110Prozessdatenbank.ViewModels
             if (m_update)
                 ProcessManager.Instance.saveProcess(m_process, true);
             else
+            {
+                if (LeftWorkpiece != null)
+                {
+                    m_process.Workpieces.Add(LeftWorkpiece);
+                    m_process.LeftWorkpieceID = LeftWorkpiece.ID;
+                }
+                if (CenterWorkpiece != null)
+                {
+                    m_process.Workpieces.Add(CenterWorkpiece);
+                    m_process.CenterWorkpieceID = CenterWorkpiece.ID;
+                }
+                if (RightWorkpiece != null)
+                {
+                    m_process.Workpieces.Add(RightWorkpiece);
+                    m_process.RightWorkpieceID = RightWorkpiece.ID;
+                }
                 ProcessManager.Instance.saveProcess(m_process, false);
+            }
 
             Updater.Instance.forceUpdate();
         }

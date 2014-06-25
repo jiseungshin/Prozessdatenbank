@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
               mc:Ignorable="d" Height="612" Width="911">
-    <Grid>
+    <Grid Background="White">
         <Label Content="Datum" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Width="110"/>
         <Label Content="Anzahl Presszyklen" HorizontalAlignment="Left" Margin="10,339,0,0" VerticalAlignment="Top" Width="151"/>
         <Label Content="Bearbeiter" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Width="110"/>
@@ -27,7 +27,7 @@
         <ComboBox x:Name="cb_user" ItemsSource="{Binding Users}" SelectedItem="{Binding User}" DisplayMemberPath="Description" Margin="187,62,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
         <ComboBox x:Name="cb_project" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" Margin="187,89,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
         <ComboBox x:Name="cb_Issue" ItemsSource="{Binding Issues}" SelectedItem="{Binding Issue}" DisplayMemberPath="Description" Margin="187,120,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
-        <ComboBox x:Name="cb_upperWP" ItemsSource="{Binding Workpieces, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding UpperWP}" Margin="187,161,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266" SelectionChanged="cb_upperWP_SelectionChanged">
+        <ComboBox x:Name="cb_upperWP" ItemsSource="{Binding Workpieces, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding UpperWP, UpdateSourceTrigger=PropertyChanged}" Margin="187,161,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266" SelectionChanged="cb_upperWP_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="170" Height="14" HorizontalAlignment="Stretch">

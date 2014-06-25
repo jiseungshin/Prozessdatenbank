@@ -34,6 +34,10 @@ namespace OE110Prozessdatenbank.ViewModels
                 m_process.IssueID = ObjectManager.Instance.getIssueID(refID);
                 
                 m_process.Date = DateTime.Now;
+
+                //set User field if user is logged in
+                if (UserManager.CurrentUser != null)
+                    m_process.UserID = UserManager.CurrentUser.ID;
             }
             //update
             else

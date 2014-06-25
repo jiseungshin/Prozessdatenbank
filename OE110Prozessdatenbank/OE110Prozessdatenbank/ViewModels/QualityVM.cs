@@ -73,6 +73,12 @@ namespace OE110Prozessdatenbank.ViewModels
             set { m_wp.Quality.MoldScratches = value; }
         }
 
+        public int OverallResult
+        {
+            get { return m_wp.Quality.OverallResult; }
+            set { m_wp.Quality.OverallResult = value; }
+        }
+
         
     }
 }

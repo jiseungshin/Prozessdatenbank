@@ -1,0 +1,124 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data;
+using PDCore.Manager;
+using PDCore.Database;
+
+namespace OE110Prozessdatenbank.ViewModels
+{
+    public class F_PostProcessingVM : BaseViewModel
+    {
+
+        private string m_processedConstraint = "ProcessReferences.Status='processed'";
+        private string m_AnalysedCostraint = "ProcessReferences.Status='analysed'";
+        private string m_DecoatedConstraint = "ProcessReferences.Status='decoated'";
+        private string m_FullConstraint = " WHERE ProcessReferences.Status='processed' OR ProcessReferences.Status='analysed' OR ProcessReferences.Status='decoated'";
+
+        private bool m_p = true;
+        private bool m_a = true;
+        private bool m_d = true;
+
+        public F_PostProcessingVM()
+        {
+            Updater.Instance.newData += Instance_newData;
+        }
+
+        void Instance_newData()
+        {
+            NotifyPropertyChanged("Data");
+        }
+
+        public DataSet Data
+        {
+            get { return ProcessManager.Instance.getData(Queries.QueryPostProcessing + m_FullConstraint); }
+        }
+
+        public bool Processed
+        {
+            set
+            {
+                if (value == true)
+                {
+                    m_processedConstraint = " ProcessReferences.Status='processed' ";
+                }
+                else
+                    m_processedConstraint = "";
+
+                generateFullConstraint();
+                m_p = value;
+            }
+            get { return m_p; }
+        }
+
+        public bool Analysed
+        {
+            set
+            {
+                if (value == true)
+                {
+                    m_AnalysedCostraint = " ProcessReferences.Status='analysed' ";
+                }
+                else
+                    m_AnalysedCostraint = "";
+
+                generateFullConstraint();
+                m_a = value;
+            }
+            get { return m_a; }
+        }
+
+        public bool Decoated
+        {
+            set
+            {
+                if (value == true)
+                {
+                    m_DecoatedConstraint = " ProcessReferences.Status='decoated' ";
+                }
+                else
+                    m_DecoatedConstraint = "";
+
+                generateFullConstraint();
+                m_d = value;
+            }
+            get
+            {
+                return m_d;
+            }
+        }
+
+        private void generateFullConstraint()
+        {
+            m_FullConstraint = " WHERE (";
+
+            if (m_processedConstraint != "")
+            {
+                m_FullConstraint += m_processedConstraint;
+                m_FullConstraint += " OR ";
+            }
+
+            if (m_AnalysedCostraint != "")
+            {
+                m_FullConstraint += m_AnalysedCostraint; m_FullConstraint += " OR ";
+            }
+
+            if (m_DecoatedConstraint != "")
+            {
+                m_FullConstraint += m_DecoatedConstraint; m_FullConstraint += " OR ";
+            }
+
+            m_FullConstraint = m_FullConstraint.Remove(m_FullConstraint.Length - 4, 3);
+            m_FullConstraint += ")";
+
+            if (m_processedConstraint == "" && m_AnalysedCostraint == "" && m_DecoatedConstraint == "")
+                m_FullConstraint = "";
+
+            NotifyPropertyChanged("Data");
+
+        }
+    }
+    
+}

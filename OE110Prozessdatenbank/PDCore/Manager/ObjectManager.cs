@@ -78,6 +78,7 @@ namespace PDCore.Manager
          private List<PGrindingPhoenixProcess> m_PhoenixProcesses = new List<PGrindingPhoenixProcess>();
 
          private List<Workpiece> m_worlpieces = new List<Workpiece>();
+         private List<Workpiece> m_coatedWorkpieces = new List<Workpiece>();
          private List<Material> m_materials = new List<Material>();
          private List<Glass> m_glasses = new List<Glass>();
 
@@ -91,6 +92,7 @@ namespace PDCore.Manager
             getWorkpieces();
             getIssues();
             getGlasses();
+            getCoatedWorkpieces();
         }
 
         private void getGlasses()
@@ -162,7 +164,8 @@ namespace PDCore.Manager
                     FirstName = row.Field<string>(DBUser.FirstName),
                     LastName = row.Field<string>(DBUser.LastName), 
                     Token = row.Field<string>(DBUser.Token),
-                    isActive = row.Field<bool>(DBUser.isActive)
+                    isActive = row.Field<bool>(DBUser.isActive),
+                    MachineID = row.Field<int?>(DBUser.MachineID)
                 });
             }
 
@@ -206,7 +209,7 @@ namespace PDCore.Manager
             m_worlpieces.Clear();
             Material mm;
             DataSet _ds = _myCommunicator.getDataSet("SELECT * FROM " + DBWorkpieces.Table +
-
+                                                        
                                                         //join materials
                                                         " LEFT JOIN " + DBMAterial.Table +
                                                         " On " + DBMAterial.Table + "." + DBMAterial.ID +
@@ -291,7 +294,8 @@ namespace PDCore.Manager
             {
                 Corrosion = _dsWPQuality.Field<int>(DBWorkpieceQuality.Corrosion),
                 MoldScratches = _dsWPQuality.Field<int>(DBWorkpieceQuality.MoldScratches),
-                GlassAdherence = _dsWPQuality.Field<int>(DBWorkpieceQuality.GlassAdherence)
+                GlassAdherence = _dsWPQuality.Field<int>(DBWorkpieceQuality.GlassAdherence),
+                OverallResult = _dsWPQuality.Field<int>(DBWorkpieceQuality.OverallResult)
             };
 
             return _wp;
@@ -381,7 +385,7 @@ namespace PDCore.Manager
             {
                 _queries.Add("Update " + DBProjects.Table + " Set " + DBProjects.Name + " = " + project.Description.ToDBObject() + " WHERE " + DBProjects.ID + "=" + project.ID);
                 _queries.Add("Update " + DBProjects.Table + " Set " + DBProjects.Remark + " = " + project.Remark.ToDBObject() + " WHERE " + DBProjects.ID + "=" + project.ID);
-                _queries.Add("Update " + DBProjects.Table + " Set " + DBProjects.Finished + " = " + project.Finished.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + " WHERE " + DBProjects.ID + "=" + project.ID);
+                _queries.Add("Update " + DBProjects.Table + " Set " + DBProjects.Finished + " = " + project.Finished.ToDBObject() + " WHERE " + DBProjects.ID + "=" + project.ID);
                 _queries.Add("Update " + DBProjects.Table + " Set " + DBProjects.Started + " = " + project.Started.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + " WHERE " + DBProjects.ID + "=" + project.ID);
             }
             else
@@ -395,7 +399,7 @@ namespace PDCore.Manager
                                                                             project.UserID.ToDBObject() + "," +
                                                                             project.Remark.ToDBObject() + "," +
                                                                             project.Started.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + "," +
-                                                                             project.Finished.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject()+")");
+                                                                             project.Finished.ToDBObject()+")");
 
 
 
@@ -443,6 +447,7 @@ namespace PDCore.Manager
                 _queries.Add("Update " + DBUser.Table + " Set " + DBUser.LastName + " = " + user.LastName.ToDBObject() + " WHERE " + DBUser.ID + "=" + user.ID);
                 _queries.Add("Update " + DBUser.Table + " Set " + DBUser.Token + " = " + user.Token.ToDBObject() + " WHERE " + DBUser.ID + "=" + user.ID);
                 _queries.Add("Update " + DBUser.Table + " Set " + DBUser.isActive + " = " + user.isActive.ToDBObject() + " WHERE " + DBUser.ID + "=" + user.ID);
+                _queries.Add("Update " + DBUser.Table + " Set " + DBUser.MachineID + " = " + user.MachineID.ToDBObject() + " WHERE " + DBUser.ID + "=" + user.ID);
 
             }
             else
@@ -450,10 +455,12 @@ namespace PDCore.Manager
                 _queries.Add("INSERT INTO " + DBUser.Table + " (" + DBUser.FirstName + "," +
                                                                            DBUser.LastName + "," +
                                                                            DBUser.Token + "," +
+                                                                           DBUser.MachineID + "," +
                                                                                      DBUser.isActive + ") Values (" +
                                                                             user.FirstName.ToDBObject() + "," +
                                                                             user.LastName.ToDBObject() + "," +
                                                                             user.Token.ToDBObject() + "," +
+                                                                            user.MachineID.ToDBObject() + "," +
                                                                              user.isActive.ToDBObject() + ")");
 
 
@@ -504,18 +511,19 @@ namespace PDCore.Manager
 
         }
 
-        public List<Workpiece> getCoatedWorkpieces()
+        private void getCoatedWorkpieces()
         {
-            List<Workpiece> m_wps = new List<Workpiece>();
+            m_coatedWorkpieces.Clear();
             DataSet _ds = _myCommunicator.getDataSet(Queries.QueryCoatedReferences);
 
             foreach (DataRow dr in _ds.Tables[0].Rows)
             {
-                m_wps.Add(getWorkpieceByReference(dr.Field<int>(DBProcessReferences.RefNumber)));
+                m_coatedWorkpieces.Add(getWorkpieceByReference(dr.Field<int>(DBProcessReferences.RefNumber)));
             }
-
-            return m_wps;
         }
+
+        public List<Workpiece> CoatedWorkpieces
+        { get { return m_coatedWorkpieces; } }
 
         
 

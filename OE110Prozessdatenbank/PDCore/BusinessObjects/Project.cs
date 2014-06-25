@@ -13,13 +13,13 @@ namespace PDCore.BusinessObjects
         {
             m_issues = new List<Issue>();
             Started = DateTime.Now;
-            Finished = DateTime.Now;
+            Finished = null;
             UserID = -1;
             Description = "";
         }
         public string Description { get; set; }
         public DateTime Started { get; set; }
-        public DateTime Finished { get; set; }
+        public DateTime? Finished { get; set; }
         public List<Issue> Issues { get { return m_issues; } set { m_issues = value;} }
         public string Remark { get; set; }
         public int UserID { get; set; }

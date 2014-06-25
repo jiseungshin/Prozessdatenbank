@@ -22,18 +22,20 @@ namespace OE110Prozessdatenbank.Controls
     public partial class CAnalyses : Window
     {
         int m_RefID = -1;
+        ViewModels.PAnalysesVM m_vm;
         public CAnalyses(int ID)
         {
             InitializeComponent();
             m_RefID = ID;
-            DataContext = new ViewModels.PAnalysesVM(ID);
+            m_vm = new ViewModels.PAnalysesVM(ID);
+            DataContext = m_vm;
         }
 
         private void LV_DoubleClick(object sender, MouseButtonEventArgs e)
         {
             if ((sender as ListView).SelectedIndex!=-1)
             {
-                new AddAnalysis(((sender as ListView).SelectedItem as PDCore.Processes.Analysis).ID, false).ShowDialog();
+                new AddAnalysis(((sender as ListView).SelectedItem as PDCore.Processes.Analysis)).Show();
             }
         }
 
@@ -44,7 +46,7 @@ namespace OE110Prozessdatenbank.Controls
 
         private void bt_add_Click(object sender, RoutedEventArgs e)
         {
-            new AddAnalysis(m_RefID, false).ShowDialog();
+            new AddAnalysis(m_RefID).ShowDialog();
         }
     }
 }

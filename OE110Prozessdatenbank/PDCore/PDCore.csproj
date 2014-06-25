@@ -49,15 +49,18 @@
     <Compile Include="BusinessObjects\Material.cs" />
     <Compile Include="BusinessObjects\Project.cs" />
     <Compile Include="BusinessObjects\QualityObject.cs" />
+    <Compile Include="BusinessObjects\Reference.cs" />
     <Compile Include="BusinessObjects\User.cs" />
     <Compile Include="BusinessObjects\Workpiece.cs" />
     <Compile Include="Database\Communicator.cs" />
     <Compile Include="Database\DBModel.cs" />
     <Compile Include="Database\MySQLCommunicator.cs" />
+    <Compile Include="Manager\FileManager.cs" />
     <Compile Include="Manager\ObjectManager.cs" />
     <Compile Include="Manager\ProcessManager.cs" />
     <Compile Include="Database\Queries.cs" />
     <Compile Include="Manager\Updater.cs" />
+    <Compile Include="Manager\UserManager.cs" />
     <Compile Include="Processes\PAnalyses.cs" />
     <Compile Include="Processes\PCoatingCemecon.cs" />
     <Compile Include="Processes\PCoatingCemeconProcess.cs" />
@@ -70,6 +73,7 @@
     <Compile Include="Processes\PGrindingPhoenix.cs" />
     <Compile Include="Processes\BaseProcess.cs" />
     <Compile Include="Processes\PGrindingPhoenixProcess.cs" />
+    <Compile Include="Processes\PToshiba.cs" />
     <Compile Include="Processes\PTurningMoore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -77,8 +81,13 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="ToshibaImport\Analytics.cs" />
+    <Compile Include="ToshibaImport\IO.cs" />
+    <Compile Include="ToshibaImport\MonFile.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="FuellerImport\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">

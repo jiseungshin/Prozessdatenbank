@@ -28,8 +28,9 @@ namespace OE110Prozessdatenbank.Controls
             m_vm = new ViewModels.WorkpieceQualityVM(wp);
             DataContext = m_vm;
         }
+       
 
-        public void foo()
-        { }
+        public Grid C
+        { get { return g_content; } }
     }
 }

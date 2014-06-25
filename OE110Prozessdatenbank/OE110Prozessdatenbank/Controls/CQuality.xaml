@@ -3,14 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Height="120" Width="420" Background="White">
-    <Grid>
+             mc:Ignorable="d" Height="120" Width="420" Background="Transparent">
+    <Grid x:Name="g_content">
         <ComboBox Margin="128,57,0,0" VerticalAlignment="Top" SelectedIndex="{Binding MoldScratches}" HorizontalAlignment="Left" Width="84">
             <ComboBoxItem Content="keine"/>
             <ComboBoxItem Content="wenig"/>
             <ComboBoxItem Content="viele"/>
         </ComboBox>
-        <ComboBox Margin="331,84,0,0" VerticalAlignment="Top" SelectedIndex="{Binding MoldScratches}" HorizontalAlignment="Left" Width="84">
+        <ComboBox Margin="331,84,0,0" VerticalAlignment="Top" SelectedIndex="{Binding OverallResult}" HorizontalAlignment="Left" Width="84">
             <ComboBoxItem Content="sehr gut"/>
             <ComboBoxItem Content="gut"/>
             <ComboBoxItem Content="mäßig"/>

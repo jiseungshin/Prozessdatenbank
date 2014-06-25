@@ -28,6 +28,8 @@ namespace OE110Prozessdatenbank.ViewModels
             {
                 m_process = new PGrindingMoore();
                 m_process.Date = DateTime.Now;
+                if (UserManager.CurrentUser != null)
+                    m_process.UserID = UserManager.CurrentUser.ID;
 
                 m_process.Workpieces.Add(ObjectManager.Instance.getWorkpiece(RefID));
             }

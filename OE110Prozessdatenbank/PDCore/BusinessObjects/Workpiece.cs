@@ -14,6 +14,7 @@ namespace PDCore.BusinessObjects
             PurchaseDate = DateTime.Now;
             Quality = new WorkpieceQuality();
             Label = "";
+            
         }
         public string Label { get; set; }
         public Material Material { get; set; }
@@ -24,6 +25,17 @@ namespace PDCore.BusinessObjects
         public bool isOneWay { get; set; }
         public int CurrentRefereneNumber { get; set; }
         public BusinessObjects.WorkpieceQuality Quality { get; set; }
+
+        public Workpiece clone()
+        {
+
+            Workpiece wp = new Workpiece();
+            wp.ID = this.ID;
+            wp.Label = this.Label;
+            wp.Material = this.Material;
+
+            return wp;
+        }
 
     }
 }

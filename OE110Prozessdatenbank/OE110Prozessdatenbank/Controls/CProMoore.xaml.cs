@@ -33,7 +33,7 @@ namespace OE110Prozessdatenbank.Controls
         public CProMoore()
         {
             InitializeComponent();
-            DataContext = new VMProcessingMoore();
+            DataContext = new VMProcessingToshiba();
             
         }
 
@@ -67,17 +67,25 @@ namespace OE110Prozessdatenbank.Controls
             m_window.Title = "Versuch - Moore";
             m_window.IconType = IconManager.IconType.ProcessIcon;
             m_window.ShowDialog();
+
         }
     }
 
-    public class VMProcessingMoore : ViewModels.BaseViewModel
+    public class VMProcessingToshiba : ViewModels.BaseViewModel
     {
 
 
         private string m_filter = "";
         private FilterCriteria m_criteria = ProcessManager.Instance.FilterCriteria[0];
-        public VMProcessingMoore()
-        { }
+        public VMProcessingToshiba()
+        {
+            Updater.Instance.newData += Instance_newData;
+        }
+
+        void Instance_newData()
+        {
+            NotifyPropertyChanged("ProcessedData");
+        }
 
         public DataSet ProcessedData
         {

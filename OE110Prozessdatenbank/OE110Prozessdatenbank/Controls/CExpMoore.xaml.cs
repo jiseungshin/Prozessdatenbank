@@ -57,7 +57,6 @@ namespace OE110Prozessdatenbank.Controls
             if (!m_set.Contains(1))
             {
                 m_set.Add(1);
-                setQualityControls();
             }
             setQualityControls();
             

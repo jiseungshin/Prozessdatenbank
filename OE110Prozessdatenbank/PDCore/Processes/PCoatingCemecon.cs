@@ -18,4 +18,16 @@ namespace PDCore.Processes
         public string Abnormalities { get; set; }
         public int Processnumber { get; set; }
     }
+
+    public class PDECoatingCemecon : BaseProcess
+    {
+        public PDECoatingCemecon()
+        {
+            CoatingProcessID = -1;
+            Workpieces = new List<BusinessObjects.Workpiece>();
+            Quality = new BusinessObjects.ProcessQuality();
+        }
+        public int CoatingProcessID { get; set; }
+        public int Processnumber { get; set; }
+    }
 }

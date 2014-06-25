@@ -23,11 +23,20 @@ namespace OE110Prozessdatenbank.ViewModels
             m_update = true;
             m_process = ProcessManager.Instance.getProcess(PID, 6) as PExpMoore;
             ProcessQualityControl = new Controls.CProcessQuality(m_process);
-            if (m_process.UpperWP !=null)
+
+            m_process.ProjectID = ObjectManager.Instance.getProjectID(m_process.Workpieces[0].CurrentRefereneNumber);
+            m_process.IssueID = ObjectManager.Instance.getIssueID(m_process.Workpieces[0].CurrentRefereneNumber);
+
+            if (m_process.UpperWP != null)
+            {
                 UpperWP = ObjectManager.Instance.getWorkpiece(Convert.ToInt32(m_process.UpperWP));
+            }
             if (m_process.LowerWP != null)
+            {
                 LowerWP = ObjectManager.Instance.getWorkpiece(Convert.ToInt32(m_process.LowerWP));
+            }
             SaveProcess = new RelayCommand(Save, CanSave);
+
         }
 
         public PExpMooreVM()
@@ -36,6 +45,10 @@ namespace OE110Prozessdatenbank.ViewModels
             m_process = new PExpMoore();
             SaveProcess = new RelayCommand(Save, CanSave);
             ProcessQualityControl = new Controls.CProcessQuality(m_process);
+
+            //set User field if user is logged in
+            if (UserManager.CurrentUser != null)
+                m_process.UserID = UserManager.CurrentUser.ID;
         }
 
         public RelayCommand SaveProcess { get; set; }
@@ -54,7 +67,7 @@ namespace OE110Prozessdatenbank.ViewModels
                 if (m_update)
                     return new ObservableCollection<Workpiece>(ObjectManager.Instance.Workpieces);
                 else
-                    return new ObservableCollection<Workpiece>(ObjectManager.Instance.getCoatedWorkpieces());
+                    return new ObservableCollection<Workpiece>(ObjectManager.Instance.CoatedWorkpieces);
             }
         }
 
@@ -70,12 +83,12 @@ namespace OE110Prozessdatenbank.ViewModels
             }
             set
             {
-                m_upper = new Workpiece();
-                m_upper.CurrentRefereneNumber = value.CurrentRefereneNumber;
-                m_upper.Label = value.Label;
-                m_upper.ID = value.ID;
-                m_process.UpperWP = value.ID;
-                WP_UpperControl = new Controls.CQuality(UpperWP);
+                    m_upper = value;
+                    WP_UpperControl = new Controls.CQuality(value);
+
+                m_process.ProjectID = ObjectManager.Instance.getProjectID(value.CurrentRefereneNumber);
+                m_process.IssueID = ObjectManager.Instance.getIssueID(value.CurrentRefereneNumber);
+                NotifyPropertyChanged("Project"); NotifyPropertyChanged("Issue");
             }
         }
 
@@ -91,12 +104,13 @@ namespace OE110Prozessdatenbank.ViewModels
             }
             set
             {
-                m_lower = new Workpiece();
-                m_lower.CurrentRefereneNumber = value.CurrentRefereneNumber;
-                m_lower.Label = value.Label;
-                m_lower.ID = value.ID;
-                m_process.LowerWP = value.ID;
-                WP_LowerControl = new Controls.CQuality(LowerWP);
+                m_lower = value;
+                WP_LowerControl = new Controls.CQuality(value);
+
+                m_process.ProjectID = ObjectManager.Instance.getProjectID(value.CurrentRefereneNumber);
+                m_process.IssueID = ObjectManager.Instance.getIssueID(value.CurrentRefereneNumber);
+
+                NotifyPropertyChanged("Project");NotifyPropertyChanged("Issue");
             }
         }
 
@@ -217,9 +231,15 @@ namespace OE110Prozessdatenbank.ViewModels
             else
             {
                 if (LowerWP != null)
+                {
                     m_process.Workpieces.Add(LowerWP);
+                    m_process.LowerWP = LowerWP.ID;
+                }
                 if (UpperWP != null)
+                {
                     m_process.Workpieces.Add(UpperWP);
+                    m_process.UpperWP = UpperWP.ID;
+                }
                 ProcessManager.Instance.saveProcess(m_process, false);
             }
 
