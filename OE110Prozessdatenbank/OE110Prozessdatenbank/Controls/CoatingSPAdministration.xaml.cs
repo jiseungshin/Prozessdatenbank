@@ -35,7 +35,7 @@ namespace OE110Prozessdatenbank.Controls
 
         private void bt_Add_Click(object sender, RoutedEventArgs e)
         {
-            Controls.CoatingStandardProcessWindow _pw = new CoatingStandardProcessWindow();
+            ObjectWindows.CoatingStandardProcessWindow _pw = new ObjectWindows.CoatingStandardProcessWindow();
             _pw.ShowDialog();
         }
 
@@ -43,7 +43,7 @@ namespace OE110Prozessdatenbank.Controls
         {
             if ((sender as ListView).SelectedIndex != -1)
             {
-                Controls.CoatingStandardProcessWindow _pw = new CoatingStandardProcessWindow((sender as ListView).SelectedItem as PCoatingCemeconProcess);
+                ObjectWindows.CoatingStandardProcessWindow _pw = new ObjectWindows.CoatingStandardProcessWindow((sender as ListView).SelectedItem as PCoatingCemeconProcess);
                 _pw.ShowDialog();
             }
         }

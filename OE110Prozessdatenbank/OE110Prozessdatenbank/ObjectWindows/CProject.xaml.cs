@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PDCore.BusinessObjects;
 
-namespace OE110Prozessdatenbank.Controls
+namespace OE110Prozessdatenbank.ObjectWindows
 {
     /// <summary>
     /// Interaktionslogik für CExpOther.xaml
@@ -51,13 +51,13 @@ namespace OE110Prozessdatenbank.Controls
         {
             if ((sender as ListView).SelectedIndex != -1)
             {
-                new CIssue((sender as ListView).SelectedItem as Issue).ShowDialog();
+                new ObjectWindows.CIssue((sender as ListView).SelectedItem as Issue).ShowDialog();
             }
         }
 
         private void bt_addIssue_Click(object sender, RoutedEventArgs e)
         {
-            new CIssue(m_vm.ProjectID).ShowDialog();
+            new ObjectWindows.CIssue(m_vm.ProjectID).ShowDialog();
         }
     }
 }

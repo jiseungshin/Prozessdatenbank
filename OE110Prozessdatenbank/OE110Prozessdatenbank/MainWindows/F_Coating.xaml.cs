@@ -20,8 +20,6 @@ namespace OE110Prozessdatenbank.MainWindows
     /// </summary>
     public partial class F_Coating : UserControl
     {
-        ViewModels.F_CoatingVM m_vm;
-        ProcessWindows.GenericWindow gw;
         public F_Coating()
         {
             InitializeComponent();
@@ -32,15 +30,9 @@ namespace OE110Prozessdatenbank.MainWindows
         {
             if ((sender as ListView).SelectedIndex != -1)
             {
-                gw = new ProcessWindows.GenericWindow();
-                gw.contentGrid.Children.Clear();
+                
                 int ID = Convert.ToInt32(((sender as ListView).SelectedItem as System.Data.DataRowView)[DBProcessReferences.RefNumber]);
-
-
-                gw.contentGrid.Children.Add(new Controls.CCoatingCemecon(ID, false));
-                gw.Title = "Prozessdaten CemeCon";
-
-                gw.ShowDialog();
+                new ProcessWindows.CCoatingCemecon(ID, false).ShowDialog();
 
             }
         }
@@ -49,42 +41,14 @@ namespace OE110Prozessdatenbank.MainWindows
         {
             if ((sender as ListView).SelectedIndex != -1)
             {
-                gw = new ProcessWindows.GenericWindow();
-                gw.contentGrid.Children.Clear();
                 int ID = Convert.ToInt32(((sender as ListView).SelectedItem as System.Data.DataRowView)[DBCoatingCemecon.ID]);
-
-
-                gw.contentGrid.Children.Add(new Controls.CCoatingCemecon(ID, true));
-                gw.Title = "Prozessdaten CemeCon";
-
-                gw.ShowDialog();
-
+                new ProcessWindows.CCoatingCemecon(ID, true).ShowDialog();
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void mbt_addcoatingProcess_Click(object sender, RoutedEventArgs e)
         {
-            new Controls.CoatingStandardProcessWindow().ShowDialog();
-        }
-
-        private void mi_WorkpieceAdmin_Click(object sender, RoutedEventArgs e)
-        {
-            new Controls.WorkpieceAdministration().ShowDialog();
-        }
-
-        private void mi_AddWorkpiece_Click(object sender, RoutedEventArgs e)
-        {
-            new Controls.AddWorkpiece().ShowDialog();
-        }
-
-        private void mi_AddMaterial_Click(object sender, RoutedEventArgs e)
-        {
-            new Controls.MaterialWindow().ShowDialog();
-        }
-
-        private void mi_CoatingProcessAdmin(object sender, RoutedEventArgs e)
-        {
-            new Controls.CoatingSPAdministration().ShowDialog();
+            new ObjectWindows.CoatingStandardProcessWindow().ShowDialog();
         }
 
         private void ToolBar_Loaded(object sender, RoutedEventArgs e)

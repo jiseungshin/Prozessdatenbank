@@ -11,36 +11,33 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using PDCore.BusinessObjects;
+using PDCore.Processes;
 
-namespace OE110Prozessdatenbank.Controls
+namespace OE110Prozessdatenbank.ObjectWindows
 {
     /// <summary>
-    /// Interaktionslogik für CIssue.xaml
+    /// Interaktionslogik für CoatingStandardProcessWindow.xaml
     /// </summary>
-    public partial class CIssue : Window
+    public partial class CoatingStandardProcessWindow : Window
     {
-        ViewModels.OIssueVM m_vm;
-        public CIssue(Issue issue)
+        public CoatingStandardProcessWindow()
         {
             InitializeComponent();
-            m_vm = new ViewModels.OIssueVM(issue);
-            DataContext = m_vm;
+            DataContext = new ViewModels.PCemeconStandarProcessVM();
         }
 
-        public CIssue(int ID)
+        public CoatingStandardProcessWindow(PCoatingCemeconProcess process)
         {
             InitializeComponent();
-            m_vm = new ViewModels.OIssueVM(ID);
-            DataContext = m_vm;
+            DataContext = new ViewModels.PCemeconStandarProcessVM(process);
         }
 
-        private void bt_cancel_Click(object sender, RoutedEventArgs e)
+        private void bt_save_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void bt_save_Click(object sender, RoutedEventArgs e)
+        private void bt_cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

@@ -14,12 +14,12 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Drawing;
 
-namespace OE110Prozessdatenbank.Controls
+namespace OE110Prozessdatenbank.ProcessWindows
 {
     /// <summary>
     /// Interaktionslogik für CExpMoore.xaml
     /// </summary>
-    public partial class CExpMoore : UserControl
+    public partial class CExpMoore : Window
     {
         ViewModels.PExpMooreVM m_vm;
         public CExpMoore()

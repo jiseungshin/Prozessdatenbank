@@ -19,7 +19,7 @@ namespace PDCore.Processes
         public int ProgramNumber { get; set; }
         public string AdherentLayer { get; set; }
         public string ProtectiveLayer { get; set; }
-        public int Thickness { get; set; }
+        public int? Thickness { get; set; }
         public bool isDecoating { get; set; }
 
         public string Description { get { return "ID: "+ProgramNumber+" , HS: "+AdherentLayer+" , SS: "+ProtectiveLayer; } }

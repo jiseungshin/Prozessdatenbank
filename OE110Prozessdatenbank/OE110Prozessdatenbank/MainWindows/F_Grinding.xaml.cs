@@ -45,36 +45,28 @@ namespace OE110Prozessdatenbank.MainWindows
         {
             if (LV_Polished.SelectedIndex != -1)
             {
-                gw = new ProcessWindows.GenericWindow();
-                gw.contentGrid.Children.Clear();
                 int ID =-1; 
 
                 switch (m_vm.Machine.ID)
                 {
                     case 1:
                         ID = Convert.ToInt32((LV_Polished.SelectedItem as System.Data.DataRowView)[DBTurningMoore.ID]);
-                        gw.contentGrid.Children.Add(new Controls.CTurningMoore(ID, true));
-                        gw.Title = "Prozessdaten " + m_vm.Machine.Name;
+                        new ProcessWindows.CTurningMoore(ID, true).ShowDialog();
                         break;
                     case 2:
                         ID = Convert.ToInt32((LV_Polished.SelectedItem as System.Data.DataRowView)[DBGrindingMoore.ID]);
-                        gw.contentGrid.Children.Add(new Controls.CGrindingMoore(ID, true));
-                        gw.Title = "Prozessdaten " + m_vm.Machine.Name;
+                        new ProcessWindows.CGrindingMoore(ID, true).ShowDialog();
                         break;
                     case 3:
                         ID = Convert.ToInt32((LV_Polished.SelectedItem as System.Data.DataRowView)[DBGrindingPhoenix.ID]);
-                         gw.contentGrid.Children.Add(new Controls.CGrindingPhoenix(ID, true));
-                        gw.Title = "Prozessdaten " + m_vm.Machine.Name;
+                        new ProcessWindows.CGrindingPhoenix(ID, true).ShowDialog();
                         break;
                     case 4:
                         ID = Convert.ToInt32((LV_Polished.SelectedItem as System.Data.DataRowView)[DBGrindingOther.ID]);
-                        gw.contentGrid.Children.Add(new Controls.CGrindingOther(ID, true));
-                        gw.Title = "Prozessdaten " + m_vm.Machine.Name;
+                        new ProcessWindows.CGrindingOther(ID, true).ShowDialog();
                         break;
 
                 }
-
-                gw.ShowDialog();
               
             }
 
@@ -85,38 +77,29 @@ namespace OE110Prozessdatenbank.MainWindows
         {
             if (LV_Raw.SelectedIndex != -1)
             {
-
-                gw = new ProcessWindows.GenericWindow();
-                gw.contentGrid.Children.Clear();
                 int ID = Convert.ToInt32((LV_Raw.SelectedItem as System.Data.DataRowView)[DBWorkpieces.ID]);
 
                 switch (m_vm.Machine.ID)
                 { 
                     case 1:
-                        gw.contentGrid.Children.Add(new Controls.CTurningMoore(ID, false));
-                        gw.Title = "Prozessdaten " + m_vm.Machine.Name;
+                        new ProcessWindows.CTurningMoore(ID, false).ShowDialog();
                         break;
                     case 2:
-                        gw.contentGrid.Children.Add(new Controls.CGrindingMoore(ID, false));
-                        gw.Title = "Prozessdaten " + m_vm.Machine.Name;
+                        new ProcessWindows.CGrindingMoore(ID, false).ShowDialog();
                         break;
                     case 3:
-                        gw.contentGrid.Children.Add(new Controls.CGrindingPhoenix(ID, false));
-                        gw.Title = "Prozessdaten " + m_vm.Machine.Name;
+                        new ProcessWindows.CGrindingPhoenix(ID, false).ShowDialog();
                         break;
                     case 4:
-                        gw.contentGrid.Children.Add(new Controls.CGrindingOther(ID, false));
-                        gw.Title = "Prozessdaten " + m_vm.Machine.Name;
+                        new ProcessWindows.CGrindingOther(ID, false).ShowDialog();
                         break;
                 }
-
-                gw.ShowDialog();
             }
         }
 
         private void Button_WP_Click(object sender, RoutedEventArgs e)
         {
-            new Controls.AddWorkpiece().ShowDialog();
+            new ObjectWindows.AddWorkpiece().ShowDialog();
         }
 
         private void mi_WorkpieceAdmin_Click(object sender, RoutedEventArgs e)
@@ -126,7 +109,7 @@ namespace OE110Prozessdatenbank.MainWindows
 
         private void mi_AddWorkpiece_Click(object sender, RoutedEventArgs e)
         {
-            new Controls.AddWorkpiece().ShowDialog();
+            new ObjectWindows.AddWorkpiece().ShowDialog();
         }
 
         private void mi_AddMaterial_Click(object sender, RoutedEventArgs e)

@@ -13,12 +13,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace OE110Prozessdatenbank.Controls
+namespace OE110Prozessdatenbank.ProcessWindows
 {
     /// <summary>
     /// Interaktionslogik für CGrindingPhoenix.xaml
     /// </summary>
-    public partial class CGrindingPhoenix : UserControl
+    public partial class CGrindingPhoenix : Window
     {
         ViewModels.PGrindingPhoenixVMcs m_vm;
         public CGrindingPhoenix(int refID, bool update)

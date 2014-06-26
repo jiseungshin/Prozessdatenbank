@@ -52,7 +52,7 @@ namespace OE110Prozessdatenbank.ViewModels
             }
             catch 
             { 
-                int a = 0; 
+                //int a = 0; 
             }
         }
 

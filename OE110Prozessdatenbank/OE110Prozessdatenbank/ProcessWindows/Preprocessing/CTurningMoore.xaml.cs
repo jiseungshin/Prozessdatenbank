@@ -13,12 +13,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace OE110Prozessdatenbank.Controls
+namespace OE110Prozessdatenbank.ProcessWindows
 {
     /// <summary>
     /// Interaktionslogik für CTurningMoore.xaml
     /// </summary>
-    public partial class CTurningMoore : UserControl
+    public partial class CTurningMoore : Window
     {
 
         ViewModels.PTurningMooreVM m_vm;
@@ -45,7 +45,7 @@ namespace OE110Prozessdatenbank.Controls
 
         private void lb_workpiece_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            AddWorkpiece tt = new Controls.AddWorkpiece(m_vm.Workpiece.ID);
+            ObjectWindows.AddWorkpiece tt = new ObjectWindows.AddWorkpiece(m_vm.Workpiece.ID);
             tt.g_content.IsEnabled = false;
             tt.Title = m_vm.Workpiece.Label;
             tt.ShowDialog();

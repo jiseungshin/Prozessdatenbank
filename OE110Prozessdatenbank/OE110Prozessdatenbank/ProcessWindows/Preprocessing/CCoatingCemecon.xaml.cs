@@ -13,22 +13,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace OE110Prozessdatenbank.Controls
+namespace OE110Prozessdatenbank.ProcessWindows
 {
     /// <summary>
-    /// Interaktionslogik für CGrindingOther.xaml
+    /// Interaktionslogik für CCoatingCemecon.xaml
     /// </summary>
-    public partial class CGrindingOther : UserControl
+    public partial class CCoatingCemecon : Window
     {
-        ViewModels.PGrindingOtherVM m_vm;
-        public CGrindingOther(int refID, bool update)
-        {
-             InitializeComponent();
-            m_vm = new ViewModels.PGrindingOtherVM(refID, update);
-            DataContext = m_vm;
+        ViewModels.PCoatingCemeconVM m_vm;
 
+        public CCoatingCemecon(int refID, bool update)
+        {
+            InitializeComponent();
+            m_vm = new ViewModels.PCoatingCemeconVM(refID, update);
+            DataContext = m_vm;
             if (update)
-                cb_process.IsEnabled = false;
+                cb_takeProcessData.IsEnabled = false;
         }
 
         private void bt_save_Click(object sender, RoutedEventArgs e)

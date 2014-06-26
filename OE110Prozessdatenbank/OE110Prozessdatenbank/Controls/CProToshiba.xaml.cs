@@ -42,11 +42,12 @@ namespace OE110Prozessdatenbank.Controls
             if ((sender as ListView).SelectedIndex != -1)
             {
                 int ID = Convert.ToInt32(((sender as ListView).SelectedItem as System.Data.DataRowView)[DBExpMoore.ID]);
-                m_window = new ProcessWindows.GenericWindow();
-                m_window.contentGrid.Children.Add(new Controls.CExpMoore(ID));
-                m_window.Title = "Versuch - Moore";
-                m_window.IconType = IconManager.IconType.ProcessIcon;
-                m_window.ShowDialog();
+                //m_window = new ProcessWindows.GenericWindow();
+                //m_window.contentGrid.Children.Add(new Controls.CExpMoore(ID));
+                //m_window.Title = "Versuch - Moore";
+                //m_window.IconType = IconManager.IconType.ProcessIcon;
+                //m_window.ShowDialog();
+                //new ProcessWindows.CExpMoore(ID).ShowDialog();
             }
         }
 

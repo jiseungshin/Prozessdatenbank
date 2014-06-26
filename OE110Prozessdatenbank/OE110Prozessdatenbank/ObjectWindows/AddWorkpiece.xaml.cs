@@ -10,36 +10,35 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace OE110Prozessdatenbank.Controls
+namespace OE110Prozessdatenbank.ObjectWindows
 {
     /// <summary>
-    /// Interaktionslogik für CGrindingMoore.xaml
+    /// Interaktionslogik für AddWorkpiece.xaml
     /// </summary>
-    public partial class CGrindingMoore : UserControl
+    public partial class AddWorkpiece : Window
     {
-        ViewModels.PGrindingMooreVM m_vm;
-        public CGrindingMoore(int refID, bool update)
+        public AddWorkpiece()
         {
             InitializeComponent();
-            InitializeComponent();
-            m_vm = new ViewModels.PGrindingMooreVM(refID, update);
-            DataContext = m_vm;
+            DataContext = new ViewModels.OWorkpieceVM();
+        }
 
-            if (update)
-                cb_process.IsEnabled = false;
+        public AddWorkpiece(int ID)
+        {
+            InitializeComponent();
+            DataContext = new ViewModels.OWorkpieceVM(ID);
         }
 
         private void bt_save_Click(object sender, RoutedEventArgs e)
         {
-            Window.GetWindow(this).Close();
+            this.Close();
         }
 
         private void bt_cancel_Click(object sender, RoutedEventArgs e)
         {
-            Window.GetWindow(this).Close();
+            this.Close();
         }
     }
 }

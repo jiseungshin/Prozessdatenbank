@@ -32,13 +32,13 @@ namespace OE110Prozessdatenbank.Controls
         {
             if ((sender as ListView).SelectedIndex != -1)
             {
-                new Controls.AddWorkpiece(((sender as ListView).SelectedItem as Workpiece).ID).ShowDialog();
+                new ObjectWindows.AddWorkpiece(((sender as ListView).SelectedItem as Workpiece).ID).ShowDialog();
             }
         }
 
         private void bt_Add_Click(object sender, RoutedEventArgs e)
         {
-            new Controls.AddWorkpiece().ShowDialog();
+            new ObjectWindows.AddWorkpiece().ShowDialog();
         }
     }
 

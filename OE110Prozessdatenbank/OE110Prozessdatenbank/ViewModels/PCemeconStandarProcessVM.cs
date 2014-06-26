@@ -42,7 +42,7 @@ namespace OE110Prozessdatenbank.ViewModels
         public string Protective
         { get { return m_process.ProtectiveLayer; } set { m_process.ProtectiveLayer = value; } }
 
-        public int Thickness
+        public int? Thickness
         { get { return m_process.Thickness; } set { m_process.Thickness = value; } }
 
         public string Remark

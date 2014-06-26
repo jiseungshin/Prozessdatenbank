@@ -44,7 +44,7 @@ namespace OE110Prozessdatenbank.Controls
                 if (MessageBox.Show("Wert wirklich übernehmen?") == MessageBoxResult.OK)
                 {
 
-                    int a = 0;
+                    //int a = 0;
                 }
 
             }

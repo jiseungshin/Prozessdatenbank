@@ -1,4 +1,4 @@
-﻿<Window x:Class="OE110Prozessdatenbank.Controls.AddWorkpiece"
+﻿<Window x:Class="OE110Prozessdatenbank.ObjectWindows.AddWorkpiece"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Werkstück anlegen" Height="269" Width="436" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">

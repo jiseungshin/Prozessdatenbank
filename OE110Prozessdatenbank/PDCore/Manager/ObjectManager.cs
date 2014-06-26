@@ -50,7 +50,18 @@ namespace PDCore.Manager
          void _myCommunicator_MessageThrown(Communicator.MessageType mType, Exception Message)
         {
              //1062 duplicate number
-            System.Windows.MessageBox.Show(Message.Message);
+             if ((Message as MySql.Data.MySqlClient.MySqlException).Number == 1062)
+             {
+                 System.Windows.MessageBox.Show("Der Datensatz kann nicht gespeicher werden, da der eingegebene Wert bereits existiert",
+                                                     "Hinweis", System.Windows.MessageBoxButton.OK,
+                                                     System.Windows.MessageBoxImage.Error);
+             }
+             else
+             {
+                 System.Windows.MessageBox.Show(Message.Message,"Hinweis",System.Windows.MessageBoxButton.OK,System.Windows.MessageBoxImage.Error);
+
+             }
+            
         }
 
          public static ObjectManager Instance

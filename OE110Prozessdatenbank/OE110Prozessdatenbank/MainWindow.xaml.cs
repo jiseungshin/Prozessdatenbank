@@ -279,7 +279,7 @@ namespace OE110Prozessdatenbank
 
         private void mbt_addProject_Click(object sender, RoutedEventArgs e)
         {
-            new Controls.CProject(2).ShowDialog();
+            new ObjectWindows.CProject(2).ShowDialog();
         }
 
         private void Debug_click(object sender, RoutedEventArgs e)

@@ -10,35 +10,39 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PDCore.BusinessObjects;
 
-namespace OE110Prozessdatenbank.Controls
+namespace OE110Prozessdatenbank.ObjectWindows
 {
     /// <summary>
-    /// Interaktionslogik für CCoatingCemecon.xaml
+    /// Interaktionslogik für CIssue.xaml
     /// </summary>
-    public partial class CCoatingCemecon : UserControl
+    public partial class CIssue : Window
     {
-        ViewModels.PCoatingCemeconVM m_vm;
-
-        public CCoatingCemecon(int refID, bool update)
+        ViewModels.OIssueVM m_vm;
+        public CIssue(Issue issue)
         {
             InitializeComponent();
-            m_vm = new ViewModels.PCoatingCemeconVM(refID, update);
+            m_vm = new ViewModels.OIssueVM(issue);
             DataContext = m_vm;
-            if (update)
-                cb_takeProcessData.IsEnabled = false;
         }
 
-        private void bt_save_Click(object sender, RoutedEventArgs e)
+        public CIssue(int ID)
         {
-            Window.GetWindow(this).Close();
+            InitializeComponent();
+            m_vm = new ViewModels.OIssueVM(ID);
+            DataContext = m_vm;
         }
 
         private void bt_cancel_Click(object sender, RoutedEventArgs e)
         {
-            Window.GetWindow(this).Close();
+            this.Close();
+        }
+
+        private void bt_save_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

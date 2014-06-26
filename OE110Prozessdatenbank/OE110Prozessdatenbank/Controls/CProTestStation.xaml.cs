@@ -28,7 +28,7 @@ namespace OE110Prozessdatenbank.Controls
     public partial class CProTestStation : UserControl
     {
 
-        private ProcessWindows.GenericWindow m_window;
+
 
         public CProTestStation()
         {
