@@ -3,13 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="ToshibaProcessEditor" Height="585" Width="475">
     <Window.Resources>
-        <ContextMenu x:Key="PostProcessingContext">
-            <ContextMenu.Template>
-                <ControlTemplate>
-                    <ComboBox ItemsSource="{Binding CountSelectionArray}" SelectionChanged="EditStatusCm_Click" Height="23" Margin="0,0,0,0"/>
-                </ControlTemplate>
-            </ContextMenu.Template>
-        </ContextMenu>
+        
     </Window.Resources>
     <Grid>
         <TabControl Margin="10">
@@ -17,18 +11,23 @@
                 <Grid Background="#FFE5E5E5">
                     <Grid Margin="10,10,-16,10">
                         <Grid.Resources>
-                            <ContextMenu x:Key="PostProcessingContext">
+                            <!--<ContextMenu x:Key="PostProcessingContext">
                                 <ContextMenu.Template>
                                     <ControlTemplate>
                                         <ComboBox ItemsSource="{Binding CountSelectionArray}" SelectionChanged="EditStatusCm_Click" Height="23" Margin="0,0,0,0"/>
                                     </ControlTemplate>
                                 </ContextMenu.Template>
+                            </ContextMenu>-->
+                            <ContextMenu x:Key="PostProcessingContext">
+                                <MenuItem Header ="für alle übernehmen" Click="take_all">
+                                </MenuItem>
+                                <MenuItem x:Name="huhu" Header ="übernehmen für" ItemsSource="{Binding Items}" Click="takespec"></MenuItem>
                             </ContextMenu>
-                            <Style TargetType="{x:Type TextBox}">
+                                <Style TargetType="{x:Type TextBox}">
                                 <Setter Property="ContextMenu" Value="{StaticResource PostProcessingContext}" />
                             </Style>
                         </Grid.Resources>
-                        <TextBox HorizontalAlignment="Left" Height="21" Margin="43,234,0,0" ContextMenu="{StaticResource PostProcessingContext}" TextWrapping="Wrap" Text="{Binding P1}" VerticalAlignment="Top" Width="50" MouseRightButtonDown="TextBox_MouseRightButtonDown" MouseDown="TextBox_MouseDown"/>
+                        <TextBox x:Name="tb_P1" HorizontalAlignment="Left" Height="21" Margin="43,234,0,0" ContextMenu="{StaticResource PostProcessingContext}" TextWrapping="Wrap" Text="{Binding VM.P1}" VerticalAlignment="Top" Width="50"/>
                         <Label Content="P1" HorizontalAlignment="Left" Margin="10,231,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692" Height="24" Width="23"/>
                         <Button Content="übernehmen" HorizontalAlignment="Left" Margin="319,429,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
                         <Label Content="Temperaturen" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
