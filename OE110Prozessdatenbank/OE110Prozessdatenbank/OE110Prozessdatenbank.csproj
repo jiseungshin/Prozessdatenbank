@@ -448,6 +448,28 @@
   <ItemGroup>
     <Resource Include="Icons\manifest_16xLG.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Diamond_16xLG.png" />
+    <Resource Include="Icons\puzzle_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\addCoatingProcess_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\ImportProcess_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\GlassAdmin_16xLG.png" />
+    <Resource Include="Icons\ProjectAdmin_16xLG.png" />
+    <Resource Include="Icons\UserAdmin_16xLG.png" />
+    <Resource Include="Icons\WorkpieceAdmin_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Editor_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\view_16xLG.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

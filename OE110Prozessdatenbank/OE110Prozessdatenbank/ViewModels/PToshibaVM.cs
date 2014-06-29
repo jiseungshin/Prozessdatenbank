@@ -121,6 +121,71 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public double? P1
         { get { return m_process.InputData.P1; } set { m_process.InputData.P1 = value; } }
+
+        public double? P2
+        { get { return m_process.InputData.P2; } set { m_process.InputData.P2 = value; } }
+
+        public double? P3
+        { get { return m_process.InputData.P3; } set { m_process.InputData.P3 = value; } }
+
+        public double? PT1
+        { get { return m_process.InputData.PT1; } set { m_process.InputData.PT1 = value; } }
+
+        public double? Tv
+        { get { return m_process.InputData.Tv; } set { m_process.InputData.Tv = value; } }
+
+        public double? Tvu
+        { get { return m_process.InputData.Tvu; } set { m_process.InputData.Tvu = value; } }
+
+        public double? T1
+        { get { return m_process.InputData.T1; } set { m_process.InputData.T1 = value; } }
+
+        public double? T1u
+        { get { return m_process.InputData.PT1; } set { m_process.InputData.T1u = value; } }
+
+        public double? T2
+        { get { return m_process.InputData.T2; } set { m_process.InputData.T2 = value; } }
+
+        public double? T3
+        { get { return m_process.InputData.T3; } set { m_process.InputData.T3 = value; } }
+
+        public double? T4
+        { get { return m_process.InputData.T4; } set { m_process.InputData.T4 = value; } }
+
+        public double? T5
+        { get { return m_process.InputData.T5; } set { m_process.InputData.T5 = value; } }
+
+        public double? Gv
+        { get { return m_process.InputData.Gv; } set { m_process.InputData.Gv = value; } }
+
+        public double? G1
+        { get { return m_process.InputData.G1; } set { m_process.InputData.G1 = value; } }
+
+        public double? G2
+        { get { return m_process.InputData.G2; } set { m_process.InputData.G2 = value; } }
+
+        public double? ST1
+        { get { return m_process.InputData.ST1; } set { m_process.InputData.ST1 = value; } }
+
+        public double? ST2
+        { get { return m_process.InputData.ST2; } set { m_process.InputData.ST2 = value; } }
+
+        public double? V1
+        { get { return m_process.InputData.V1; } set { m_process.InputData.V1 = value; } }
+
+        public double? V2
+        { get { return m_process.InputData.V2; } set { m_process.InputData.V2 = value; } }
+
+        public double? V3
+        { get { return m_process.InputData.V3; } set { m_process.InputData.V3 = value; } }
+
+        public double? Z1
+        { get { return m_process.InputData.Z1; } set { m_process.InputData.Z1 = value; } }
+
+        public double? Z2
+        { get { return m_process.InputData.Z2; } set { m_process.InputData.Z2 = value; } }
+
+
     }
 
     public class InvisibleAxis : Axis

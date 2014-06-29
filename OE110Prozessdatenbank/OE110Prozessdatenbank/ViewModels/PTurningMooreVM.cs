@@ -52,16 +52,16 @@ namespace OE110Prozessdatenbank.ViewModels
         public ObservableCollection<Project> Projects { get { return new ObservableCollection<PDCore.BusinessObjects.Project>(ObjectManager.Instance.Projects); } }
 
         public DateTime Date { get { return m_process.Date; } set { m_process.Date = value; } } 
-        public int? Radius { get { return m_process.Radius; } set { m_process.Radius = value; } }
-        public int? Feed { get { return m_process.Feed; } set { m_process.Feed = value; } }
-        public int? CuttingAngle { get { return m_process.CuttingAngle; } set { m_process.CuttingAngle = value; } }
-        public int? CutDepth { get { return m_process.CuttingDepth; } set { m_process.CuttingDepth = value; } }
-        public int? Speed { get { return m_process.Speed; } set { m_process.Speed = value; } }
+        public double? Radius { get { return m_process.Radius; } set { m_process.Radius = value; } }
+        public double? Feed { get { return m_process.Feed; } set { m_process.Feed = value; } }
+        public double? CuttingAngle { get { return m_process.CuttingAngle; } set { m_process.CuttingAngle = value; } }
+        public double? CutDepth { get { return m_process.CuttingDepth; } set { m_process.CuttingDepth = value; } }
+        public double? Speed { get { return m_process.Speed; } set { m_process.Speed = value; } }
         public bool isFinish { get { return m_process.isFinish; } set { m_process.isFinish = value; } }
         public int Processing { get { return m_process.Processing; } set { m_process.Processing = value; } }
         public string ToolID { get { return m_process.ToolID; } set { m_process.ToolID = value; } }
-        public int? PV { get { return m_process.PV; } set { m_process.PV = value; } }
-        public int? RA { get { return m_process.RA; } set { m_process.RA = value; } } 
+        public double? PV { get { return m_process.PV; } set { m_process.PV = value; } }
+        public double? RA { get { return m_process.RA; } set { m_process.RA = value; } } 
         public string Remark { get { return m_process.Remark; } set { m_process.Remark = value; } }
 
         public string WorkpieceLabel

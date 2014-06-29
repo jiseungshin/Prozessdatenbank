@@ -27,10 +27,16 @@
         </Grid.Resources>
         <ToolBarTray Height="44" VerticalAlignment="Top" Background="#FFB4B4B4" Width="auto">
             <ToolBar x:Name="tb_mainTool" Background="#FFB4B4B4" HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="auto" Margin="0,0,-125,-31" ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded">
-                <Button x:Name="mbt_addProduct" Height="30" Width="150" HorizontalAlignment="Right" ToolTip="Versuch durchführen" Margin="8,0,0,0" Click="mbt_newProcess_Click">
-                    <StackPanel Orientation="Horizontal" Height="30" Width="150">
-                        <Image Source="/OE110Prozessdatenbank;component/Icons/action_16xLG.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <Label Content="Versuch durchführen"/>
+                <Button x:Name="mbt_addProduct" Height="30" Width="170" HorizontalAlignment="Right" ToolTip="Versuch durchführen" Margin="8,0,0,0" Click="mbt_newProcess_Click">
+                    <StackPanel Orientation="Horizontal" Height="30" Width="160">
+                        <Image Source="/OE110Prozessdatenbank;component/Icons/ImportProcess_16xLG.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Label Content="Prozessdaten importieren"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="mbt_MONViewer" Height="30" Width="100" HorizontalAlignment="Right" ToolTip="Versuch durchführen" Margin="8,0,0,0" Click="mbt_newProcess_Click">
+                    <StackPanel Orientation="Horizontal" Height="30" Width="100">
+                        <Image Source="/OE110Prozessdatenbank;component/Icons/view_16xLG.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Label Content="MON-Viewer"/>
                     </StackPanel>
                 </Button>
             </ToolBar>

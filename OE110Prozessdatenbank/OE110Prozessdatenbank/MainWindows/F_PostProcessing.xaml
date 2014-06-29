@@ -30,20 +30,20 @@
         <ListView x:Name="listview" SelectionMode="Single" Margin="10,70,10,10" MouseDoubleClick="LV_MouseDoubleClick" ItemsSource="{Binding Table}" DataContext="{Binding Data, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1">
             <ListView.Resources>
                 <ContextMenu x:Key="PostProcessingContext">
-                    <MenuItem Header="zur Analyse" Click="cmb_analyse_Click" Height="30">
+                    <MenuItem Header="zur Analyse" Click="cmb_analyse_Click">
                         <MenuItem.Icon>
                             <Image Source="/OE110Prozessdatenbank;component/Icons/Analysis_9699.png" 
                                     Height="{Binding Path=ActualHeight, ElementName=StorageContextmenu}"
                                     Width="{Binding Path=ActualHeight, ElementName=StorageContextmenu}" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="zum Decoating" Click="cmb_decoating_Click" Height="30">
+                    <MenuItem Header="zum Decoating" Click="cmb_decoating_Click">
                         <MenuItem.Icon>
                             <Image Source="/OE110Prozessdatenbank;component/Icons/TransparentBackground_244.png" Height="{Binding Path=ActualHeight, ElementName=StorageContextmenu}"
                                     Width="{Binding Path=ActualHeight, ElementName=StorageContextmenu}" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Fazit eingeben" Click="cmb_conclusion_Click" Height="30">
+                    <MenuItem Header="Fazit eingeben" Click="cmb_conclusion_Click">
                         <MenuItem.Icon>
                             <Image Source="/OE110Prozessdatenbank;component/Icons/LightBulb_16xLG.png"
                                    Height="{Binding Path=ActualHeight, ElementName=StorageContextmenu}"
@@ -106,16 +106,22 @@
         <Grid Background="#FFB4B4B4">
             <ToolBarTray Height="50" VerticalAlignment="Top" Background="#FFB4B4B4" Width="auto">
                 <ToolBar x:Name="tb_mainTool" Background="#FFB4B4B4" HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="auto" Margin="0,0,-125,-31" ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded">
-                    <Button x:Name="mbt_addWorkpieve" Height="30" Width="150" HorizontalAlignment="Right" ToolTip="Versuch durchführen" Margin="8,0,0,0">
-                        <StackPanel Orientation="Horizontal" Height="30" Width="150">
-                            <Image Source="/OE110Prozessdatenbank;component/Icons/action_16xLG.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <Label Content="Werkstück anlegen"/>
+                    <Button x:Name="mbt_addWorkpieve" Height="30" Width="70" HorizontalAlignment="Right" ToolTip="Versuch durchführen" Margin="8,0,0,0">
+                        <StackPanel Orientation="Horizontal" Height="30" Width="65">
+                            <Image Source="/OE110Prozessdatenbank;component/Icons/Analysis_9699.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Label Content="Analyse"/>
                         </StackPanel>
                     </Button>
-                    <Button x:Name="mbt_addMaterial" Height="30" Width="150" HorizontalAlignment="Right" ToolTip="Versuch durchführen" Margin="8,0,0,0">
-                        <StackPanel Orientation="Horizontal" Height="30" Width="150">
-                            <Image Source="/OE110Prozessdatenbank;component/Icons/action_16xLG.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <Label Content="Material anlegen"/>
+                    <Button x:Name="mbt_addMaterial" Height="30" Width="80" HorizontalAlignment="Right" ToolTip="Versuch durchführen" Margin="8,0,0,0">
+                        <StackPanel Orientation="Horizontal" Height="30" Width="80">
+                            <Image Source="/OE110Prozessdatenbank;component/Icons/TransparentBackground_244.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Label Content="Decoating"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="mbt_addConclusion" Height="30" Width="60" HorizontalAlignment="Right" ToolTip="Versuch durchführen" Margin="8,0,0,0">
+                        <StackPanel Orientation="Horizontal" Height="30" Width="60">
+                            <Image Source="/OE110Prozessdatenbank;component/Icons/LightBulb_16xLG.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Label Content="Fazit"/>
                         </StackPanel>
                     </Button>
                 </ToolBar>

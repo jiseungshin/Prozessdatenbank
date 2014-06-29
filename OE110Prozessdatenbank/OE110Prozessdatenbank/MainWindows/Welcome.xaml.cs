@@ -27,6 +27,9 @@ namespace OE110Prozessdatenbank.MainWindows
             InitializeComponent();
             ObjectManager.Instance.update();
             cb_user.DataContext = ObjectManager.Instance.Users;
+
+            cb_user.SelectedItem = ObjectManager.Instance.Users.Find(item => item.Token == Environment.UserName);
+
             login = control;
         }
 

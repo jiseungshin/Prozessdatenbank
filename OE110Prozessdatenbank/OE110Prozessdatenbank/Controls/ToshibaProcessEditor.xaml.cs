@@ -67,27 +67,26 @@ namespace OE110Prozessdatenbank.Controls
 
         private void generateCountSelector(int count)
         {
-            m_countSelection.Add("---Übernehmen---");
-            m_countSelection.Add("Übernehmen für alle");
             for (int i=1; i<count; i++)
             {
                 if (i == 1)
                 {
-                    m_countSelection.Add("Übernehmen für den nächsten");
                     MenuItem item = new MenuItem();
                     item.Header = "den nächsten";
-                    item.Name = "mi_"+i.ToString(); 
+                    item.Name = "mi_"+i.ToString();
+                    item.Click += item_Click;
                     m_items.Add(item);
                 }
                 else
                 {
-                    m_countSelection.Add("Übernehmen für die nächsten " + i);
                     MenuItem item = new MenuItem();
                     item.Header = "die nächsten " + i;
                     item.Name = "mi_" + i.ToString();
                     item.Click += item_Click;
                     m_items.Add(item);
                 }
+
+                
             }
         }
 
@@ -96,8 +95,6 @@ namespace OE110Prozessdatenbank.Controls
             MenuItem mnu = sender as MenuItem;
             string name = mnu.Name;
 
-
-            object t = (ContextMenu)mnu.Parent;
 
             test = Convert.ToInt32(name.Remove(0, 3));
         }
@@ -165,29 +162,18 @@ namespace OE110Prozessdatenbank.Controls
             TextBox sp = null;
             if (mnu != null)
             {
-                //MenuItem bb;
-                //bb = ((MenuItem)mnu.Parent) as MenuItem;
                 sp = ((ContextMenu)mnu.Parent).PlacementTarget as TextBox;
 
                 Binding myBinding = BindingOperations.GetBinding(sp, TextBox.TextProperty);
 
-                string dd = myBinding.Path.Path.Remove(0, 3);
-                
-                //PropertyInfo property = typeof(ViewModels.PToshibaVM).GetProperty(myBinding.ElementName);
+                string boundComponent = myBinding.Path.Path.Remove(0, 3);
 
-                System.Reflection.PropertyInfo prop = typeof(ViewModels.PToshibaVM).GetProperty(dd);
 
-                
-
-                
-                
+                System.Reflection.PropertyInfo prop = typeof(ViewModels.PToshibaVM).GetProperty(boundComponent);
+      
                 for (int i = index + 1; i < index + test+1; i++)
                 {
-                    //object value = prop.GetValue(m_vm.Processes[i], null);
-
-                    prop.SetValue(m_vm.Processes[i], Convert.ToDouble(sp.Text.Replace('.', ',')), null);
-                    
-                    //m_vm.Processes[i].P1 = Convert.ToDouble(sp.Text.Replace('.',','));
+                    prop.SetValue(m_vm.Processes[i], Convert.ToDouble(sp.Text.Replace('.', ',')), null);                   
                 }
 
                 

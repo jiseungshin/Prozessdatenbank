@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:oxy="http://oxyplot.codeplex.com"
         xmlns:local="clr-namespace:OE110Prozessdatenbank.Controls"
-        Title="ToshibaProcessImport" Height="326" Width="838" WindowState="Maximized">
+        Title="Toshiba Prozessdatenimport" Height="326" Width="838" WindowState="Maximized" Icon="/OE110Prozessdatenbank;component/Icons/ImportProcess_16xLG.png">
     <Grid>
         <Grid.Resources>
             <!--<local:CQuality x:Key="WorkpieceQuality"></local:CQuality>-->
