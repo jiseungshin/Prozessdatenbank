@@ -140,10 +140,14 @@ namespace PDCore.Manager
         }
         public string getDirPth(int ReferenceNumber)
         {
-           string[] dir = Directory.GetDirectories(Properties.Settings.Default.StandardDirPath, ReferenceNumber.ToString(), SearchOption.AllDirectories);
-           string test = dir[0].Replace(Properties.Settings.Default.StandardDirPath, "");
-           string huhu = Properties.Settings.Default.StandardDirPath;
-           return dir[0];
+            try
+            {
+                string[] dir = Directory.GetDirectories(Properties.Settings.Default.StandardDirPath, ReferenceNumber.ToString(), SearchOption.AllDirectories);
+                string test = dir[0].Replace(Properties.Settings.Default.StandardDirPath, "");
+                string huhu = Properties.Settings.Default.StandardDirPath;
+                return dir[0];
+            }
+            catch { return ""; }
         }
     }
 }
