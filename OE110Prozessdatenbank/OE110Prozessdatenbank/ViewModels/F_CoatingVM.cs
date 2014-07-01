@@ -21,6 +21,7 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public F_CoatingVM()
         {
+            ProcessManager.Instance.update();
             Updater.Instance.newData += Instance_newData;
         }
 
@@ -36,7 +37,25 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public DataSet DataCoated
         {
-            get { return ProcessManager.Instance.getData(Queries.QueryCoated + m_coatedFilter); }
+            get
+            {
+                DataSet _ds = ProcessManager.Instance.getData(Queries.QueryCoated + m_coatedFilter);
+                //_ds.Tables[0].Columns.Add("al", typeof(string));
+                //_ds.Tables[0].Columns.Add("pl", typeof(string));
+                //foreach(DataRow dr in _ds.Tables[0].Rows)
+                //{
+                //    //AdherentLayer = Layer.Find(item => item.ID == row.Field<int>(DBCoatingCemeconProcess.AdherentLayer)),
+                //    //ProtectiveLayer = Layer.Find(item => item.ID == row.Field<int>(DBCoatingCemeconProcess.ProtectiveLayer)),
+
+                //    //int id = dr.Field<int>(DBCoatingCemeconProcess.AdherentLayer);
+
+                //    dr["al"] = ProcessManager.Instance.Layer.Find(item => item.ID == dr.Field<int>(DBCoatingCemeconProcess.AdherentLayer)).Structure;
+                //    dr["pl"] = ProcessManager.Instance.Layer.Find(item => item.ID == dr.Field<int>(DBCoatingCemeconProcess.ProtectiveLayer)).Structure;
+
+                //}
+
+                return _ds;
+            }
         }
 
         public string PolishedFilter

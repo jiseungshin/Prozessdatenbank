@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using OE110Prozessdatenbank.ViewModels;
 
 namespace OE110Prozessdatenbank.Controls
 {
@@ -22,6 +23,12 @@ namespace OE110Prozessdatenbank.Controls
         public CConclusion(int RefID)
         {
             InitializeComponent();
+            DataContext = new OReferenceVM(RefID);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

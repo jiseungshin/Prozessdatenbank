@@ -2,7 +2,11 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:src="clr-namespace:OE110Prozessdatenbank"
-        Title="CAnalyses" Height="268" Width="533">
+        xmlns:local="clr-namespace:OE110Prozessdatenbank"
+        Title="Analysen" Height="268" Width="533" WindowStartupLocation="CenterScreen" Icon="/OE110Prozessdatenbank;component/Icons/Analysis_9699.png">
+    <Window.Resources>
+        <local:AnalysisConverter x:Key="aconv"></local:AnalysisConverter>
+    </Window.Resources>
     <Grid>
         <Grid.Resources>
             <src:DateConverter x:Key="DateConverter"></src:DateConverter>
@@ -50,7 +54,7 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Analyse" DisplayMemberBinding="{Binding Description}" Width="120"/>
+                    <GridViewColumn Header="Analyse" DisplayMemberBinding="{Binding Description, Converter={StaticResource aconv}}" Width="120"/>
                     <GridViewColumn Header="Bearbeiter" DisplayMemberBinding="{Binding User.Token}" Width="80"/>
                     <GridViewColumn Header="Start" DisplayMemberBinding="{Binding Started,Converter={StaticResource DateConverter}}" Width="80"/>
                     <GridViewColumn Header="Ende" DisplayMemberBinding="{Binding Finished,Converter={StaticResource DateConverter}}" Width="80"/>

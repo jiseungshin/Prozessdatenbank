@@ -25,12 +25,13 @@ namespace OE110Prozessdatenbank
         Brush m_selectedColor;
         Brush m_hoverColor;
 
-        private MainWindows.F_Grinding m_grindingControl;
+        private MainViews.MV_Grinding m_grindingControl;
         private UIElement m_coatingControl;
         private UIElement m_processingControlMoore;
         private UIElement m_processingControlTest;
         private UIElement m_analysingControl;
         private UIElement m_processingControlToshiba;
+        private UIElement m_processingControlCemeCon;
 
 
         public MainWindow()
@@ -43,12 +44,13 @@ namespace OE110Prozessdatenbank
             m_selectedColor = (Brush)converter.ConvertFromString("#FF509E5E");
             m_hoverColor = (Brush)converter.ConvertFromString("#FF5EB45A");
 
-            m_grindingControl = new MainWindows.F_Grinding();
-            m_coatingControl = new MainWindows.F_Coating();
-            m_processingControlMoore = new Controls.CProMoore();
-            m_processingControlToshiba = new Controls.CProToshiba();
-            m_processingControlTest = new Controls.CProTestStation();
-            m_analysingControl = new MainWindows.F_PostProcessing();
+            m_grindingControl = new MainViews.MV_Grinding();
+            m_coatingControl = new MainViews.MV_Coating();
+            m_processingControlMoore = new MainViews.MV_ProMoore();
+            m_processingControlToshiba = new MainViews.MV_ProToshiba();
+            m_processingControlTest = new MainViews.MV_ProTestStation();
+            m_analysingControl = new MainViews.MV_PostProcessing();
+            m_processingControlCemeCon = new Controls.CProSemeCon();
 
             this.Closing += MainWindow_Closing;
 
@@ -68,12 +70,12 @@ namespace OE110Prozessdatenbank
         {
             g_selector.Visibility = System.Windows.Visibility.Visible;
             Cursor = Cursors.Wait;
-            m_grindingControl = new MainWindows.F_Grinding();
-            m_coatingControl = new MainWindows.F_Coating();
-            m_processingControlTest = new Controls.CProTestStation();
-            m_processingControlMoore = new Controls.CProMoore();
-            m_analysingControl = new MainWindows.F_PostProcessing();
-            m_processingControlToshiba = new Controls.CProToshiba();
+            m_grindingControl = new MainViews.MV_Grinding();
+            m_coatingControl = new MainViews.MV_Coating();
+            m_processingControlTest = new MainViews.MV_ProTestStation();
+            m_processingControlMoore = new MainViews.MV_ProMoore();
+            m_analysingControl = new MainViews.MV_PostProcessing();
+            m_processingControlToshiba = new MainViews.MV_ProToshiba();
             
             if (PDCore.Manager.UserManager.CurrentUser!=null)
             {
@@ -82,37 +84,43 @@ namespace OE110Prozessdatenbank
                 int id = Convert.ToInt32(PDCore.Manager.UserManager.CurrentUser.MachineID);
                 switch(id)
                 {
-                    case 1:
+                    case 11:
                         this.changeWindow(lb_1, id);
                         break;
-                    case 2:
+                    case 12:
                         this.changeWindow(lb_1, id);
                         break;
-                    case 3:
+                    case 13:
                         this.changeWindow(lb_1, id);
                         break;
-                    case 4:
+                    case 14:
                         this.changeWindow(lb_1, id);
                         break;
-                    case 5:
+                    case 21:
                         this.changeWindow(lb_2, id);
                         break;
-                    case 6:
-                        this.changeWindow(lb_3, id);
-                        break;
-                    case 7:
-                        this.changeWindow(lb_3, id);
-                        break;
-                    case 8:
-                        this.changeWindow(lb_3, id);
-                        break;
-                    case 9:
+                    case 31:
                         this.changeWindow(lb_31, id);
                         break;
-                    case 10:
+                    case 32:
+                        this.changeWindow(lb_32, id);
+                        break;
+                    case 33:
+                        this.changeWindow(lb_33, id);
+                        break;
+                    case 34:
+                        this.changeWindow(lb_34, id);
+                        break;
+                    case 35:
+                        this.changeWindow(lb_35, id);
+                        break;
+                    //case 36:
+                    //    this.changeWindow(lb_36, id);
+                    //    break;
+                    case 41:
                         this.changeWindow(lb_4, id);
                         break;
-                    case 11:
+                    case 51:
                         this.changeWindow(lb_4, id);
                         break;
 
@@ -174,23 +182,30 @@ namespace OE110Prozessdatenbank
                     lb.Background = m_selectedColor;
                     lb.Foreground = Brushes.WhiteSmoke;
                     break;
-                case "lb_32":
+                case "lb_31":
                     g_content.Children.Clear();
                     g_content.Children.Add(m_processingControlMoore);
                     lb_3.Background = m_selectedColor;
                     lb_3.Foreground = Brushes.WhiteSmoke;
                     m_selectedLabel = lb_3;
                     break;
-                case "lb_35":
+                case "lb_32":
                     g_content.Children.Clear();
                     g_content.Children.Add(m_processingControlTest);
                     lb_3.Background = m_selectedColor;
                     lb_3.Foreground = Brushes.WhiteSmoke;
                     m_selectedLabel = lb_3;
                     break;
-                case "lb_31":
+                case "lb_34":
                     g_content.Children.Clear();
                     g_content.Children.Add(m_processingControlToshiba);
+                    lb_3.Background = m_selectedColor;
+                    lb_3.Foreground = Brushes.WhiteSmoke;
+                    m_selectedLabel = lb_3;
+                    break;
+                case "lb_33":
+                    g_content.Children.Clear();
+                    g_content.Children.Add(m_processingControlCemeCon);
                     lb_3.Background = m_selectedColor;
                     lb_3.Foreground = Brushes.WhiteSmoke;
                     m_selectedLabel = lb_3;
@@ -279,13 +294,34 @@ namespace OE110Prozessdatenbank
 
         private void mbt_addProject_Click(object sender, RoutedEventArgs e)
         {
-            new ObjectWindows.CProject(2).ShowDialog();
+            new ObjectWindows.CProject().ShowDialog();
         }
 
         private void Debug_click(object sender, RoutedEventArgs e)
-        {            
+        {
+            //var tt = PDCore.Manager.ProcessManager.Instance.getWorkpieceHistory(1);
+            var tt = PDCore.Manager.FileManager.Instance.getDirPth(1);
+        }
 
-           
+        private void mbt_CoatingAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            new ObjectWindows.CoatingSPAdministration().ShowDialog();
+        }
+
+        private void mbt_ProjectAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            new ObjectWindows.ProjectAdministration().ShowDialog();
+        }
+
+        private void mbt_Admininstration_Click(object sender, RoutedEventArgs e)
+        {
+            g_content.Children.Clear();
+            g_content.Children.Add(new MainViews.Administration());
+        }
+
+        private void mbt_WorkpieceAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            new ObjectWindows.WorkpieceAdministration().ShowDialog();
         }
 
 

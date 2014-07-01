@@ -56,7 +56,7 @@ namespace OE110Prozessdatenbank.ViewModels
         public string Label
         { get { return m_workpiece.Label; } set { m_workpiece.Label = value; } }
 
-        public DateTime PurchaseDate
+        public DateTime? PurchaseDate
         { get { return m_workpiece.PurchaseDate; } set { m_workpiece.PurchaseDate = value; } }
 
         public string Geometry

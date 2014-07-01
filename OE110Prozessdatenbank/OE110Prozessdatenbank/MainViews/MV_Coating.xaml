@@ -1,0 +1,165 @@
+﻿<UserControl x:Class="OE110Prozessdatenbank.MainViews.MV_Coating"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:OE110Prozessdatenbank"
+        Height="auto" Width="auto" >
+    <UserControl.Resources>
+        <local:DateConverter x:Key="dateConv"></local:DateConverter>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="1,0.5" StartPoint="0.5,2">
+                <LinearGradientBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                        <RotateTransform Angle="-70" CenterY="0.5" CenterX="0.5"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </LinearGradientBrush.RelativeTransform>
+                <GradientStop Color="#FF3C7E48"/>
+                <GradientStop Color="White" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="44"/>
+            <RowDefinition Height="281*"/>
+        </Grid.RowDefinitions>
+        <Grid Margin="0,2,0,0" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="296*"/>
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="g_raw">
+                <ListView Name="LD_Polished" Margin="10,36,10,10" DataContext="{Binding DataPolished, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Table}" SelectionMode="Single" MouseDoubleClick="LV_Raw_DoubvleClick">
+                    <ListView.Background>
+                        <LinearGradientBrush>
+                            <GradientStop  Offset="0" Color="#FFE8E8E8"/>
+                        </LinearGradientBrush>
+                    </ListView.Background>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="BorderBrush" Value="LightGray" />
+                            <Setter Property="BorderThickness" Value="0,0,0,1" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListViewItem">
+                                        <Border CornerRadius="2" SnapsToDevicePixels="True"
+                                        BorderThickness="{TemplateBinding     BorderThickness}" 
+                                        BorderBrush="{TemplateBinding BorderBrush}" 
+                                        Background="{TemplateBinding Background}">
+                                            <Border Name="InnerBorder" CornerRadius="0"   BorderThickness="1">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition MaxHeight="11" />
+                                                        <RowDefinition />
+                                                    </Grid.RowDefinitions>
+                                                    <Rectangle Name="UpperHighlight" Visibility="Collapsed" Fill="#75FFFFFF" />
+                                                    <GridViewRowPresenter Grid.RowSpan="2" 
+                                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                                </Grid>
+                                            </Border>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background" Value="#FF4D83E2"/>
+                                                <Setter Property="Foreground" Value="WhiteSmoke"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="V-Nr." DisplayMemberBinding="{Binding Path=ReferenceNumber}" Width="50"/>
+                            <GridViewColumn Header="Werkstück" DisplayMemberBinding="{Binding Path=Label}" Width="115"/>
+                            <GridViewColumn Header="Material" DisplayMemberBinding="{Binding Path=Name}" Width="115"/>
+                        </GridView>
+
+                    </ListView.View>
+                </ListView>
+                <TextBox x:Name="tb_raw" Height="23" Margin="59,5,10,0" TextWrapping="Wrap" Text="{Binding PolishedFilter, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
+                <Label Content="Suche:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <ListView Name="LV_Coated" Margin="10,36,10,10" DataContext="{Binding DataCoated, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Table}" SelectionMode="Single" MouseDoubleClick="MaterialListView_MouseDoubleClick">
+                    <ListView.Background>
+                        <LinearGradientBrush>
+                            <GradientStop  Offset="0" Color="#FFE8E8E8"/>
+                        </LinearGradientBrush>
+                    </ListView.Background>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="BorderBrush" Value="LightGray" />
+                            <Setter Property="BorderThickness" Value="0,0,0,1" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListViewItem">
+                                        <Border CornerRadius="2" SnapsToDevicePixels="True"
+                                        BorderThickness="{TemplateBinding     BorderThickness}" 
+                                        BorderBrush="{TemplateBinding BorderBrush}" 
+                                        Background="{TemplateBinding Background}">
+                                            <Border Name="InnerBorder" CornerRadius="0"   BorderThickness="1">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition MaxHeight="11" />
+                                                        <RowDefinition />
+                                                    </Grid.RowDefinitions>
+                                                    <Rectangle Name="UpperHighlight" Visibility="Collapsed" Fill="#75FFFFFF" />
+                                                    <GridViewRowPresenter Grid.RowSpan="2" 
+                                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                                </Grid>
+                                            </Border>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background" Value="#FF4D83E2"/>
+                                                <Setter Property="Foreground" Value="WhiteSmoke"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="V-Nr." DisplayMemberBinding="{Binding Path=ReferenceNumber}" Width="50"/>
+                            <GridViewColumn Header="Prozessnummer" DisplayMemberBinding="{Binding Path=ProcessNumber}" Width="100"/>
+                            <GridViewColumn Header="Beschichtings-ID" DisplayMemberBinding="{Binding Path=MachineProgramNumber}" Width="100"/>
+                            <GridViewColumn Header="Haftschicht" DisplayMemberBinding="{Binding ALayer}" Width="90"/>
+                            <GridViewColumn Header="Schutzschicht" DisplayMemberBinding="{Binding PLayer}" Width="90"/>
+                            <GridViewColumn Header="Werkstück" DisplayMemberBinding="{Binding Path=Label}" Width="90"/>
+                            <GridViewColumn Header="Material" DisplayMemberBinding="{Binding Path=Name}" Width="90"/>
+                            <GridViewColumn Header="Projekt" DisplayMemberBinding="{Binding Path=ProjectName}" Width="100"/>
+                            <GridViewColumn Header="Bearbeiter" DisplayMemberBinding="{Binding Path=Token}" Width="100"/>
+                            <GridViewColumn Header="Datum" DisplayMemberBinding="{Binding Path=Date, Converter={StaticResource dateConv}}" Width="130"/>
+                        </GridView>
+
+                    </ListView.View>
+                </ListView>
+                <TextBox x:Name="tb_polished" HorizontalAlignment="Left" Height="23" Margin="59,5,0,0" TextWrapping="Wrap" Text="{Binding CoatedFilter, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="220"/>
+                <ComboBox HorizontalAlignment="Left" Margin="284,5,0,0" ItemsSource="{Binding FilterCriteria}" SelectedItem="{Binding Criterium}" DisplayMemberPath="Name" VerticalAlignment="Top" Width="161" SelectedIndex="0">
+                </ComboBox>
+                <Label Content="Suche:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
+            </Grid>
+        </Grid>
+        <Grid Background="#FFB4B4B4">
+            <ToolBarTray Height="44" VerticalAlignment="Top" Background="#FFB4B4B4" Width="auto">
+                <ToolBar x:Name="tb_mainTool" Background="#FFB4B4B4" HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="451" Margin="0,0,-401,-31" ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded">
+                    <Button x:Name="mbt_addcoatingProcess" Height="30" Width="200" HorizontalAlignment="Right" ToolTip="Versuch durchführen" Margin="8,0,0,0" Click="mbt_addcoatingProcess_Click">
+                        <StackPanel Orientation="Horizontal" Height="30" Width="200">
+                            <Image Source="/OE110Prozessdatenbank;component/Icons/addCoatingProcess_16xLG.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Label Content="Beschichtungsprozess anlegen"/>
+                        </StackPanel>
+                    </Button>
+                </ToolBar>
+            </ToolBarTray>
+        </Grid>
+
+    </Grid>
+</UserControl>

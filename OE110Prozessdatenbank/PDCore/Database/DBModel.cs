@@ -30,7 +30,7 @@ namespace PDCore.Database
         public static string Table { get { return "Turning_Moore"; } }
         public static string ID { get { return "Turning_Moore_ID"; } }
         public static string UserID { get { return "User_ID"; } }
-        public static string Date { get { return "ProcessDate"; } }
+        public static string Date { get { return "Date"; } }
         public static string Radius { get { return "Radius"; } }
         public static string Feed { get { return "Feed"; } }
         public static string CuttingAngle { get { return "CuttingAngle"; } }
@@ -49,7 +49,7 @@ namespace PDCore.Database
         public static string ID { get { return "Grinding_Moore_ID"; } }
         public static string UserID { get { return "User_ID"; } }
         public static string Remark { get { return "Remark"; } }
-        public static string Date { get { return "ProcessDate"; } }
+        public static string Date { get { return "Date"; } }
         public static string ToolRadius { get { return "ToolRadius"; } }
         public static string TipRadius { get { return "TippRadius"; } }
         public static string GrindingDirection { get { return "GrindingDirection"; } }
@@ -68,7 +68,7 @@ namespace PDCore.Database
         public static string ProcessID { get { return "Grinding_PhoenixProcesses_ID"; } }
         public static string UserID { get { return "User_ID"; } }
         public static string Remark { get { return "Remark"; } }
-        public static string Date { get { return "ProcessDate"; } }
+        public static string Date { get { return "Date"; } }
     }
     public static class DBGrindingOther
     {
@@ -76,7 +76,7 @@ namespace PDCore.Database
         public static string ID { get { return "Grinding_Other_ID"; } }
         public static string UserID { get { return "User_ID"; } }
         public static string Remark { get { return "Remark"; } }
-        public static string Date { get { return "ProcessDate"; } }
+        public static string Date { get { return "Date"; } }
     }
     public static class DBWorkpieces
     {
@@ -205,6 +205,14 @@ namespace PDCore.Database
         public static string Remark { get { return "Remark"; } }
         public static string Date { get { return "Date"; } }
         public static string IsDecoating { get { return "IsDecoating"; } }
+
+    }
+
+    public static class DBCoatingLayers
+    {
+        public static string Table { get { return "Coating_Layers"; } }
+        public static string ID { get { return "Coating_Layer_ID"; } }
+        public static string Layer { get { return "Layer"; } }
 
     }
 

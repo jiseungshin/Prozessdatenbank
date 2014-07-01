@@ -92,6 +92,7 @@ namespace PDCore.Manager
          private List<Workpiece> m_coatedWorkpieces = new List<Workpiece>();
          private List<Material> m_materials = new List<Material>();
          private List<Glass> m_glasses = new List<Glass>();
+         
 
         public void update()
         {
@@ -105,6 +106,12 @@ namespace PDCore.Manager
             getGlasses();
             getCoatedWorkpieces();
         }
+
+        public void updateProjects()
+        { getProjects(); getIssues(); }
+
+        public void updateUser()
+        { getUser(); }
 
         private void getGlasses()
         {
@@ -130,7 +137,7 @@ namespace PDCore.Manager
             {
                 
                 Project _p = new Project() { ID = row.Field<int>(DBProjects.ID), Description = row.Field<string>(DBProjects.Name) };
-                _p.UserID = row.Field<int>(DBProjects.UserID);
+                _p.User = Users.Find(item => item.ID == row.Field<int>(DBProjects.UserID));
                 _p.Remark = row.Field<string>(DBProjects.Remark);
 
                 DataSet _dsIssue = _myCommunicator.getDataSet("SELECT * FROM " + DBIssues.Table + " WHERE " + DBIssues.ProjectID + "=" + _p.ID);
@@ -162,6 +169,8 @@ namespace PDCore.Manager
             }
 
         }
+
+       
 
         private void getUser()
         {
@@ -220,7 +229,7 @@ namespace PDCore.Manager
             m_worlpieces.Clear();
             Material mm;
             DataSet _ds = _myCommunicator.getDataSet("SELECT * FROM " + DBWorkpieces.Table +
-                                                        
+
                                                         //join materials
                                                         " LEFT JOIN " + DBMAterial.Table +
                                                         " On " + DBMAterial.Table + "." + DBMAterial.ID +
@@ -235,10 +244,11 @@ namespace PDCore.Manager
                     Label = row.Field<string>(DBWorkpieces.Label),
                     Material = mm,
                     BatchNumber = row.Field<string>(DBWorkpieces.BatchNumber),
-                    //PurchaseDate = row.Field<DateTime>(DBWorkpieces.PurchaseDate),
+                    PurchaseDate = row.Field<DateTime?>(DBWorkpieces.PurchaseDate),
                     Geometry = row.Field<string>(DBWorkpieces.Geometry),
                     isOneWay = row.Field<bool>(DBWorkpieces.isOneWay),
-                    KindOfProbe = row.Field<string>(DBWorkpieces.KindOfProbe)
+                    KindOfProbe = row.Field<string>(DBWorkpieces.KindOfProbe),
+                    Status = row.Field<string>(DBWorkpieces.Status)
                 });
             }
         }
@@ -269,26 +279,27 @@ namespace PDCore.Manager
         public List<Issue> Issues
         { get { return m_issues; } }
 
+       
         public Workpiece getWorkpiece(int WPID)
         {
             return m_worlpieces.Find(item => item.ID == WPID); 
         }
 
-        public Workpiece getWorkpieceByProcessID(int PID)
-        {
+        //public Workpiece getWorkpieceByProcessID(int PID)
+        //{
 
-            DataSet _ds = _myCommunicator.getDataSet("SELECT * FROM " + DBProcessReferenceRelation.Table +
+        //    DataSet _ds = _myCommunicator.getDataSet("SELECT * FROM " + DBProcessReferenceRelation.Table +
 
-                                                        //join References
-                                                        " LEFT JOIN " + DBProcessReferences.Table +
-                                                        " On " + DBProcessReferences.Table + "." + DBProcessReferences.RefNumber +
-                                                        "=" + DBProcessReferenceRelation.Table + "." + DBProcessReferenceRelation.RefNumber+
-                                                        " where " + DBProcessReferenceRelation.Table + "." + DBProcessReferenceRelation.PID + "=" + PID);
+        //                                                //join References
+        //                                                " LEFT JOIN " + DBProcessReferences.Table +
+        //                                                " On " + DBProcessReferences.Table + "." + DBProcessReferences.RefNumber +
+        //                                                "=" + DBProcessReferenceRelation.Table + "." + DBProcessReferenceRelation.RefNumber+
+        //                                                " where " + DBProcessReferenceRelation.Table + "." + DBProcessReferenceRelation.PID + "=" + PID);
 
-            int wp_ID = _ds.Tables[0].Rows[0].Field<int>(DBProcessReferences.WorkpiceID);
+        //    int wp_ID = _ds.Tables[0].Rows[0].Field<int>(DBProcessReferences.WorkpiceID);
 
-            return getWorkpiece(wp_ID);
-        }
+        //    return getWorkpiece(wp_ID);
+        //}
 
         public Workpiece getWorkpieceByReference(int RefNumber)
         {
@@ -329,7 +340,7 @@ namespace PDCore.Manager
                 _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.BatchNumber + " = " + wp.BatchNumber.ToDBObject() + " WHERE " + DBWorkpieces.ID + "=" + wp.ID);
                 _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.isOneWay + " = " + wp.isOneWay.ToDBObject() + " WHERE " + DBWorkpieces.ID + "=" + wp.ID);
                 _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.KindOfProbe + " = " + wp.KindOfProbe.ToDBObject() + " WHERE " + DBWorkpieces.ID + "=" + wp.ID);
-                _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.PurchaseDate + " = " + wp.PurchaseDate.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + " WHERE " + DBWorkpieces.ID + "=" + wp.ID);
+                _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.PurchaseDate + " = " + wp.PurchaseDate.ToDBObject() + " WHERE " + DBWorkpieces.ID + "=" + wp.ID);
             }
             else
             {
@@ -346,7 +357,59 @@ namespace PDCore.Manager
                                                                             wp.Geometry.ToDBObject() + "," +
                                                                             wp.isOneWay.ToDBObject() + "," +
                                                                             wp.KindOfProbe.ToDBObject() + "," +
-                                                                            wp.PurchaseDate.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + "," +
+                                                                            wp.PurchaseDate.ToDBObject() + "," +
+                                                                             wp.Material.ID.ToDBObject() + ",'raw')");
+
+
+
+
+            }
+
+            _myCommunicator.executeTransactedQueries(_queries);
+        }
+
+        public void saveWorkpiece(Workpiece wp, bool update, int projectID, int IssueID)
+        {
+
+            List<string> _queries = new List<string>();
+
+            
+
+            
+            if (update)
+            {
+                _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.Label + " = " + wp.Label.ToDBObject() + " WHERE " + DBWorkpieces.ID + "=" + wp.ID);
+                _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.MaterialID + " = " + wp.Material.ID.ToDBObject() + " WHERE " + DBWorkpieces.ID + "=" + wp.ID);
+                _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.Geometry + " = " + wp.Geometry.ToDBObject() + " WHERE " + DBWorkpieces.ID + "=" + wp.ID);
+                _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.BatchNumber + " = " + wp.BatchNumber.ToDBObject() + " WHERE " + DBWorkpieces.ID + "=" + wp.ID);
+                _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.isOneWay + " = " + wp.isOneWay.ToDBObject() + " WHERE " + DBWorkpieces.ID + "=" + wp.ID);
+                _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.KindOfProbe + " = " + wp.KindOfProbe.ToDBObject() + " WHERE " + DBWorkpieces.ID + "=" + wp.ID);
+                _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.PurchaseDate + " = " + wp.PurchaseDate.ToDBObject() + " WHERE " + DBWorkpieces.ID + "=" + wp.ID);
+            }
+            else
+            {
+
+                int _ref = ProcessManager.Instance.getNextRefNumber();
+
+                _queries.Add("INSERT INTO " + DBProcessReferences.Table + " (" + DBProcessReferences.RefNumber + "," + DBProcessReferences.WorkpiceID + "," + DBProcessReferences.ProjectID + "," + DBProcessReferences.IssueID + "," + DBProcessReferences.Status +
+                                ") VALUES (" + _ref + ", " + wp.ID + ", " + projectID.ToDBObject() + ", " + IssueID.ToDBObject() + ", 'raw')");
+                _queries.Add("INSERT INTO " + DBWorkpieceQuality.Table + " (" + DBProcessReferences.RefNumber + ") VALUES (" + _ref + ")");
+                _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.Status + " = 'INPROCESS' WHERE " + DBWorkpieces.ID + "=" + wp.ID);
+
+                _queries.Add("INSERT INTO " + DBWorkpieces.Table + " (" + DBWorkpieces.Label + "," +
+                                                                           DBWorkpieces.BatchNumber + "," +
+                                                                           DBWorkpieces.Geometry + "," +
+                                                                           DBWorkpieces.isOneWay + "," +
+                                                                           DBWorkpieces.KindOfProbe + "," +
+                                                                           DBWorkpieces.PurchaseDate + "," +
+                                                                           DBWorkpieces.MaterialID + "," +
+                                                                                     DBWorkpieces.Status + ") Values (" +
+                                                                            wp.Label.ToDBObject() + "," +
+                                                                            wp.BatchNumber.ToDBObject() + "," +
+                                                                            wp.Geometry.ToDBObject() + "," +
+                                                                            wp.isOneWay.ToDBObject() + "," +
+                                                                            wp.KindOfProbe.ToDBObject() + "," +
+                                                                            wp.PurchaseDate.ToDBObject() + "," +
                                                                              wp.Material.ID.ToDBObject() + ",'raw')");
 
 
@@ -407,7 +470,7 @@ namespace PDCore.Manager
                                                                            DBProjects.Started + "," +
                                                                                      DBProjects.Finished + ") Values (" +
                                                                             project.Description.ToDBObject() + "," +
-                                                                            project.UserID.ToDBObject() + "," +
+                                                                            project.User.ID.ToDBObject() + "," +
                                                                             project.Remark.ToDBObject() + "," +
                                                                             project.Started.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + "," +
                                                                              project.Finished.ToDBObject()+")");
@@ -417,7 +480,15 @@ namespace PDCore.Manager
 
             }
 
-            _myCommunicator.executeTransactedQueries(_queries);
+            bool success = _myCommunicator.executeTransactedQueries(_queries);
+            if (success && !update)
+            {
+                FileManager.Instance.createProjectDirectory(project);
+            }
+            if (success && update)
+            {
+                FileManager.Instance.updateProjectDirectory(project);
+            }
         }
 
         public void saveIssue(Issue issue, bool update)
@@ -445,7 +516,15 @@ namespace PDCore.Manager
 
             }
 
-            _myCommunicator.executeTransactedQueries(_queries);
+            bool success = _myCommunicator.executeTransactedQueries(_queries);
+            if (success && !update)
+            {
+                FileManager.Instance.createIssueDirectory(issue);
+            }
+            if (success && update)
+            {
+                FileManager.Instance.updateIssueDirectoryName(issue);
+            }
         }
 
         public void saveUser(User user, bool update)
@@ -536,7 +615,16 @@ namespace PDCore.Manager
         public List<Workpiece> CoatedWorkpieces
         { get { return m_coatedWorkpieces; } }
 
-        
+        public void ReleaseWorkpiece(Workpiece wp, bool cancelled)
+        {
+            List<string> _queries = new List<string>();
+
+            _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.Status + " = 'raw' WHERE " + DBWorkpieces.ID + "=" + wp.ID);
+            if (cancelled)
+                _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.Status + " = 'cancelled' WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
+
+            _myCommunicator.executeTransactedQueries(_queries);
+        }
 
 
     }

@@ -26,6 +26,7 @@ namespace OE110Prozessdatenbank.ViewModels
         public OProjectVM(int ID)
         {
             m_project = ObjectManager.Instance.Projects.Find(item => item.ID == ID);
+            m_project.OLDDescription = m_project.Description;
             m_update = true;
             save = new RelayCommand(Save, CanSave);
             Updater.Instance.newData += Instance_newData;
@@ -67,14 +68,15 @@ namespace OE110Prozessdatenbank.ViewModels
             {
                 try
                 {
-                    return ObjectManager.Instance.Users.Single(item => item.ID == m_project.UserID) as User;
+                    return ObjectManager.Instance.Users.Single(item => item.ID == m_project.User.ID) as User;
+                    //return m_project.User;
                 }
                 catch { return null; }
             }
 
             set
             {
-                m_project.UserID = value.ID;
+                m_project.User = value;
 
             }
         }
@@ -93,7 +95,7 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public bool CanSave()
         {
-            if (m_project.Description !="" && m_project.UserID!=-1)
+            if (m_project.Description !="" && m_project.User!=null)
                 return true;
             else
                 return false;
@@ -117,6 +119,7 @@ namespace OE110Prozessdatenbank.ViewModels
         public OIssueVM(Issue issue)
         {
             m_issue = issue;
+            m_issue.OLDDescription = issue.Description;
             m_update = true;
             save = new RelayCommand(Save, CanSave);
             m_update = true;

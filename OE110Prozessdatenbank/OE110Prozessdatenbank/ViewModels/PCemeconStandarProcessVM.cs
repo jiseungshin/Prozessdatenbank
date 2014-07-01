@@ -36,11 +36,11 @@ namespace OE110Prozessdatenbank.ViewModels
         public int ProgramNumber
         { get { return m_process.ProgramNumber; } set { m_process.ProgramNumber = value; } }
 
-        public string Adherent
-        { get { return m_process.AdherentLayer; } set { m_process.AdherentLayer = value; } }
+        public PCoatingCemeconProcess.Layer? Adherent
+        { get { return m_process.AdherentLayer.GetValueOrDefault(); } set { m_process.AdherentLayer = value; } }
 
-        public string Protective
-        { get { return m_process.ProtectiveLayer; } set { m_process.ProtectiveLayer = value; } }
+        public PCoatingCemeconProcess.Layer? Protective
+        { get { return m_process.ProtectiveLayer.GetValueOrDefault(); } set { m_process.ProtectiveLayer = value; } }
 
         public int? Thickness
         { get { return m_process.Thickness; } set { m_process.Thickness = value; } }
@@ -50,6 +50,9 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public bool isDecoating
         { get { return m_process.isDecoating; } set { m_process.isDecoating = value; } }
+
+        public ObservableCollection<PCoatingCemeconProcess.Layer> Layers
+        { get { return new ObservableCollection<PCoatingCemeconProcess.Layer>(ProcessManager.Instance.Layer); } }
 
          public RelayCommand SaveProcess { get; set; }
 
@@ -67,7 +70,7 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public bool CanSave()
         {
-            if (m_process.ProtectiveLayer !="" && m_process.AdherentLayer != "" && m_process.ProgramNumber !=-1)
+            if (m_process.ProtectiveLayer !=null && m_process.AdherentLayer != null && m_process.ProgramNumber !=-1)
                 return true;
             else
                 return false;

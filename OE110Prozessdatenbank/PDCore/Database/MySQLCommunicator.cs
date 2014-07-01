@@ -234,10 +234,11 @@ namespace PDCore.Database
 
         
 
-        public void executeTransactedQueries(List<string> queries)
+        public bool executeTransactedQueries(List<string> queries)
         {
             MySqlTransaction _mySqlTransaction = null;
             MySqlConnection m_mySqlConnection = null;
+            bool success = true;
 
             try
             {
@@ -271,6 +272,7 @@ namespace PDCore.Database
                 }
 
                 OnMessageThrown(MessageType.Error, ex);
+                success = false;
 
             }
             finally
@@ -278,8 +280,14 @@ namespace PDCore.Database
                 if (m_mySqlConnection != null)
                 {
                     m_mySqlConnection.Close();
+                    
                 }
             }
+
+            if (success)
+                return true;
+            else
+                return false;
         }
         
         protected void generateConnectionString()

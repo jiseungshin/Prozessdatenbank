@@ -9,34 +9,6 @@
         <local:DateConverter x:Key="dateConv"></local:DateConverter>
     </Window.Resources>
     <Grid>
-        <ComboBox x:Name="cb_user" ItemsSource="{Binding Users}" SelectedItem="{Binding User}" DisplayMemberPath="Description" Margin="166,97,10,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cb_project" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project}" DisplayMemberPath="Description" Margin="166,124,10,0" VerticalAlignment="Top"/>
-        <DatePicker SelectedDate="{Binding Date}" Margin="166,68,10,0" VerticalAlignment="Top"/>
-        <TextBox Height="23" Margin="166,208,10,0" TextWrapping="Wrap" Text="{Binding ToolRadius}" VerticalAlignment="Top"/>
-        <TextBox Height="23" Margin="166,236,10,0" TextWrapping="Wrap" Text="{Binding TippRadius}" VerticalAlignment="Top"/>
-        <TextBox Height="23" Margin="166,264,10,0" TextWrapping="Wrap" Text="{Binding GrindingDirection}" VerticalAlignment="Top"/>
-        <TextBox Height="23" Margin="166,292,10,0" TextWrapping="Wrap" Text="{Binding InFeed}" VerticalAlignment="Top"/>
-        <TextBox Height="23" Margin="166,320,10,0" TextWrapping="Wrap" Text="{Binding Feed}" VerticalAlignment="Top"/>
-        <TextBox Height="23" Margin="166,348,10,0" TextWrapping="Wrap" Text="{Binding ToolSpeed}" VerticalAlignment="Top"/>
-        <TextBox Height="23" Margin="166,379,10,0" TextWrapping="Wrap" Text="{Binding GrindingWheelSpeed}" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_remark" Height="69" Margin="166,411,10,0" TextWrapping="Wrap" Text="{Binding Remark}" VerticalAlignment="Top"/>
-        <TextBox Height="23" Margin="166,516,10,0" TextWrapping="Wrap" Text="{Binding RA}" VerticalAlignment="Top"/>
-        <TextBox Height="23" Margin="166,544,10,0" TextWrapping="Wrap" Text="{Binding PV}" VerticalAlignment="Top"/>
-        <Label Content="Bearbeiter *" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
-        <Label Content="Projekt *" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,124,0,0" VerticalAlignment="Top" Width="110"/>
-        <Label Content="Datum *" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Width="110"/>
-        <Label Content="Werkzeugradius" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top" Width="110"/>
-        <Label Content="Tippradius" HorizontalAlignment="Left" Margin="10,233,0,0" VerticalAlignment="Top" Width="110"/>
-        <Label Content="Schleifrichtung [EtC, CtE]" HorizontalAlignment="Left" Margin="10,261,0,0" VerticalAlignment="Top" Width="151"/>
-        <Label Content="Zustellung" HorizontalAlignment="Left" Margin="10,289,0,0" VerticalAlignment="Top" Width="110"/>
-        <Label Content="Vorschub" HorizontalAlignment="Left" Margin="10,317,0,0" VerticalAlignment="Top" Width="110"/>
-        <Label Content="Drehlzahl Werkstück" HorizontalAlignment="Left" Margin="10,345,0,0" VerticalAlignment="Top" Width="151"/>
-        <Label Content="Bemerkung" HorizontalAlignment="Left" Margin="10,411,0,0" VerticalAlignment="Top" Width="110"/>
-        <Label Content="Ra" HorizontalAlignment="Left" Margin="10,513,0,0" VerticalAlignment="Top" Width="110"/>
-        <Label Content="Pv" HorizontalAlignment="Left" Margin="10,541,0,0" VerticalAlignment="Top" Width="110"/>
-        <CheckBox Content="manuelle Nachbearbeitung" IsChecked="{Binding PostProduction}" HorizontalAlignment="Left" Margin="169,485,0,0" VerticalAlignment="Top" Width="263"/>
-        <Button x:Name="bt_save" Content="speichern" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Command="{Binding SaveProcess}" IsEnabled="{Binding SaveProcess.CanSave}" Click="bt_save_Click"/>
-        <Button x:Name="bt_cancel" Content="abbrechen" HorizontalAlignment="Right" Margin="0,0,92,10" VerticalAlignment="Bottom" Width="75" Click="bt_cancel_Click"/>
         <ComboBox x:Name="cb_process" ItemsSource="{Binding AvailableProcesses}" SelectedItem="{Binding SelectedProcess}" Margin="166,32,10,0" VerticalAlignment="Top">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -48,12 +20,45 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
+
+        <DatePicker SelectedDate="{Binding Date}" Margin="166,68,10,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cb_user" ItemsSource="{Binding Users}" SelectedItem="{Binding User}" DisplayMemberPath="Description" Margin="166,97,10,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cb_project" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project}" DisplayMemberPath="Description" Margin="166,124,10,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cb_Issue" ItemsSource="{Binding Issues, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Issue}" DisplayMemberPath="Description" Margin="166,150,10,0" VerticalAlignment="Top"/>
+
+        <TextBox Height="23" Margin="166,208,10,0" TextWrapping="Wrap" Text="{Binding ToolRadius}" VerticalAlignment="Top"  PreviewTextInput="TextBox_PreviewTextInput"/>
+        <TextBox Height="23" Margin="166,236,10,0" TextWrapping="Wrap" Text="{Binding TippRadius}" VerticalAlignment="Top" PreviewTextInput="TextBox_PreviewTextInput"/>
+        <TextBox Height="23" Margin="166,264,10,0" TextWrapping="Wrap" Text="{Binding GrindingDirection}" VerticalAlignment="Top"/>
+        <TextBox Height="23" Margin="166,292,10,0" TextWrapping="Wrap" Text="{Binding InFeed}" VerticalAlignment="Top"  PreviewTextInput="TextBox_PreviewTextInput"/>
+        <TextBox Height="23" Margin="166,320,10,0" TextWrapping="Wrap" Text="{Binding Feed}" VerticalAlignment="Top"  PreviewTextInput="TextBox_PreviewTextInput"/>
+        <TextBox Height="23" Margin="166,348,10,0" TextWrapping="Wrap" Text="{Binding ToolSpeed}" VerticalAlignment="Top"  PreviewTextInput="TextBox_PreviewTextInput"/>
+        <TextBox Height="23" Margin="166,379,10,0" TextWrapping="Wrap" Text="{Binding GrindingWheelSpeed}" VerticalAlignment="Top"  PreviewTextInput="TextBox_PreviewTextInput"/>
+        <TextBox x:Name="tb_remark" Height="69" Margin="166,411,10,0" TextWrapping="Wrap" Text="{Binding Remark}" VerticalAlignment="Top"/>
+        <CheckBox Content="manuelle Nachbearbeitung" IsChecked="{Binding PostProduction}" HorizontalAlignment="Left" Margin="169,485,0,0" VerticalAlignment="Top" Width="263"/>
+        <TextBox Height="23" Margin="166,516,10,0" TextWrapping="Wrap" Text="{Binding RA}" VerticalAlignment="Top" PreviewTextInput="TextBox_PreviewTextInput"/>
+        <TextBox Height="23" Margin="166,544,10,0" TextWrapping="Wrap" Text="{Binding PV}" VerticalAlignment="Top" PreviewTextInput="TextBox_PreviewTextInput"/>
+
+        
+        
+        <Label Content="Bearbeiter *" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
+        <Label Content="Projekt *" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,124,0,0" VerticalAlignment="Top" Width="110"/>
+        <Label Content="Datum *" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Width="110"/>
+        <Label Content="Werkzeugradius *" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
+        <Label Content="Tippradius *" HorizontalAlignment="Left" Margin="10,233,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
+        <Label Content="Schleifrichtung * [EtC, CtE]" HorizontalAlignment="Left" Margin="10,261,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
+        <Label Content="Zustellung *" HorizontalAlignment="Left" Margin="10,289,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
+        <Label Content="Vorschub *" HorizontalAlignment="Left" Margin="10,317,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
+        <Label Content="Drehlzahl Werkstück *" HorizontalAlignment="Left" Margin="10,345,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
+        <Label Content="Bemerkung" HorizontalAlignment="Left" Margin="10,411,0,0" VerticalAlignment="Top" Width="110"/>
+        <Label Content="Ra" HorizontalAlignment="Left" Margin="10,513,0,0" VerticalAlignment="Top" Width="110"/>
+        <Label Content="Pv" HorizontalAlignment="Left" Margin="10,541,0,0" VerticalAlignment="Top" Width="110"/>
         <Label Content="Daten übernehmen von" HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" Width="151"/>
         <Label Content="Werkstück:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="79"/>
         <Label x:Name="lb_workpiece" Content="{Binding WorkpieceLabel}" HorizontalAlignment="Left" Margin="163,0,0,0" VerticalAlignment="Top" Width="79"/>
-        <Label Content="Drehlzahl Schleifscheibe" HorizontalAlignment="Left" Margin="10,376,0,0" VerticalAlignment="Top" Width="151"/>
-        <ComboBox x:Name="cb_project_Copy" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project}" DisplayMemberPath="Description" Margin="166,150,10,0" VerticalAlignment="Top"/>
-        <Label Content="Fragestellung *" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top" Width="110"/>
-
+        <Label Content="Drehlzahl Schleifscheibe *" HorizontalAlignment="Left" Margin="10,376,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
+        <Label Content="Fragestellung /&#xD;&#xA;Versuchsreihe *" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top" Width="110"/>
+       
+        <Button x:Name="bt_save" Content="speichern" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Command="{Binding SaveProcess}" IsEnabled="{Binding SaveProcess.CanSave}" Click="bt_save_Click"/>
+        <Button x:Name="bt_cancel" Content="abbrechen" HorizontalAlignment="Right" Margin="0,0,92,10" VerticalAlignment="Bottom" Width="75" Click="bt_cancel_Click"/>
     </Grid>
 </Window>

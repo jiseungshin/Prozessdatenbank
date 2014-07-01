@@ -1,0 +1,75 @@
+﻿<Window x:Class="OE110Prozessdatenbank.ObjectWindows.WorkpieceAdministration"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:OE110Prozessdatenbank"
+        Title="Werkstückverwaltung" Height="483" Width="640.134" WindowStartupLocation="CenterScreen" Icon="/OE110Prozessdatenbank;component/Icons/WorkpieceAdmin_16xLG.png">
+    <Window.Resources>
+        <local:StatusConverter x:Key="StatusConv"></local:StatusConverter>
+    </Window.Resources>
+    <Grid>
+        
+        <ListView x:Name="LV_Workpiece" Margin="10,49,10,10" ItemsSource="{Binding Workpieces, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" MouseDoubleClick="LV_Workpiece_DoubleClick">
+            <ListView.Background>
+                <LinearGradientBrush>
+                    <GradientStop  Offset="0" Color="#FFE8E8E8"/>
+                </LinearGradientBrush>
+            </ListView.Background>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="BorderBrush" Value="LightGray" />
+                    <Setter Property="BorderThickness" Value="0,0,0,1" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                <Border CornerRadius="2" SnapsToDevicePixels="True"
+    								BorderThickness="{TemplateBinding BorderThickness}" 
+    								BorderBrush="{TemplateBinding BorderBrush}" 
+    								Background="{TemplateBinding Background}">
+                                    <Border x:Name="InnerBorder" CornerRadius="0"   BorderThickness="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition MaxHeight="11" />
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <Rectangle x:Name="UpperHighlight" Visibility="Collapsed" Fill="#75FFFFFF" />
+                                            <GridViewRowPresenter Grid.RowSpan="2" 
+    											VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+    											SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                        </Grid>
+                                    </Border>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="#FF4D83E2"/>
+                                        <Setter Property="Foreground" Value="WhiteSmoke"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Beschriftung" DisplayMemberBinding="{Binding Label}" Width="120"/>
+                    <GridViewColumn Header="Material" DisplayMemberBinding="{Binding Material.Name}" Width="120"/>
+                    <GridViewColumn Header="Art der Probe" DisplayMemberBinding="{Binding KindOfProbe}" Width="120"/>
+                    <GridViewColumn Header="Geometrie" DisplayMemberBinding="{Binding Geometry}" Width="120"/>
+                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status, Converter={StaticResource StatusConv}}" Width="120"/>
+                </GridView>
+
+            </ListView.View>
+        </ListView>
+        <ToolBarTray Height="44" VerticalAlignment="Top" Background="#FFB4B4B4" Width="auto">
+            <ToolBar x:Name="tb_mainTool" Background="#FFB4B4B4" HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="451" Margin="0,0,-401,-31" ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded">
+                <Button x:Name="mbt_addWorkpiece" Height="30" Width="130" HorizontalAlignment="Right" Margin="8,0,0,0" Click="mbt_addWorkpiece_Click">
+                    <StackPanel Orientation="Horizontal" Height="30" Width="130">
+                        <Image Source="/OE110Prozessdatenbank;component/Icons/puzzle_16xLG.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Label Content="Werkstück anlegen"/>
+                    </StackPanel>
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+
+    </Grid>
+</Window>

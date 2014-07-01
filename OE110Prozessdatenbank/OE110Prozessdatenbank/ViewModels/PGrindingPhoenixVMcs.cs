@@ -18,6 +18,7 @@ namespace OE110Prozessdatenbank.ViewModels
     {
         private PGrindingPhoenix m_process;
         private bool m_update = false;
+        private ObservableCollection<Issue> m_issues = new ObservableCollection<Issue>();
 
         public PGrindingPhoenixVMcs(int RefID, bool update)
         {
@@ -37,7 +38,10 @@ namespace OE110Prozessdatenbank.ViewModels
             else
             {
                 m_process = ProcessManager.Instance.getProcess(RefID, 3) as PGrindingPhoenix;             
-            }           
+            }
+
+            m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == m_process.ProjectID));
+            NotifyPropertyChanged("Issues");
             
             
         }
@@ -119,14 +123,40 @@ namespace OE110Prozessdatenbank.ViewModels
                 {
                     return ObjectManager.Instance.Projects.Single(item => item.ID == m_process.ProjectID) as Project;
                 }
-                catch {return null; }
+                catch { return null; }
             }
 
             set
             {
-                    m_process.ProjectID = value.ID;
+                m_process.ProjectID = value.ID;
+                m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == m_process.ProjectID));
+                NotifyPropertyChanged("Issues");
             }
         }
+
+        public Issue Issue
+        {
+            get
+            {
+                try
+                {
+                    return ObjectManager.Instance.Issues.Single(item => item.ID == m_process.IssueID) as Issue;
+                }
+                catch { return null; }
+            }
+
+            set
+            {
+                try
+                {
+                    m_process.IssueID = value.ID;
+                }
+                catch { }
+            }
+        }
+
+        public ObservableCollection<Issue> Issues
+        { get { return m_issues; } }
 
         public PGrindingPhoenixProcess Process
         {
@@ -160,7 +190,7 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public bool CanSave()
         {
-            if (m_process.UserID != -1 && m_process.ProjectID != -1 && m_process.ProcessID != -1)
+            if (m_process.UserID != -1 && m_process.ProjectID != -1 && m_process.IssueID != -1 && m_process.ProcessID != -1)
                 return true;
             else
                 return false;

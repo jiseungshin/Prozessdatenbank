@@ -11,7 +11,6 @@ namespace PDCore.BusinessObjects
         public Workpiece()
         {
             Material = new Material();
-            PurchaseDate = DateTime.Now;
             Quality = new WorkpieceQuality();
             Label = "";
             
@@ -21,10 +20,11 @@ namespace PDCore.BusinessObjects
         public string Geometry { get; set; }
         public string KindOfProbe { get; set; }
         public string BatchNumber { get; set; }
-        public DateTime PurchaseDate { get; set; }
+        public DateTime? PurchaseDate { get; set; }
         public bool isOneWay { get; set; }
         public int CurrentRefereneNumber { get; set; }
         public BusinessObjects.WorkpieceQuality Quality { get; set; }
+        public string Status { get; set; }
 
         public Workpiece clone()
         {

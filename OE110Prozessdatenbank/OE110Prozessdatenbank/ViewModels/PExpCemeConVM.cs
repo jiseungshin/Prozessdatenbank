@@ -20,11 +20,14 @@ namespace OE110Prozessdatenbank.ViewModels
         private bool m_update = false;
         public PExpCemeConVM(int ID, bool update)
         {
+            ObjectManager.Instance.update();
             m_update = update;
             //update
             if (update)
             {
                 m_process = ProcessManager.Instance.getProcess(ID, 8) as PExpCemeCon;
+                WorkpieceQualityControl = new Controls.CQuality(m_process.Workpieces[0]);
+                
             }
 
             //new Process
@@ -35,11 +38,13 @@ namespace OE110Prozessdatenbank.ViewModels
                 m_process.IssueID = ObjectManager.Instance.getIssueID(ID);
                 m_process.Workpieces.Add(ObjectManager.Instance.getWorkpieceByReference(ID));
 
+                WorkpieceQualityControl = new Controls.CQuality(m_process.Workpieces[0]);
+
                 //set User field if user is logged in
                 if (UserManager.CurrentUser != null)
                     m_process.UserID = UserManager.CurrentUser.ID;
             }
-
+            ProcessQualityControl = new Controls.CProcessQuality(m_process);
             //NotifyPropertyChanged("Project");
             SaveProcess = new RelayCommand(Save, CanSave);
         }
@@ -143,6 +148,11 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public double? Pressure
         { get { return m_process.Pressure; } set { m_process.Pressure = value; } }
+
+
+        public Controls.CQuality WorkpieceQualityControl { get; set; }
+        public Controls.CProcessQuality ProcessQualityControl { get; set; }
+
 
         public RelayCommand SaveProcess { get; set; }
 

@@ -56,6 +56,7 @@
     <Compile Include="BusinessObjects\Reference.cs" />
     <Compile Include="BusinessObjects\User.cs" />
     <Compile Include="BusinessObjects\Workpiece.cs" />
+    <Compile Include="BusinessObjects\WorkpieceHistory.cs" />
     <Compile Include="Database\Communicator.cs" />
     <Compile Include="Database\DBModel.cs" />
     <Compile Include="Database\MySQLCommunicator.cs" />

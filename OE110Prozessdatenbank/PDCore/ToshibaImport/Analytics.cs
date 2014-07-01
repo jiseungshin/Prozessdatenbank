@@ -42,7 +42,7 @@ namespace PDCore.ToshibaImport
                         process.MachinaData.Gv_lower_quali = result.TRateLowerQuality;
                         process.MachinaData.Gv_upper_quali = result.TRateUpperQuality;
 
-                        process.InputData.Gv = (((result.TUpper_Last + result.TLower_Last) / 2) - ((result.TUpper_First + result.TLower_First) / 2)) / result.Duration;
+                        process.InputData.Gv = Math.Round((((result.TUpper_Last + result.TLower_Last) / 2) - ((result.TUpper_First + result.TLower_First) / 2)) / result.Duration,2);
                         process.InputData.Tv = ((result.TUpper_Last + result.TLower_Last) / 2);
                         process.InputData.Z1 = result.Posmax;
 
@@ -61,7 +61,7 @@ namespace PDCore.ToshibaImport
                         process.MachinaData.G1_lower_quali = result.TRateLowerQuality;
                         process.MachinaData.G1_upper_quali = result.TRateUpperQuality;
 
-                        process.InputData.G1 = (((result.TUpper_Last + result.TLower_Last) / 2) - ((result.TUpper_First + result.TLower_First) / 2)) / result.Duration;
+                        process.InputData.G1 =  Math.Round((((result.TUpper_Last + result.TLower_Last) / 2) - ((result.TUpper_First + result.TLower_First) / 2)) / result.Duration,2);
                         process.InputData.Tvu = ((result.TUpper_First + result.TLower_First) / 2);
                         process.InputData.T1u = ((result.TUpper_Last + result.TLower_Last) / 2);
 
@@ -108,7 +108,7 @@ namespace PDCore.ToshibaImport
                         process.MachinaData.T2_lower = result.TChangeLower;
                         process.MachinaData.T2_upper = result.TChangeUpper;
 
-                        process.InputData.G2 = (((result.TUpper_Last + result.TLower_Last) / 2) - ((result.TUpper_First + result.TLower_First) / 2)) / result.Duration;
+                        process.InputData.G2 = Math.Round((((result.TUpper_Last + result.TLower_Last) / 2) - ((result.TUpper_First + result.TLower_First) / 2)) / result.Duration,2);
                         process.InputData.T2 = (result.TChangeLower + result.TChangeUpper) / 2;
                         process.InputData.P2 = Math.Round(result.PAverage, PressRound);
 

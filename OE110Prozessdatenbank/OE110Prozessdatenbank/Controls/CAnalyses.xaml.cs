@@ -41,6 +41,8 @@ namespace OE110Prozessdatenbank.Controls
 
         private void bt_openExplorer_Click(object sender, RoutedEventArgs e)
         {
+
+            string test = (sender as Button).Uid;
             Process.Start("explorer.exe",(sender as Button).Uid);
         }
 

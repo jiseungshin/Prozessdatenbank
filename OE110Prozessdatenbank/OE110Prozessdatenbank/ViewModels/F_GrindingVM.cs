@@ -94,13 +94,13 @@ namespace OE110Prozessdatenbank.ViewModels
             {
                 switch (Machine.ID)
                 {
-                    case 1:
+                    case 11:
                         return ProcessManager.Instance.getData(Queries.QueryTurningMoore + m_PolshedFilter);
-                    case 2:
+                    case 12:
                         return ProcessManager.Instance.getData(Queries.QueryGrindingMoore + m_PolshedFilter);
-                    case 3:
+                    case 13:
                         return ProcessManager.Instance.getData(Queries.QueryGrindingPhoenix + m_PolshedFilter);
-                    case 4:
+                    case 14:
                         return ProcessManager.Instance.getData(Queries.QueryGrindingOther + m_PolshedFilter);
 
                 }

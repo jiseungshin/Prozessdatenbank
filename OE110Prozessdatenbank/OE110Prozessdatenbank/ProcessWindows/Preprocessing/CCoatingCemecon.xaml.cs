@@ -40,5 +40,10 @@ namespace OE110Prozessdatenbank.ProcessWindows
         {
             Window.GetWindow(this).Close();
         }
+
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Input.IntegerRegex.IsMatch((sender as TextBox).Text + e.Text);
+        }
     }
 }

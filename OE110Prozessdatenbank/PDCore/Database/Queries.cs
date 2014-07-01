@@ -226,7 +226,17 @@ namespace PDCore.Database
         {
             get
             {
-                return "SELECT * FROM " + DBCoatingCemecon.Table +
+                return "SELECT "+DBCoatingCemecon.Table+".*,"+ 
+                                DBProcessReferenceRelation.Table+".*,"+
+                                DBProcessReferences.Table+".*,"+ 
+                                DBCoatingCemeconProcess.Table+".*,"+ 
+                                DBWorkpieces.Table+".*,"+ 
+                                DBMAterial.Table+".*,"+ 
+                                DBUser.Table+".*,"+ 
+                                DBProjects.Table+".*,"+ 
+                                DBIssues.Table+".*, al."+DBCoatingLayers.Layer+" AS ALayer, pl."+DBCoatingLayers.Layer+" AS PLayer " +
+                               
+                                            "FROM " + DBCoatingCemecon.Table +
 
                                           //join ReferenceRelations
                                           " LEFT JOIN " + DBProcessReferenceRelation.Table +
@@ -242,6 +252,15 @@ namespace PDCore.Database
                                           " LEFT JOIN " + DBCoatingCemeconProcess.Table +
                                           " On " + DBCoatingCemeconProcess.Table + "." + DBCoatingCemeconProcess.ID +
                                           "=" + DBCoatingCemecon.Table + "." + DBCoatingCemecon.CoatingProcessID +
+                                            
+                                          //join Layers
+                                          " LEFT JOIN " + DBCoatingLayers.Table + " AS al " +
+                                          " On " + DBCoatingCemeconProcess.Table + "." + DBCoatingCemeconProcess.AdherentLayer +
+                                          "=al." + DBCoatingLayers.ID +
+
+                                          " LEFT JOIN " + DBCoatingLayers.Table + " AS pl " +
+                                          " On " + DBCoatingCemeconProcess.Table + "." + DBCoatingCemeconProcess.ProtectiveLayer +
+                                          "=pl." + DBCoatingLayers.ID +
 
                                           //join Workpiece
                                           " LEFT JOIN " + DBWorkpieces.Table +
@@ -269,6 +288,52 @@ namespace PDCore.Database
                                           "=" + DBProcessReferences.Table + "." + DBProcessReferences.IssueID;
 
 
+                //return "SELECT * FROM " + DBCoatingCemecon.Table +
+
+                //                          //join ReferenceRelations
+                //                          " LEFT JOIN " + DBProcessReferenceRelation.Table +
+                //                          " On " + DBProcessReferenceRelation.Table + "." + DBProcessReferenceRelation.PID +
+                //                          "=" + DBCoatingCemecon.Table + "." + DBCoatingCemecon.ID +
+
+                //                          //join References
+                //                          " LEFT JOIN " + DBProcessReferences.Table +
+                //                          " On " + DBProcessReferences.Table + "." + DBProcessReferences.RefNumber +
+                //                          "=" + DBProcessReferenceRelation.Table + "." + DBProcessReferenceRelation.RefNumber +
+
+                //                          //join Standardprocesses
+                //                          " LEFT JOIN " + DBCoatingCemeconProcess.Table +
+                //                          " On " + DBCoatingCemeconProcess.Table + "." + DBCoatingCemeconProcess.ID +
+                //                          "=" + DBCoatingCemecon.Table + "." + DBCoatingCemecon.CoatingProcessID +
+                                            
+                //                          //join Layers
+                //                          " LEFT JOIN " + DBCoatingLayers.Table +
+                //                          " On " + DBCoatingLayers.Table + "." + DBCoatingLayers.ID +
+                //                          "=" + DBCoatingCemeconProcess.Table + "." + DBCoatingCemeconProcess. +
+
+                //                          //join Workpiece
+                //                          " LEFT JOIN " + DBWorkpieces.Table +
+                //                          " On " + DBWorkpieces.Table + "." + DBWorkpieces.ID +
+                //                          "=" + DBProcessReferences.Table + "." + DBProcessReferences.WorkpiceID +
+
+                //                           //join Material
+                //                          " LEFT JOIN " + DBMAterial.Table +
+                //                          " On " + DBMAterial.Table + "." + DBMAterial.ID +
+                //                          "=" + DBWorkpieces.Table + "." + DBWorkpieces.MaterialID +
+
+                //                           //join User
+                //                          " LEFT JOIN " + DBUser.Table +
+                //                          " On " + DBUser.Table + "." + DBUser.ID +
+                //                          "=" + DBCoatingCemecon.Table + "." + DBCoatingCemecon.UserID +
+
+                //                          //join project
+                //                          " LEFT JOIN " + DBProjects.Table +
+                //                          " On " + DBProjects.Table + "." + DBProjects.ID +
+                //                          "=" + DBProcessReferences.Table + "." + DBProcessReferences.ProjectID +
+
+                //                          //join issues
+                //                          " LEFT JOIN " + DBIssues.Table +
+                //                          " On " + DBIssues.Table + "." + DBIssues.ID +
+                //                          "=" + DBProcessReferences.Table + "." + DBProcessReferences.IssueID;
             }
         }
 
@@ -334,6 +399,54 @@ namespace PDCore.Database
                                               " On " + DBIssues.Table + "." + DBIssues.ID +
                                               "=" + DBProcessReferences.Table + "." + DBProcessReferences.IssueID ;//+
                                               //" WHERE " + DBProcessReferences.Table + "." + DBProcessReferences.Status + "='processed'";
+            }
+        }
+        public static string QueryProcessedCemeCon
+        {
+            get
+            {
+                return "SELECT * FROM " + DBExpCemeCon.Table +
+
+                                              //join ReferenceRelations
+                                              " LEFT JOIN " + DBProcessReferenceRelation.Table +
+                                              " On " + DBProcessReferenceRelation.Table + "." + DBProcessReferenceRelation.PID +
+                                              "=" + DBExpCemeCon.Table + "." + DBExpCemeCon.ID +
+
+                                              //join References
+                                              " LEFT JOIN " + DBProcessReferences.Table +
+                                              " On " + DBProcessReferences.Table + "." + DBProcessReferences.RefNumber +
+                                              "=" + DBProcessReferenceRelation.Table + "." + DBProcessReferenceRelation.RefNumber +
+
+                                              //join Workpiece
+                                              " LEFT JOIN " + DBWorkpieces.Table +
+                                              " On " + DBWorkpieces.Table + "." + DBWorkpieces.ID +
+                                              "=" + DBProcessReferences.Table + "." + DBProcessReferences.WorkpiceID +
+
+                                               //join Material
+                                              " LEFT JOIN " + DBMAterial.Table +
+                                              " On " + DBMAterial.Table + "." + DBMAterial.ID +
+                                              "=" + DBWorkpieces.Table + "." + DBWorkpieces.MaterialID +
+
+                                               //join Glasses
+                                              " LEFT JOIN " + DBGlasses.Table +
+                                              " On " + DBGlasses.Table + "." + DBGlasses.ID +
+                                              "=" + DBExpCemeCon.Table + "." + DBExpCemeCon.GlassID +
+
+                                               //join User
+                                              " LEFT JOIN " + DBUser.Table +
+                                              " On " + DBUser.Table + "." + DBUser.ID +
+                                              "=" + DBExpCemeCon.Table + "." + DBExpCemeCon.UserID +
+
+                                              //join project
+                                              " LEFT JOIN " + DBProjects.Table +
+                                              " On " + DBProjects.Table + "." + DBProjects.ID +
+                                              "=" + DBProcessReferences.Table + "." + DBProcessReferences.ProjectID +
+
+                                              //join issues
+                                              " LEFT JOIN " + DBIssues.Table +
+                                              " On " + DBIssues.Table + "." + DBIssues.ID +
+                                              "=" + DBProcessReferences.Table + "." + DBProcessReferences.IssueID;//+
+                //" WHERE " + DBProcessReferences.Table + "." + DBProcessReferences.Status + "='processed'";
             }
         }
         public static string QueryProcessedTestStation

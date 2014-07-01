@@ -14,21 +14,23 @@ namespace PDCore.BusinessObjects
             m_issues = new List<Issue>();
             Started = DateTime.Now;
             Finished = null;
-            UserID = -1;
+            User = null;
             Description = "";
         }
         public string Description { get; set; }
+        public string OLDDescription { get; set; }
         public DateTime Started { get; set; }
         public DateTime? Finished { get; set; }
         public List<Issue> Issues { get { return m_issues; } set { m_issues = value;} }
         public string Remark { get; set; }
-        public int UserID { get; set; }
+        public User User { get; set; }
         
     }
 
     public class Issue : BusinessObject
     {
         public string Description { get; set; }
+        public string OLDDescription { get; set; }
         public int ProjectID { get; set; }
         public string Remark { get; set; }
         public DateTime Started { get; set; }

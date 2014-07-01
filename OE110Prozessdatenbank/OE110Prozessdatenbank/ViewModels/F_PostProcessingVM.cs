@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Data;
 using PDCore.Manager;
 using PDCore.Database;
+using System.Drawing;
+using System.Windows.Media.Imaging;
 
 namespace OE110Prozessdatenbank.ViewModels
 {
@@ -15,7 +17,11 @@ namespace OE110Prozessdatenbank.ViewModels
         private string m_processedConstraint = "ProcessReferences.Status='processed'";
         private string m_AnalysedCostraint = "ProcessReferences.Status='analysed'";
         private string m_DecoatedConstraint = "ProcessReferences.Status='decoated'";
-        private string m_FullConstraint = " WHERE ProcessReferences.Status='processed' OR ProcessReferences.Status='analysed' OR ProcessReferences.Status='decoated'";
+        private string m_FullConstraint = " WHERE ProcessReferences.Status='processed' "+
+                                            "OR ProcessReferences.Status='analysed' "+
+                                            "OR ProcessReferences.Status='terminated' " +
+                                            "OR ProcessReferences.Status='cancelled' " +
+                                            "OR ProcessReferences.Status='decoated'" ;
 
         private bool m_p = true;
         private bool m_a = true;
@@ -31,9 +37,41 @@ namespace OE110Prozessdatenbank.ViewModels
             NotifyPropertyChanged("Data");
         }
 
-        public DataSet Data
+        public DataTable Data
         {
-            get { return ProcessManager.Instance.getData(Queries.QueryPostProcessing + m_FullConstraint); }
+            get
+            {
+                DataSet _ds = ProcessManager.Instance.getData(Queries.QueryPostProcessing + m_FullConstraint);
+                if (_ds.Tables[0].Rows.Count > 0)
+                {
+                    _ds.Tables[0].Columns.Add("analysed", typeof(bool));
+                    _ds.Tables[0].Columns.Add("decoated", typeof(bool));
+                    _ds.Tables[0].Columns.Add("terminated", typeof(bool));
+
+                    foreach (DataRow dr in _ds.Tables[0].Rows)
+                    {
+
+                        if (ProcessManager.Instance.getCountOf(DBAnalyses.Table, DBAnalyses.RefNumber, dr.Field<int>(DBProcessReferences.RefNumber)) > 0)
+                            dr["analysed"] = true;
+                        else
+                            dr["analysed"] = false;
+
+                        if (ProcessManager.Instance.getCountOf(DBProcessReferenceRelation.Table, DBProcessReferenceRelation.RefNumber + " = " + dr.Field<int>(DBProcessReferences.RefNumber) + " AND Machine_ID=51") > 0)
+                            dr["decoated"] = true;
+                        else
+                            dr["decoated"] = false;
+
+                        if (dr.Field<string>(DBProcessReferences.Conclusion) != null)
+                            dr["terminated"] = true;
+                        else
+                            dr["terminated"] = false;
+                    }
+                }
+
+
+
+                return _ds.Tables[0];
+            }
         }
 
         public bool Processed
@@ -114,11 +152,22 @@ namespace OE110Prozessdatenbank.ViewModels
             m_FullConstraint += ")";
 
             if (m_processedConstraint == "" && m_AnalysedCostraint == "" && m_DecoatedConstraint == "")
-                m_FullConstraint = "";
+                m_FullConstraint = " WHERE ProcessReferences.ReferenceNumber=-1";
 
             NotifyPropertyChanged("Data");
 
         }
+
+        //public bool Image
+        //{
+        //    get
+        //    {
+        //        return new BitmapImage(new Uri(@"pack://application:,,,/Icons/process_16xLG.png", UriKind.RelativeOrAbsolute));
+        //    }
+        //}
+
+        //public String ImagePath
+        //{ get { return "/OE110Prozessdatenbank;component/Icons/GotoNextRow_289.png"; } }
     }
     
 }

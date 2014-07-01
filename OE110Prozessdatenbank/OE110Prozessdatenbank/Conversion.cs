@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Globalization;
+using System.Windows.Media.Imaging;
 
 namespace OE110Prozessdatenbank
 {
@@ -39,6 +40,26 @@ namespace OE110Prozessdatenbank
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return value == null ? "--" : value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value;
+        }
+    }
+
+    public class BoolToImage : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if ((bool)value ==true)
+            {
+                return new BitmapImage(new Uri(@"pack://application:,,,/Icons/Status_ok_16xMD.png", UriKind.RelativeOrAbsolute));
+            }
+            else
+                return new BitmapImage(new Uri(@"pack://application:,,,/Icons/Status_Blocked_16xMD.png", UriKind.RelativeOrAbsolute));
+
+            //return value == null ? "--" : value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -110,13 +131,23 @@ namespace OE110Prozessdatenbank
             string _status = value.ToString();
 
             switch (_status)
-            { 
+            {
+                case "polished":
+                    return "vorbereitet";
+                case "raw":
+                    return "unbearbeitet";
                 case "processed":
                     return "Versuch durchgeführt";
                 case "analysed":
                     return "Analysiert";
                 case "decoated":
                     return "Decoated";
+                case "terminated":
+                    return "beendet";
+                case "cancelled":
+                    return "abgebrochen";
+                case "INPROCESS":
+                    return "im Durchlauf";
                 default:
                     return value.ToString();
             }
@@ -126,6 +157,42 @@ namespace OE110Prozessdatenbank
         {
             return "";
         }
+    }
+
+    public class AnalysisConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string _analysis = value.ToString();
+
+            switch (_analysis)
+            {
+                case "REM":
+                    return "REM";
+                case "XPS":
+                    return "XPS";
+                case "WI":
+                    return "Weißlicht";
+                case "LIMI":
+                    return "Lichtmikroskop";
+                case "XRD":
+                    return "XRD";
+                case "EBSD":
+                    return "EBSD";
+                case "PROF":
+                    return "Profilometer";
+                case "PHOTO":
+                    return "im Fotodoku";
+                default:
+                    return value.ToString();
+            }
+        }
+
+            public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return "";
+        }
+        
     }
 
 

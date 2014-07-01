@@ -35,12 +35,7 @@ namespace OE110Prozessdatenbank.ProcessWindows
 
         private void bt_save_Click(object sender, RoutedEventArgs e)
         {
-            Window.GetWindow(this).Close();
-        }
-
-        private void bt_cancel_Click(object sender, RoutedEventArgs e)
-        {
-            Window.GetWindow(this).Close();
+            this.Close();
         }
 
         private void lb_workpiece_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -49,6 +44,16 @@ namespace OE110Prozessdatenbank.ProcessWindows
             tt.g_content.IsEnabled = false;
             tt.Title = m_vm.Workpiece.Label;
             tt.ShowDialog();
+        }
+
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Input.DecimalRegex.IsMatch((sender as TextBox).Text + e.Text);
+        }
+
+        private void bt_cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
