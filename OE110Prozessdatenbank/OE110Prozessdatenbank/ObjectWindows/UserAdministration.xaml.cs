@@ -15,7 +15,7 @@ using PDCore.BusinessObjects;
 using PDCore.Manager;
 using System.Collections.ObjectModel;
 
-namespace OE110Prozessdatenbank.Controls
+namespace OE110Prozessdatenbank.ObjectWindows
 {
     /// <summary>
     /// Interaktionslogik für UserAdministration.xaml
@@ -32,13 +32,13 @@ namespace OE110Prozessdatenbank.Controls
         {
             if ((sender as ListView).SelectedIndex != -1)
             {
-                new Controls.AddUser(((sender as ListView).SelectedItem as User).ID).ShowDialog();
+                new AddUser(((sender as ListView).SelectedItem as User).ID).ShowDialog();
             }
         }
 
         private void bt_Add_Click(object sender, RoutedEventArgs e)
         {
-            new Controls.AddUser().ShowDialog();
+            new AddUser().ShowDialog();
         }
     }
 

@@ -25,7 +25,7 @@ namespace OE110Prozessdatenbank.ViewModels
             //update
             if (update)
             {
-                m_process = ProcessManager.Instance.getProcess(ID, 8) as PExpCemeCon;
+                m_process = ProcessManager.Instance.getProcess(ID, 33) as PExpCemeCon;
                 WorkpieceQualityControl = new Controls.CQuality(m_process.Workpieces[0]);
                 
             }

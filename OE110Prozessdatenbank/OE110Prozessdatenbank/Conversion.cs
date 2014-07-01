@@ -138,6 +138,8 @@ namespace OE110Prozessdatenbank
                     return "unbearbeitet";
                 case "processed":
                     return "Versuch durchgeführt";
+                case "coated":
+                    return "Beschichtet";
                 case "analysed":
                     return "Analysiert";
                 case "decoated":

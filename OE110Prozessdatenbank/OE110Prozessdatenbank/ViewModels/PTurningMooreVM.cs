@@ -29,7 +29,7 @@ namespace OE110Prozessdatenbank.ViewModels
 
             if (update)
             {
-                m_process = ProcessManager.Instance.getProcess(RefID, 1) as PTurningMoore;
+                m_process = ProcessManager.Instance.getProcess(RefID, 11) as PTurningMoore;
             }
             else
             {
@@ -130,7 +130,7 @@ namespace OE110Prozessdatenbank.ViewModels
             {
                 int ID = value.Row.Field<int>(DBTurningMoore.ID);
                // int _refID = ProcessManager.Instance.getReference(ID)[0];
-                PTurningMoore _p = ProcessManager.Instance.getProcess(ID, 1) as PTurningMoore;
+                PTurningMoore _p = ProcessManager.Instance.getProcess(ID, 11) as PTurningMoore;
 
                 m_process.CuttingAngle = _p.CuttingAngle;
                 m_process.CuttingDepth = _p.CuttingDepth;

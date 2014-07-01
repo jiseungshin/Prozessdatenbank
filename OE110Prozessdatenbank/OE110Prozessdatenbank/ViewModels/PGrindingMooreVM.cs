@@ -36,7 +36,7 @@ namespace OE110Prozessdatenbank.ViewModels
             }
             else
             {
-                m_process = ProcessManager.Instance.getProcess(RefID, 2) as PGrindingMoore;             
+                m_process = ProcessManager.Instance.getProcess(RefID, 12) as PGrindingMoore;             
             }
 
             m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == m_process.ProjectID));
@@ -86,7 +86,7 @@ namespace OE110Prozessdatenbank.ViewModels
             {
                 int ID = value.Row.Field<int>(DBGrindingMoore.ID);
                 //int _refID = ProcessManager.Instance.getReference(ID)[0];
-                PGrindingMoore _p = ProcessManager.Instance.getProcess(ID, 2) as PGrindingMoore;
+                PGrindingMoore _p = ProcessManager.Instance.getProcess(ID, 12) as PGrindingMoore;
 
                 m_process.GrindingDirection = _p.GrindingDirection;
                 m_process.GrindingWheelSpeed = _p.GrindingWheelSpeed;

@@ -42,7 +42,7 @@ namespace OE110Prozessdatenbank.ViewModels
             //update
             else
             {
-                m_process = ProcessManager.Instance.getProcess(refID, 5) as PCoatingCemecon;
+                m_process = ProcessManager.Instance.getProcess(refID, 21) as PCoatingCemecon;
 
                 m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == m_process.ProjectID));
                 NotifyPropertyChanged("Issue");
@@ -97,7 +97,7 @@ namespace OE110Prozessdatenbank.ViewModels
             {
                 int ID = value.Row.Field<int>(DBCoatingCemecon.ID);
                 //int _refID = ProcessManager.Instance.getReference(ID)[0];
-                PCoatingCemecon _p = ProcessManager.Instance.getProcess(ID, 5) as PCoatingCemecon;
+                PCoatingCemecon _p = ProcessManager.Instance.getProcess(ID, 21) as PCoatingCemecon;
 
 
                 Project = new PDCore.BusinessObjects.Project() { ID = Convert.ToInt32(_p.ProjectID) };

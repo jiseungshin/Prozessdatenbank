@@ -21,7 +21,7 @@ namespace OE110Prozessdatenbank.ViewModels
         {
             ObjectManager.Instance.update();
             m_update = true;
-            m_process = ProcessManager.Instance.getProcess(PID, 6) as PExpMoore;
+            m_process = ProcessManager.Instance.getProcess(PID, 31) as PExpMoore;
             ProcessQualityControl = new Controls.CProcessQuality(m_process);
 
             m_process.ProjectID = ObjectManager.Instance.getProjectID(m_process.Workpieces[0].CurrentRefereneNumber);

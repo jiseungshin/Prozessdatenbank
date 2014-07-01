@@ -41,7 +41,7 @@ namespace OE110Prozessdatenbank.MainViews
 
         private void mbt_getHistory_Click(object sender, RoutedEventArgs e)
         {
-
+            new Controls.ReferencePicker().ShowDialog();
         }
 
     }

@@ -1,7 +1,7 @@
 ﻿<Window x:Class="OE110Prozessdatenbank.Controls.AddAnalysis"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="AddAnalysis" Height="202" Width="349">
+        Title="AddAnalysis" Height="202" Width="349" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/OE110Prozessdatenbank;component/Icons/Analysis_9699.png">
     <Grid>
         <DatePicker SelectedDate="{Binding Started}" Margin="129,64,10,0" VerticalAlignment="Top"/>
         <DatePicker SelectedDate="{Binding Finished}" Margin="129,93,10,0" VerticalAlignment="Top"/>

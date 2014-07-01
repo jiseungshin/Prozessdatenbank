@@ -325,6 +325,16 @@ namespace OE110Prozessdatenbank
             new ObjectWindows.WorkpieceAdministration().ShowDialog();
         }
 
+        private void mbt_UserAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            new ObjectWindows.UserAdministration().ShowDialog();
+        }
+
+        private void mbt_GlassAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            new ObjectWindows.GlassAdministration().ShowDialog();
+        }
+
 
         
 

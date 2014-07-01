@@ -68,10 +68,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="Controls\AddAnalysis.xaml.cs">
+    <Compile Include="Controls\ReferencePicker.xaml.cs">
+      <DependentUpon>ReferencePicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ObjectWindows\AddAnalysis.xaml.cs">
       <DependentUpon>AddAnalysis.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AddGlass.xaml.cs">
+    <Compile Include="ObjectWindows\AddGlass.xaml.cs">
       <DependentUpon>AddGlass.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\AddUser.xaml.cs">
@@ -89,6 +92,9 @@
     </Compile>
     <Compile Include="Controls\CAnalyses.xaml.cs">
       <DependentUpon>CAnalyses.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ObjectWindows\HistoryViewer.xaml.cs">
+      <DependentUpon>HistoryViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="ObjectWindows\ProjectAdministration.xaml.cs">
       <DependentUpon>ProjectAdministration.xaml</DependentUpon>
@@ -153,7 +159,7 @@
     <Compile Include="Controls\CQuality.xaml.cs">
       <DependentUpon>CQuality.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\GlassAdministration.xaml.cs">
+    <Compile Include="ObjectWindows\GlassAdministration.xaml.cs">
       <DependentUpon>GlassAdministration.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\AddMaterial.xaml.cs">
@@ -162,7 +168,7 @@
     <Compile Include="ProcessWindows\Processing\ToshibaProcessEditor.xaml.cs">
       <DependentUpon>ToshibaProcessEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\UserAdministration.xaml.cs">
+    <Compile Include="ObjectWindows\UserAdministration.xaml.cs">
       <DependentUpon>UserAdministration.xaml</DependentUpon>
     </Compile>
     <Compile Include="ObjectWindows\WorkpieceAdministration.xaml.cs">
@@ -210,11 +216,15 @@
     <Compile Include="ViewModels\PToshibaVM.cs" />
     <Compile Include="ViewModels\PTurningMooreVM.cs" />
     <Compile Include="ViewModels\QualityVM.cs" />
-    <Page Include="Controls\AddAnalysis.xaml">
+    <Page Include="Controls\ReferencePicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AddGlass.xaml">
+    <Page Include="ObjectWindows\AddAnalysis.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ObjectWindows\AddGlass.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -235,6 +245,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\CAnalyses.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ObjectWindows\HistoryViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -326,7 +340,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\GlassAdministration.xaml">
+    <Page Include="ObjectWindows\GlassAdministration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -338,7 +352,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\UserAdministration.xaml">
+    <Page Include="ObjectWindows\UserAdministration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -498,6 +512,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\CoatingAdmin_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\AddGlass_16xLG.png" />
+    <Resource Include="Icons\Glass_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Glass2Admin_16xLG.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

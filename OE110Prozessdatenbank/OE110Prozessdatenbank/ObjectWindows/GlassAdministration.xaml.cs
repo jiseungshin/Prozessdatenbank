@@ -15,7 +15,7 @@ using PDCore.BusinessObjects;
 using PDCore.Manager;
 using System.Collections.ObjectModel;
 
-namespace OE110Prozessdatenbank.Controls
+namespace OE110Prozessdatenbank.ObjectWindows
 {
     /// <summary>
     /// Interaktionslogik für GlassAdministration.xaml
@@ -30,14 +30,14 @@ namespace OE110Prozessdatenbank.Controls
 
         private void bt_Add_Click(object sender, RoutedEventArgs e)
         {
-            new Controls.AddGlass().ShowDialog();
+            new AddGlass().ShowDialog();
         }
 
         private void LV_Glass_DoubleClick(object sender, MouseButtonEventArgs e)
         {
             if ((sender as ListView).SelectedIndex != -1)
             {
-                new Controls.AddGlass(((sender as ListView).SelectedItem as Glass).ID).ShowDialog();
+                new AddGlass(((sender as ListView).SelectedItem as Glass).ID).ShowDialog();
             }
         }
     }

@@ -22,7 +22,7 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public PDeCoatingCemeconVM(int refID)
         {
-            List<int> PIDList = ProcessManager.Instance.getPIDbyReference(refID, 13);
+            List<int> PIDList = ProcessManager.Instance.getPIDbyReference(refID, 51);
             if (PIDList.Count > 0)
                 m_update = true;
             ObjectManager.Instance.update();
@@ -46,7 +46,7 @@ namespace OE110Prozessdatenbank.ViewModels
             else
             {
                 //List<int> PIDList = ProcessManager.Instance.getPIDbyReference(refID, 13);
-                m_process = ProcessManager.Instance.getProcess(PIDList[0], 13) as PDECoatingCemecon;
+                m_process = ProcessManager.Instance.getProcess(PIDList[0], 51) as PDECoatingCemecon;
 
                 m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == m_process.ProjectID));
                 NotifyPropertyChanged("Issue");
@@ -101,7 +101,7 @@ namespace OE110Prozessdatenbank.ViewModels
             {
                 int ID = value.Row.Field<int>(DBCoatingCemecon.ID);
                 //int _refID = ProcessManager.Instance.getReference(ID)[0];
-                PCoatingCemecon _p = ProcessManager.Instance.getProcess(ID, 5) as PCoatingCemecon;
+                PCoatingCemecon _p = ProcessManager.Instance.getProcess(ID, 51) as PCoatingCemecon;
 
 
                 Project = new PDCore.BusinessObjects.Project() { ID = Convert.ToInt32(_p.ProjectID) };

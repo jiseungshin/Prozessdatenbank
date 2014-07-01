@@ -14,7 +14,7 @@
                 <DataTemplate>
                     <Grid Width="250" Height="14" HorizontalAlignment="Stretch">
                         <TextBlock Text="{Binding Label, StringFormat=Werkstück  {0}}" Margin="0,0,0,0" ></TextBlock>
-                        <TextBlock Text="{Binding ProcessDate,Converter={StaticResource dateConv}, StringFormat=({0})}" Margin="110,0,0,0" ></TextBlock>
+                        <TextBlock Text="{Binding Date,Converter={StaticResource dateConv}, StringFormat=({0})}" Margin="110,0,0,0" ></TextBlock>
                         <TextBlock Text="{Binding ReferenceNumber,StringFormat=(V-Nr.: {0})}" Margin="180,0,0,0" HorizontalAlignment="Left"/>
                     </Grid>
                 </DataTemplate>

@@ -1,7 +1,7 @@
-﻿<Window x:Class="OE110Prozessdatenbank.Controls.AddUser"
+﻿<Window x:Class="OE110Prozessdatenbank.ObjectWindows.AddUser"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="AddUser" Height="201" Width="300">
+        Title="Benutzerformular" Height="201" Width="300" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="/OE110Prozessdatenbank;component/Icons/user_16xLG.png">
     <Grid>
         <Label Content="Vorname" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="81"/>
         <TextBox Height="23" Margin="96,13,10,0" TextWrapping="Wrap" Text="{Binding FirstName}" VerticalAlignment="Top"/>

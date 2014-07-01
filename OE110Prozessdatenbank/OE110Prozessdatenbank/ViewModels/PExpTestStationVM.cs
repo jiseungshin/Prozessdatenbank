@@ -30,7 +30,7 @@ namespace OE110Prozessdatenbank.ViewModels
             ObjectManager.Instance.update();
             m_update = true;
 
-            m_process = ProcessManager.Instance.getProcess(PID, 7) as PExpTestStation;
+            m_process = ProcessManager.Instance.getProcess(PID, 32) as PExpTestStation;
             ProcessQualityControl = new Controls.CProcessQuality(m_process);
             if (m_process.LeftWorkpieceID != null)
             {

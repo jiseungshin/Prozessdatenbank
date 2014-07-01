@@ -128,25 +128,25 @@ namespace PDCore.Manager
 
             switch (MachineID)
             {
-                case 1:
-                    return getTurningMooreProcess(PID);
-                case 2:
-                    return getGrindingMooreProcess(PID);
-                case 3:
-                    return getGrindingPhoenixProcess(PID);
-                case 4:
-                    return getGrindingOtherProcess(PID);
-                case 5:
-                    return getCoatingCemeConProcess(PID);
-                case 6:
-                    return getExpMooreProcess(PID);
-                case 7:
-                    return getExpTestStationProcess(PID);
-                case 8:
-                    return getExpCemeConProcess(PID);
                 case 11:
-                    return getExpOtherProcess(PID);
+                    return getTurningMooreProcess(PID);
+                case 12:
+                    return getGrindingMooreProcess(PID);
                 case 13:
+                    return getGrindingPhoenixProcess(PID);
+                case 14:
+                    return getGrindingOtherProcess(PID);
+                case 21:
+                    return getCoatingCemeConProcess(PID);
+                case 31:
+                    return getExpMooreProcess(PID);
+                case 32:
+                    return getExpTestStationProcess(PID);
+                case 33:
+                    return getExpCemeConProcess(PID);
+                case 36:
+                    return getExpOtherProcess(PID);
+                case 51:
                     return getDeCoatingCemeConProcess(PID);
                      
             }
@@ -1563,6 +1563,21 @@ namespace PDCore.Manager
 
                 }
 
+                DataTable _dtAnalyses = _myCommunicator.getDataSet("SELECT * FROM " + DBAnalyses.Table + " WHERE " + DBAnalyses.RefNumber + "=" + ReferenceNumber).Tables[0];
+
+                foreach (DataRow dr in _dtAnalyses.Rows)
+                {
+                    BusinessObjects.Machine m = new Machine();
+                    m.ID = 40;
+                    m.Name = "Analyse ("+dr.Field<string>(DBAnalyses.Type)+")";
+                    m_history.Processes.Add(new ProcessMetaData()
+                    {
+                        Date = dr.Field<DateTime>("Started"),
+                        User = ObjectManager.Instance.Users.Find(item => item.ID == dr.Field<int>("User_ID")),
+                        Machine = m,
+                        PID = -1
+                    });
+                }
 
                 return m_history;
             
@@ -1637,7 +1652,7 @@ namespace PDCore.Manager
                     m_list.Add(DBExpOther.Table);
                     m_list.Add(DBExpOther.ID);
                     break;
-                case 41:
+                case 40:
                     m_list.Add(DBAnalyses.Table);
                     m_list.Add(DBAnalyses.ID);
                     break;

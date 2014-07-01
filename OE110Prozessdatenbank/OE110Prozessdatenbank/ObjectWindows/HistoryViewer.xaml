@@ -1,0 +1,68 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:OE110Prozessdatenbank" x:Class="OE110Prozessdatenbank.ObjectWindows.HistoryViewer"
+        Title="Abfrage Vorgangsnummer" Height="594" Width="468" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="/OE110Prozessdatenbank;component/Icons/magnifier_16xLG.png">
+    <Window.Resources>
+        <local:DateConverter x:Key="DateConv"/>
+        <local:StatusConverter x:Key="StatusConv"></local:StatusConverter>
+    </Window.Resources>
+    <Grid>
+
+        <ListView x:Name="LV_Workpiece" SelectionMode="Single" Margin="10,175,10,10" MouseDoubleClick="LV_History_DoubleClick" ItemsSource="{Binding History, UpdateSourceTrigger=PropertyChanged}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Machine.Name}" Header="Vorgang" Width="180"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding User.Description}" Header="Bearbeiter" Width="150"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Date, Converter={StaticResource DateConv}}" Header="Datum" Width="100"/>
+                </GridView>
+            </ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="BorderBrush" Value="LightGray"/>
+                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                <Border SnapsToDevicePixels="True" CornerRadius="2" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                                    <Border x:Name="InnerBorder" CornerRadius="0" BorderThickness="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition MaxHeight="11"/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <Rectangle x:Name="UpperHighlight" Fill="#75FFFFFF" Visibility="Collapsed"/>
+                                            <GridViewRowPresenter Grid.RowSpan="2" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                        </Grid>
+                                    </Border>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="#FF4D83E2"/>
+                                        <Setter Property="Foreground" Value="WhiteSmoke"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FFE8E8E8" Offset="0"/>
+                </LinearGradientBrush>
+            </ListView.Background>
+        </ListView>
+        <Label Content="Vorgangsnummer" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Werkstück" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
+        <Label Content="aktueller Status" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
+        <Label Content="{Binding ReferenceNumber}" HorizontalAlignment="Left" Margin="168,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="{Binding Workpiece.Label}" HorizontalAlignment="Left" Margin="168,36,0,0" VerticalAlignment="Top"/>
+        <Label Content="{Binding Status,Converter={StaticResource StatusConv}}" HorizontalAlignment="Left" Margin="168,62,0,0" VerticalAlignment="Top"/>
+        <Label Content="Projekt" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"/>
+        <Label Content="Fragestellung" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top"/>
+        <Label Content="{Binding Project.Description}" HorizontalAlignment="Left" Margin="168,88,0,0" VerticalAlignment="Top"/>
+        <Label Content="{Binding Issue.Description}" HorizontalAlignment="Left" Margin="168,114,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

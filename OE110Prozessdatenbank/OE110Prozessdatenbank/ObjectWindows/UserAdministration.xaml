@@ -1,7 +1,11 @@
-﻿<Window x:Class="OE110Prozessdatenbank.Controls.UserAdministration"
+﻿<Window x:Class="OE110Prozessdatenbank.ObjectWindows.UserAdministration"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="UserAdministration" Height="324" Width="488">
+        xmlns:loval="clr-namespace:OE110Prozessdatenbank"
+        Title="Benutzerverwaltung" Height="324" Width="488" Icon="/OE110Prozessdatenbank;component/Icons/UserAdmin_16xLG.png" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <loval:BoolToImage x:Key="boolToImage"></loval:BoolToImage>
+    </Window.Resources>
     <Grid>
         <ListView x:Name="LV_Users" Margin="10,10,10,35" ItemsSource="{Binding Users, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" MouseDoubleClick="LV_Users_DoubleClick">
             <ListView.Background>
@@ -49,7 +53,15 @@
                     <GridViewColumn Header="Vorname" DisplayMemberBinding="{Binding FirstName}" Width="120"/>
                     <GridViewColumn Header="Nachname" DisplayMemberBinding="{Binding LastName}" Width="120"/>
                     <GridViewColumn Header="Kürzel" DisplayMemberBinding="{Binding Token}" Width="80"/>
-                    <GridViewColumn Header="Aktiv" DisplayMemberBinding="{Binding isActive}" Width="60"/>
+                    <GridViewColumn Header="Aktiv" Width="50">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Width="50">
+                                    <Image RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding isActive,Converter={StaticResource boolToImage}}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
 
             </ListView.View>

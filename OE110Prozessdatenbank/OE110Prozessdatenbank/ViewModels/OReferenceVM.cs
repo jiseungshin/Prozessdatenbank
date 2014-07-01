@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using PDCore.BusinessObjects;
 using PDCore.Manager;
 using OE110Prozessdatenbank.Commands;
+using System.Collections.ObjectModel;
 
 namespace OE110Prozessdatenbank.ViewModels
 {
@@ -19,6 +20,11 @@ namespace OE110Prozessdatenbank.ViewModels
 
         }
 
+        public int ReferenceNumber
+        { get { return m_history.ReferenceNumber; } }
+
+        public string Status
+        { get { return m_history.Status; } }
         public Workpiece Workpiece
         { get { return m_history.Workpiece; } }
         public Project Project
@@ -28,7 +34,8 @@ namespace OE110Prozessdatenbank.ViewModels
         public string Conclusion
         { get { return m_history.Conclusion; } set { m_history.Conclusion = value; } }
 
-
+        public ObservableCollection<ProcessMetaData> History
+        { get { return new ObservableCollection<ProcessMetaData>(m_history.Processes); } }
 
 
 
