@@ -82,7 +82,7 @@
                 </ListView>
                 <TextBox x:Name="tb_raw" Height="23" Margin="59,39,10,0" TextWrapping="Wrap" Text="{Binding RawFilter, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
                 <Label Content="Suche:" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
-                <Label Content="Ubearbeitete Werkstücke" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" FontStyle="Italic" Foreground="#FF303030"/>
+                <Label Content="Unbearbeitete Werkstücke" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" FontStyle="Italic" Foreground="#FF303030"/>
                 <Label Content="Bearbeitete Werkstücke" HorizontalAlignment="Left" Margin="311,0,-198,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" FontStyle="Italic" Foreground="#FF303030"/>
             </Grid>
             <Grid Grid.Column="1">

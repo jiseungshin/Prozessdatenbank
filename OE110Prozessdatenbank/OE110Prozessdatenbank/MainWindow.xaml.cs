@@ -300,7 +300,8 @@ namespace OE110Prozessdatenbank
         private void Debug_click(object sender, RoutedEventArgs e)
         {
             //var tt = PDCore.Manager.ProcessManager.Instance.getWorkpieceHistory(1);
-            var tt = PDCore.Manager.FileManager.Instance.getDirPth(1);
+            //var tt = PDCore.Manager.FileManager.Instance.getDirPth(1);
+            PDCore.Manager.ExportManager.foo();
         }
 
         private void mbt_CoatingAdmin_Click(object sender, RoutedEventArgs e)
