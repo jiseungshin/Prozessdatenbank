@@ -77,13 +77,18 @@ namespace OE110Prozessdatenbank.MainWindows
         {
 
         }
-
+        ProcessWindows.ToshibaProcessEditor m_processWindow;
         private void LV_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if ((sender as ListView).SelectedIndex!=-1)
             {
-                int index = (sender as ListView).SelectedIndex;
-                new ProcessWindows.ToshibaProcessEditor(m_vm, index).Show();
+                try
+                {
+                    int index = (sender as ListView).SelectedIndex;
+                    new ProcessWindows.ToshibaProcessEditor(m_vm, index).ShowDialog();
+
+                }
+                catch { }
 
             }
         }

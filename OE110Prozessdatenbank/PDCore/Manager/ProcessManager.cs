@@ -1543,7 +1543,7 @@ namespace PDCore.Manager
                 m_history.Conclusion = _dt.Rows[0].Field<string>(DBProcessReferences.Conclusion);
 
                 DataTable _dtProcesses = _myCommunicator.getDataSet("SELECT * FROM " + DBProcessReferenceRelation.Table + " WHERE " + DBProcessReferenceRelation.RefNumber + "=" + ReferenceNumber).Tables[0];
-
+                
                 foreach(DataRow dr in _dtProcesses.Rows)
                 {
 
@@ -1552,14 +1552,18 @@ namespace PDCore.Manager
                     int PID = dr.Field<int>(DBProcessReferenceRelation.PID);
 
                     DataTable _dtt = _myCommunicator.getDataSet("SELECT * FROM " + TableInfo[0] + " WHERE " + TableInfo[1] + "=" + PID).Tables[0];
+                    //System.Windows.MessageBox.Show(TableInfo[0] + "," + TableInfo[1]);
 
-                    m_history.Processes.Add(new ProcessMetaData()
+                    if (_dtt.Rows.Count > 0)
                     {
-                        Date = _dtt.Rows[0].Field<DateTime>("Date"),
-                        User = ObjectManager.Instance.Users.Find(item => item.ID == _dtt.Rows[0].Field<int>("User_ID")),
-                        Machine = ObjectManager.Instance.Machines.Find(item => item.ID == dr.Field<int>(DBProcessReferenceRelation.MachineID)),
-                        PID = PID
-                    });
+                        m_history.Processes.Add(new ProcessMetaData()
+                        {
+                            Date = _dtt.Rows[0].Field<DateTime>("Date"),
+                            User = ObjectManager.Instance.Users.Find(item => item.ID == _dtt.Rows[0].Field<int>("User_ID")),
+                            Machine = ObjectManager.Instance.Machines.Find(item => item.ID == dr.Field<int>(DBProcessReferenceRelation.MachineID)),
+                            PID = PID
+                        });
+                    }
 
                 }
 
@@ -1569,7 +1573,7 @@ namespace PDCore.Manager
                 {
                     BusinessObjects.Machine m = new Machine();
                     m.ID = 40;
-                    m.Name = "Analyse ("+dr.Field<string>(DBAnalyses.Type)+")";
+                    m.Name = "Analyse (" + dr.Field<string>(DBAnalyses.Type) + ")";
                     m_history.Processes.Add(new ProcessMetaData()
                     {
                         Date = dr.Field<DateTime>("Started"),
@@ -1619,8 +1623,8 @@ namespace PDCore.Manager
                     m_list.Add(DBGrindingMoore.ID);
                     break;
                 case 13:
-                    m_list.Add(DBPhoenixProcesses.Table);
-                    m_list.Add(DBPhoenixProcesses.ID);
+                    m_list.Add(DBGrindingPhoenix.Table);
+                    m_list.Add(DBGrindingPhoenix.ID);
                     break;
                 case 14:
                     m_list.Add(DBGrindingOther.Table);

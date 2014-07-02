@@ -191,22 +191,26 @@ namespace OE110Prozessdatenbank.ProcessWindows
             TextBox sp = null;
             if (mnu != null)
             {
-                sp = ((ContextMenu)mnu.Parent).PlacementTarget as TextBox;
-
-                Binding myBinding = BindingOperations.GetBinding(sp, TextBox.TextProperty);
-
-                string boundComponent = myBinding.Path.Path.Remove(0, 3);
-
-
-                System.Reflection.PropertyInfo prop = typeof(ViewModels.PToshibaVM).GetProperty(boundComponent);
-      
-                for (int i = index + 1; i < index + test+1; i++)
+                if (System.Windows.MessageBox.Show("Daten wirklich übernehmen?", "", MessageBoxButton.YesNo
+                    , MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    prop.SetValue(m_vm.Processes[i], Convert.ToDouble(sp.Text.Replace('.', ',')), null);                   
+
+                    sp = ((ContextMenu)mnu.Parent).PlacementTarget as TextBox;
+
+                    Binding myBinding = BindingOperations.GetBinding(sp, TextBox.TextProperty);
+
+                    string boundComponent = myBinding.Path.Path.Remove(0, 3);
+
+
+                    System.Reflection.PropertyInfo prop = typeof(ViewModels.PToshibaVM).GetProperty(boundComponent);
+
+                    for (int i = index + 1; i < index + test + 1; i++)
+                    {
+                        prop.SetValue(m_vm.Processes[i], Convert.ToDouble(sp.Text.Replace('.', ',')), null);
+                    }
+
+
                 }
-
-                
-
                 //property.SetValue(Convert.ToDouble(sp.Text.Replace('.',',')), "...", null);
 
             }

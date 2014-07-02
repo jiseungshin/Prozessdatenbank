@@ -25,8 +25,8 @@
         <Label Content="Qualitätsmerkmale" HorizontalAlignment="Left" Margin="478,31,0,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
         <DatePicker SelectedDate="{Binding Date}" Margin="187,33,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
         <ComboBox x:Name="cb_user" ItemsSource="{Binding Users}" SelectedItem="{Binding User}" DisplayMemberPath="Description" Margin="187,62,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
-        <ComboBox x:Name="cb_project" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" Margin="187,89,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
-        <ComboBox x:Name="cb_Issue" ItemsSource="{Binding Issues}" SelectedItem="{Binding Issue}" DisplayMemberPath="Description" Margin="187,120,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
+        <ComboBox x:Name="cb_project" IsEnabled="False" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" Margin="187,89,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
+        <ComboBox x:Name="cb_Issue" IsEnabled="False" ItemsSource="{Binding Issues}" SelectedItem="{Binding Issue}" DisplayMemberPath="Description" Margin="187,120,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
         <ComboBox x:Name="cb_upperWP" ItemsSource="{Binding Workpieces, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding UpperWP, UpdateSourceTrigger=PropertyChanged}" Margin="187,161,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266" SelectionChanged="cb_upperWP_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>

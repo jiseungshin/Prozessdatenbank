@@ -33,8 +33,9 @@ namespace OE110Prozessdatenbank
 
         void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            try
+           try
             {
+
                 Exception ex = (Exception)e.ExceptionObject;
                 LogError(ex);
 
@@ -53,8 +54,8 @@ namespace OE110Prozessdatenbank
         {
             Assembly caller = Assembly.GetEntryAssembly();
             Process thisProcess = Process.GetCurrentProcess();
-
-            using (StreamWriter sw = new StreamWriter(@"ErrorLog.txt"))
+            MessageBox.Show(DateTime.Now.ToLongTimeString());
+            using (StreamWriter sw = new StreamWriter(@"ErrorLog_"+DateTime.Now.ToShortDateString().Replace(".","")+""+DateTime.Now.ToLongTimeString().Replace(":","")+".txt"))
             {
                 sw.WriteLine("==============================================================================");
                 sw.WriteLine(caller.FullName);

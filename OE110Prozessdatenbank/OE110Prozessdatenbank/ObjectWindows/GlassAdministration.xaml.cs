@@ -45,6 +45,8 @@ namespace OE110Prozessdatenbank.ObjectWindows
     public class VMGlassAdministration : ViewModels.BaseViewModel
     {
 
+        private string m_filter = "";
+
         public VMGlassAdministration()
         {
             ObjectManager.Instance.update();
@@ -53,13 +55,25 @@ namespace OE110Prozessdatenbank.ObjectWindows
 
         public ObservableCollection<Glass> Glasses
         {
-            get { return new ObservableCollection<Glass>(ObjectManager.Instance.Glasses); }
+            get 
+            { 
+                if (m_filter=="")
+                    return new ObservableCollection<Glass>(ObjectManager.Instance.Glasses);
+                else
+                    return new ObservableCollection<Glass>(ObjectManager.Instance.Glasses.Where(item => item.Comapany.ToLower().Contains(Filter.ToLower()) || item.Name.ToLower().Contains(Filter.ToLower())));
+            }
         }
 
         void Instance_newData()
         {
             ObjectManager.Instance.update();
             NotifyPropertyChanged("Glasses");
+        }
+
+        public string Filter
+        {
+            get { return m_filter; }
+            set { m_filter = value; NotifyPropertyChanged("Glasses"); }
         }
     }
 

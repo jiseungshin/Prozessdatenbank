@@ -1,7 +1,7 @@
 ﻿<Window x:Class="OE110Prozessdatenbank.ObjectWindows.CIssue"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Height="183" Width="442" Title="Fragestellung / Versuchsreihe" Icon="/OE110Prozessdatenbank;component/Icons/manifest_16xLG.png" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" >
+        Height="183" Width="442" Title="Fragestellung / Versuchsreihe" Icon="/OE110Prozessdatenbank;component/Icons/manifest_16xLG.png" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" >
     <Grid>
         <TextBox x:Name="tb_remark" Height="71" Margin="211,41,10,0" TextWrapping="Wrap" Text="{Binding Remark}" VerticalAlignment="Top"/>
         <Label Content="Bemerkung" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="110"/>

@@ -16,7 +16,7 @@ namespace OE110Prozessdatenbank.ViewModels
         private Workpiece m_upper;
         private Workpiece m_lower;
         private User m_user;
-        private string m_lensName = "Linse_";
+        private string m_lensName = "";
         private Glass m_glass;
 
         public PToshibaImportVM(List<PToshiba> processes)
@@ -58,7 +58,7 @@ namespace OE110Prozessdatenbank.ViewModels
             if (Glass != null)
                 process.GlassID = Glass.ID;
 
-            process.GlassName = LensName + index;
+            process.GlassName = LensName + "_"+index;
 
             m_ProcessVms.Add(new PToshibaVM(process));
             NotifyPropertyChanged("Processes");

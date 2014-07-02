@@ -573,7 +573,7 @@ namespace PDCore.Manager
             }
             else
             {
-                _queries.Add("INSERT INTO " + DBUser.Table + " (" + DBGlasses.Description + "," +
+                _queries.Add("INSERT INTO " + DBGlasses.Table + " (" + DBGlasses.Description + "," +
                                                                                      DBGlasses.Company + ") Values (" +
                                                                             glass.Name.ToDBObject() + "," +
                                                                              glass.Comapany.ToDBObject() + ")");

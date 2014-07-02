@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Glassortenverwaltung" Height="335" Width="525" WindowStartupLocation="CenterScreen" Icon="/OE110Prozessdatenbank;component/Icons/Glass2Admin_16xLG.png">
     <Grid>
-        <ListView x:Name="LV_Glass" Margin="10,10,10,35" ItemsSource="{Binding Glasses, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" MouseDoubleClick="LV_Glass_DoubleClick">
+        <ListView x:Name="LV_Glass" Margin="10,41,10,35" ItemsSource="{Binding Glasses, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" MouseDoubleClick="LV_Glass_DoubleClick">
             <ListView.Background>
                 <LinearGradientBrush>
                     <GradientStop  Offset="0" Color="#FFE8E8E8"/>
@@ -53,6 +53,8 @@
             </ListView.View>
         </ListView>
         <Button x:Name="bt_Add" Content="Glassorte hinzufügen" Margin="10,0,10,10" Click="bt_Add_Click" Height="20" VerticalAlignment="Bottom"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="68,10,0,0" TextWrapping="Wrap" Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="154"/>
+        <Label Content="Suche" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
