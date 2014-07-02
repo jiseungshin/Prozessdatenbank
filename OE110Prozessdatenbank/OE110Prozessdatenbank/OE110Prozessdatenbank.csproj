@@ -195,6 +195,7 @@
     <Compile Include="ViewModels\F_CoatingVM.cs" />
     <Compile Include="ViewModels\F_GrindingVM.cs" />
     <Compile Include="ViewModels\F_PostProcessingVM.cs" />
+    <Compile Include="ViewModels\MonFileVM.cs" />
     <Compile Include="ViewModels\OMaterialVM.cs" />
     <Compile Include="ViewModels\OProjectVM.cs" />
     <Compile Include="ViewModels\OGlassVM.cs" />

@@ -4,18 +4,55 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Excel = Microsoft.Office.Interop.Excel;
+using PDCore.Processes;
 
 namespace PDCore.Manager
 {
     public static class ExportManager
     {
 
-        private static void exportTurningMoore()
-        { 
-        
+        private static void exportTurningMoore(List<PTurningMoore> processes, Excel.Worksheet ws)
+        {
+            // Überschriften eingeben
+            ws.Cells[2, 1] = "Projekt";    
+            ws.Cells[2, 2] = "Werkstück";  
+            ws.Cells[2, 3] = "Material";   
+            ws.Cells[2, 4] = "Werkzeugnummer";
+            ws.Cells[2, 5] = "Radius";
+            ws.Cells[2, 6] = "Spanwinkel";
+            ws.Cells[2, 7] = "Drehzahl";
+            ws.Cells[2, 8] = "Vorschub";  
+            ws.Cells[2, 9] = "Schnittiefe";  
+            ws.Cells[2, 10] = "Bemerkung";  
+
+            // Formatieren der Überschrift
+            Excel.Range myRangeHeadline;
+            myRangeHeadline = ws.get_Range("A2", "J2");
+            myRangeHeadline.Font.Bold = true;
+            myRangeHeadline.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            //myRangeHeadline.Borders.Weight = Excel.XlBorderWeight.xlThick;
+
+            for (int i = 0; i < processes.Count;i++ )
+            {
+                ws.Cells[i + 3, 1] = ObjectManager.Instance.Projects.Find(item => item.ID == processes[i].ProjectID).Description;
+                ws.Cells[i + 3, 2] = processes[i].Workpieces[0].Label;
+                ws.Cells[i + 3, 3] = processes[i].Workpieces[0].Material.Name;
+                ws.Cells[i + 3, 4] = processes[i].ToolID;
+                ws.Cells[i + 3, 5] = processes[i].Radius;
+                ws.Cells[i + 3, 6] = processes[i].CuttingAngle;
+                ws.Cells[i + 3, 7] = processes[i].Speed;
+                ws.Cells[i + 3, 8] = processes[i].Feed;
+                ws.Cells[i + 3, 9] = processes[i].CuttingDepth;
+                ws.Cells[i + 3, 10] = processes[i].Remark;
+
+            }
+                // Daten eingeben
+                
+           
+            ws.Name = "Prozessdaten Drehen";
         }
 
-        public static void foo()
+        public static void foo(List<PTurningMoore> process)
         {
             // Variablen deklarieren 
             Excel.Application myExcelApplication;
@@ -35,59 +72,12 @@ namespace PDCore.Manager
                 myExcelWorkbook = (Excel.Workbook)(myExcelApplication.Workbooks.Add(System.Reflection.Missing.Value));
                 myExcelWorkSheet = (Excel.Worksheet)myExcelWorkbook.ActiveSheet;
 
-                // Überschriften eingeben
-                myExcelWorkSheet.Cells[2, 2] = "Hamburg";    // Zelle B2
-                myExcelWorkSheet.Cells[2, 3] = "Nürnberg";   // Zelle C2
-                myExcelWorkSheet.Cells[2, 4] = "Hamburg";    // Zelle D2
 
-                // Formatieren der Überschrift
-                Excel.Range myRangeHeadline;
-                myRangeHeadline = myExcelWorkSheet.get_Range("B2", "D2");
-                myRangeHeadline.Font.Bold = true;
-                myRangeHeadline.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                myRangeHeadline.Borders.Weight = Excel.XlBorderWeight.xlThick;
-
-                // Daten eingeben
-                myExcelWorkSheet.Cells[3, 2] = "18";
-                myExcelWorkSheet.Cells[3, 3] = "21";
-                myExcelWorkSheet.Cells[3, 4] = "11";
-                myExcelWorkSheet.Cells[4, 2] = "21";
-                myExcelWorkSheet.Cells[4, 3] = "32";
-                myExcelWorkSheet.Cells[4, 4] = "22";
-                myExcelWorkSheet.Cells[5, 2] = "12";
-                myExcelWorkSheet.Cells[5, 3] = "56";
-                myExcelWorkSheet.Cells[5, 4] = "14";
-                myExcelWorkSheet.Name = "Kunden";
+                exportTurningMoore(process , myExcelWorkSheet);
+               
 
 
-                // Chart erzeugen
-                Excel.Range myRangeValues;
-                myRangeValues = myExcelWorkSheet.get_Range("B3", "D5");
-
-                Excel.Chart myChart = (Excel.Chart)myExcelWorkbook.Charts.Add(
-                  System.Reflection.Missing.Value,
-                  System.Reflection.Missing.Value,
-                  System.Reflection.Missing.Value,
-                  System.Reflection.Missing.Value);
-
-                myChart.ChartWizard(
-                  myRangeValues,
-                  Excel.XlChartType.xl3DColumn,
-                  System.Reflection.Missing.Value,
-                  Excel.XlRowCol.xlRows,
-                  System.Reflection.Missing.Value,
-                  System.Reflection.Missing.Value,
-                  System.Reflection.Missing.Value,
-                  "Titel",
-                  "Kunden",
-                  "Anzahl",
-                  System.Reflection.Missing.Value);
-
-                myChart.CopyPicture(Excel.XlPictureAppearance.xlScreen,
-                 Excel.XlCopyPictureFormat.xlBitmap,
-                 Excel.XlPictureAppearance.xlScreen);
-
-                myChart.Location(Excel.XlChartLocation.xlLocationAsObject, myExcelWorkSheet.Name);
+                
 
                 // Excel Datei abspeichern
                 // wenn die Datei vorher vorhanden ist, kommt in Excel eine Fehlermeldung.

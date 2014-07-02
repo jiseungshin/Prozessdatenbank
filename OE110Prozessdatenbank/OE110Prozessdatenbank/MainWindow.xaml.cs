@@ -301,7 +301,8 @@ namespace OE110Prozessdatenbank
         {
             //var tt = PDCore.Manager.ProcessManager.Instance.getWorkpieceHistory(1);
             //var tt = PDCore.Manager.FileManager.Instance.getDirPth(1);
-            PDCore.Manager.ExportManager.foo();
+            PDCore.Processes.PTurningMoore p = PDCore.Manager.ProcessManager.Instance.getProcess(21,11) as PDCore.Processes.PTurningMoore;
+            PDCore.Manager.ExportManager.foo(new List<PDCore.Processes.PTurningMoore>() { p });
         }
 
         private void mbt_CoatingAdmin_Click(object sender, RoutedEventArgs e)

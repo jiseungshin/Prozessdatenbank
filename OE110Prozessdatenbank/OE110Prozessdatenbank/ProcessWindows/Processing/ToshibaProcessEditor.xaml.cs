@@ -25,6 +25,7 @@ namespace OE110Prozessdatenbank.ProcessWindows
         private List<string> m_countSelection;
         private List<MenuItem> m_items;
         int index = 0;
+        int gridIndex = 0;
         public ToshibaProcessEditor(ViewModels.PToshibaImportVM vm, int index)
         {
             InitializeComponent();
@@ -36,7 +37,35 @@ namespace OE110Prozessdatenbank.ProcessWindows
             DataContext = this;// vm.Processes[index];
             //cb1.DataContext = this;
 
-            
+            if (m_vm.UpperWP != null)
+            {
+                try
+                {
+                    g_quality.Children.Add(m_vm.Processes[index].WP_UpperControl);
+                    Grid.SetRow(m_vm.Processes[index].WP_UpperControl, gridIndex);
+                    gridIndex++;
+                }
+                catch { }
+            }
+            if (m_vm.LowerWP != null)
+            {
+                try
+                {
+                    g_quality.Children.Add(m_vm.Processes[index].WP_LowerControl);
+                    Grid.SetRow(m_vm.Processes[index].WP_LowerControl, gridIndex);
+                    gridIndex++;
+                }
+                catch { }
+            }
+            if (m_vm.Glass != null)
+            {
+                try
+                {
+                    g_quality.Children.Add(m_vm.Processes[index].ProcessQualityControl);
+                    Grid.SetRow(m_vm.Processes[index].ProcessQualityControl, gridIndex);
+                }
+                catch { }
+            }
         }
 
         public ObservableCollection<string> CountSelectionArray
@@ -183,6 +212,11 @@ namespace OE110Prozessdatenbank.ProcessWindows
             }
 
             //MessageBox.Show(" Textbox:" + sp.Name);
+        }
+
+        private void editor_Closed(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            g_quality.Children.Clear();
         }
 
     }

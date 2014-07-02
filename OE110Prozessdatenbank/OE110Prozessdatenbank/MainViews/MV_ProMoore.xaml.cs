@@ -111,7 +111,7 @@ namespace OE110Prozessdatenbank.MainViews
             {
                 if (value != "")
                 {
-                    m_filter = " AND " + m_criteria.DatabaseField + " LIKE ('%" + value + "%')";
+                    m_filter = " WHERE " + m_criteria.DatabaseField + " LIKE ('%" + value + "%')";
                 }
                 else
                     m_filter = value;

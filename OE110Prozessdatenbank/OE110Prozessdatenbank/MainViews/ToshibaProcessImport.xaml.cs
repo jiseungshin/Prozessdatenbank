@@ -95,7 +95,7 @@ namespace OE110Prozessdatenbank.MainWindows
 
         private void bt_openProcessParams_Click(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show((sender as Label).Parent.ToString()); ;
+           
         }
     }
 }

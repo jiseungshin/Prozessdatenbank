@@ -33,6 +33,7 @@ namespace PDCore.BusinessObjects
             wp.ID = this.ID;
             wp.Label = this.Label;
             wp.Material = this.Material;
+            wp.CurrentRefereneNumber = this.CurrentRefereneNumber;
 
             return wp;
         }

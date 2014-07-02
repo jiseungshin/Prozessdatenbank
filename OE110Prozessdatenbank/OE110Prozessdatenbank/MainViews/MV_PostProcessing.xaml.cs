@@ -125,6 +125,8 @@ namespace OE110Prozessdatenbank.MainViews
                 int ID = Convert.ToInt32(((listview).SelectedItem as DataRowView)[DBProcessReferences.RefNumber]);
                 new Controls.CAnalyses(ID).ShowDialog();
             }
+            else
+                MessageBox.Show("Es wurde kein Listenelement ausgewählt!", "Hinweis", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private void mbt_gotoDecoating_Click(object sender, RoutedEventArgs e)
@@ -134,6 +136,8 @@ namespace OE110Prozessdatenbank.MainViews
                 int ID = Convert.ToInt32(((listview).SelectedItem as DataRowView)[DBProcessReferences.RefNumber]);
                 new Controls.CDecoating(ID).ShowDialog();
             }
+            else
+                MessageBox.Show("Es wurde kein Listenelement ausgewählt!", "Hinweis", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private void mbt_gotoConclusion_Click(object sender, RoutedEventArgs e)
@@ -143,6 +147,8 @@ namespace OE110Prozessdatenbank.MainViews
                 int ID = Convert.ToInt32(((listview).SelectedItem as DataRowView)[DBProcessReferences.RefNumber]);
                 new Controls.CConclusion(ID).ShowDialog();
             }
+            else
+                MessageBox.Show("Es wurde kein Listenelement ausgewählt!", "Hinweis", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
 }

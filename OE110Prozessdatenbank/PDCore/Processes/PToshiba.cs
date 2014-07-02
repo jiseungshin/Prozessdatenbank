@@ -14,6 +14,7 @@ namespace PDCore.Processes
             Workpieces = new List<BusinessObjects.Workpiece>();
             InputData = new ToshibaInputData();
             MachinaData = new ToshibaMachineData();
+            Quality = new BusinessObjects.ProcessQuality();
 
         }
 

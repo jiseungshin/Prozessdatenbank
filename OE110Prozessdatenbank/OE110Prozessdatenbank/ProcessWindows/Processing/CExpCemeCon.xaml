@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Height="500.58" Width="916.668">
+             mc:Ignorable="d" Height="500.58" Width="916.668" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <ComboBox x:Name="cb_user" ItemsSource="{Binding Users}" SelectedItem="{Binding User}" DisplayMemberPath="Description" Margin="166,62,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
-        <ComboBox x:Name="cb_project" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" Margin="166,89,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
+        <ComboBox x:Name="cb_project" IsEnabled="False" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" Margin="166,89,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
         <DatePicker SelectedDate="{Binding Date}" Margin="166,33,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
 
         <Label Content="Bearbeiter" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Width="110"/>
@@ -17,7 +17,7 @@
         <Button x:Name="bt_cancel" Content="abbrechen" HorizontalAlignment="Right" Margin="0,0,92,10" VerticalAlignment="Bottom" Width="75" Click="bt_cancel_Click"/>
         <Label Content="Werkstück:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="79"/>
         <Label x:Name="lb_workpiece" Content="{Binding WorkpieceLabel}" HorizontalAlignment="Left" Margin="163,0,0,0" VerticalAlignment="Top" Width="79"/>
-        <ComboBox x:Name="cb_Issue" ItemsSource="{Binding Issues}" SelectedItem="{Binding Issue}" DisplayMemberPath="Description" Margin="166,120,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
+        <ComboBox x:Name="cb_Issue" IsEnabled="False" ItemsSource="{Binding Issues}" SelectedItem="{Binding Issue}" DisplayMemberPath="Description" Margin="166,120,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
         <Label Content="Fragestellung" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top" Width="151"/>
         <ComboBox x:Name="cb_Issue_Copy" ItemsSource="{Binding Glasses, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Glass}" DisplayMemberPath="VisualName" SelectionChanged="cb_glass_changed" Margin="166,170,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
         <Label Content="Glas" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top" Width="151"/>

@@ -17,11 +17,13 @@ namespace OE110Prozessdatenbank.ViewModels
         private string m_processedConstraint = "ProcessReferences.Status='processed'";
         private string m_AnalysedCostraint = "ProcessReferences.Status='analysed'";
         private string m_DecoatedConstraint = "ProcessReferences.Status='decoated'";
-        private string m_FullConstraint = " WHERE ProcessReferences.Status='processed' "+
+        private string m_FullConstraint = " WHERE (ProcessReferences.Status='processed' "+
                                             "OR ProcessReferences.Status='analysed' "+
                                             "OR ProcessReferences.Status='terminated' " +
                                             "OR ProcessReferences.Status='cancelled' " +
-                                            "OR ProcessReferences.Status='decoated'" ;
+                                            "OR ProcessReferences.Status='decoated') " ;
+
+        private string m_Filter = "";
 
         private bool m_p = true;
         private bool m_a = true;
@@ -41,7 +43,7 @@ namespace OE110Prozessdatenbank.ViewModels
         {
             get
             {
-                DataSet _ds = ProcessManager.Instance.getData(Queries.QueryPostProcessing + m_FullConstraint);
+                DataSet _ds = ProcessManager.Instance.getData(Queries.QueryPostProcessing + m_FullConstraint + m_Filter);
                 if (_ds.Tables[0].Rows.Count > 0)
                 {
                     _ds.Tables[0].Columns.Add("analysed", typeof(bool));
@@ -158,16 +160,22 @@ namespace OE110Prozessdatenbank.ViewModels
 
         }
 
-        //public bool Image
-        //{
-        //    get
-        //    {
-        //        return new BitmapImage(new Uri(@"pack://application:,,,/Icons/process_16xLG.png", UriKind.RelativeOrAbsolute));
-        //    }
-        //}
+        public string Filter
+        {
+            set
+            {
+                if (value != "")
+                {
+                    m_Filter = " AND (" + DBWorkpieces.Table + "." + DBWorkpieces.Label + " LIKE ('%" + value + "%')" +
+                              " OR " + DBProcessReferences.Table + "." + DBProcessReferences.RefNumber + " LIKE ('%" + value + "%')" +
+                              " OR " + DBMAterial.Table + "." + DBMAterial.Name + " LIKE ('%" + value + "%'))";
+                }
+                else
+                    m_Filter = value;
 
-        //public String ImagePath
-        //{ get { return "/OE110Prozessdatenbank;component/Icons/GotoNextRow_289.png"; } }
+                NotifyPropertyChanged("Data");
+            }
+        }
     }
     
 }

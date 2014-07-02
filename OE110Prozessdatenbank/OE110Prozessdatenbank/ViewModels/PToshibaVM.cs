@@ -18,14 +18,21 @@ namespace OE110Prozessdatenbank.ViewModels
         public PlotModel plotModelT;
         public PlotModel plotModelP;
 
+        public ViewModels.MonFileVM m_vm;
+
         public PToshibaVM(PToshiba process)
         {
             m_process = process;
             plotModelT = new OxyPlot.PlotModel();
             plotModelP = new OxyPlot.PlotModel();
 
-            WP_UpperControl = new Controls.CQuality(process.Workpieces.Find(item => item.ID == m_process.UpperWorkpiece));
+            //Inint QualityControls
+            if (m_process.UpperWorkpiece!=null)
+                WP_UpperControl = new Controls.CQuality(process.Workpieces.Find(item => item.ID == m_process.UpperWorkpiece));
+            if (m_process.LowerWorkpiece != null)
+                WP_LowerControl = new Controls.CQuality(process.Workpieces.Find(item => item.ID == m_process.LowerWorkpiece));
             PV_Control = new Controls.CPVControl();
+            ProcessQualityControl = new Controls.CProcessQuality(m_process);
 
             #region Temp
             LineSeries ls = new LineSeries();
@@ -85,7 +92,12 @@ namespace OE110Prozessdatenbank.ViewModels
 
             #endregion
 
+            m_vm = new MonFileVM(process.File);
+
         }
+
+        public ViewModels.MonFileVM MonVM
+        { get { return m_vm; } }
 
         public DateTime Date
         { get { return m_process.Date; } }
@@ -117,7 +129,9 @@ namespace OE110Prozessdatenbank.ViewModels
         }
 
         public Controls.CQuality WP_UpperControl { get; set; }
+        public Controls.CQuality WP_LowerControl { get; set; }
         public Controls.CPVControl PV_Control { get; set; }
+        public Controls.CProcessQuality ProcessQualityControl { get; set; }
 
         public double? P1
         { get { return m_process.InputData.P1; } set { m_process.InputData.P1 = value; } }
