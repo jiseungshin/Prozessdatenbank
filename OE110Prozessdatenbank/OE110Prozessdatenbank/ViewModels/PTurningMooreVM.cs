@@ -141,7 +141,11 @@ namespace OE110Prozessdatenbank.ViewModels
                 m_process.Speed = _p.Speed;
                 m_process.ToolID = _p.ToolID;
                 m_process.UserID = _p.UserID;
+
                 m_process.ProjectID = _p.ProjectID;
+                m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == _p.ProjectID));
+                NotifyPropertyChanged("Issues");
+                m_process.IssueID = _p.IssueID;
 
                 NotifyPropertyChanged("CuttingAngle");
                 NotifyPropertyChanged("CutDepth");
@@ -154,6 +158,7 @@ namespace OE110Prozessdatenbank.ViewModels
                 NotifyPropertyChanged("ToolID");
                 NotifyPropertyChanged("User");
                 NotifyPropertyChanged("Project");
+                NotifyPropertyChanged("Issue");
 
             }
         }

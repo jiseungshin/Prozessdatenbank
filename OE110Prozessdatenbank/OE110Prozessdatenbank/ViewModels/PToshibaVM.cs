@@ -96,6 +96,9 @@ namespace OE110Prozessdatenbank.ViewModels
 
         }
 
+
+        public PToshiba Process
+        { get { return m_process; } }
         public ViewModels.MonFileVM MonVM
         { get { return m_vm; } }
 

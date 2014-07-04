@@ -51,6 +51,21 @@
                                     Width="{Binding Path=ActualHeight, ElementName=StorageContextmenu}" />
                         </MenuItem.Icon>
                     </MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Header="Vorgang abbrechen" Click="cmb_cancel_Click">
+                        <MenuItem.Icon>
+                            <Image Source="/OE110Prozessdatenbank;component/Icons/StatusAnnotations_Critical_16xLG_color.png"
+                                   Height="{Binding Path=ActualHeight, ElementName=StorageContextmenu}"
+                                    Width="{Binding Path=ActualHeight, ElementName=StorageContextmenu}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Vorgang beenden" Click="cmb_terminate_Click">
+                        <MenuItem.Icon>
+                            <Image Source="/OE110Prozessdatenbank;component/Icons/StatusAnnotations_Complete_and_ok_16xLG_color.png"
+                                   Height="{Binding Path=ActualHeight, ElementName=StorageContextmenu}"
+                                    Width="{Binding Path=ActualHeight, ElementName=StorageContextmenu}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </ContextMenu>
             </ListView.Resources>
             <ListView.View>

@@ -33,7 +33,7 @@ namespace OE110Prozessdatenbank.MainViews
         public MV_ProToshiba()
         {
             InitializeComponent();
-            //DataContext = new VMProcessingMoore();
+            DataContext = new VMProcessingToshiba();
             
         }
 
@@ -41,13 +41,14 @@ namespace OE110Prozessdatenbank.MainViews
         {
             if ((sender as ListView).SelectedIndex != -1)
             {
-                int ID = Convert.ToInt32(((sender as ListView).SelectedItem as System.Data.DataRowView)[DBExpMoore.ID]);
+                int ID = Convert.ToInt32(((sender as ListView).SelectedItem as System.Data.DataRowView)[DBExpToshiba.ID]);
                 //m_window = new ProcessWindows.GenericWindow();
                 //m_window.contentGrid.Children.Add(new Controls.CExpMoore(ID));
                 //m_window.Title = "Versuch - Moore";
                 //m_window.IconType = IconManager.IconType.ProcessIcon;
                 //m_window.ShowDialog();
                 //new ProcessWindows.CExpMoore(ID).ShowDialog();
+                PDCore.Processes.PToshiba tt = PDCore.Manager.ProcessManager.Instance.getProcess(ID, 34) as PDCore.Processes.PToshiba;
             }
         }
 
@@ -68,13 +69,13 @@ namespace OE110Prozessdatenbank.MainViews
         }
     }
 
-    public class VMProcessingMoore : ViewModels.BaseViewModel
+    public class VMProcessingToshiba : ViewModels.BaseViewModel
     {
 
 
         private string m_filter = "";
         private FilterCriteria m_criteria = ProcessManager.Instance.FilterCriteria[0];
-        public VMProcessingMoore()
+        public VMProcessingToshiba()
         {
             Updater.Instance.newData += Instance_newData;
         }
@@ -88,7 +89,7 @@ namespace OE110Prozessdatenbank.MainViews
         {
             get 
             {
-                return ProcessManager.Instance.getData(Queries.QueryProcessedMoore + m_filter);
+                return ProcessManager.Instance.getData(Queries.QueryProcessedToshiba + m_filter);
             }
         }
 
@@ -106,7 +107,7 @@ namespace OE110Prozessdatenbank.MainViews
             {
                 if (value != "")
                 {
-                    m_filter = " AND " + m_criteria.DatabaseField + " LIKE ('%" + value + "%')";
+                    m_filter = " WHERE " + m_criteria.DatabaseField + " LIKE ('%" + value + "%')";
                 }
                 else
                     m_filter = value;

@@ -127,6 +127,34 @@ namespace OE110Prozessdatenbank.MainViews
             }
         }
 
+        private void mi_Export_Click(object sender, RoutedEventArgs e)
+        {
+            switch (m_vm.Machine.ID)
+            {
+                case 11:
+                    List<PDCore.Processes.PTurningMoore> processes = new List<PDCore.Processes.PTurningMoore>();
+                    foreach (DataRowView rowview in LV_Polished.Items)
+                    {
+                        processes.Add(PDCore.Manager.ProcessManager.Instance.getProcess(Convert.ToInt32(rowview[DBTurningMoore.ID]), 11) as PDCore.Processes.PTurningMoore);
+                    }
+                    PDCore.Manager.ExportManager.foo(processes);
+                    break;
+                //case 12:
+                //    ID = Convert.ToInt32((LV_Polished.SelectedItem as System.Data.DataRowView)[DBGrindingMoore.ID]);
+                //    new ProcessWindows.CGrindingMoore(ID, true).ShowDialog();
+                //    break;
+                //case 13:
+                //    ID = Convert.ToInt32((LV_Polished.SelectedItem as System.Data.DataRowView)[DBGrindingPhoenix.ID]);
+                //    new ProcessWindows.CGrindingPhoenix(ID, true).ShowDialog();
+                //    break;
+                //case 14:
+                //    ID = Convert.ToInt32((LV_Polished.SelectedItem as System.Data.DataRowView)[DBGrindingOther.ID]);
+                //    new ProcessWindows.CGrindingOther(ID, true).ShowDialog();
+                //    break;
+
+            }
+        }
+
 
     }
 }

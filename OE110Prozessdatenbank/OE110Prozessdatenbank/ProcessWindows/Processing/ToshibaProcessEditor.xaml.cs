@@ -26,6 +26,7 @@ namespace OE110Prozessdatenbank.ProcessWindows
         private List<MenuItem> m_items;
         int index = 0;
         int gridIndex = 0;
+        
         public ToshibaProcessEditor(ViewModels.PToshibaImportVM vm, int index)
         {
             InitializeComponent();
@@ -34,8 +35,7 @@ namespace OE110Prozessdatenbank.ProcessWindows
             generateCountSelector(vm.Processes.Count - index);
             this.index = index;
             m_vm = vm;
-            DataContext = this;// vm.Processes[index];
-            //cb1.DataContext = this;
+            DataContext = this;
 
             if (m_vm.UpperWP != null)
             {
@@ -78,21 +78,21 @@ namespace OE110Prozessdatenbank.ProcessWindows
         { get { return m_vm.Processes[index]; } }
 
 
-        public int Selection
-        {
-            set
-            {
-                if (MessageBox.Show("Wert wirklich übernehmen?") == MessageBoxResult.OK)
-                {
+       // public int Selection
+       // {
+       //     set
+       //     {
+       //         if (MessageBox.Show("Wert wirklich übernehmen?") == MessageBoxResult.OK)
+       //         {
 
-                    //int a = 0;
-                }
+       //             //int a = 0;
+       //         }
 
-            }
-            get { return 0; }
-        }
+       //     }
+       //     get { return 0; }
+       // }
 
-       // int sel = 0;
+       //// int sel = 0;
 
         private void generateCountSelector(int count)
         {

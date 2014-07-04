@@ -149,5 +149,10 @@ namespace PDCore.Manager
             }
             catch { return ""; }
         }
+
+        public void Copy(string source, string dest)
+        {
+            File.Copy(source, dest);
+        }
     }
 }

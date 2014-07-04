@@ -144,6 +144,8 @@ namespace PDCore.Manager
                     return getExpTestStationProcess(PID);
                 case 33:
                     return getExpCemeConProcess(PID);
+                case 34:
+                    return getExpToshibaProcess(PID);
                 case 36:
                     return getExpOtherProcess(PID);
                 case 51:
@@ -223,16 +225,16 @@ namespace PDCore.Manager
             _p.Date = _dr.Field<DateTime>(DBTurningMoore.Date);
             _p.UserID = _dr.Field<int>(DBTurningMoore.UserID);
             _p.ToolID = _dr.Field<string>(DBTurningMoore.ToolID);
-            _p.Speed = _dr.Field<int?>(DBTurningMoore.Speed);
-            _p.CuttingAngle = _dr.Field<int?>(DBTurningMoore.CuttingAngle);
-            _p.CuttingDepth = _dr.Field<int?>(DBTurningMoore.CutDepth);
+            _p.Speed = _dr.Field<double?>(DBTurningMoore.Speed);
+            _p.CuttingAngle = _dr.Field<double?>(DBTurningMoore.CuttingAngle);
+            _p.CuttingDepth = _dr.Field<double?>(DBTurningMoore.CutDepth);
             _p.Remark = _dr.Field<string>(DBTurningMoore.Remark);
-            _p.Radius = _dr.Field<int?>(DBTurningMoore.Radius);
+            _p.Radius = _dr.Field<double?>(DBTurningMoore.Radius);
             _p.RA = _dr.Field<int?>(DBTurningMoore.RA);
             _p.PV = _dr.Field<int?>(DBTurningMoore.PV);
             _p.Processing = _dr.Field<int>(DBTurningMoore.Processing);
             _p.isFinish = _dr.Field<bool>(DBTurningMoore.IsFinish);
-            _p.Feed = _dr.Field<int?>(DBTurningMoore.Feed);
+            _p.Feed = _dr.Field<double?>(DBTurningMoore.Feed);
 
             _p.ProjectID = _dr2.Field<int?>(DBProcessReferences.ProjectID);
             _p.IssueID = _dr2.Field<int?>(DBProcessReferences.IssueID);
@@ -261,15 +263,16 @@ namespace PDCore.Manager
             _p.Date = _dr.Field<DateTime>(DBGrindingMoore.Date);
             _p.UserID = _dr.Field<int>(DBGrindingMoore.UserID);
             _p.GrindingDirection = _dr.Field<string>(DBGrindingMoore.GrindingDirection);
-            _p.GrindingWheelSpeed = _dr.Field<int?>(DBGrindingMoore.GrindingWheelSpeed);
-            _p.InFeed = _dr.Field<int?>(DBGrindingMoore.InFeed);
+            _p.GrindingWheelSpeed = _dr.Field<double?>(DBGrindingMoore.GrindingWheelSpeed);
+            _p.InFeed = _dr.Field<double?>(DBGrindingMoore.InFeed);
+            _p.Feed = _dr.Field<double?>(DBGrindingMoore.Feed);
             _p.PostProduction = _dr.Field<bool>(DBGrindingMoore.PostProduction);
             _p.Remark = _dr.Field<string>(DBGrindingMoore.Remark);
             _p.PV = _dr.Field<int?>(DBGrindingMoore.PV);
             _p.RA = _dr.Field<int?>(DBGrindingMoore.RA);
-            _p.TippRadius = _dr.Field<int?>(DBGrindingMoore.TipRadius);
-            _p.ToolRadius = _dr.Field<int?>(DBGrindingMoore.ToolRadius);
-            _p.ToolSpeed = _dr.Field<int?>(DBGrindingMoore.ToolSpeed);
+            _p.TippRadius = _dr.Field<double?>(DBGrindingMoore.TipRadius);
+            _p.ToolRadius = _dr.Field<double?>(DBGrindingMoore.ToolRadius);
+            _p.ToolSpeed = _dr.Field<double?>(DBGrindingMoore.ToolSpeed);
 
             _p.ProjectID = _dr2.Field<int?>(DBProcessReferences.ProjectID);
             _p.IssueID = _dr2.Field<int?>(DBProcessReferences.IssueID);
@@ -561,6 +564,68 @@ namespace PDCore.Manager
             _p.IssueID = _dr2.Field<int?>(DBProcessReferences.IssueID);
 
             getProcessQuality(_p.Quality,PID);
+
+            return _p;
+        }
+
+        private BaseProcess getExpToshibaProcess(int PID)
+        {
+            DataRow _drProcess = (_myCommunicator.getDataSet("SELECT * from " + DBExpToshiba.Table +
+                                                               " where " + DBExpToshiba.ID + "=" + PID)).Tables[0].Rows[0];
+
+            List<int> _references = getReference(PID);
+
+            DataRow _drProject = (_myCommunicator.getDataSet("SELECT * from " + DBProcessReferences.Table +
+                                                               " where " + DBProcessReferences.RefNumber + "=" + _references[0])).Tables[0].Rows[0];
+
+
+
+            PToshiba _p = new PToshiba();
+
+            //get Workpieces 
+            for (int i = 0; i < _references.Count; i++)
+            {
+                _p.Workpieces.Add(ObjectManager.Instance.getWorkpieceByReference(_references[i], PID));
+            }
+
+            _p.ID = PID;
+            _p.Date = _drProcess.Field<DateTime>(DBExpToshiba.Date);
+            _p.UserID = _drProcess.Field<int>(DBExpToshiba.UserID);
+            _p.Remark = _drProcess.Field<string>(DBExpToshiba.Remark);
+            _p.GlassID = _drProcess.Field<int?>(DBExpToshiba.GlassID);
+            _p.GlassName = _drProcess.Field<string>(DBExpToshiba.GlassName);
+            _p.LowerWorkpiece = _drProcess.Field<int?>(DBExpToshiba.LowerWPID);
+            _p.UpperWorkpiece = _drProcess.Field<int?>(DBExpToshiba.UpperWPID);
+            _p.InputData.CoolingLower = _drProcess.Field<string>(DBExpToshiba.CoolingLower);
+            _p.InputData.CoolingUpper = _drProcess.Field<string>(DBExpToshiba.CoolingUpper);
+
+            _p.InputData.G1 = _drProcess.Field<double?>(DBExpToshiba.G1);
+            _p.InputData.G2 = _drProcess.Field<double?>(DBExpToshiba.G2);
+            _p.InputData.Gv = _drProcess.Field<double?>(DBExpToshiba.Gv);
+            _p.InputData.P1 = _drProcess.Field<double?>(DBExpToshiba.P1);
+            _p.InputData.P2 = _drProcess.Field<double?>(DBExpToshiba.P2);
+            _p.InputData.P3 = _drProcess.Field<double?>(DBExpToshiba.P3);
+            _p.InputData.PT1 = _drProcess.Field<double?>(DBExpToshiba.PT1);
+            _p.InputData.ST1 = _drProcess.Field<double?>(DBExpToshiba.ST1);
+            _p.InputData.ST2 = _drProcess.Field<double?>(DBExpToshiba.ST2);
+            _p.InputData.T1 = _drProcess.Field<double?>(DBExpToshiba.T1);
+            _p.InputData.T1u = _drProcess.Field<double?>(DBExpToshiba.T1u);
+            _p.InputData.T2 = _drProcess.Field<double?>(DBExpToshiba.T2);
+            _p.InputData.T3 = _drProcess.Field<double?>(DBExpToshiba.T3);
+            _p.InputData.T4 = _drProcess.Field<double?>(DBExpToshiba.T4);
+            _p.InputData.T5 = _drProcess.Field<double?>(DBExpToshiba.T5);
+            _p.InputData.Tv = _drProcess.Field<double?>(DBExpToshiba.Tv);
+            _p.InputData.Tvu = _drProcess.Field<double?>(DBExpToshiba.Tvu);
+            _p.InputData.V1 = _drProcess.Field<double?>(DBExpToshiba.V1);
+            _p.InputData.V2 = _drProcess.Field<double?>(DBExpToshiba.V2);
+            _p.InputData.V3 = _drProcess.Field<double?>(DBExpToshiba.V3);
+            _p.InputData.Z1 = _drProcess.Field<double?>(DBExpToshiba.Z1);
+            _p.InputData.Z2 = _drProcess.Field<double?>(DBExpToshiba.Z2);
+
+            _p.ProjectID = _drProject.Field<int?>(DBProcessReferences.ProjectID);
+            _p.IssueID = _drProject.Field<int?>(DBProcessReferences.IssueID);
+
+            getProcessQuality(_p.Quality, PID);
 
             return _p;
         }
@@ -1173,6 +1238,141 @@ namespace PDCore.Manager
             _myCommunicator.executeTransactedQueries(_queries);
         }
 
+        public bool importToshibaProcesses(List<PToshiba> processes)
+        {
+
+
+            foreach (var process in processes)
+            {
+                bool success = saveExpToshibaProcess(process, false);
+            }
+            
+
+            return true;
+        }
+
+        private bool saveExpToshibaProcess(BaseProcess process,bool update)
+        {
+            List<string> _queries = new List<string>();
+
+            PToshiba Process = process as PToshiba;
+
+            if (update)
+            { }
+
+            else
+            {
+                 int _pro = getNextProcessIndex();
+
+                 foreach (Workpiece wp in Process.Workpieces)
+                 {
+                     _queries.Add("INSERT INTO " + DBProcessReferenceRelation.Table + " (" + DBProcessReferenceRelation.PID + "," + DBProcessReferenceRelation.MachineID + "," + DBProcessReferenceRelation.RefNumber +
+                                    ") VALUES (" + _pro + ", " + 34 + "," + wp.CurrentRefereneNumber + ")");
+
+                     _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.Status + " = 'processed' WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
+                     
+                     _queries.Add("DELETE FROM " + DBWorkpieceQuality.Table + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + wp.CurrentRefereneNumber + " AND " + DBWorkpieceQuality.PID + " is null");
+                     
+                     _queries.Add("INSERT INTO " + DBWorkpieceQuality.Table + " (" + DBProcessReferences.RefNumber + "," +
+                                                                                    DBWorkpieceQuality.GlassAdherence + "," +
+                                                                                    DBWorkpieceQuality.MoldScratches + "," +
+                                                                                    DBWorkpieceQuality.OverallResult + "," +
+                                                                                    DBWorkpieceQuality.PID + "," +
+                                                                                    DBWorkpieceQuality.Corrosion+") VALUES ("
+                                                                                    + wp.CurrentRefereneNumber + "," +
+                                                                                    wp.Quality.GlassAdherence + "," +
+                                                                                    wp.Quality.MoldScratches + "," +
+                                                                                    wp.Quality.OverallResult + "," +
+                                                                                    _pro + "," +
+                                                                                    wp.Quality.Corrosion+")");
+                 }
+
+                 Process.ID = _pro;
+
+                 _queries.Add(saveProcessQuality(process));
+
+                 _queries.Add("INSERT INTO " + DBExpToshiba.Table + " (" + DBExpToshiba.ID + "," +
+                                                                           DBExpToshiba.CoolingLower + "," +
+                                                                           DBExpToshiba.CoolingUpper + "," +
+                                                                           DBExpToshiba.Date + "," +
+                                                                           DBExpToshiba.G1 + "," +
+                                                                           DBExpToshiba.G2 + "," +
+                                                                           DBExpToshiba.GlassID + "," +
+                                                                           DBExpToshiba.GlassName + "," +
+                                                                           DBExpToshiba.Gv + "," +
+                                                                           DBExpToshiba.LowerWPID + "," +
+                                                                           DBExpToshiba.P1 + "," +
+                                                                           DBExpToshiba.P2 + "," +
+                                                                           DBExpToshiba.P3 + "," +
+                                                                           DBExpToshiba.PT1 + "," +
+                                                                           DBExpToshiba.Remark + "," +
+                                                                           DBExpToshiba.ST1 + "," +
+                                                                           DBExpToshiba.ST2 + "," +
+                                                                           DBExpToshiba.T1 + "," +
+                                                                           DBExpToshiba.T1u + "," +
+                                                                           DBExpToshiba.T2 + "," +
+                                                                           DBExpToshiba.T3 + "," +
+                                                                           DBExpToshiba.T4 + "," +
+                                                                           DBExpToshiba.T5 + "," +
+                                                                           DBExpToshiba.Tv + "," +
+                                                                           DBExpToshiba.Tvu + "," +
+                                                                           DBExpToshiba.UpperWPID + "," +
+                                                                           DBExpToshiba.UserID + "," +
+                                                                           DBExpToshiba.V1 + "," +
+                                                                           DBExpToshiba.V2 + "," +
+                                                                           DBExpToshiba.V3 + "," +
+                                                                           DBExpToshiba.Z2 + "," +
+                                                                           DBExpToshiba.Z1 + ") Values (" +
+
+                                                                           _pro + "," +
+                                                                           Process.InputData.CoolingLower.ToDBObject() + "," +
+                                                                           Process.InputData.CoolingUpper.ToDBObject() + "," +
+                                                                           Process.Date.ToDBObject() + "," +
+                                                                           Process.InputData.G1.ToDBObject() + "," +
+                                                                           Process.InputData.G2.ToDBObject() + "," +
+                                                                           Process.GlassID.ToDBObject() + "," +
+                                                                           Process.GlassName.ToDBObject() + "," +
+                                                                           Process.InputData.Gv.ToDBObject() + "," +
+                                                                           Process.LowerWorkpiece.ToDBObject() + "," +
+                                                                           Process.InputData.P1.ToDBObject() + "," +
+                                                                           Process.InputData.P2.ToDBObject() + "," +
+                                                                           Process.InputData.P3.ToDBObject() + "," +
+                                                                           Process.InputData.PT1.ToDBObject() + "," +
+                                                                           Process.Remark.ToDBObject() + "," +
+                                                                           Process.InputData.ST1.ToDBObject() + "," +
+                                                                           Process.InputData.ST2.ToDBObject() + "," +
+                                                                           Process.InputData.T1.ToDBObject() + "," +
+                                                                           Process.InputData.T1u.ToDBObject() + "," +
+                                                                           Process.InputData.T2.ToDBObject() + "," +
+                                                                           Process.InputData.T3.ToDBObject() + "," +
+                                                                           Process.InputData.T4.ToDBObject() + "," +
+                                                                           Process.InputData.T5.ToDBObject() + "," +
+                                                                           Process.InputData.Tv.ToDBObject() + "," +
+                                                                           Process.InputData.Tvu.ToDBObject() + "," +
+                                                                           Process.UpperWorkpiece.ToDBObject() + "," +
+                                                                           Process.UserID.ToDBObject() + "," +
+                                                                           Process.InputData.V1.ToDBObject() + "," +
+                                                                           Process.InputData.V2.ToDBObject() + "," +
+                                                                           Process.InputData.V3.ToDBObject() + "," +
+                                                                           Process.InputData.Z2.ToDBObject() + "," +
+                                                                           Process.InputData.Z1.ToDBObject() + ")");
+
+                //TODO: MachineData speichen
+
+                bool success = _myCommunicator.executeTransactedQueries(_queries);
+
+                if (success)
+                {
+                    FileManager.Instance.Copy(Process.File.Path, @"Data\Toshiba\" + _pro + ".mon");
+                }
+
+                return success;
+
+            }
+
+            return false;
+        }
+
         private void saveExpMooreProcess(BaseProcess process, bool update)
         {
             List<string> _queries = new List<string>();
@@ -1599,11 +1799,21 @@ namespace PDCore.Manager
 
             if (WPH.Conclusion!="")
             {
-                setReferenceStatus(WPH.ReferenceNumber, "terminated");
                 ObjectManager.Instance.ReleaseWorkpiece(WPH.Workpiece, false);
             }
 
             _myCommunicator.executeTransactedQueries(_queries);
+
+        }
+
+        public void OverrideReferenceStatus(Workpiece workpiece,string Status)
+        {
+            if (Status== DBEnum.EnumReference.CANCELLED)
+                ObjectManager.Instance.ReleaseWorkpiece(workpiece, true);
+            if (Status == DBEnum.EnumReference.TERMINATED)
+                ObjectManager.Instance.ReleaseWorkpiece(workpiece, false);
+
+            Updater.Instance.forceUpdate();
 
         }
 

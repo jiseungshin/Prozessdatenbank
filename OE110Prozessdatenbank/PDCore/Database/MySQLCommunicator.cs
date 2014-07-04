@@ -232,8 +232,6 @@ namespace PDCore.Database
             return 0;
         }
 
-        
-
         public bool executeTransactedQueries(List<string> queries)
         {
             MySqlTransaction _mySqlTransaction = null;
@@ -343,6 +341,29 @@ namespace PDCore.Database
             return true;
         }
 
+        public static string BuildUpdateQuery(string Table, List<ColumnValuePair> Values, ColumnValuePair condition)
+        {
+
+            string _query = "UPDATE " + Table + " SET ";
+
+            foreach(var pair in Values)
+            {
+                _query += pair.Culumn + "=" + pair.Value.ToDBObject() + ", ";
+            }
+
+            _query = _query.Remove(_query.LastIndexOf(','), 1);
+
+            _query += " WHERE " + condition.Culumn + "=" + condition.Value.ToDBObject();
+
+
+            return _query;
+        }
+
+        public struct ColumnValuePair
+        {
+            public string Culumn { get; set; }
+            public object Value { get; set; }
+        }
         
     }
 
@@ -361,7 +382,7 @@ namespace PDCore.Database
                 }
             if (obj is int || obj is double)
             {
-                return obj.ToString();
+                return obj.ToString().Replace(',', '.');
             }
             if (obj is DateTime)
             {

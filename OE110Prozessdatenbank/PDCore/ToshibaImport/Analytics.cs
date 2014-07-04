@@ -268,7 +268,7 @@ namespace PDCore.ToshibaImport
 
             _result.PAverage = press.GroupBy(item => item).OrderByDescending(g => g.Count()).Select(g => g.Key).First();
 
-            _result.PressTime = press.Where(item => item > (_result.PAverage - (_result.PAverage * 0.2))).Count();
+            _result.PressTime = press.Where(item => Math.Abs(item) > (_result.PAverage - (_result.PAverage * 0.2))).Count();
             
             
             

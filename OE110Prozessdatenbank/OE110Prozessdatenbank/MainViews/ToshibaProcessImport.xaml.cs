@@ -43,12 +43,10 @@ namespace OE110Prozessdatenbank.MainWindows
 
 
             System.Windows.Forms.DialogResult result = _ofd.ShowDialog();
-            Cursor = Cursors.Wait;
             this.UpdateLayout();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 Cursor = Cursors.Wait;
-               // ToshibaImportProgress io = new ToshibaImportProgress(m_vm);
                 int id = 1;
                 foreach (var path in _ofd.FileNames)
                 {
@@ -63,10 +61,6 @@ namespace OE110Prozessdatenbank.MainWindows
                     
                 }
 
-                //io.Show();
-                //io.startImport(_ofd.FileNames.ToList());
-
-           // new Controls.CPVControl().ShowDialog();
                 Cursor = Cursors.Arrow;
                
 
@@ -101,6 +95,26 @@ namespace OE110Prozessdatenbank.MainWindows
         private void bt_openProcessParams_Click(object sender, MouseButtonEventArgs e)
         {
            
+        }
+
+        private void bt_importToDB_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show(Properties.Messages.q_importToshiba, "Hinweis", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                List<PToshiba> processes = new List<PToshiba>();
+                foreach (var pvm in m_vm.Processes)
+                {
+                    processes.Add(pvm.Process);
+                }
+
+                PDCore.Manager.ProcessManager.Instance.importToshibaProcesses(processes);
+                this.Close();
+            }
+        }
+
+        private void bt_cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

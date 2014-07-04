@@ -23,6 +23,7 @@ namespace PDCore.ToshibaImport
 
             MonFile m_file = new MonFile();
             string valueString;
+            m_file.Path = path;
 
             valueString = m_data.Find(item => item.Contains("StartTime"));
             valueString = valueString.Remove(0, valueString.IndexOf(',') + 1);

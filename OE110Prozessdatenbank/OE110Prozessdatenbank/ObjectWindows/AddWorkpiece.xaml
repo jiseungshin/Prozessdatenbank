@@ -1,7 +1,7 @@
 ﻿<Window x:Class="OE110Prozessdatenbank.ObjectWindows.AddWorkpiece"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Werkstück anlegen" Height="269" Width="436" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Werkstück" Height="299" Width="436" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid x:Name="g_content">
         <Label Content="Material *" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <ComboBox Margin="142,10,10,0" ItemsSource="{Binding Materials}" SelectedItem="{Binding Material}" DisplayMemberPath="Name" VerticalAlignment="Top"/>
@@ -18,5 +18,6 @@
         <Label Content="Art der Probe" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top"/>
         <Label Content="Chargennummer" HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top"/>
         <Label Content="Kaufdatum" HorizontalAlignment="Left" Margin="10,149,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="Aktiv" IsChecked="{Binding isActive}" IsEnabled="{Binding canChangeActive}" HorizontalAlignment="Left" Margin="142,200,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

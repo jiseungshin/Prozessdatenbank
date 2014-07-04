@@ -60,6 +60,7 @@
     <Compile Include="Database\Communicator.cs" />
     <Compile Include="Database\DBModel.cs" />
     <Compile Include="Database\MySQLCommunicator.cs" />
+    <Compile Include="IO\SimpleIO.cs" />
     <Compile Include="Manager\ExportManager.cs" />
     <Compile Include="Manager\FileManager.cs" />
     <Compile Include="Manager\ObjectManager.cs" />

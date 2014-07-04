@@ -33,7 +33,7 @@ namespace OE110Prozessdatenbank.MainViews
         public MV_ProMoore()
         {
             InitializeComponent();
-            DataContext = new VMProcessingToshiba();
+            DataContext = new VMProcessingMoore();
             
         }
 
@@ -73,13 +73,13 @@ namespace OE110Prozessdatenbank.MainViews
         }
     }
 
-    public class VMProcessingToshiba : ViewModels.BaseViewModel
+    public class VMProcessingMoore : ViewModels.BaseViewModel
     {
 
 
         private string m_filter = "";
         private FilterCriteria m_criteria = ProcessManager.Instance.FilterCriteria[0];
-        public VMProcessingToshiba()
+        public VMProcessingMoore()
         {
             Updater.Instance.newData += Instance_newData;
         }

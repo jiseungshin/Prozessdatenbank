@@ -85,7 +85,13 @@ namespace OE110Prozessdatenbank.ViewModels
 
                 m_process.Remark = _p.Remark;
                 m_process.UserID = _p.UserID;
+               
                 m_process.ProjectID = _p.ProjectID;
+                m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == _p.ProjectID));
+                NotifyPropertyChanged("Issues");
+                m_process.IssueID = _p.IssueID;
+                NotifyPropertyChanged("Issue");
+                
                 m_process.ProcessID = _p.ProcessID;
 
                 NotifyPropertyChanged("UserID");

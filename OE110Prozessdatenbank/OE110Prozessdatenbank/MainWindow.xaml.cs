@@ -14,6 +14,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PDCore.BusinessObjects;
 using PDCore.Processes;
+using PDCore.Database;
+using System.Threading;
+using System.Windows.Markup;
+using System.Globalization;
 
 namespace OE110Prozessdatenbank
 {
@@ -37,6 +41,14 @@ namespace OE110Prozessdatenbank
         public MainWindow()
         {
             InitializeComponent();
+
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("de-DE");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("de-DE");
+
+            FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(
+            XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
+
+
             lbLoginName.Content = "";
             userIcon.Visibility = System.Windows.Visibility.Hidden;
             //#FF5EB45A
@@ -301,8 +313,15 @@ namespace OE110Prozessdatenbank
         {
             //var tt = PDCore.Manager.ProcessManager.Instance.getWorkpieceHistory(1);
             //var tt = PDCore.Manager.FileManager.Instance.getDirPth(1);
-            PDCore.Processes.PTurningMoore p = PDCore.Manager.ProcessManager.Instance.getProcess(21,11) as PDCore.Processes.PTurningMoore;
-            PDCore.Manager.ExportManager.foo(new List<PDCore.Processes.PTurningMoore>() { p });
+            //PDCore.Processes.PTurningMoore p = PDCore.Manager.ProcessManager.Instance.getProcess(15,11) as PDCore.Processes.PTurningMoore;
+            //PDCore.Manager.ExportManager.foo(new List<PDCore.Processes.PTurningMoore>() { p });
+            List<MySQLCommunicator.ColumnValuePair> tt = new List<MySQLCommunicator.ColumnValuePair>();
+
+            tt.Add(new MySQLCommunicator.ColumnValuePair(){Culumn=DBWorkpieces.Label,Value="huhu"});
+            tt.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBWorkpieces.PurchaseDate, Value = DateTime.Now });
+            tt.Add(new MySQLCommunicator.ColumnValuePair(){Culumn=DBWorkpieces.isActive,Value=true});
+
+            string q =PDCore.Database.MySQLCommunicator.BuildUpdateQuery(DBWorkpieces.Table,tt,new MySQLCommunicator.ColumnValuePair(){Culumn=DBWorkpieces.ID,Value=1});
         }
 
         private void mbt_CoatingAdmin_Click(object sender, RoutedEventArgs e)

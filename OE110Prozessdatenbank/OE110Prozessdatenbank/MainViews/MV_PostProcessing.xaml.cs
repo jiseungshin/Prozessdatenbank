@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data;
 using PDCore.Database;
+using OE110Prozessdatenbank.Properties;
 
 namespace OE110Prozessdatenbank.MainViews
 {
@@ -126,7 +127,7 @@ namespace OE110Prozessdatenbank.MainViews
                 new Controls.CAnalyses(ID).ShowDialog();
             }
             else
-                MessageBox.Show("Es wurde kein Listenelement ausgewählt!", "Hinweis", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(Messages.e_NoSelectedListElement, "Hinweis", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private void mbt_gotoDecoating_Click(object sender, RoutedEventArgs e)
@@ -137,7 +138,7 @@ namespace OE110Prozessdatenbank.MainViews
                 new Controls.CDecoating(ID).ShowDialog();
             }
             else
-                MessageBox.Show("Es wurde kein Listenelement ausgewählt!", "Hinweis", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(Messages.e_NoSelectedListElement, "Hinweis", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private void mbt_gotoConclusion_Click(object sender, RoutedEventArgs e)
@@ -148,7 +149,31 @@ namespace OE110Prozessdatenbank.MainViews
                 new Controls.CConclusion(ID).ShowDialog();
             }
             else
-                MessageBox.Show("Es wurde kein Listenelement ausgewählt!", "Hinweis", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(Messages.e_NoSelectedListElement, "Hinweis", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+
+        private void cmb_cancel_Click(object sender, RoutedEventArgs e)
+        {
+            if (listview.SelectedIndex != -1)
+            {
+                if (MessageBox.Show(Messages.q_CancelReference, "Vorgang abbrechen", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    int ID = Convert.ToInt32(((listview).SelectedItem as DataRowView)[DBProcessReferences.RefNumber]);
+                    PDCore.Manager.ProcessManager.Instance.OverrideReferenceStatus(PDCore.Manager.ObjectManager.Instance.getWorkpieceByReference(ID), DBEnum.EnumReference.CANCELLED);
+                }
+            }
+        }
+
+        private void cmb_terminate_Click(object sender, RoutedEventArgs e)
+        {
+            if (listview.SelectedIndex != -1)
+            {
+                if (MessageBox.Show(Messages.q_TerminateReference, "Vorgang beenden", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    int ID = Convert.ToInt32(((listview).SelectedItem as DataRowView)[DBProcessReferences.RefNumber]);
+                    PDCore.Manager.ProcessManager.Instance.OverrideReferenceStatus(PDCore.Manager.ObjectManager.Instance.getWorkpieceByReference(ID), DBEnum.EnumReference.CANCELLED);
+                }
+            }
         }
     }
 }

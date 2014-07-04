@@ -60,6 +60,8 @@ namespace OE110Prozessdatenbank.ViewModels
 
             process.GlassName = LensName + "_"+index;
 
+            process.UserID = User.ID;
+
             m_ProcessVms.Add(new PToshibaVM(process));
             NotifyPropertyChanged("Processes");
         }

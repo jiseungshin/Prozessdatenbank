@@ -13,10 +13,10 @@
         <ComboBox x:Name="cb_takeProcessData" ItemsSource="{Binding AvailableProcesses}" SelectedItem="{Binding SelectedProcess}" Margin="166,32,10,0" VerticalAlignment="Top">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="170" Height="14" HorizontalAlignment="Stretch">
+                    <Grid Width="250" Height="28" HorizontalAlignment="Stretch">
                         <TextBlock Text="{Binding Label, StringFormat=Werkstück  {0}}" Margin="0,0,0,0" ></TextBlock>
-                        <TextBlock Text="{Binding Date,Converter={StaticResource dateConv}}" Margin="110,0,0,0" ></TextBlock>
-                        <TextBlock Text="{Binding ReferenceNumber,StringFormat=(V-Nr.: {0})}" Margin="180,0,0,0" HorizontalAlignment="Left"/>
+                        <TextBlock Text="{Binding Date,Converter={StaticResource dateConv}, StringFormat=({0})}" Margin="0,14,0,0" ></TextBlock>
+                        <TextBlock Text="{Binding ReferenceNumber,StringFormat=(V-Nr.: {0})}" Margin="70,14,0,0" HorizontalAlignment="Left"/>
                     </Grid>
                 </DataTemplate>
             </ComboBox.ItemTemplate>

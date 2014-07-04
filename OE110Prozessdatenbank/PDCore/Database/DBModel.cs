@@ -90,6 +90,7 @@ namespace PDCore.Database
         public static string KindOfProbe { get { return "KindOfProbe"; } }
         public static string BatchNumber { get { return "BatchNumber"; } }
         public static string isOneWay { get { return "isOneWay"; } }
+        public static string isActive { get { return "isActive"; } }
 
     }
     public static class DBWorkpieceQuality
@@ -101,6 +102,7 @@ namespace PDCore.Database
         public static string MoldScratches { get { return "MoldScratches"; } }
         public static string GlassAdherence { get { return "GlassAdherence"; } }
         public static string OverallResult { get { return "OverallResult"; } }
+        public static string PID { get { return "Process_ID"; } }
     }
     public static class DBProcessQuality
     {
@@ -322,6 +324,7 @@ namespace PDCore.Database
         public static string V1 { get { return "V1"; } }
         public static string V2 { get { return "V2"; } }
         public static string Z2 { get { return "Z2"; } }
+        public static string Z1 { get { return "Z1"; } }
         public static string V3 { get { return "V3"; } }
         public static string Gv { get { return "Gv"; } }
         public static string G1 { get { return "G1"; } }
@@ -384,4 +387,30 @@ namespace PDCore.Database
 
     }
 
+    public static class DBEnum
+    {
+        public static class EnumWorkpiece
+        {
+            public static string RAW { get { return "raw"; } }
+            public static string IN_PROCESS { get { return "INPROCESS"; } }
+
+        }
+
+        public static class EnumReference
+        {
+            public static string RAW { get { return "raw"; } }
+            public static string POLISHED { get { return "polished"; } }
+            public static string COATED { get { return "coated"; } }
+            public static string PROCESSED { get { return "processed"; } }
+            public static string ANALYSED { get { return "analysed"; } }
+            public static string DECOATED { get { return "decoated"; } }
+            public static string TERMINATED { get { return "terminated"; } }
+            public static string CANCELLED { get { return "cancelled"; } }
+
+        }
+
+
+
+
+    }
 }

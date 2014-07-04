@@ -60,7 +60,7 @@ namespace OE110Prozessdatenbank.ViewModels
         { get { return m_workpiece.PurchaseDate; } set { m_workpiece.PurchaseDate = value; } }
 
         public string Geometry
-        { get { return m_workpiece.Geometry; } set { m_workpiece.Geometry = value; System.Windows.MessageBox.Show(value.ToString()); } }
+        { get { return m_workpiece.Geometry; } set { m_workpiece.Geometry = value; } }
 
         public List<string> Geometries
         { get { return m_geometries; } }
@@ -75,8 +75,20 @@ namespace OE110Prozessdatenbank.ViewModels
         }
         public string BatchNumber
         { get { return m_workpiece.BatchNumber; } set { m_workpiece.BatchNumber = value; } }
-        
 
+        public bool isActive
+        { get { return m_workpiece.isActive; } set { m_workpiece.isActive = value; } }
+        
+        public bool canChangeActive
+        {
+            get
+            {
+                if (m_workpiece.Status == "raw")
+                    return true;
+                else
+                    return false;
+            }
+        }
 
         #region Command functions
         public void Save()

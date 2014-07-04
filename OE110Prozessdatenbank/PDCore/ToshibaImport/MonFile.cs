@@ -13,6 +13,7 @@ namespace PDCore.ToshibaImport
         public TimeSpan CycleTime { get; set; }
 
         public List<ProcessStep> Steps { get; set; }
+        public string Path { get; set; }
 
         public MonFile()
         {

@@ -11,7 +11,7 @@ namespace PDCore.Database
             {
                 return "SELECT Workpieces.Label, Materials.Name, Workpieces.WorkPiece_ID FROM Workpieces " +
                           "INNER JOIN Materials ON Workpieces.Material_ID = Materials.Material_ID " +
-                          "WHERE Workpieces.Status='raw'";
+                          "WHERE Workpieces.Status='raw' AND Workpieces.isActive=1 ";
             }
         }
 
@@ -494,6 +494,55 @@ namespace PDCore.Database
                                               " LEFT JOIN " + DBIssues.Table +
                                               " On " + DBIssues.Table + "." + DBIssues.ID +
                                               "=" + DBProcessReferences.Table + "." + DBProcessReferences.IssueID;
+            }
+        }
+
+        public static string QueryProcessedToshiba
+        {
+            get
+            {
+                return "SELECT * FROM " + DBExpToshiba.Table +
+
+                                              //join ReferenceRelations
+                                              " LEFT JOIN " + DBProcessReferenceRelation.Table +
+                                              " On " + DBProcessReferenceRelation.Table + "." + DBProcessReferenceRelation.PID +
+                                              "=" + DBExpToshiba.Table + "." + DBExpToshiba.ID +
+
+                                              //join References
+                                              " LEFT JOIN " + DBProcessReferences.Table +
+                                              " On " + DBProcessReferences.Table + "." + DBProcessReferences.RefNumber +
+                                              "=" + DBProcessReferenceRelation.Table + "." + DBProcessReferenceRelation.RefNumber +
+
+                                              //join Workpiece
+                                              " LEFT JOIN " + DBWorkpieces.Table +
+                                              " On " + DBWorkpieces.Table + "." + DBWorkpieces.ID +
+                                              "=" + DBProcessReferences.Table + "." + DBProcessReferences.WorkpiceID +
+
+                                               //join Material
+                                              " LEFT JOIN " + DBMAterial.Table +
+                                              " On " + DBMAterial.Table + "." + DBMAterial.ID +
+                                              "=" + DBWorkpieces.Table + "." + DBWorkpieces.MaterialID +
+
+                                               //join Glasses
+                                              " LEFT JOIN " + DBGlasses.Table +
+                                              " On " + DBGlasses.Table + "." + DBGlasses.ID +
+                                              "=" + DBExpToshiba.Table + "." + DBExpToshiba.GlassID +
+
+                                               //join User
+                                              " LEFT JOIN " + DBUser.Table +
+                                              " On " + DBUser.Table + "." + DBUser.ID +
+                                              "=" + DBExpToshiba.Table + "." + DBExpToshiba.UserID +
+
+                                              //join project
+                                              " LEFT JOIN " + DBProjects.Table +
+                                              " On " + DBProjects.Table + "." + DBProjects.ID +
+                                              "=" + DBProcessReferences.Table + "." + DBProcessReferences.ProjectID +
+
+                                              //join issues
+                                              " LEFT JOIN " + DBIssues.Table +
+                                              " On " + DBIssues.Table + "." + DBIssues.ID +
+                                              "=" + DBProcessReferences.Table + "." + DBProcessReferences.IssueID;//+
+                //" WHERE " + DBProcessReferences.Table + "." + DBProcessReferences.Status + "='processed'";
             }
         }
         public static string QueryPostProcessing

@@ -13,6 +13,8 @@ namespace PDCore.BusinessObjects
             Material = new Material();
             Quality = new WorkpieceQuality();
             Label = "";
+            isActive = true;
+            Status = "raw";
             
         }
         public string Label { get; set; }
@@ -25,6 +27,7 @@ namespace PDCore.BusinessObjects
         public int CurrentRefereneNumber { get; set; }
         public BusinessObjects.WorkpieceQuality Quality { get; set; }
         public string Status { get; set; }
+        public bool isActive { get; set; }
 
         public Workpiece clone()
         {

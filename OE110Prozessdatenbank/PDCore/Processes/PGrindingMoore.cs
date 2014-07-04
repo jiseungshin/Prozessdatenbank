@@ -17,15 +17,15 @@ namespace PDCore.Processes
             Quality = new BusinessObjects.ProcessQuality();
         }
 
-        public int? ToolRadius { get; set; }
-        public int? Feed { get; set; }
-        public int? TippRadius { get; set; }
+        public double? ToolRadius { get; set; }
+        public double? Feed { get; set; }
+        public double? TippRadius { get; set; }
         public string GrindingDirection { get; set; }
         public int? RA { get; set; }
         public int? PV { get; set; }
-        public int? InFeed { get; set; }
-        public int? ToolSpeed { get; set; }
-        public int? GrindingWheelSpeed { get; set; }
+        public double? InFeed { get; set; }
+        public double? ToolSpeed { get; set; }
+        public double? GrindingWheelSpeed { get; set; }
         public bool PostProduction { get; set; }
 
     }

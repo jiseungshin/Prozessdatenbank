@@ -150,8 +150,11 @@ namespace OE110Prozessdatenbank.ViewModels
                 m_FullConstraint += m_DecoatedConstraint; m_FullConstraint += " OR ";
             }
 
-            m_FullConstraint = m_FullConstraint.Remove(m_FullConstraint.Length - 4, 3);
-            m_FullConstraint += ")";
+            m_FullConstraint += "ProcessReferences.Status='cancelled' " +
+                                "OR ProcessReferences.Status='terminated')";
+
+            //m_FullConstraint = m_FullConstraint.Remove(m_FullConstraint.Length - 4, 3);
+            //m_FullConstraint += ")";
 
             if (m_processedConstraint == "" && m_AnalysedCostraint == "" && m_DecoatedConstraint == "")
                 m_FullConstraint = " WHERE ProcessReferences.ReferenceNumber=-1";

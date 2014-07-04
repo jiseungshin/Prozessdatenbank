@@ -50,15 +50,15 @@ namespace OE110Prozessdatenbank.ViewModels
         public ObservableCollection<User> Users { get { return new ObservableCollection<PDCore.BusinessObjects.User>(ObjectManager.Instance.Users); } }
         public ObservableCollection<Project> Projects { get { return new ObservableCollection<PDCore.BusinessObjects.Project>(ObjectManager.Instance.Projects); } }
 
-        public DateTime Date { get { return m_process.Date; } set { m_process.Date = value; } } 
-        public int? InFeed { get { return m_process.InFeed; } set { m_process.InFeed = value; } }
-        public int? Feed { get { return m_process.Feed; } set { m_process.Feed = value; } }
+        public DateTime Date { get { return m_process.Date; } set { m_process.Date = value; } }
+        public double? InFeed { get { return m_process.InFeed; } set { m_process.InFeed = value; } }
+        public double? Feed { get { return m_process.Feed; } set { m_process.Feed = value; } }
         public string GrindingDirection { get { return m_process.GrindingDirection; } set { m_process.GrindingDirection = value; } }
-        public int? GrindingWheelSpeed { get { return m_process.GrindingWheelSpeed; } set { m_process.GrindingWheelSpeed = value; } }
+        public double? GrindingWheelSpeed { get { return m_process.GrindingWheelSpeed; } set { m_process.GrindingWheelSpeed = value; } }
         public bool Speed { get { return m_process.PostProduction; } set { m_process.PostProduction = value; } }
-        public int? TippRadius { get { return m_process.TippRadius; } set { m_process.TippRadius = value; } }
-        public int? ToolRadius { get { return m_process.ToolRadius; } set { m_process.ToolRadius = value; } }
-        public int? ToolSpeed { get { return m_process.ToolSpeed; } set { m_process.ToolSpeed = value; } }
+        public double? TippRadius { get { return m_process.TippRadius; } set { m_process.TippRadius = value; } }
+        public double? ToolRadius { get { return m_process.ToolRadius; } set { m_process.ToolRadius = value; } }
+        public double? ToolSpeed { get { return m_process.ToolSpeed; } set { m_process.ToolSpeed = value; } }
         public int? PV { get { return m_process.PV; } set { m_process.PV = value; } }
         public int? RA { get { return m_process.RA; } set { m_process.RA = value; } } 
         public string Remark { get { return m_process.Remark; } set { m_process.Remark = value; } }
@@ -98,7 +98,12 @@ namespace OE110Prozessdatenbank.ViewModels
                 m_process.ToolRadius = _p.ToolRadius;
                 m_process.UserID = _p.UserID;
                 m_process.ToolSpeed = _p.ToolSpeed;
+
                 m_process.ProjectID = _p.ProjectID;
+                m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == _p.ProjectID));
+                NotifyPropertyChanged("Issues");
+                m_process.IssueID = _p.IssueID;
+                NotifyPropertyChanged("Issue");
 
                 NotifyPropertyChanged("GrindingDirection");
                 NotifyPropertyChanged("GrindingWheelSpeed");
