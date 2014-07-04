@@ -70,6 +70,7 @@ namespace PDCore.Manager
         public void createProjectDirectory(Project project)
         {
             Directory.CreateDirectory(Properties.Settings.Default.StandardDirPath + project.Description);
+            //Directory.CreateDirectory(@"" + project.Description);
         }
 
         public void updateProjectDirectory(Project Project)

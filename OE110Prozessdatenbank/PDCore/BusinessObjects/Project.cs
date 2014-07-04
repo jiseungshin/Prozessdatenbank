@@ -16,6 +16,7 @@ namespace PDCore.BusinessObjects
             Finished = null;
             User = null;
             Description = "";
+            
         }
         public string Description { get; set; }
         public string OLDDescription { get; set; }

@@ -126,7 +126,7 @@
         <Label Content="Glas" HorizontalAlignment="Left" Margin="347,10,0,0" VerticalAlignment="Top" Width="76"/>
         <Label Content="Benennung" HorizontalAlignment="Left" Margin="347,36,0,0" VerticalAlignment="Top" Width="102"/>
         <Label Content="+ Zahl" HorizontalAlignment="Left" Margin="579,34,-5,0" VerticalAlignment="Top" Width="102"/>
-        <Button x:Name="bt_importToDB" Content="importieren" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="87" Click="bt_importToDB_Click"/>
+        <Button x:Name="bt_importToDB" IsEnabled="False" Content="importieren" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="87" Click="bt_importToDB_Click"/>
         <Button x:Name="bt_cancel" Content="abbrechen" HorizontalAlignment="Right" Margin="0,0,102,10" VerticalAlignment="Bottom" Width="87" Click="bt_cancel_Click"/>
 
     </Grid>

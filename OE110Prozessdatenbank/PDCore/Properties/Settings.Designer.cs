@@ -34,7 +34,7 @@ namespace PDCore.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("192.168.178.49")]
+        [global::System.Configuration.DefaultSettingValueAttribute("localhost")]
         public string Server {
             get {
                 return ((string)(this["Server"]));
@@ -61,7 +61,7 @@ namespace PDCore.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("D:\\Prozessdatenbank\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Prozessdatenbank\\")]
         public string StandardDirPath {
             get {
                 return ((string)(this["StandardDirPath"]));

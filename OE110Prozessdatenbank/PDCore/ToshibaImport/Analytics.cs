@@ -24,8 +24,8 @@ namespace PDCore.ToshibaImport
                 switch(step.stepnumber)
                 {
                     case 1:
-                        result = analyse_123(step);
-                        process.InputData.V1 = result.PosRate;
+                        //result = analyse_123(step);
+                        process.InputData.V1 = null;
                         break;
                     case 2:
                         result = analyse_123(step);
@@ -90,7 +90,7 @@ namespace PDCore.ToshibaImport
                         process.InputData.P1 = Math.Round(result.PAverage, PressRound);
                         process.InputData.PT1 = result.PressTime;
                         process.InputData.ST2 = result.Duration;
-                        process.InputData.V2 = result.PosRate;
+                        process.InputData.V2 = null;
                         process.InputData.Z2 = result.Posmax;
                         break;
                     case 6:
