@@ -140,7 +140,7 @@ namespace PDCore.Database
     {
         public static string Table { get { return "Glasses"; } }
         public static string ID { get { return "Glass_ID"; } }
-        public static string Description { get { return "GlassName"; } }
+        public static string Description { get { return "Glass_Name"; } }
         public static string Company { get { return "Company"; } }
     }
     public static class DBUser

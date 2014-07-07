@@ -44,6 +44,7 @@ namespace PDCore.Manager
             m_criteriaCoating.Add(new FilterCriteria() { DatabaseField = "al."+DBCoatingLayers.Layer, Name = "Haftschicht" });
             m_criteriaCoating.Add(new FilterCriteria() { DatabaseField = DBProcessReferences.Table + "." + DBProcessReferences.RefNumber, Name = "Vorgangsnummer" });
 
+        
         }
 
          void _myCommunicator_MessageThrown(Communicator.MessageType mType, Exception Message)
@@ -74,6 +75,7 @@ namespace PDCore.Manager
         private List<PCoatingCemeconProcess> m_CoatingProcesses = new List<PCoatingCemeconProcess>();
         private List<FilterCriteria> m_criteria = new List<FilterCriteria>();
         private List<FilterCriteria> m_criteriaCoating = new List<FilterCriteria>();
+        private List<FilterCriteria> m_criteriaProcessingToshiba = new List<FilterCriteria>();
         private List<PCoatingCemeconProcess.Layer> m_layers = new List<PCoatingCemeconProcess.Layer>();
 
         public void update()
