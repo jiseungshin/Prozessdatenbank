@@ -24,6 +24,7 @@
             <src:StatusConverter x:Key="StatusConverter"></src:StatusConverter>
             <src:DateTimeConverter x:Key="DateConverter"></src:DateTimeConverter>
             <src:NullToString x:Key="NullToString"></src:NullToString>
+            <src:PVCategoryToColor x:Key="PVConv"></src:PVCategoryToColor>
         </Grid.Resources>
         <ToolBarTray Height="44" VerticalAlignment="Top" Background="#FFB4B4B4" Width="auto">
             <ToolBar x:Name="tb_mainTool" Background="#FFB4B4B4" HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="auto" Margin="0,0,-125,-31" ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded">
@@ -90,7 +91,15 @@
                     <GridViewColumn Header="Werkstück obere Achse" DisplayMemberBinding="{Binding Path=Upper}" Width="150"/>
                     <GridViewColumn Header="Glassorte" DisplayMemberBinding="{Binding Path=GlassName,Converter={StaticResource NullToString}}" Width="90"/>
                     <GridViewColumn Header="Glasbezeichnung" DisplayMemberBinding="{Binding Path=GlassName,Converter={StaticResource NullToString}}" Width="110"/>
-                    <GridViewColumn Header="PV" DisplayMemberBinding="{Binding Glass_PV_Category}" Width="50"/>
+                    <GridViewColumn Header="PV" Width="30">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Width="30">
+                                    <Ellipse x:Name="rb_g" HorizontalAlignment="Left" Fill="{Binding Glass_PV_Category, Converter={StaticResource PVConv}}" Height="12" Margin="4,0,0,0" Stroke="#FF4D4D4D" VerticalAlignment="Top" Width="12"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
 
             </ListView.View>

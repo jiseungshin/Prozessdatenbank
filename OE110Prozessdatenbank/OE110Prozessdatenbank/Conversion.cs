@@ -58,8 +58,6 @@ namespace OE110Prozessdatenbank
             }
             else
                 return new BitmapImage(new Uri(@"pack://application:,,,/Icons/Status_Blocked_16xMD.png", UriKind.RelativeOrAbsolute));
-
-            //return value == null ? "--" : value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -83,32 +81,32 @@ namespace OE110Prozessdatenbank
 
 
 
-    //public class ProgressToColorConverter : IValueConverter
-    //{
-    //    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    //    {
-    //        if ((double)value > 100)
-    //        {
-    //            return System.Windows.Media.Brushes.Red;
-    //        }
-    //        if ((double)value > 90)
-    //        {
-    //            return System.Windows.Media.Brushes.Tomato;
-    //        }
-    //        if ((double)value > 80)
-    //        {
-    //            return System.Windows.Media.Brushes.Orange;
-    //        }
-    //        else
-    //            return System.Windows.Media.Brushes.Green;
+    public class PVCategoryToColor : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if ((int)value ==0)
+            {
+                return System.Windows.Media.Brushes.Green;
+            }
+            if ((int)value ==1)
+            {
+                return System.Windows.Media.Brushes.Orange;
+            }
+            if ((int)value ==2)
+            {
+                return System.Windows.Media.Brushes.Red;
+            }
+            else
+                return System.Windows.Media.Brushes.Green;
 
-    //    }
+        }
 
-    //    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    //    {
-    //        return 0;
-    //    }
-    //}
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return 0;
+        }
+    }
 
     public class DateConverter : IValueConverter
     {
