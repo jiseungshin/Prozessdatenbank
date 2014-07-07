@@ -32,7 +32,7 @@ namespace OE110Prozessdatenbank.ViewModels
                 WP_UpperControl = new Controls.CQuality(process.Workpieces.Find(item => item.ID == m_process.UpperWorkpiece));
             if (m_process.LowerWorkpiece != null)
                 WP_LowerControl = new Controls.CQuality(process.Workpieces.Find(item => item.ID == m_process.LowerWorkpiece));
-            PV_Control = new Controls.CPVControl();
+            PV_Control = new Controls.CPVControl(m_process);
             ProcessQualityControl = new Controls.CProcessQuality(m_process);
 
             #region Temp
@@ -121,7 +121,7 @@ namespace OE110Prozessdatenbank.ViewModels
                 WP_UpperControl = new Controls.CQuality(ObjectManager.Instance.Workpieces.Find(item => item.ID == m_process.UpperWorkpiece));
             if (m_process.LowerWorkpiece != null)
                 WP_LowerControl = new Controls.CQuality(ObjectManager.Instance.Workpieces.Find(item => item.ID == m_process.LowerWorkpiece));
-            PV_Control = new Controls.CPVControl();
+            PV_Control = new Controls.CPVControl(m_process);
             ProcessQualityControl = new Controls.CProcessQuality(m_process);
 
             #region Temp

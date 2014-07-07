@@ -453,16 +453,17 @@ namespace PDCore.Database
         {
             get
             {
-                string bla= "SELECT " + DBExpToshiba.Table + ".*," +
+                string query= "SELECT " + DBExpToshiba.Table + ".*," +
+                                            DBProcessQuality.Table + ".*," +
                                             DBGlasses.Table + ".*," +
                                             DBUser.Table + ".*, uwp." + DBWorkpieces.Label + " AS Upper, lwp." + DBWorkpieces.Label + " AS Lower " +
 
-                                 "FROM " + DBExpToshiba.Table +
+                                            "FROM " + DBExpToshiba.Table +
 
-                                              ////join ReferenceRelations
-                                              //" LEFT JOIN " + DBProcessReferenceRelation.Table +
-                                              //" On " + DBProcessReferenceRelation.Table + "." + DBProcessReferenceRelation.PID +
-                                              //"=" + DBExpToshiba.Table + "." + DBExpToshiba.ID +
+                                              //join ProcessQuality
+                                              " LEFT JOIN " + DBProcessQuality.Table +
+                                              " On " + DBProcessQuality.Table + "." + DBProcessQuality.PID +
+                                              "=" + DBExpToshiba.Table + "." + DBExpToshiba.ID +
 
                                               ////join References
                                               //" LEFT JOIN " + DBProcessReferences.Table +
@@ -494,7 +495,7 @@ namespace PDCore.Database
                                               "=lwp." + DBWorkpieces.ID 
 
                                              ;// +
-                return bla;
+                return query;
                                               ////join project
                                               //" LEFT JOIN " + DBProjects.Table +
                                               //" On " + DBProjects.Table + "." + DBProjects.ID +

@@ -19,6 +19,9 @@ namespace OE110Prozessdatenbank.ViewModels
         private string m_lensName = "";
         private Glass m_glass;
 
+        private Project m_project;
+        private Issue m_issue;
+
         private ObservableCollection<Issue> m_issues = new ObservableCollection<Issue>();
 
         public PToshibaImportVM(List<PToshiba> processes)
@@ -79,6 +82,8 @@ namespace OE110Prozessdatenbank.ViewModels
             process.GlassName = LensName + "_"+index;
 
             process.UserID = User.ID;
+            process.ProjectID = m_project.ID;
+            process.IssueID = m_issue.ID;
 
             m_ProcessVms.Add(new PToshibaVM(process));
             NotifyPropertyChanged("Processes");
@@ -101,33 +106,51 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public Issue Issue
         {
-            set
+            get
             {
                 try
                 {
-                    foreach (var p in Processes)
-                    {
-                        p.m_process.IssueID = value.ID;
-                    }
+                    return m_issue;// ObjectManager.Instance.Issues.Find(item => item.ID == Processes[0].IssueID);
                 }
-                catch
-                {
-                    foreach (var p in Processes)
-                    {
-                        p.m_process.IssueID = null;
-                    }
-                }
+                catch { return null; }
+            }
+            set
+            {
+                m_issue = value;
+                //try
+                //{
+                //    foreach (var p in Processes)
+                //    {
+                //        p.m_process.IssueID = value.ID;
+                //    }
+                //}
+                //catch
+                //{
+                //    foreach (var p in Processes)
+                //    {
+                //        p.m_process.IssueID = null;
+                //    }
+                //}
             }
         }
 
         public Project Project
         {
+            get 
+            {
+                try
+                {
+                    return m_project;// ObjectManager.Instance.Projects.Find(item => item.ID == Processes[0].ProjectID);
+                }
+                catch { return null; }
+            }
             set
             {
-                foreach (var p in Processes)
-                {
-                    p.m_process.ProjectID = value.ID;
-                }
+                //foreach (var p in Processes)
+                //{
+                //    p.m_process.ProjectID = value.ID;
+                //}
+                m_project = value;
                 m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == value.ID));
                 NotifyPropertyChanged("Issues");
             }

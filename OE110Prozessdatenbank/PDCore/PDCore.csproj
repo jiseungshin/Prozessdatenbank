@@ -93,6 +93,8 @@
     <Compile Include="ToshibaImport\MonFile.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Data\Fueller\" />
+    <Folder Include="Data\Toshiba\" />
     <Folder Include="FuellerImport\" />
   </ItemGroup>
   <ItemGroup>

@@ -217,6 +217,9 @@ namespace PDCore.Manager
 
             DataRow _dr2 = (_myCommunicator.getDataSet("SELECT * from " + DBProcessReferences.Table +
                                                                " where " + DBProcessReferences.RefNumber + "=" + _references[0])).Tables[0].Rows[0];
+
+            DataRow _drQuality = (_myCommunicator.getDataSet("SELECT * from " + DBWorkpieceQuality.Table +
+                                                              " where " + DBWorkpieceQuality.ReferenceNumber + "=" + _references[0])).Tables[0].Rows[0];
            
             //get Workpieces 
             for (int i = 0; i < _references.Count; i++)
@@ -233,14 +236,16 @@ namespace PDCore.Manager
             _p.CuttingDepth = _dr.Field<double?>(DBTurningMoore.CutDepth);
             _p.Remark = _dr.Field<string>(DBTurningMoore.Remark);
             _p.Radius = _dr.Field<double?>(DBTurningMoore.Radius);
-            _p.RA = _dr.Field<int?>(DBTurningMoore.RA);
-            _p.PV = _dr.Field<int?>(DBTurningMoore.PV);
+            
             _p.Processing = _dr.Field<int>(DBTurningMoore.Processing);
             _p.isFinish = _dr.Field<bool>(DBTurningMoore.IsFinish);
             _p.Feed = _dr.Field<double?>(DBTurningMoore.Feed);
 
             _p.ProjectID = _dr2.Field<int?>(DBProcessReferences.ProjectID);
             _p.IssueID = _dr2.Field<int?>(DBProcessReferences.IssueID);
+
+            _p.RA = _drQuality.Field<int?>(DBWorkpieceQuality.Grinding_RA);
+            _p.PV = _drQuality.Field<int?>(DBWorkpieceQuality.Grinding_PV);
 
             return _p;
         }
@@ -256,6 +261,9 @@ namespace PDCore.Manager
             DataRow _dr2 = (_myCommunicator.getDataSet("SELECT * from " + DBProcessReferences.Table +
                                                                " where " + DBProcessReferences.RefNumber + "=" + _references[0])).Tables[0].Rows[0];
 
+            DataRow _drQuality = (_myCommunicator.getDataSet("SELECT * from " + DBWorkpieceQuality.Table +
+                                                   " where " + DBWorkpieceQuality.ReferenceNumber + "=" + _references[0])).Tables[0].Rows[0];
+            
             //get Workpieces 
             for (int i = 0; i < _references.Count; i++)
             {
@@ -271,14 +279,15 @@ namespace PDCore.Manager
             _p.Feed = _dr.Field<double?>(DBGrindingMoore.Feed);
             _p.PostProduction = _dr.Field<bool>(DBGrindingMoore.PostProduction);
             _p.Remark = _dr.Field<string>(DBGrindingMoore.Remark);
-            _p.PV = _dr.Field<int?>(DBGrindingMoore.PV);
-            _p.RA = _dr.Field<int?>(DBGrindingMoore.RA);
             _p.TippRadius = _dr.Field<double?>(DBGrindingMoore.TipRadius);
             _p.ToolRadius = _dr.Field<double?>(DBGrindingMoore.ToolRadius);
             _p.ToolSpeed = _dr.Field<double?>(DBGrindingMoore.ToolSpeed);
 
             _p.ProjectID = _dr2.Field<int?>(DBProcessReferences.ProjectID);
             _p.IssueID = _dr2.Field<int?>(DBProcessReferences.IssueID);
+
+            _p.PV = _drQuality.Field<int?>(DBWorkpieceQuality.Grinding_PV);
+            _p.RA = _drQuality.Field<int?>(DBWorkpieceQuality.Grinding_RA);
 
             return _p;
         }
@@ -644,6 +653,7 @@ namespace PDCore.Manager
                 q.GlassSratches = _dr.Field<bool>(DBProcessQuality.GlassScratches);
                 q.GlassPeeling = _dr.Field<bool>(DBProcessQuality.GlassPeeling);
                 q.OverallResult = _dr.Field<int>(DBProcessQuality.OverallResult);
+                q.PV = _dr.Field<int?>(DBProcessQuality.GlassPV);
             };
 
         }
@@ -754,6 +764,8 @@ namespace PDCore.Manager
                 
                 _queries.AddRange(createReferenceSatements(Process, _pro,11, "polished",ref _refs));
 
+                _queries.Add("Update " + DBWorkpieceQuality.Table + " Set " + DBWorkpieceQuality.Grinding_RA + " = " + Process.RA.ToDBObject() + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + _refs[0]);
+                _queries.Add("Update " + DBWorkpieceQuality.Table + " Set " + DBWorkpieceQuality.Grinding_PV + " = " + Process.PV.ToDBObject() + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + _refs[0]);
 
                 _queries.Add("INSERT INTO " + DBTurningMoore.Table + " (" + DBTurningMoore.ID + "," +
                                                                         DBTurningMoore.UserID + "," +
@@ -826,6 +838,9 @@ namespace PDCore.Manager
                 int _pro = getNextProcessIndex();
 
                 _queries.AddRange(createReferenceSatements(Process, _pro,12, "polished", ref _refs));
+
+                _queries.Add("Update " + DBWorkpieceQuality.Table + " Set " + DBWorkpieceQuality.Grinding_RA + " = " + Process.RA.ToDBObject() + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + _refs[0]);
+                _queries.Add("Update " + DBWorkpieceQuality.Table + " Set " + DBWorkpieceQuality.Grinding_PV + " = " + Process.PV.ToDBObject() + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + _refs[0]);
 
 
                 _queries.Add("INSERT INTO " + DBGrindingMoore.Table + " (" + DBGrindingMoore.ID + "," +
@@ -1546,6 +1561,7 @@ namespace PDCore.Manager
             _queries.Add("Update " + DBProcessQuality.Table + " Set " + DBProcessQuality.GlassPeeling + " = " + Process.Quality.GlassPeeling.ToDBObject() + " WHERE " + DBProcessQuality.PID + "=" + Process.ID);
             _queries.Add("Update " + DBProcessQuality.Table + " Set " + DBProcessQuality.GlassScratches + " = " + Process.Quality.GlassSratches.ToDBObject() + " WHERE " + DBProcessQuality.PID + "=" + Process.ID);
             _queries.Add("Update " + DBProcessQuality.Table + " Set " + DBProcessQuality.OverallResult + " = " + Process.Quality.OverallResult.ToDBObject() + " WHERE " + DBProcessQuality.PID + "=" + Process.ID);
+            _queries.Add("Update " + DBProcessQuality.Table + " Set " + DBProcessQuality.GlassPV + " = " + Process.Quality.PV.ToDBObject() + " WHERE " + DBProcessQuality.PID + "=" + Process.ID);
 
             return _queries;
         }
@@ -1557,11 +1573,13 @@ namespace PDCore.Manager
                                                                           DBProcessQuality.GlassBreakage + "," +
                                                                           DBProcessQuality.GlassPeeling + "," +
                                                                           DBProcessQuality.GlassScratches + "," +
+                                                                          DBProcessQuality.GlassPV + "," +
                                                                           DBProcessQuality.OverallResult + ") Values (" +
                                                                           Process.ID + "," +
                                                                            Process.Quality.GlassBreakage.ToDBObject() + "," +
                                                                             Process.Quality.GlassPeeling.ToDBObject() + "," +
                                                                              Process.Quality.GlassSratches.ToDBObject() + "," +
+                                                                             Process.Quality.PV.ToDBObject() + "," +
                                                                                Process.Quality.OverallResult.ToDBObject() + ")";
         }
 

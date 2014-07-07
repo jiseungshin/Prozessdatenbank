@@ -103,6 +103,8 @@ namespace PDCore.Database
         public static string GlassAdherence { get { return "GlassAdherence"; } }
         public static string OverallResult { get { return "OverallResult"; } }
         public static string PID { get { return "Process_ID"; } }
+        public static string Grinding_PV { get { return "Grinding_PV"; } }
+        public static string Grinding_RA { get { return "Grinding_RA"; } }
     }
     public static class DBProcessQuality
     {
@@ -113,6 +115,7 @@ namespace PDCore.Database
         public static string GlassPeeling { get { return "GlassPeeling"; } }
         public static string GlassBreakage { get { return "GlassBreakage"; } }
         public static string OverallResult { get { return "OverallResult"; } }
+        public static string GlassPV { get { return "Glass_PV_Category"; } }
     }
     public static class DBProjects
     {

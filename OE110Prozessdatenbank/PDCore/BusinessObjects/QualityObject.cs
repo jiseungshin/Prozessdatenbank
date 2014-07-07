@@ -14,6 +14,7 @@ namespace PDCore.BusinessObjects
         public bool GlassPeeling { get; set; }
         public bool GlassBreakage { get; set; }
         public int OverallResult { get; set; }
+        public int? PV { get; set; }
 
     }
 

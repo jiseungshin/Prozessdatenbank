@@ -353,7 +353,7 @@ namespace PDCore.Database
 
             _query = _query.Remove(_query.LastIndexOf(','), 1);
 
-            _query += " WHERE " + condition.Culumn + "=" + condition.Value.ToDBObject();
+            _query += " WHERE " + condition.Culumn + "=" + condition.Value;
 
 
             return _query;

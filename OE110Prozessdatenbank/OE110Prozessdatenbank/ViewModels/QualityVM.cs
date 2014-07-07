@@ -39,6 +39,12 @@ namespace OE110Prozessdatenbank.ViewModels
             get { return m_process.Quality.OverallResult; }
             set { m_process.Quality.OverallResult = value; }
         }
+
+        public int PV
+        {
+            get { return m_process.Quality.PV ?? 0; }
+            set { m_process.Quality.PV = value; }
+        }
     }
 
     public class WorkpieceQualityVM : BaseViewModel

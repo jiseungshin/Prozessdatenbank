@@ -90,6 +90,7 @@
                     <GridViewColumn Header="Werkstück obere Achse" DisplayMemberBinding="{Binding Path=Upper}" Width="150"/>
                     <GridViewColumn Header="Glassorte" DisplayMemberBinding="{Binding Path=GlassName,Converter={StaticResource NullToString}}" Width="90"/>
                     <GridViewColumn Header="Glasbezeichnung" DisplayMemberBinding="{Binding Path=GlassName,Converter={StaticResource NullToString}}" Width="110"/>
+                    <GridViewColumn Header="PV" DisplayMemberBinding="{Binding Glass_PV_Category}" Width="50"/>
                 </GridView>
 
             </ListView.View>
