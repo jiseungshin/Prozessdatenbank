@@ -34,7 +34,7 @@ namespace PDCore.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("137.226.66.43")]
+        [global::System.Configuration.DefaultSettingValueAttribute("localhost")]
         public string Server {
             get {
                 return ((string)(this["Server"]));

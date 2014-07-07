@@ -53,6 +53,9 @@ namespace OE110Prozessdatenbank.ProcessWindows
                 {
                     g_quality.Children.Add(m_vm.ProcessQualityControl);
                     Grid.SetRow(m_vm.ProcessQualityControl, gridIndex);
+
+                    g_quality.Children.Add(m_vm.PV_Control);
+                    Grid.SetRow(m_vm.PV_Control, gridIndex + 1);
                 }
                 catch { }
             }
