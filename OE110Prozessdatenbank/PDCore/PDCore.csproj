@@ -60,6 +60,7 @@
     <Compile Include="Database\Communicator.cs" />
     <Compile Include="Database\DBModel.cs" />
     <Compile Include="Database\MySQLCommunicator.cs" />
+    <Compile Include="FuellerImport\FuellerProcess.cs" />
     <Compile Include="IO\SimpleIO.cs" />
     <Compile Include="Manager\ExportManager.cs" />
     <Compile Include="Manager\FileManager.cs" />
@@ -95,7 +96,6 @@
   <ItemGroup>
     <Folder Include="Data\Fueller\" />
     <Folder Include="Data\Toshiba\" />
-    <Folder Include="FuellerImport\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

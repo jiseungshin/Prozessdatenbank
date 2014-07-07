@@ -3,12 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:oxy="http://oxyplot.codeplex.com"
         xmlns:local="clr-namespace:OE110Prozessdatenbank.Controls"
-        Title="Toshiba Prozessdatenimport" Height="452.849" Width="903.404" WindowState="Maximized" Icon="/OE110Prozessdatenbank;component/Icons/ImportProcess_16xLG.png">
+        Title="Toshiba Prozessdatenimport" Height="452.849" Width="1146.404" WindowState="Maximized" Icon="/OE110Prozessdatenbank;component/Icons/ImportProcess_16xLG.png">
     <Grid>
-        <Grid.Resources>
-            <!--<local:CQuality x:Key="WorkpieceQuality"></local:CQuality>-->
-        </Grid.Resources>
-        <ListView x:Name="LV_Processes" Margin="10,138,10,35" ItemsSource="{Binding Processes, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" MouseDoubleClick="LV_MouseDoubleClick" KeyDown="LV_Processes_KeyDown">
+        <ListView x:Name="LV_Processes" Margin="10,105,10,35" ItemsSource="{Binding Processes, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" MouseDoubleClick="LV_MouseDoubleClick" KeyDown="LV_Processes_KeyDown">
             <ListView.Background>
                 <LinearGradientBrush>
                     <GradientStop  Offset="0" Color="#FFE8E8E8"/>
@@ -53,7 +50,7 @@
                 <GridView>
                     <GridViewColumn Header="Datum" DisplayMemberBinding="{Binding Date, StringFormat={}{0:dd.MM.yy }}" Width="100"/>
                     <GridViewColumn Header="Uhrzeit" DisplayMemberBinding="{Binding Date, StringFormat={}{0:HH:mm }}" Width="50"/>
-                    <GridViewColumn Header="Temperatur" Width="210">
+                    <GridViewColumn Header="Temperaturverlauf" Width="210">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <oxy:Plot x:Name="Plot1" Model="{Binding Temperature, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" Height="80" Width="200">
@@ -65,7 +62,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Presskraft" Width="210">
+                    <GridViewColumn Header="Presskraftverlauf" Width="210">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <oxy:Plot x:Name="Plot1" Model="{Binding Force, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" Height="80" Width="200">
@@ -83,15 +80,6 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Label Content="{Binding PV_Control}"></Label>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Speicherort" Width="80">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Label Width="65" MouseLeftButtonDown="bt_openProcessParams_Click" Uid="{Binding Path}" ToolTip="Dateipfad öffnen">
-                                    <Image  Source="/OE110Prozessdatenbank;component/Icons/folder_Open_16xLG.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                </Label>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

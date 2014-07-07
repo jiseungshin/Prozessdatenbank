@@ -18,6 +18,8 @@ namespace OE110Prozessdatenbank.ViewModels
 
         private PExpCemeCon m_process;
         private bool m_update = false;
+
+        private ObservableCollection<Issue> m_issues = new ObservableCollection<Issue>();
         public PExpCemeConVM(int ID, bool update)
         {
             ObjectManager.Instance.update();
@@ -45,14 +47,55 @@ namespace OE110Prozessdatenbank.ViewModels
                     m_process.UserID = UserManager.CurrentUser.ID;
             }
             ProcessQualityControl = new Controls.CProcessQuality(m_process);
-            //NotifyPropertyChanged("Project");
+            
             SaveProcess = new RelayCommand(Save, CanSave);
+
+            m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == m_process.ProjectID));
+            NotifyPropertyChanged("Issues");
         }
 
         public ObservableCollection<User> Users { get { return new ObservableCollection<PDCore.BusinessObjects.User>(ObjectManager.Instance.Users); } }
         public ObservableCollection<Project> Projects { get { return new ObservableCollection<PDCore.BusinessObjects.Project>(ObjectManager.Instance.Projects); } }
-        public ObservableCollection<Issue> Issues { get { return new ObservableCollection<Issue>(ObjectManager.Instance.Issues); } }
+        public ObservableCollection<Issue> Issues { get { return m_issues; } } 
         public ObservableCollection<Glass> Glasses { get { return new ObservableCollection<Glass>(ObjectManager.Instance.Glasses); } }
+
+
+        public DataTable AvailableProcesses
+        {
+            get { return ProcessManager.Instance.getData(Queries.QueryProcessedCemeCon).Tables[0]; }
+        }
+
+        public DataRowView SelectedProcess
+        {
+            set
+            {
+                int ID = value.Row.Field<int>(DBExpCemeCon.ID);
+
+                PExpCemeCon _p = ProcessManager.Instance.getProcess(ID, 33) as PExpCemeCon;
+
+                m_process.Atmosphere = _p.Atmosphere;
+                m_process.Duration = _p.Duration;
+                m_process.GlassID = _p.GlassID;
+                m_process.Pressure = _p.Pressure;
+                m_process.ProcessID = _p.ProcessID;
+                m_process.Temperature = _p.Temperature;
+
+
+                m_process.ProjectID = _p.ProjectID;
+                m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == _p.ProjectID));
+                NotifyPropertyChanged("Project");
+                m_process.IssueID = _p.IssueID;
+                NotifyPropertyChanged("Issues");
+                NotifyPropertyChanged("Issue");
+
+                NotifyPropertyChanged("Glass");
+                NotifyPropertyChanged("Duration");
+                NotifyPropertyChanged("Atmosphere");
+                NotifyPropertyChanged("Pressure");
+                NotifyPropertyChanged("ProcessID");
+                NotifyPropertyChanged("Temperature");
+            }
+        }
 
         public DateTime Date
         { get { return m_process.Date; } set { m_process.Date = value; } }
@@ -94,6 +137,8 @@ namespace OE110Prozessdatenbank.ViewModels
             set
             {
                 m_process.ProjectID = value.ID;
+                m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == m_process.ProjectID));
+                NotifyPropertyChanged("Issues");
             }
         }
 
@@ -127,7 +172,11 @@ namespace OE110Prozessdatenbank.ViewModels
 
             set
             {
-                m_process.IssueID = value.ID;
+                try
+                {
+                    m_process.IssueID = value.ID;
+                }
+                catch { m_process.IssueID = null; }
             }
         }
 

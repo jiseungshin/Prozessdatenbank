@@ -116,6 +116,7 @@ namespace OE110Prozessdatenbank.MainWindows
                 }
 
                 PDCore.Manager.ProcessManager.Instance.importToshibaProcesses(processes);
+                Updater.Instance.forceUpdate();
                 this.Close();
             }
         }

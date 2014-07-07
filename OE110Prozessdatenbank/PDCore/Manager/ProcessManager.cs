@@ -997,8 +997,8 @@ namespace PDCore.Manager
                 _queries.Add("Update " + DBCoatingCemecon.Table + " Set " + DBCoatingCemecon.ProcessNumber + " = " + Process.Processnumber.ToDBObject() + " WHERE " + DBCoatingCemecon.ID + "=" + Process.ID);
                 foreach (Workpiece wp in Process.Workpieces)
                 {
-                    _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.ProjectID + " = " + process.ProjectID + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
-                    _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.IssueID + " = " + process.IssueID + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
+                    _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.ProjectID + " = " + process.ProjectID.ToDBObject() + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
+                    _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.IssueID + " = " + process.IssueID.ToDBObject() + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
                 }
             }
             else
@@ -1012,8 +1012,8 @@ namespace PDCore.Manager
 
 
                     _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.Status + " = 'coated' WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
-                    _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.ProjectID + " = " + process.ProjectID + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
-                    _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.IssueID + " = " + process.IssueID + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
+                    _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.ProjectID + " = " + process.ProjectID.ToDBObject() + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
+                    _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.IssueID + " = " + process.IssueID.ToDBObject() + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
                 }
 
 
