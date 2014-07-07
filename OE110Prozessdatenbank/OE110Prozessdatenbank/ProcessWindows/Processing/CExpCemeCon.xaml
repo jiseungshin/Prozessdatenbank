@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:OE110Prozessdatenbank="clr-namespace:OE110Prozessdatenbank" x:Class="OE110Prozessdatenbank.ProcessWindows.CExpCemeCon" 
-             mc:Ignorable="d" Height="500.58" Width="916.668" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+             mc:Ignorable="d" Height="512.8" Width="916.668" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.Resources>
         <OE110Prozessdatenbank:DateConverter x:Key="dateConv"/>
     </Window.Resources>

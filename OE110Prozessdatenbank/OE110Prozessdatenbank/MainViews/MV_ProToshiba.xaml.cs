@@ -40,13 +40,8 @@ namespace OE110Prozessdatenbank.MainViews
             if ((sender as ListView).SelectedIndex != -1)
             {
                 int ID = Convert.ToInt32(((sender as ListView).SelectedItem as System.Data.DataRowView)[DBExpToshiba.ID]);
-                //m_window = new ProcessWindows.GenericWindow();
-                //m_window.contentGrid.Children.Add(new Controls.CExpMoore(ID));
-                //m_window.Title = "Versuch - Moore";
-                //m_window.IconType = IconManager.IconType.ProcessIcon;
-                //m_window.ShowDialog();
-                //new ProcessWindows.CExpMoore(ID).ShowDialog();
-                //PDCore.Processes.PToshiba tt = PDCore.Manager.ProcessManager.Instance.getProcess(ID, 34) as PDCore.Processes.PToshiba;
+
+                (sender as ListView).SelectedIndex = -1;
                 new ProcessWindows.CExpToshiba(ID).ShowDialog();
             }
         }
@@ -65,6 +60,12 @@ namespace OE110Prozessdatenbank.MainViews
         {
             new ProcessWindows.ToshibaImportPreparation().ShowDialog();
 
+        }
+
+        private void LV_ProcessedMoore_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if ((sender as ListView).SelectedIndex!=-1)
+            { (sender as ListView).SelectedIndex = -1; }
         }
     }
 

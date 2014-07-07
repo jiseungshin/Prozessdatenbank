@@ -30,7 +30,7 @@
         <Label Content="Glas" HorizontalAlignment="Left" Margin="12,181,0,0" VerticalAlignment="Top" Width="76"/>
         <Label Content="Benennung" HorizontalAlignment="Left" Margin="12,208,0,0" VerticalAlignment="Top" Width="102"/>
         <Label Content="+ Zahl" HorizontalAlignment="Left" Margin="327,205,0,0" VerticalAlignment="Top" Width="102"/>
-        <Button Content="Mon-Dateien laden" Click="bt_imoport_Click" HorizontalAlignment="Right" Margin="0,0,15,10" VerticalAlignment="Bottom" Width="122"/>
+        <Button Content="Mon-Dateien laden" Click="bt_imoport_Click" Command="{Binding Import}" IsEnabled="{Binding Import.CanImport}" HorizontalAlignment="Right" Margin="0,0,15,10" VerticalAlignment="Bottom" Width="122"/>
         <Label Content="Projekt *" HorizontalAlignment="Left" Margin="12,38,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
         <Label Content="Fragestellung/Versuchsreihe *" HorizontalAlignment="Left" Margin="12,69,0,0" VerticalAlignment="Top" Width="177" FontWeight="Bold"/>
         <ComboBox x:Name="cb_project" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" Margin="207,38,15,0" VerticalAlignment="Top"/>

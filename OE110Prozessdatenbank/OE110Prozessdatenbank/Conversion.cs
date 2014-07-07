@@ -85,20 +85,24 @@ namespace OE110Prozessdatenbank
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((int)value ==0)
+            try
             {
-                return System.Windows.Media.Brushes.Green;
+                if ((int)value == 0)
+                {
+                    return System.Windows.Media.Brushes.Green;
+                }
+                if ((int)value == 1)
+                {
+                    return System.Windows.Media.Brushes.Orange;
+                }
+                if ((int)value == 2)
+                {
+                    return System.Windows.Media.Brushes.Red;
+                }
+                else
+                    return System.Windows.Media.Brushes.Green;
             }
-            if ((int)value ==1)
-            {
-                return System.Windows.Media.Brushes.Orange;
-            }
-            if ((int)value ==2)
-            {
-                return System.Windows.Media.Brushes.Red;
-            }
-            else
-                return System.Windows.Media.Brushes.Green;
+            catch{return System.Windows.Media.Brushes.Green;}
 
         }
 

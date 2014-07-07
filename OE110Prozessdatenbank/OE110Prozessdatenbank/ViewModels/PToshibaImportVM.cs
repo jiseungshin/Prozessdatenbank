@@ -7,6 +7,7 @@ using PDCore.Processes;
 using System.Collections.ObjectModel;
 using PDCore.BusinessObjects;
 using PDCore.Manager;
+using OE110Prozessdatenbank.Commands;
 
 namespace OE110Prozessdatenbank.ViewModels
 {
@@ -43,6 +44,8 @@ namespace OE110Prozessdatenbank.ViewModels
 
             m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues);
             NotifyPropertyChanged("Issues");
+
+            Import = new RelayCommand(import, CanImport);
         }
 
         public ObservableCollection<PToshibaVM> Processes
@@ -57,11 +60,7 @@ namespace OE110Prozessdatenbank.ViewModels
 
         }
 
-        //public List<PToshibaVM> Processes
-        //{
-        //    get { return m_ProcessVms; }
-
-        //}
+        public RelayCommand Import { get; set; }
 
         public void addProcess(PToshiba process, int index)
         {
@@ -232,6 +231,22 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public User User
         { get { return m_user; } set { m_user = ObjectManager.Instance.Users.Find(item => item.ID == value.ID); } }
+
+        #region Command functions
+        public void import()
+        {
+
+        }
+
+        public bool CanImport()
+        {
+            if (User!=null && Project!=null && Issue !=null && (LowerWP!=null || UpperWP !=null))
+                return true;
+            else
+                return false;
+        }
+
+        #endregion
 
     }
 }

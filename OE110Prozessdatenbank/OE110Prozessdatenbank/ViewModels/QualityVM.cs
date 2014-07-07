@@ -63,25 +63,25 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public int Corrosion
         {
-            get { return m_wp.Quality.Corrosion; }
+            get { return m_wp.Quality.Corrosion ?? -1; }
             set { m_wp.Quality.Corrosion = value; }
         }
 
         public int GlassAdherence
         {
-            get { return m_wp.Quality.GlassAdherence; }
+            get { return m_wp.Quality.GlassAdherence ?? -1; }
             set { m_wp.Quality.GlassAdherence = value; }
         }
 
         public int MoldScratches
         {
-            get { return m_wp.Quality.MoldScratches; }
+            get { return m_wp.Quality.MoldScratches ??-1; }
             set { m_wp.Quality.MoldScratches = value; }
         }
 
         public int OverallResult
         {
-            get { return m_wp.Quality.OverallResult; }
+            get { return m_wp.Quality.OverallResult ??-1; }
             set { m_wp.Quality.OverallResult = value; }
         }
 

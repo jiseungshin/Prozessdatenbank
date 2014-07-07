@@ -198,6 +198,14 @@ namespace OE110Prozessdatenbank.ViewModels
         public int? IssueID
         { get { return m_process.IssueID; } set { m_process.IssueID = value; } }
 
+        public Project Project
+        { get { return ObjectManager.Instance.Projects.Find(item => item.ID == m_process.ProjectID); } }
+        public Issue Issue
+        { get { return ObjectManager.Instance.Issues.Find(item => item.ID == m_process.IssueID); } }
+
+        public User User
+        { get { return ObjectManager.Instance.Users.Find(item => item.ID == m_process.UserID); } }
+
         public DateTime Date
         { get { return m_process.Date; } }
 
@@ -226,6 +234,12 @@ namespace OE110Prozessdatenbank.ViewModels
                 //   m_process.GlassID = value.ID;
             }
         }
+
+        public Workpiece UpperWorkpiece
+        { get { return m_process.Workpieces.Find(item => item.ID == m_process.UpperWorkpiece); } }
+
+        public Workpiece LowerWorkpiece
+        { get { return m_process.Workpieces.Find(item => item.ID == m_process.LowerWorkpiece); } }
 
         public Controls.CQuality WP_UpperControl { get; set; }
         public Controls.CQuality WP_LowerControl { get; set; }

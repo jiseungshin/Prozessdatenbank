@@ -140,5 +140,11 @@ namespace OE110Prozessdatenbank.MainWindows
 
             }
         }
+
+        private void LV_Processes_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if ((sender as ListView).SelectedIndex != -1)
+            { (sender as ListView).SelectedIndex = -1; }
+        }
     }
 }

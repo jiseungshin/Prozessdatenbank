@@ -299,10 +299,10 @@ namespace PDCore.Manager
 
             _wp.Quality = new WorkpieceQuality()
             {
-                Corrosion = _dsWPQuality.Field<int>(DBWorkpieceQuality.Corrosion),
-                MoldScratches = _dsWPQuality.Field<int>(DBWorkpieceQuality.MoldScratches),
-                GlassAdherence = _dsWPQuality.Field<int>(DBWorkpieceQuality.GlassAdherence),
-                OverallResult = _dsWPQuality.Field<int>(DBWorkpieceQuality.OverallResult)
+                Corrosion = _dsWPQuality.Field<int?>(DBWorkpieceQuality.Corrosion),
+                MoldScratches = _dsWPQuality.Field<int?>(DBWorkpieceQuality.MoldScratches),
+                GlassAdherence = _dsWPQuality.Field<int?>(DBWorkpieceQuality.GlassAdherence),
+                OverallResult = _dsWPQuality.Field<int?>(DBWorkpieceQuality.OverallResult)
             };
 
             return _wp;
@@ -342,15 +342,6 @@ namespace PDCore.Manager
 
             if (update)
             {
-                //_queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.Label + " = " + wp.Label.ToDBObject() + " WHERE " + DBWorkpieces.ID + "=" + wp.ID);
-                //_queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.MaterialID + " = " + wp.Material.ID.ToDBObject() + " WHERE " + DBWorkpieces.ID + "=" + wp.ID);
-                //_queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.Geometry + " = " + wp.Geometry.ToDBObject() + " WHERE " + DBWorkpieces.ID + "=" + wp.ID);
-                //_queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.BatchNumber + " = " + wp.BatchNumber.ToDBObject() + " WHERE " + DBWorkpieces.ID + "=" + wp.ID);
-                //_queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.isOneWay + " = " + wp.isOneWay.ToDBObject() + " WHERE " + DBWorkpieces.ID + "=" + wp.ID);
-                //_queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.KindOfProbe + " = " + wp.KindOfProbe.ToDBObject() + " WHERE " + DBWorkpieces.ID + "=" + wp.ID);
-                //_queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.PurchaseDate + " = " + wp.PurchaseDate.ToDBObject() + " WHERE " + DBWorkpieces.ID + "=" + wp.ID);
-                //_queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.isActive + " = " + wp.isActive.ToDBObject() + " WHERE " + DBWorkpieces.ID + "=" + wp.ID);
-
                 List<MySQLCommunicator.ColumnValuePair> values = new List<MySQLCommunicator.ColumnValuePair>();
                 values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBWorkpieces.Label, Value = wp.Label });
                 values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBWorkpieces.MaterialID, Value = wp.Material.ID });
@@ -381,7 +372,7 @@ namespace PDCore.Manager
                                                                             wp.isOneWay.ToDBObject() + "," +
                                                                             wp.KindOfProbe.ToDBObject() + "," +
                                                                             wp.PurchaseDate.ToDBObject() + "," +
-                                                                            wp.Material.ID.ToDBObject() +
+                                                                            wp.Material.ID.ToDBObject() + "," +
                                                                              wp.isActive.ToDBObject() + ",'raw')");
 
 

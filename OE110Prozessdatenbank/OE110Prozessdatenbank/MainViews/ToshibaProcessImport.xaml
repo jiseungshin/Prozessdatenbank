@@ -5,7 +5,7 @@
         xmlns:local="clr-namespace:OE110Prozessdatenbank.Controls"
         Title="Toshiba Prozessdatenimport" Height="452.849" Width="1146.404" WindowState="Maximized" Icon="/OE110Prozessdatenbank;component/Icons/ImportProcess_16xLG.png">
     <Grid>
-        <ListView x:Name="LV_Processes" Margin="10,105,10,35" ItemsSource="{Binding Processes, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" MouseDoubleClick="LV_MouseDoubleClick" KeyDown="LV_Processes_KeyDown">
+        <ListView x:Name="LV_Processes" Margin="10,105,10,35" ItemsSource="{Binding Processes, UpdateSourceTrigger=PropertyChanged}" MouseDoubleClick="LV_MouseDoubleClick" KeyDown="LV_Processes_KeyDown" SelectionMode="Single" MouseLeftButtonDown="LV_Processes_MouseLeftButtonDown">
             <ListView.Background>
                 <LinearGradientBrush>
                     <GradientStop  Offset="0" Color="#FFE8E8E8"/>

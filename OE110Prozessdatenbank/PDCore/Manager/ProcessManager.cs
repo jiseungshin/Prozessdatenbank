@@ -1349,8 +1349,8 @@ namespace PDCore.Manager
                                     ") VALUES (" + _pro + ", " + 34 + "," + wp.CurrentRefereneNumber + ")");
 
                      _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.Status + " = 'processed' WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
-                     _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.ProjectID + " = " + process.ProjectID + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
-                     _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.IssueID + " = " + process.IssueID + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
+                     _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.ProjectID + " = " + process.ProjectID.ToDBObject() + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
+                     _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.IssueID + " = " + process.IssueID.ToDBObject() + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
 
                      _queries.Add("DELETE FROM " + DBWorkpieceQuality.Table + " WHERE " + DBWorkpieceQuality.ReferenceNumber + "=" + wp.CurrentRefereneNumber + " AND " + DBWorkpieceQuality.PID + " is null");
                      
@@ -1360,12 +1360,12 @@ namespace PDCore.Manager
                                                                                     DBWorkpieceQuality.OverallResult + "," +
                                                                                     DBWorkpieceQuality.PID + "," +
                                                                                     DBWorkpieceQuality.Corrosion+") VALUES ("
-                                                                                    + wp.CurrentRefereneNumber + "," +
-                                                                                    wp.Quality.GlassAdherence + "," +
-                                                                                    wp.Quality.MoldScratches + "," +
-                                                                                    wp.Quality.OverallResult + "," +
+                                                                                    + wp.CurrentRefereneNumber.ToDBObject() + "," +
+                                                                                    wp.Quality.GlassAdherence.ToDBObject() + "," +
+                                                                                    wp.Quality.MoldScratches.ToDBObject() + "," +
+                                                                                    wp.Quality.OverallResult.ToDBObject() + "," +
                                                                                     _pro + "," +
-                                                                                    wp.Quality.Corrosion+")");
+                                                                                    wp.Quality.Corrosion.ToDBObject()+")");
                  }
 
                  Process.ID = _pro;

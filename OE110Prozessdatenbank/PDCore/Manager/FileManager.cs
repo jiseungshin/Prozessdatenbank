@@ -153,7 +153,7 @@ namespace PDCore.Manager
 
         public void Copy(string source, string dest)
         {
-            File.Copy(source, dest);
+            File.Copy(source, dest, true);
         }
     }
 }

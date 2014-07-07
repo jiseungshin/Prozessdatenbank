@@ -42,7 +42,7 @@
                 </Button>
             </ToolBar>
         </ToolBarTray>
-        <ListView Name="LV_ProcessedMoore" Margin="10,80,10,10" DataContext="{Binding ProcessedData, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Table}" SelectionMode="Single" MouseDoubleClick="LV_MouseDoubleClick">
+        <ListView Name="LV_ProcessedMoore" Margin="10,80,10,10" DataContext="{Binding ProcessedData, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Table}" SelectionMode="Single" MouseDoubleClick="LV_MouseDoubleClick" MouseLeftButtonDown="LV_ProcessedMoore_MouseLeftButtonDown">
             <ListView.Background>
                 <LinearGradientBrush>
                     <GradientStop  Offset="0" Color="#FFE8E8E8"/>
