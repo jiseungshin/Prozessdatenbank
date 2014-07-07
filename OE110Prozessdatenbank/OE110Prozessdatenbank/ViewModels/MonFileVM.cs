@@ -19,9 +19,12 @@ namespace OE110Prozessdatenbank.ViewModels
             plotModelP = new OxyPlot.PlotModel();
             plotModelS = new OxyPlot.PlotModel();
 
-            SetUpModel();
-
-            LoadData(File);
+            
+                SetUpModel();
+                if (File.Steps.Count > 0)
+                {
+                    LoadData(File);
+                }
 
         }
 

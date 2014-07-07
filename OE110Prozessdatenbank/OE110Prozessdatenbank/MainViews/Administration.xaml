@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="600">
+             d:DesignHeight="300" d:DesignWidth="1000">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="1,0.5" StartPoint="0.5,2">
@@ -21,17 +21,47 @@
             </LinearGradientBrush>
         </Grid.Background>
         <ToolBarTray Height="44" VerticalAlignment="Top" Background="#FFB4B4B4" Width="auto">
-            <ToolBar x:Name="tb_mainTool" Background="#FFB4B4B4" HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="451" Margin="0,0,-401,-31" ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded">
+            <ToolBar x:Name="tb_mainTool" Background="#FFB4B4B4" HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="805" Margin="0,0,-755,-31" ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded">
                 <Button x:Name="mbt_GetHistory" Height="30" Width="170" HorizontalAlignment="Right" Margin="8,0,0,0" Click="mbt_getHistory_Click">
                     <StackPanel Orientation="Horizontal" Height="30" Width="165">
                         <Image Source="/OE110Prozessdatenbank;component/Icons/magnifier_16xLG.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <Label Content="Abfrage Vorgangsnummer"/>
                     </StackPanel>
                 </Button>
+                <Button x:Name="mbt_Projects" Height="30" Width="80" HorizontalAlignment="Right" Margin="8,0,0,0" Click="mbt_getProjects_Click">
+                    <StackPanel Orientation="Horizontal" Height="30" Width="80">
+                        <Image Source="/OE110Prozessdatenbank;component/Icons/ProjectAdmin_16xLG.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Label Content="Projekte"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="mbt_Workpieces" Height="30" Width="90" HorizontalAlignment="Right" Margin="8,0,0,0" Click="mbt_getWorkpieces_Click">
+                    <StackPanel Orientation="Horizontal" Height="30" Width="90">
+                        <Image Source="/OE110Prozessdatenbank;component/Icons/WorkpieceAdmin_16xLG.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Label Content="Werkstücke"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="mbt_Glasses" Height="30" Width="90" HorizontalAlignment="Right" Margin="8,0,0,0" Click="mbt_getGlasses_Click">
+                    <StackPanel Orientation="Horizontal" Height="30" Width="90">
+                        <Image Source="/OE110Prozessdatenbank;component/Icons/Glass2Admin_16xLG.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Label Content="Glassorten"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="mbt_CemeconProcesses" Height="30" Width="150" HorizontalAlignment="Right" Margin="8,0,0,0" Click="mbt_getCoatProcesses_Click">
+                    <StackPanel Orientation="Horizontal" Height="30" Width="150">
+                        <Image Source="/OE110Prozessdatenbank;component/Icons/CoatingAdmin_16xLG.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Label Content="Beschichtungsprozesse"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="mbt_User" Height="30" Width="80" HorizontalAlignment="Right" Margin="8,0,0,0" Click="mbt_getUser_Click">
+                    <StackPanel Orientation="Horizontal" Height="30" Width="80">
+                        <Image Source="/OE110Prozessdatenbank;component/Icons/UserAdmin_16xLG.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Label Content="Benutzer"/>
+                    </StackPanel>
+                </Button>
             </ToolBar>
         </ToolBarTray>
         <Label Content="Administration" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="40" FontWeight="Bold" Foreground="#FFCFCFCF" Margin="0,0,50,51"/>
-        
+
 
 
     </Grid>

@@ -11,8 +11,8 @@ namespace PDCore.Processes
         public PTurningMoore()
         {
             UserID = -1;
-            ProjectID = -1;
-            IssueID = -1;
+            //ProjectID = -1;
+            //IssueID = -1;
             Processing = 1;
             Workpieces = new List<BusinessObjects.Workpiece>();
             Quality = new BusinessObjects.ProcessQuality();

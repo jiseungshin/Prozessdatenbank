@@ -182,6 +182,28 @@ namespace OE110Prozessdatenbank.ProcessWindows
             if (mnu != null)
             {
                 sp = ((ContextMenu)mnu.Parent).PlacementTarget as TextBox;
+
+                if (System.Windows.MessageBox.Show("Daten wirklich für alle übernehmen?", "", MessageBoxButton.YesNo
+                    , MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+
+                    Binding myBinding = BindingOperations.GetBinding(sp, TextBox.TextProperty);
+
+                    string boundComponent = myBinding.Path.Path.Remove(0, 3);
+
+
+                    System.Reflection.PropertyInfo prop = typeof(ViewModels.PToshibaVM).GetProperty(boundComponent);
+
+                    for (int i = 0; i < m_vm.Processes.Count; i++)
+                    {
+                        if (sp.Text != "")
+                            prop.SetValue(m_vm.Processes[i], Convert.ToDouble(sp.Text.Replace('.', ',')), null);
+                        else
+                            prop.SetValue(m_vm.Processes[i], null, null);
+                    }
+
+
+                }
             }
         }
 
@@ -191,11 +213,11 @@ namespace OE110Prozessdatenbank.ProcessWindows
             TextBox sp = null;
             if (mnu != null)
             {
+                sp = ((ContextMenu)mnu.Parent).PlacementTarget as TextBox;
+
                 if (System.Windows.MessageBox.Show("Daten wirklich übernehmen?", "", MessageBoxButton.YesNo
                     , MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-
-                    sp = ((ContextMenu)mnu.Parent).PlacementTarget as TextBox;
 
                     Binding myBinding = BindingOperations.GetBinding(sp, TextBox.TextProperty);
 
@@ -206,7 +228,10 @@ namespace OE110Prozessdatenbank.ProcessWindows
 
                     for (int i = index + 1; i < index + test + 1; i++)
                     {
-                        prop.SetValue(m_vm.Processes[i], Convert.ToDouble(sp.Text.Replace('.', ',')), null);
+                        if (sp.Text!= "")
+                            prop.SetValue(m_vm.Processes[i], Convert.ToDouble(sp.Text.Replace('.', ',')), null);
+                        else
+                            prop.SetValue(m_vm.Processes[i], null, null);
                     }
 
 

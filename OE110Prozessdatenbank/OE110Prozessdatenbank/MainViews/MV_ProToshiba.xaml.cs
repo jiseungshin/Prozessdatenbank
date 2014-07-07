@@ -28,8 +28,6 @@ namespace OE110Prozessdatenbank.MainViews
     public partial class MV_ProToshiba : UserControl
     {
 
-        private ProcessWindows.GenericWindow m_window;
-
         public MV_ProToshiba()
         {
             InitializeComponent();
@@ -48,7 +46,8 @@ namespace OE110Prozessdatenbank.MainViews
                 //m_window.IconType = IconManager.IconType.ProcessIcon;
                 //m_window.ShowDialog();
                 //new ProcessWindows.CExpMoore(ID).ShowDialog();
-                PDCore.Processes.PToshiba tt = PDCore.Manager.ProcessManager.Instance.getProcess(ID, 34) as PDCore.Processes.PToshiba;
+                //PDCore.Processes.PToshiba tt = PDCore.Manager.ProcessManager.Instance.getProcess(ID, 34) as PDCore.Processes.PToshiba;
+                new ProcessWindows.CExpToshiba(ID).ShowDialog();
             }
         }
 
@@ -64,7 +63,7 @@ namespace OE110Prozessdatenbank.MainViews
 
         private void mbt_newProcess_Click(object sender, RoutedEventArgs e)
         {
-            new MainWindows.ToshibaProcessImport().ShowDialog();
+            new ProcessWindows.ToshibaImportPreparation().ShowDialog();
 
         }
     }

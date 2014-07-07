@@ -17,6 +17,9 @@ namespace OE110Prozessdatenbank.ViewModels
         private Workpiece m_upper;
         private Workpiece m_lower;
         private bool m_update = false;
+
+        private ObservableCollection<Issue> m_issues = new ObservableCollection<Issue>();
+
         public PExpMooreVM(int PID)
         {
             ObjectManager.Instance.update();
@@ -37,6 +40,9 @@ namespace OE110Prozessdatenbank.ViewModels
             }
             SaveProcess = new RelayCommand(Save, CanSave);
 
+            m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == m_process.ProjectID));
+            NotifyPropertyChanged("Issues");
+
         }
 
         public PExpMooreVM()
@@ -49,6 +55,9 @@ namespace OE110Prozessdatenbank.ViewModels
             //set User field if user is logged in
             if (UserManager.CurrentUser != null)
                 m_process.UserID = UserManager.CurrentUser.ID;
+
+            m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == m_process.ProjectID));
+            NotifyPropertyChanged("Issues");
         }
 
         public RelayCommand SaveProcess { get; set; }
@@ -60,14 +69,29 @@ namespace OE110Prozessdatenbank.ViewModels
         public Controls.CQuality WP_LowerControl { get; set; }
         public Controls.CProcessQuality ProcessQualityControl { get; set; }
 
-        public ObservableCollection<Workpiece> Workpieces
+        public ObservableCollection<Workpiece> WorkpiecesUpper
         {
             get
             {
                 if (m_update)
                     return new ObservableCollection<Workpiece>(ObjectManager.Instance.Workpieces);
                 else
-                    return new ObservableCollection<Workpiece>(ObjectManager.Instance.CoatedWorkpieces);
+                {
+                    return new ObservableCollection<Workpiece>(ObjectManager.Instance.CoatedWorkpieces.FindAll(item => item != m_lower));
+                }
+            }
+        }
+
+        public ObservableCollection<Workpiece> WorkpiecesLower
+        {
+            get
+            {
+                if (m_update)
+                    return new ObservableCollection<Workpiece>(ObjectManager.Instance.Workpieces);
+                else
+                {
+                    return new ObservableCollection<Workpiece>(ObjectManager.Instance.CoatedWorkpieces.FindAll(item => item != m_upper));
+                }
             }
         }
 
@@ -77,7 +101,7 @@ namespace OE110Prozessdatenbank.ViewModels
             {
                 try
                 {
-                    return Workpieces.Single(item => item.ID == m_upper.ID);
+                    return WorkpiecesUpper.Single(item => item.ID == m_upper.ID);
                 }
                 catch { return null; }
             }
@@ -86,9 +110,7 @@ namespace OE110Prozessdatenbank.ViewModels
                     m_upper = value;
                     WP_UpperControl = new Controls.CQuality(value);
 
-                m_process.ProjectID = ObjectManager.Instance.getProjectID(value.CurrentRefereneNumber);
-                m_process.IssueID = ObjectManager.Instance.getIssueID(value.CurrentRefereneNumber);
-                NotifyPropertyChanged("Project"); NotifyPropertyChanged("Issue");
+                NotifyPropertyChanged("WorkpiecesLower");
             }
         }
 
@@ -98,7 +120,7 @@ namespace OE110Prozessdatenbank.ViewModels
             {
                 try
                 {
-                    return Workpieces.Single(item => item.ID == m_lower.ID);
+                    return WorkpiecesLower.Single(item => item.ID == m_lower.ID);
                 }
                 catch { return null; }
             }
@@ -107,10 +129,7 @@ namespace OE110Prozessdatenbank.ViewModels
                 m_lower = value;
                 WP_LowerControl = new Controls.CQuality(value);
 
-                m_process.ProjectID = ObjectManager.Instance.getProjectID(value.CurrentRefereneNumber);
-                m_process.IssueID = ObjectManager.Instance.getIssueID(value.CurrentRefereneNumber);
-
-                NotifyPropertyChanged("Project");NotifyPropertyChanged("Issue");
+                NotifyPropertyChanged("WorkpiecesUpper");
             }
         }
 
@@ -118,7 +137,7 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public ObservableCollection<User> Users { get { return new ObservableCollection<PDCore.BusinessObjects.User>(ObjectManager.Instance.Users); } }
         public ObservableCollection<Project> Projects { get { return new ObservableCollection<PDCore.BusinessObjects.Project>(ObjectManager.Instance.Projects); } }
-        public ObservableCollection<Issue> Issues { get { return new ObservableCollection<Issue>(ObjectManager.Instance.Issues); } }
+        public ObservableCollection<Issue> Issues {  get { return m_issues; } } 
         public ObservableCollection<Glass> Glasses { get { return new ObservableCollection<Glass>(ObjectManager.Instance.Glasses); } }
 
         public DateTime Date
@@ -156,6 +175,8 @@ namespace OE110Prozessdatenbank.ViewModels
             set
             {
                 m_process.ProjectID = value.ID;
+                m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == m_process.ProjectID));
+                NotifyPropertyChanged("Issues");
             }
         }
 
@@ -189,7 +210,11 @@ namespace OE110Prozessdatenbank.ViewModels
 
             set
             {
-                m_process.IssueID = value.ID;
+                try
+                {
+                    m_process.IssueID = value.ID;
+                }
+                catch { m_process.IssueID = null; }
             }
         }
 
@@ -248,7 +273,7 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public bool CanSave()
         {
-            if (m_process.UserID != -1 && m_process.ProjectID != -1 && m_process.IssueID != -1)
+            if (m_process.UserID != -1 && m_process.ProjectID != null && m_process.IssueID != null && (m_upper!=null|| m_lower!=null))
                 return true;
             else
                 return false;

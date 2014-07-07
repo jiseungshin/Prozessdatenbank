@@ -19,6 +19,8 @@ namespace OE110Prozessdatenbank.ViewModels
         private string m_lensName = "";
         private Glass m_glass;
 
+        private ObservableCollection<Issue> m_issues = new ObservableCollection<Issue>();
+
         public PToshibaImportVM(List<PToshiba> processes)
         {
             m_ProcessVms = new List<PToshibaVM>();
@@ -34,13 +36,29 @@ namespace OE110Prozessdatenbank.ViewModels
         {
             m_ProcessVms = new List<PToshibaVM>();
             if (UserManager.CurrentUser!=null)
-                m_user = ObjectManager.Instance.Users.Find(item => item.ID == UserManager.CurrentUser.ID); ;
+                m_user = ObjectManager.Instance.Users.Find(item => item.ID == UserManager.CurrentUser.ID);
+
+            m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues);
+            NotifyPropertyChanged("Issues");
         }
 
         public ObservableCollection<PToshibaVM> Processes
-        { 
-            get { return new ObservableCollection<PToshibaVM>(m_ProcessVms.OrderBy(item=>item.Date)); }
+        {
+            get
+            {
+                foreach (var p in m_ProcessVms)
+                { p.plotModelP.InvalidatePlot(false); p.plotModelT.InvalidatePlot(false); }
+                return new ObservableCollection<PToshibaVM>(m_ProcessVms);
+                
+            }
+
         }
+
+        //public List<PToshibaVM> Processes
+        //{
+        //    get { return m_ProcessVms; }
+
+        //}
 
         public void addProcess(PToshiba process, int index)
         {
@@ -66,17 +84,72 @@ namespace OE110Prozessdatenbank.ViewModels
             NotifyPropertyChanged("Processes");
         }
 
+        public void RemoveProcess(int index)
+        {
+            //m_ProcessVms.RemoveAt(index);
+            //NotifyPropertyChanged("Processes");
+        }
+
         public ObservableCollection<User> Users { get { return new ObservableCollection<PDCore.BusinessObjects.User>(ObjectManager.Instance.Users); } }
         public ObservableCollection<Glass> Glasses { get { return new ObservableCollection<Glass>(ObjectManager.Instance.Glasses); } }
         
         public string LensName
         { get { return m_lensName; } set { m_lensName = value; } }
-        
-        public ObservableCollection<Workpiece> Workpieces
+
+        public ObservableCollection<Project> Projects { get { return new ObservableCollection<PDCore.BusinessObjects.Project>(ObjectManager.Instance.Projects); } }
+        public ObservableCollection<Issue> Issues { get { return m_issues; } }
+
+        public Issue Issue
+        {
+            set
+            {
+                try
+                {
+                    foreach (var p in Processes)
+                    {
+                        p.m_process.IssueID = value.ID;
+                    }
+                }
+                catch
+                {
+                    foreach (var p in Processes)
+                    {
+                        p.m_process.IssueID = null;
+                    }
+                }
+            }
+        }
+
+        public Project Project
+        {
+            set
+            {
+                foreach (var p in Processes)
+                {
+                    p.m_process.ProjectID = value.ID;
+                }
+                m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == value.ID));
+                NotifyPropertyChanged("Issues");
+            }
+        }
+
+        public ObservableCollection<Workpiece> WorkpiecesUpper
         {
             get
             {
-                return new ObservableCollection<Workpiece>(ObjectManager.Instance.CoatedWorkpieces);
+
+                return new ObservableCollection<Workpiece>(ObjectManager.Instance.CoatedWorkpieces.FindAll(item => item != m_lower));
+                
+            }
+        }
+
+        public ObservableCollection<Workpiece> WorkpiecesLower
+        {
+            get
+            {
+
+                return new ObservableCollection<Workpiece>(ObjectManager.Instance.CoatedWorkpieces.FindAll(item => item != m_upper));
+                
             }
         }
 
@@ -86,16 +159,15 @@ namespace OE110Prozessdatenbank.ViewModels
             {
                 try
                 {
-                    return Workpieces.Single(item => item.ID == m_upper.ID);
+                    return WorkpiecesUpper.Single(item => item.ID == m_upper.ID);
                 }
                 catch { return null; }
             }
             set
             {
                 m_upper = value;
-                //WP_UpperControl = new Controls.CQuality(value);
 
-                NotifyPropertyChanged("Project"); NotifyPropertyChanged("Issue");
+                NotifyPropertyChanged("WorkpiecesLower");
             }
         }
 
@@ -105,16 +177,15 @@ namespace OE110Prozessdatenbank.ViewModels
             {
                 try
                 {
-                    return Workpieces.Single(item => item.ID == m_lower.ID);
+                    return WorkpiecesLower.Single(item => item.ID == m_lower.ID);
                 }
                 catch { return null; }
             }
             set
             {
                 m_lower = value;
-                //WP_LowerControl = new Controls.CQuality(value);
 
-                NotifyPropertyChanged("Project"); NotifyPropertyChanged("Issue");
+                NotifyPropertyChanged("WorkpiecesUpper");
             }
         }
 

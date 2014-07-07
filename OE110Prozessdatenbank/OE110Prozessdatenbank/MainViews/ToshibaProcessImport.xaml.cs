@@ -31,6 +31,14 @@ namespace OE110Prozessdatenbank.MainWindows
             
         }
 
+        public ToshibaProcessImport(ViewModels.PToshibaImportVM vm)
+        {
+            InitializeComponent();
+            m_vm = vm;
+            DataContext = m_vm;
+
+        }
+
         private void bt_import_Click(object sender, RoutedEventArgs e)
         {
            
@@ -115,6 +123,21 @@ namespace OE110Prozessdatenbank.MainWindows
         private void bt_cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void LV_Processes_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((sender as ListView).SelectedIndex!=-1)
+            {
+                if (e.Key == Key.Delete)
+                {
+                    if (MessageBox.Show("Das Entfernen von Elementen ist zurzeit aus technischen Gründen nicht möglich","Hinweis",MessageBoxButton.OK,MessageBoxImage.Warning)== MessageBoxResult.Yes)
+                    {
+                        //m_vm.RemoveProcess((sender as ListView).SelectedIndex);
+                    }
+                }
+
+            }
         }
     }
 }

@@ -7,14 +7,14 @@
     <Grid Background="White">
         <Label Content="Datum" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Width="110"/>
         <Label Content="Anzahl Presszyklen" HorizontalAlignment="Left" Margin="10,339,0,0" VerticalAlignment="Top" Width="151"/>
-        <Label Content="Bearbeiter" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Width="110"/>
+        <Label Content="Bearbeiter *" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
         <Label Content="Programmtitel" HorizontalAlignment="Left" Margin="10,432,0,0" VerticalAlignment="Top" Width="151"/>
         <Label Content="Temperatur max [°C]" HorizontalAlignment="Left" Margin="10,308,0,0" VerticalAlignment="Top" Width="151"/>
         <Label Content="Temperatur bei Entnahme [°C]" HorizontalAlignment="Left" Margin="10,494,0,0" VerticalAlignment="Top" Width="151"/>
-        <Label Content="Projekt" HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top" Width="110"/>
+        <Label Content="Projekt *" HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
         <Label Content="Bemerkung" HorizontalAlignment="Left" Margin="10,525,0,0" VerticalAlignment="Top" Width="110"/>
         <Label Content="Fokus (mag. Dreieck)" HorizontalAlignment="Left" Margin="10,463,0,0" VerticalAlignment="Top" Width="151"/>
-        <Label Content="Fragestellung/Versuchsreihe" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top" Width="172"/>
+        <Label Content="Fragestellung/Versuchsreihe *" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top" Width="177" FontWeight="Bold"/>
         <Label Content="Glas" HorizontalAlignment="Left" Margin="10,223,0,0" VerticalAlignment="Top" Width="151"/>
         <Label Content="Presszeit pro Zyklus [kN]" HorizontalAlignment="Left" Margin="10,370,0,0" VerticalAlignment="Top" Width="151"/>
         <Label Content="Preskraft [kN]" HorizontalAlignment="Left" Margin="10,246,0,0" VerticalAlignment="Top" Width="151"/>
@@ -25,9 +25,9 @@
         <Label Content="Qualitätsmerkmale" HorizontalAlignment="Left" Margin="478,31,0,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
         <DatePicker SelectedDate="{Binding Date}" Margin="187,33,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
         <ComboBox x:Name="cb_user" ItemsSource="{Binding Users}" SelectedItem="{Binding User}" DisplayMemberPath="Description" Margin="187,62,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
-        <ComboBox x:Name="cb_project" IsEnabled="False" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" Margin="187,89,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
-        <ComboBox x:Name="cb_Issue" IsEnabled="False" ItemsSource="{Binding Issues}" SelectedItem="{Binding Issue}" DisplayMemberPath="Description" Margin="187,120,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
-        <ComboBox x:Name="cb_upperWP" ItemsSource="{Binding Workpieces, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding UpperWP, UpdateSourceTrigger=PropertyChanged}" Margin="187,161,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266" SelectionChanged="cb_upperWP_SelectionChanged">
+        <ComboBox x:Name="cb_project" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" Margin="187,89,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
+        <ComboBox x:Name="cb_Issue" ItemsSource="{Binding Issues}" SelectedItem="{Binding Issue}" DisplayMemberPath="Description" Margin="187,120,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
+        <ComboBox x:Name="cb_upperWP" ItemsSource="{Binding WorkpiecesUpper}" SelectedItem="{Binding UpperWP}" Margin="187,161,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266" SelectionChanged="cb_upperWP_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="170" Height="14" HorizontalAlignment="Stretch">
@@ -37,7 +37,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox x:Name="cb_lowerWP" ItemsSource="{Binding Workpieces,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding LowerWP, UpdateSourceTrigger=PropertyChanged}" Margin="187,192,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266" SelectionChanged="cb_lowerWP_SelectionChanged">
+        <ComboBox x:Name="cb_lowerWP" ItemsSource="{Binding WorkpiecesLower}" SelectedItem="{Binding LowerWP}" Margin="187,192,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266" SelectionChanged="cb_lowerWP_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="170" Height="14" HorizontalAlignment="Stretch">

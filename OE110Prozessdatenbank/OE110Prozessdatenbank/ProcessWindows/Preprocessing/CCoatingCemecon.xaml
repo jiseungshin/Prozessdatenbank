@@ -24,8 +24,8 @@
 
         <DatePicker SelectedDate="{Binding Date}" Margin="166,68,10,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cb_user" ItemsSource="{Binding Users}" SelectedItem="{Binding User}" DisplayMemberPath="Description" Margin="166,97,10,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cb_project" IsEnabled="False" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project}" DisplayMemberPath="Description" Margin="166,124,10,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cb_issue" IsEnabled="False" ItemsSource="{Binding Issues,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Issue}" DisplayMemberPath="Description" Margin="166,151,10,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cb_project" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project}" DisplayMemberPath="Description" Margin="166,124,10,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cb_issue" ItemsSource="{Binding Issues,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Issue}" DisplayMemberPath="Description" Margin="166,151,10,0" VerticalAlignment="Top"/>
 
         <ComboBox x:Name="cb_processes" ItemsSource="{Binding Processes}" SelectedItem="{Binding Process}" Margin="166,202,10,0" VerticalAlignment="Top" Height="71">
             <ComboBox.ItemTemplate>

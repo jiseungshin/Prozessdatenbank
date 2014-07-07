@@ -11,7 +11,7 @@ namespace PDCore.Processes
         public PGrindingOther()
         {
             UserID = -1;
-            ProjectID = -1; IssueID = -1;
+            //ProjectID = -1; IssueID = -1;
 
             Workpieces = new List<BusinessObjects.Workpiece>();
         }

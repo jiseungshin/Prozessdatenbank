@@ -44,6 +44,31 @@ namespace OE110Prozessdatenbank.MainViews
             new Controls.ReferencePicker().ShowDialog();
         }
 
+        private void mbt_getCoatProcesses_Click(object sender, RoutedEventArgs e)
+        {
+            new ObjectWindows.CoatingSPAdministration().ShowDialog();
+        }
+
+        private void mbt_getGlasses_Click(object sender, RoutedEventArgs e)
+        {
+            new ObjectWindows.GlassAdministration().ShowDialog();
+        }
+
+        private void mbt_getWorkpieces_Click(object sender, RoutedEventArgs e)
+        {
+            new ObjectWindows.WorkpieceAdministration().ShowDialog();
+        }
+
+        private void mbt_getProjects_Click(object sender, RoutedEventArgs e)
+        {
+            new ObjectWindows.ProjectAdministration().ShowDialog();
+        }
+
+        private void mbt_getUser_Click(object sender, RoutedEventArgs e)
+        {
+            new ObjectWindows.UserAdministration().ShowDialog();
+        }
+
     }
 
     

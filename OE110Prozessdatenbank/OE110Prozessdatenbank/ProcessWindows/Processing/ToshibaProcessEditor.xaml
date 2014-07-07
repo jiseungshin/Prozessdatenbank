@@ -2,9 +2,10 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:oxy="http://oxyplot.codeplex.com"
+        xmlns:local="clr-namespace:OE110Prozessdatenbank"
         Title="Prozessdaten Editor" Height="585" Width="495.896" Icon="/OE110Prozessdatenbank;component/Icons/Editor_16xLG.png" Closing="editor_Closed">
     <Window.Resources>
-
+        <local:NullableConverter x:Key="nullConv"></local:NullableConverter>
     </Window.Resources>
     <Grid>
         <TabControl Margin="10">
@@ -28,7 +29,7 @@
                                 <Setter Property="ContextMenu" Value="{StaticResource PostProcessingContext}" />
                             </Style>
                         </Grid.Resources>
-                        <TextBox x:Name="tb_P1" HorizontalAlignment="Left" Height="21" Margin="43,234,0,0" TextWrapping="Wrap" Text="{Binding VM.P1}" VerticalAlignment="Top" Width="50"/>
+                        <TextBox x:Name="tb_P1" HorizontalAlignment="Left" Height="21" Margin="43,234,0,0" TextWrapping="Wrap" Text="{Binding VM.P1, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="50"/>
                         <Label Content="P1" HorizontalAlignment="Left" Margin="10,231,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692" Height="24" Width="23"/>
                         <Button Content="übernehmen" HorizontalAlignment="Left" Margin="319,429,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
                         <Label Content="P2" HorizontalAlignment="Left" Margin="128,231,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692" Height="24" Width="22"/>
@@ -55,30 +56,30 @@
                         <Label Content="V2" HorizontalAlignment="Left" Margin="104,350,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692" Height="24" Width="23"/>
                         <Label Content="Z2" HorizontalAlignment="Left" Margin="103,378,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692" Height="24" Width="23"/>
                         <Label Content="V3" HorizontalAlignment="Left" Margin="195,350,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692" Height="24" Width="23"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="43,44,0,0" TextWrapping="Wrap" Text="{Binding VM.Tv}" VerticalAlignment="Top" Width="52"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="43,160,0,0" TextWrapping="Wrap" Text="{Binding VM.Gv}" VerticalAlignment="Top" Width="52"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="43,70,0,0" TextWrapping="Wrap" Text="{Binding VM.Tvu}" VerticalAlignment="Top" Width="52"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="130,44,0,0" TextWrapping="Wrap" Text="{Binding VM.T1}" VerticalAlignment="Top" Width="51"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="130,68,0,0" TextWrapping="Wrap" Text="{Binding VM.T1u}" VerticalAlignment="Top" Width="51" RenderTransformOrigin="0.549,1.522"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="43,106,0,0" TextWrapping="Wrap" Text="{Binding VM.ST1}" VerticalAlignment="Top" Width="51" RenderTransformOrigin="0.507,1.957"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="223,46,0,0" TextWrapping="Wrap" Text="{Binding VM.T2}" VerticalAlignment="Top" Width="51"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="223,72,0,0" TextWrapping="Wrap" Text="{Binding VM.T3}" VerticalAlignment="Top" Width="51"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="130,106,0,0" TextWrapping="Wrap" Text="{Binding VM.ST2}" VerticalAlignment="Top" Width="51"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="223,160,0,0" TextWrapping="Wrap" Text="{Binding VM.G2}" VerticalAlignment="Top" Width="51"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="130,160,0,0" TextWrapping="Wrap" Text="{Binding VM.G1}" VerticalAlignment="Top" Width="51"/>
-                        <TextBox HorizontalAlignment="Left" Height="21" Margin="43,353,0,0" TextWrapping="Wrap" Text="{Binding VM.V1}" VerticalAlignment="Top" Width="49"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="43,379,0,0" TextWrapping="Wrap" Text="{Binding VM.Z1}" VerticalAlignment="Top" Width="49"/>
-                        <TextBox HorizontalAlignment="Left" Height="21" Margin="268,234,0,0" TextWrapping="Wrap" Text="{Binding VM.P3}" VerticalAlignment="Top" Width="50" MouseRightButtonDown="TextBox_MouseRightButtonDown" MouseDown="TextBox_MouseDown"/>
-                        <TextBox HorizontalAlignment="Left" Height="21" Margin="155,234,0,0" TextWrapping="Wrap" Text="{Binding VM.P2}" VerticalAlignment="Top" Width="50" MouseRightButtonDown="TextBox_MouseRightButtonDown" MouseDown="TextBox_MouseDown"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="43,44,0,0" TextWrapping="Wrap" Text="{Binding VM.Tv, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="52"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="43,160,0,0" TextWrapping="Wrap" Text="{Binding VM.Gv, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="52"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="43,70,0,0" TextWrapping="Wrap" Text="{Binding VM.Tvu, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="52"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="130,44,0,0" TextWrapping="Wrap" Text="{Binding VM.T1, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="51"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="130,68,0,0" TextWrapping="Wrap" Text="{Binding VM.T1u, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="51" RenderTransformOrigin="0.549,1.522"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="43,106,0,0" TextWrapping="Wrap" Text="{Binding VM.ST1, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="51" RenderTransformOrigin="0.507,1.957"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="223,46,0,0" TextWrapping="Wrap" Text="{Binding VM.T2, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="51"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="223,72,0,0" TextWrapping="Wrap" Text="{Binding VM.T3, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="51"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="130,106,0,0" TextWrapping="Wrap" Text="{Binding VM.ST2, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="51"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="223,160,0,0" TextWrapping="Wrap" Text="{Binding VM.G2, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="51"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="130,160,0,0" TextWrapping="Wrap" Text="{Binding VM.G1, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="51"/>
+                        <TextBox HorizontalAlignment="Left" Height="21" Margin="43,353,0,0" TextWrapping="Wrap" Text="{Binding VM.V1, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="49"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="43,379,0,0" TextWrapping="Wrap" Text="{Binding VM.Z1, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="49"/>
+                        <TextBox HorizontalAlignment="Left" Height="21" Margin="268,234,0,0" TextWrapping="Wrap" Text="{Binding VM.P3, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="50" MouseRightButtonDown="TextBox_MouseRightButtonDown" MouseDown="TextBox_MouseDown"/>
+                        <TextBox HorizontalAlignment="Left" Height="21" Margin="155,234,0,0" TextWrapping="Wrap" Text="{Binding VM.P2, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="50" MouseRightButtonDown="TextBox_MouseRightButtonDown" MouseDown="TextBox_MouseDown"/>
 
-                        <TextBox HorizontalAlignment="Left" Height="21" Margin="43,258,0,0" TextWrapping="Wrap" Text="{Binding VM.PT1}" VerticalAlignment="Top" Width="50" MouseRightButtonDown="TextBox_MouseRightButtonDown" MouseDown="TextBox_MouseDown"/>
+                        <TextBox HorizontalAlignment="Left" Height="21" Margin="43,258,0,0" TextWrapping="Wrap" Text="{Binding VM.PT1, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="50" MouseRightButtonDown="TextBox_MouseRightButtonDown" MouseDown="TextBox_MouseDown"/>
 
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="343,44,0,0" TextWrapping="Wrap" Text="{Binding VM.T4}" VerticalAlignment="Top" Width="51"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="343,70,0,0" TextWrapping="Wrap" Text="{Binding VM.T5}" VerticalAlignment="Top" Width="51"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="343,44,0,0" TextWrapping="Wrap" Text="{Binding VM.T4, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="51"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="343,70,0,0" TextWrapping="Wrap" Text="{Binding VM.T5, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="51"/>
 
-                        <TextBox HorizontalAlignment="Left" Height="21" Margin="132,353,0,0" TextWrapping="Wrap" Text="{Binding VM.V2}" VerticalAlignment="Top" Width="49"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="132,379,0,0" TextWrapping="Wrap" Text="{Binding VM.Z2}" VerticalAlignment="Top" Width="49"/>
-                        <TextBox HorizontalAlignment="Left" Height="21" Margin="225,353,0,0" TextWrapping="Wrap" Text="{Binding VM.V3}" VerticalAlignment="Top" Width="49"/>
+                        <TextBox HorizontalAlignment="Left" Height="21" Margin="132,353,0,0" TextWrapping="Wrap" Text="{Binding VM.V2, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="49"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="132,379,0,0" TextWrapping="Wrap" Text="{Binding VM.Z2, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="49"/>
+                        <TextBox HorizontalAlignment="Left" Height="21" Margin="225,353,0,0" TextWrapping="Wrap" Text="{Binding VM.V3, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="49"/>
 
 
 

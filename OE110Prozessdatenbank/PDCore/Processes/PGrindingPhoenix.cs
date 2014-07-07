@@ -12,9 +12,9 @@ namespace PDCore.Processes
         public PGrindingPhoenix()
         {
             UserID = -1;
-            ProjectID = -1;
+            //ProjectID = -1;
             ProcessID = -1;
-            IssueID = -1;
+            //IssueID = -1;
             Quality = new BusinessObjects.ProcessQuality();
             Workpieces = new List<BusinessObjects.Workpiece>();
         }

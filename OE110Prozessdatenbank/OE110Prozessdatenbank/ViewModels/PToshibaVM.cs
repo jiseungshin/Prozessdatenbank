@@ -9,6 +9,7 @@ using OxyPlot.Axes;
 using OxyPlot.Series;
 using PDCore.BusinessObjects;
 using PDCore.Manager;
+using OE110Prozessdatenbank.Commands;
 
 namespace OE110Prozessdatenbank.ViewModels
 {
@@ -96,11 +97,106 @@ namespace OE110Prozessdatenbank.ViewModels
 
         }
 
+        public PToshibaVM(int PID)
+        {
+            SaveProcess = new RelayCommand(Save, CanSave);
+
+            m_process = ProcessManager.Instance.getProcess(PID, 34) as PToshiba;
+            
+            //try getting mon-file from local directory
+            try
+            {
+                m_process.File = PDCore.ToshibaImport.IO.getMonFileData(@"Data\Toshiba\" + PID + ".mon");
+            }
+            catch
+            {
+                m_process.File = new PDCore.ToshibaImport.MonFile();
+            }
+
+            plotModelT = new OxyPlot.PlotModel();
+            plotModelP = new OxyPlot.PlotModel();
+
+            //Inint QualityControls
+            if (m_process.UpperWorkpiece != null)
+                WP_UpperControl = new Controls.CQuality(ObjectManager.Instance.Workpieces.Find(item => item.ID == m_process.UpperWorkpiece));
+            if (m_process.LowerWorkpiece != null)
+                WP_LowerControl = new Controls.CQuality(ObjectManager.Instance.Workpieces.Find(item => item.ID == m_process.LowerWorkpiece));
+            PV_Control = new Controls.CPVControl();
+            ProcessQualityControl = new Controls.CProcessQuality(m_process);
+
+            #region Temp
+            LineSeries ls = new LineSeries();
+
+            foreach (var step in m_process.File.Steps)
+            {
+                ls.StrokeThickness = 0.8;
+                ls.Smooth = true;
+                ls.Color = OxyColors.Red;
+
+
+                for (int i = 0; i < step.MeasuringPoints.Count; i++)
+                {
+                    ls.Points.Add(new DataPoint(step.MeasuringPoints[i].TimePass, step.MeasuringPoints[i].LTemp1));
+                }
+            }
+
+            Temperature.Series.Add(ls);
+
+            plotModelT.PlotMargins = new OxyThickness(3, 3, 3, 3);
+            plotModelT.Padding = new OxyThickness(3, 3, 3, 3);
+            plotModelT.TitleFontSize = 0;
+            plotModelT.SubtitleFontSize = 0;
+            plotModelT.TitlePadding = 0;
+            plotModelT.Axes.Clear();
+
+            plotModelT.Axes.Add(new InvisibleAxis { Position = AxisPosition.Bottom });
+            plotModelT.Axes.Add(new InvisibleAxis { Position = AxisPosition.Left });
+
+            #endregion
+
+            #region force
+            ls = new LineSeries();
+            foreach (var step in m_process.File.Steps)
+            {
+                ls.StrokeThickness = 0.8;
+                ls.Smooth = true;
+                ls.Color = OxyColors.Blue;
+
+                for (int i = 0; i < step.MeasuringPoints.Count; i += 1)
+                {
+                    ls.Points.Add(new DataPoint(step.MeasuringPoints[i].TimePass, step.MeasuringPoints[i].PressZ));
+                }
+            }
+
+            Force.Series.Add(ls);
+
+            plotModelP.PlotMargins = new OxyThickness(3, 3, 3, 3);
+            plotModelP.Padding = new OxyThickness(3, 3, 3, 3);
+            plotModelP.TitleFontSize = 0;
+            plotModelP.SubtitleFontSize = 0;
+            plotModelP.TitlePadding = 0;
+            plotModelP.Axes.Clear();
+
+            plotModelP.Axes.Add(new InvisibleAxis { Position = AxisPosition.Bottom });
+            plotModelP.Axes.Add(new InvisibleAxis { Position = AxisPosition.Left });
+
+            #endregion
+
+            m_vm = new MonFileVM(m_process.File);
+
+        }
+
 
         public PToshiba Process
         { get { return m_process; } }
         public ViewModels.MonFileVM MonVM
         { get { return m_vm; } }
+
+        public int? ProjectID
+        { get { return m_process.ProjectID; } set { m_process.ProjectID = value; } }
+
+        public int? IssueID
+        { get { return m_process.IssueID; } set { m_process.IssueID = value; } }
 
         public DateTime Date
         { get { return m_process.Date; } }
@@ -201,6 +297,29 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public double? Z2
         { get { return m_process.InputData.Z2; } set { m_process.InputData.Z2 = value; } }
+
+        #region Command functions
+
+        public RelayCommand SaveProcess { get; set; }
+        public void Save()
+        {
+            
+                ProcessManager.Instance.saveProcess(m_process, true);
+            
+            
+
+            Updater.Instance.forceUpdate();
+        }
+
+        public bool CanSave()
+        {
+            if (m_process.UserID != -1 && m_process.ProjectID != -1 && m_process.IssueID != -1)
+                return true;
+            else
+                return false;
+        }
+
+        #endregion
 
 
     }

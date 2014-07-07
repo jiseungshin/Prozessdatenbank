@@ -37,6 +37,8 @@ namespace OE110Prozessdatenbank
         private UIElement m_processingControlToshiba;
         private UIElement m_processingControlCemeCon;
 
+        private Label m_adminLabel = new Label();
+
 
         public MainWindow()
         {
@@ -48,7 +50,7 @@ namespace OE110Prozessdatenbank
             FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(
             XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
 
-
+            m_adminLabel.Name = "lb_0";
             lbLoginName.Content = "";
             userIcon.Visibility = System.Windows.Visibility.Hidden;
             //#FF5EB45A
@@ -96,6 +98,9 @@ namespace OE110Prozessdatenbank
                 int id = Convert.ToInt32(PDCore.Manager.UserManager.CurrentUser.MachineID);
                 switch(id)
                 {
+                    case 0:
+                        this.changeWindow(m_adminLabel, 0);
+                        break;
                     case 11:
                         this.changeWindow(lb_1, id);
                         break;
@@ -181,6 +186,10 @@ namespace OE110Prozessdatenbank
             g_selector.Visibility = System.Windows.Visibility.Visible;
             switch (lb.Name)
             {
+                case "lb_0":
+                    g_content.Children.Clear();
+                    g_content.Children.Add(new MainViews.Administration());
+                    break;
                 case "lb_1":
                     g_content.Children.Clear();
                     m_grindingControl.setMachineID(machine);

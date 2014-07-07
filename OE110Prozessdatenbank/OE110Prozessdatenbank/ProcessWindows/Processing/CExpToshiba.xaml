@@ -1,0 +1,100 @@
+﻿<Window x:Class="OE110Prozessdatenbank.ProcessWindows.CExpToshiba"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:oxy="http://oxyplot.codeplex.com"
+       Title="Prozessdaten Editor" Height="585" Width="495.896" Icon="/OE110Prozessdatenbank;component/Icons/Editor_16xLG.png">
+    <Window.Resources>
+
+    </Window.Resources>
+    <Grid>
+        <TabControl Margin="10,10,10,42">
+            <TabItem Header="Prozessparameter">
+                <Grid Background="#FFE5E5E5">
+                    <Grid Margin="10,10,-16,10">
+                        <TextBox x:Name="tb_P1" HorizontalAlignment="Left" Height="21" Margin="43,234,0,0" TextWrapping="Wrap" Text="{Binding P1}" VerticalAlignment="Top" Width="50"/>
+                        <Label Content="P1" HorizontalAlignment="Left" Margin="10,231,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692" Height="24" Width="23"/>
+                        <Label Content="P2" HorizontalAlignment="Left" Margin="128,231,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692" Height="24" Width="22"/>
+                        <Label Content="Temperaturen" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+                        <Label Content="Presskräfte" HorizontalAlignment="Left" Margin="10,203,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Height="27" Width="123"/>
+                        <Label Content="Presswege" HorizontalAlignment="Left" Margin="10,311,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Height="27" Width="102"/>
+                        <Label Content="P3" HorizontalAlignment="Left" Margin="241,231,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692" Height="24" Width="22"/>
+                        <Label Content="PT1" HorizontalAlignment="Left" Margin="10,255,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692" Height="24" Width="28"/>
+                        <Label Content="Tv" HorizontalAlignment="Left" Margin="10,44,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692"/>
+                        <Label Content="Tvu" HorizontalAlignment="Left" Margin="11,68,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692"/>
+                        <Label Content="T1" HorizontalAlignment="Left" Margin="103,44,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692"/>
+                        <Label Content="T1u" HorizontalAlignment="Left" Margin="103,68,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692"/>
+                        <Label Content="ST2" HorizontalAlignment="Left" Margin="96,106,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692"/>
+                        <Label Content="ST1" HorizontalAlignment="Left" Margin="10,106,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692"/>
+                        <Label Content="T2" HorizontalAlignment="Left" Margin="195,46,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692"/>
+                        <Label Content="T3" HorizontalAlignment="Left" Margin="195,72,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692"/>
+                        <Label Content="T4" HorizontalAlignment="Left" Margin="315,44,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692"/>
+                        <Label Content="T5" HorizontalAlignment="Left" Margin="315,70,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692"/>
+                        <Label Content="Gv" HorizontalAlignment="Left" Margin="10,156,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692"/>
+                        <Label Content="G1" HorizontalAlignment="Left" Margin="101,156,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692"/>
+                        <Label Content="G2" HorizontalAlignment="Left" Margin="193,156,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692"/>
+                        <Label Content="V1" HorizontalAlignment="Left" Margin="11,349,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692" Height="24" Width="23"/>
+                        <Label Content="Z1" HorizontalAlignment="Left" Margin="9,375,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692" Height="24" Width="23"/>
+                        <Label Content="V2" HorizontalAlignment="Left" Margin="104,350,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692" Height="24" Width="23"/>
+                        <Label Content="Z2" HorizontalAlignment="Left" Margin="103,378,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692" Height="24" Width="23"/>
+                        <Label Content="V3" HorizontalAlignment="Left" Margin="195,350,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692" Height="24" Width="23"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="43,44,0,0" TextWrapping="Wrap" Text="{Binding Tv}" VerticalAlignment="Top" Width="52"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="43,160,0,0" TextWrapping="Wrap" Text="{Binding Gv}" VerticalAlignment="Top" Width="52"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="43,70,0,0" TextWrapping="Wrap" Text="{Binding Tvu}" VerticalAlignment="Top" Width="52"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="130,44,0,0" TextWrapping="Wrap" Text="{Binding T1}" VerticalAlignment="Top" Width="51"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="130,68,0,0" TextWrapping="Wrap" Text="{Binding T1u}" VerticalAlignment="Top" Width="51" RenderTransformOrigin="0.549,1.522"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="43,106,0,0" TextWrapping="Wrap" Text="{Binding ST1}" VerticalAlignment="Top" Width="51" RenderTransformOrigin="0.507,1.957"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="223,46,0,0" TextWrapping="Wrap" Text="{Binding T2}" VerticalAlignment="Top" Width="51"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="223,72,0,0" TextWrapping="Wrap" Text="{Binding T3}" VerticalAlignment="Top" Width="51"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="130,106,0,0" TextWrapping="Wrap" Text="{Binding ST2}" VerticalAlignment="Top" Width="51"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="223,160,0,0" TextWrapping="Wrap" Text="{Binding G2}" VerticalAlignment="Top" Width="51"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="130,160,0,0" TextWrapping="Wrap" Text="{Binding G1}" VerticalAlignment="Top" Width="51"/>
+                        <TextBox HorizontalAlignment="Left" Height="21" Margin="43,353,0,0" TextWrapping="Wrap" Text="{Binding V1}" VerticalAlignment="Top" Width="49"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="43,379,0,0" TextWrapping="Wrap" Text="{Binding Z1}" VerticalAlignment="Top" Width="49"/>
+                        <TextBox HorizontalAlignment="Left" Height="21" Margin="268,234,0,0" TextWrapping="Wrap" Text="{Binding P3}" VerticalAlignment="Top" Width="50"/>
+                        <TextBox HorizontalAlignment="Left" Height="21" Margin="155,234,0,0" TextWrapping="Wrap" Text="{Binding P2}" VerticalAlignment="Top" Width="50"/>
+
+                        <TextBox HorizontalAlignment="Left" Height="21" Margin="43,258,0,0" TextWrapping="Wrap" Text="{Binding PT1}" VerticalAlignment="Top" Width="50"/>
+
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="343,44,0,0" TextWrapping="Wrap" Text="{Binding T4}" VerticalAlignment="Top" Width="51"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="343,70,0,0" TextWrapping="Wrap" Text="{Binding T5}" VerticalAlignment="Top" Width="51"/>
+
+                        <TextBox HorizontalAlignment="Left" Height="21" Margin="132,353,0,0" TextWrapping="Wrap" Text="{Binding V2}" VerticalAlignment="Top" Width="49"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="132,379,0,0" TextWrapping="Wrap" Text="{Binding Z2}" VerticalAlignment="Top" Width="49"/>
+                        <TextBox HorizontalAlignment="Left" Height="21" Margin="225,353,0,0" TextWrapping="Wrap" Text="{Binding V3}" VerticalAlignment="Top" Width="49"/>
+
+
+
+                    </Grid>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Diagramme">
+                <Grid Background="#FFE5E5E5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <oxy:Plot x:Name="Plot1" Title=" Temperatur - Keine Daten verfügbar!" Model="{Binding MonVM.PlotModelT, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,10,10" Background="WhiteSmoke" RenderTransformOrigin="-0.556,1.562"/>
+                        <oxy:Plot x:Name="Plot2" Title="Presskraft - Keine Daten verfügbar!" Model="{Binding MonVM.PlotModelP, UpdateSourceTrigger=PropertyChanged}" Margin="10" Background="WhiteSmoke" Grid.Row="1"/>
+                        <oxy:Plot x:Name="Plot3" Title="Pressweg - Keine Daten verfügbar!" Model="{Binding MonVM.PlotModelS, UpdateSourceTrigger=PropertyChanged}" Margin="10" Background="WhiteSmoke" Grid.Row="2"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Qulitätsparameter">
+                <Grid>
+                    <Grid x:Name="g_quality" Height="auto" Margin="10,10,10,0" VerticalAlignment="Top">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Button Content="übernehmen" Command="{Binding SaveProcess}" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Click="Button_Click"/>
+    </Grid>
+</Window>
+

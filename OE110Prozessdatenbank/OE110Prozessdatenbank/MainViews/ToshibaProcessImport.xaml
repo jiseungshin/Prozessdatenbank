@@ -8,8 +8,7 @@
         <Grid.Resources>
             <!--<local:CQuality x:Key="WorkpieceQuality"></local:CQuality>-->
         </Grid.Resources>
-        <Button x:Name="bt_import" Content="Prozessdaten laden" Margin="10,105,10,0" VerticalAlignment="Top" Click="bt_import_Click" Height="28"/>
-        <ListView x:Name="LV_Processes" Margin="10,138,10,35" ItemsSource="{Binding Processes, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" MouseDoubleClick="LV_MouseDoubleClick">
+        <ListView x:Name="LV_Processes" Margin="10,138,10,35" ItemsSource="{Binding Processes, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" MouseDoubleClick="LV_MouseDoubleClick" KeyDown="LV_Processes_KeyDown">
             <ListView.Background>
                 <LinearGradientBrush>
                     <GradientStop  Offset="0" Color="#FFE8E8E8"/>
@@ -99,8 +98,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ComboBox HorizontalAlignment="Left" ItemsSource="{Binding Users}" SelectedItem="{Binding User}" DisplayMemberPath="Description" Margin="143,10,0,0" VerticalAlignment="Top" Width="183"/>
-        <ComboBox HorizontalAlignment="Left" ItemsSource="{Binding Workpieces}" SelectedItem="{Binding LowerWP}" Margin="143,64,0,0" VerticalAlignment="Top" Width="183">
+        <ComboBox HorizontalAlignment="Left" ItemsSource="{Binding Users}" SelectedItem="{Binding User}" DisplayMemberPath="Description" Margin="143,10,0,0" VerticalAlignment="Top" Width="183" IsEnabled="False"/>
+        <ComboBox HorizontalAlignment="Left" ItemsSource="{Binding Workpieces}" SelectedItem="{Binding LowerWP}" Margin="143,64,0,0" VerticalAlignment="Top" Width="183" IsEnabled="False">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="250" Height="14" HorizontalAlignment="Stretch">
@@ -109,7 +108,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox HorizontalAlignment="Left" ItemsSource="{Binding Workpieces}" SelectedItem="{Binding UpperWP}" Margin="143,37,0,0" VerticalAlignment="Top" Width="183">
+        <ComboBox HorizontalAlignment="Left" ItemsSource="{Binding Workpieces}" SelectedItem="{Binding UpperWP}" Margin="143,37,0,0" VerticalAlignment="Top" Width="183" IsEnabled="False">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="250" Height="14" HorizontalAlignment="Stretch">
@@ -118,15 +117,15 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox HorizontalAlignment="Left" ItemsSource="{Binding Glasses}" SelectedItem="{Binding Glass}" IsEditable="True" DisplayMemberPath="VisualName" Margin="451,10,0,0" VerticalAlignment="Top" Width="183"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="451,37,0,0" TextWrapping="Wrap" Text="{Binding LensName}" VerticalAlignment="Top" Width="120"/>
+        <ComboBox HorizontalAlignment="Left" ItemsSource="{Binding Glasses}" SelectedItem="{Binding Glass}" IsEditable="True" DisplayMemberPath="VisualName" Margin="451,10,0,0" VerticalAlignment="Top" Width="183" IsEnabled="False"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="451,37,0,0" TextWrapping="Wrap" Text="{Binding LensName}" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
         <Label Content="Bearbeiter" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="128"/>
         <Label Content="Oberes Werkstück" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="128"/>
         <Label Content="Unteres Werkstück" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Width="128"/>
         <Label Content="Glas" HorizontalAlignment="Left" Margin="347,10,0,0" VerticalAlignment="Top" Width="76"/>
         <Label Content="Benennung" HorizontalAlignment="Left" Margin="347,36,0,0" VerticalAlignment="Top" Width="102"/>
         <Label Content="+ Zahl" HorizontalAlignment="Left" Margin="579,34,-5,0" VerticalAlignment="Top" Width="102"/>
-        <Button x:Name="bt_importToDB" IsEnabled="False" Content="importieren" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="87" Click="bt_importToDB_Click"/>
+        <Button x:Name="bt_importToDB" IsEnabled="True" Content="importieren" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="87" Click="bt_importToDB_Click"/>
         <Button x:Name="bt_cancel" Content="abbrechen" HorizontalAlignment="Right" Margin="0,0,102,10" VerticalAlignment="Bottom" Width="87" Click="bt_cancel_Click"/>
 
     </Grid>

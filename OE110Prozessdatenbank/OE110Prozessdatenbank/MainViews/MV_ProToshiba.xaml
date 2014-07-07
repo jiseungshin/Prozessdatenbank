@@ -22,7 +22,7 @@
         </Grid.Background>
         <Grid.Resources>
             <src:StatusConverter x:Key="StatusConverter"></src:StatusConverter>
-            <src:DateConverter x:Key="DateConverter"></src:DateConverter>
+            <src:DateTimeConverter x:Key="DateConverter"></src:DateTimeConverter>
             <src:NullToString x:Key="NullToString"></src:NullToString>
         </Grid.Resources>
         <ToolBarTray Height="44" VerticalAlignment="Top" Background="#FFB4B4B4" Width="auto">
@@ -84,14 +84,12 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="V-Nr." DisplayMemberBinding="{Binding Path=ReferenceNumber}" Width="50"/>
-                    <GridViewColumn Header="Werkstück" DisplayMemberBinding="{Binding Path=Label}" Width="90"/>
-                    <GridViewColumn Header="Material" DisplayMemberBinding="{Binding Path=Name}" Width="90"/>
-                    <GridViewColumn Header="Glas" DisplayMemberBinding="{Binding Path=GlassName,Converter={StaticResource NullToString}}" Width="90"/>
-                    <GridViewColumn Header="Projekt" DisplayMemberBinding="{Binding Path=ProjectName}" Width="100"/>
-                    <GridViewColumn Header="Bearbeiter" DisplayMemberBinding="{Binding Path=Token}" Width="90"/>
                     <GridViewColumn Header="Datum" DisplayMemberBinding="{Binding Path=Date, Converter={StaticResource DateConverter}}" Width="130"/>
-                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Path=Status,Converter={StaticResource StatusConverter}}" Width="130"/>
+                    <GridViewColumn Header="Bearbeiter" DisplayMemberBinding="{Binding Path=Token}" Width="90"/>
+                    <GridViewColumn Header="Werkstück untere Achse" DisplayMemberBinding="{Binding Path=Lower}" Width="150"/>
+                    <GridViewColumn Header="Werkstück obere Achse" DisplayMemberBinding="{Binding Path=Upper}" Width="150"/>
+                    <GridViewColumn Header="Glassorte" DisplayMemberBinding="{Binding Path=GlassName,Converter={StaticResource NullToString}}" Width="90"/>
+                    <GridViewColumn Header="Glasbezeichnung" DisplayMemberBinding="{Binding Path=GlassName,Converter={StaticResource NullToString}}" Width="110"/>
                 </GridView>
 
             </ListView.View>

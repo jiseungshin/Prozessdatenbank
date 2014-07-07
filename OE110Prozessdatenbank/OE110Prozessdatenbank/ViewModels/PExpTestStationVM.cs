@@ -23,6 +23,8 @@ namespace OE110Prozessdatenbank.ViewModels
         private Workpiece m_centerWP;
         private Workpiece m_rightWP;
 
+        private ObservableCollection<Issue> m_issues = new ObservableCollection<Issue>();
+
         public PExpTestStation Process
         { get { return m_process; } }
         public PExpTestStationVM(int PID)
@@ -31,6 +33,10 @@ namespace OE110Prozessdatenbank.ViewModels
             m_update = true;
 
             m_process = ProcessManager.Instance.getProcess(PID, 32) as PExpTestStation;
+
+            m_process.ProjectID = ObjectManager.Instance.getProjectID(m_process.Workpieces[0].CurrentRefereneNumber);
+            m_process.IssueID = ObjectManager.Instance.getIssueID(m_process.Workpieces[0].CurrentRefereneNumber);
+
             ProcessQualityControl = new Controls.CProcessQuality(m_process);
             if (m_process.LeftWorkpieceID != null)
             {
@@ -44,6 +50,9 @@ namespace OE110Prozessdatenbank.ViewModels
             {
                 RightWorkpiece = ObjectManager.Instance.getWorkpiece(Convert.ToInt32(m_process.RightWorkpieceID));
             }
+
+            m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == m_process.ProjectID));
+            NotifyPropertyChanged("Issues");
 
             SaveProcess = new RelayCommand(Save, CanSave);
         }
@@ -61,6 +70,9 @@ namespace OE110Prozessdatenbank.ViewModels
             //set User field if user is logged in
             if (UserManager.CurrentUser != null)
                 m_process.UserID = UserManager.CurrentUser.ID;
+
+            m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == m_process.ProjectID));
+            NotifyPropertyChanged("Issues");
         }
 
         public ObservableCollection<User> Users { get { return new ObservableCollection<PDCore.BusinessObjects.User>(ObjectManager.Instance.Users); } }
@@ -92,23 +104,6 @@ namespace OE110Prozessdatenbank.ViewModels
             }
         }
 
-        public Project Project
-        {
-            get
-            {
-                try
-                {
-                    return ObjectManager.Instance.Projects.Single(item => item.ID == m_process.ProjectID) as Project;
-                }
-                catch { return null; }
-            }
-
-            set
-            {
-                m_process.ProjectID = value.ID;
-            }
-        }
-
         public Glass Glass
         {
             get
@@ -126,6 +121,129 @@ namespace OE110Prozessdatenbank.ViewModels
             }
         }
 
+        public Controls.CQuality WP_LeftControl { get; set; }
+        public Controls.CQuality WP_CenterControl { get; set; }
+        public Controls.CQuality WP_RightControl { get; set; }
+        public Controls.CProcessQuality ProcessQualityControl { get; set; }
+
+        public ObservableCollection<Project> Projects { get { return new ObservableCollection<PDCore.BusinessObjects.Project>(ObjectManager.Instance.Projects); } }
+        public ObservableCollection<Issue> Issues { get { return m_issues; } } 
+
+        public ObservableCollection<Workpiece> WorkpiecesLeft
+        {
+            get
+            {
+                if (m_update)
+                    return new ObservableCollection<Workpiece>(ObjectManager.Instance.Workpieces);
+                else
+                {
+                    return new ObservableCollection<Workpiece>(ObjectManager.Instance.CoatedWorkpieces.FindAll(item => item != m_centerWP && item != m_rightWP));
+                }
+            }
+        }
+
+        public ObservableCollection<Workpiece> WorkpiecesCenter
+        {
+            get
+            {
+                if (m_update)
+                    return new ObservableCollection<Workpiece>(ObjectManager.Instance.Workpieces);
+                else
+                {
+                    return new ObservableCollection<Workpiece>(ObjectManager.Instance.CoatedWorkpieces.FindAll(item => item != m_leftWP && item != m_rightWP));
+                }
+            }
+        }
+
+        public ObservableCollection<Workpiece> WorkpiecesRight
+        {
+            get
+            {
+                if (m_update)
+                    return new ObservableCollection<Workpiece>(ObjectManager.Instance.Workpieces);
+                else
+                {
+                    return new ObservableCollection<Workpiece>(ObjectManager.Instance.CoatedWorkpieces.FindAll(item => item != m_centerWP && item != m_leftWP));
+                }
+            }
+        }
+
+        public Workpiece LeftWorkpiece
+        {
+            get
+            {
+                try
+                {
+                    return WorkpiecesLeft.Single(item => item.ID == m_leftWP.ID);
+                }
+                catch { return null; }
+            }
+            set
+            {
+                m_leftWP = value;
+                WP_LeftControl = new Controls.CQuality(value);
+                NotifyPropertyChanged("WorkpiecesRight");
+                NotifyPropertyChanged("WorkpiecesCenter");
+            }
+        }
+
+        public Workpiece CenterWorkpiece
+        {
+            get
+            {
+                try
+                {
+                    return WorkpiecesCenter.Single(item => item.ID == m_centerWP.ID);
+                }
+                catch { return null; }
+            }
+            set
+            {
+                m_centerWP = value;
+                WP_CenterControl = new Controls.CQuality(value);
+                NotifyPropertyChanged("WorkpiecesRight");
+                NotifyPropertyChanged("WorkpiecesLeft");
+            }
+        }
+
+        public Workpiece RightWorkpiece
+        {
+            get
+            {
+                try
+                {
+                    return WorkpiecesRight.Single(item => item.ID == m_rightWP.ID);
+                }
+                catch { return null; }
+            }
+            set
+            {
+                m_rightWP = value;
+                WP_RightControl = new Controls.CQuality(value);
+                NotifyPropertyChanged("WorkpiecesCenter");
+                NotifyPropertyChanged("WorkpiecesLeft");
+            }
+        }
+
+        public Project Project
+        {
+            get
+            {
+                try
+                {
+                    return ObjectManager.Instance.Projects.Single(item => item.ID == m_process.ProjectID) as Project;
+                }
+                catch { return null; }
+            }
+
+            set
+            {
+                m_process.ProjectID = value.ID;
+                m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == m_process.ProjectID));
+                NotifyPropertyChanged("Issues");
+            }
+        }
+
         public Issue Issue
         {
             get
@@ -139,75 +257,11 @@ namespace OE110Prozessdatenbank.ViewModels
 
             set
             {
-                m_process.IssueID = value.ID;
-            }
-        }
-
-
-        public Controls.CQuality WP_LeftControl { get; set; }
-        public Controls.CQuality WP_CenterControl { get; set; }
-        public Controls.CQuality WP_RightControl { get; set; }
-        public Controls.CProcessQuality ProcessQualityControl { get; set; }
-
-        public ObservableCollection<Workpiece> Workpieces
-        {
-            get
-            {
-                if (m_update)
-                    return new ObservableCollection<Workpiece>(ObjectManager.Instance.Workpieces);
-                else
-                    return new ObservableCollection<Workpiece>(ObjectManager.Instance.CoatedWorkpieces);
-            }
-        }
-
-        public Workpiece LeftWorkpiece
-        {
-            get
-            {
                 try
                 {
-                    return Workpieces.Single(item => item.ID == m_leftWP.ID);
+                    m_process.IssueID = value.ID;
                 }
-                catch { return null; }
-            }
-            set
-            {
-                m_leftWP = value;
-                WP_LeftControl = new Controls.CQuality(value);
-            }
-        }
-
-        public Workpiece CenterWorkpiece
-        {
-            get
-            {
-                try
-                {
-                    return Workpieces.Single(item => item.ID == m_centerWP.ID);
-                }
-                catch { return null; }
-            }
-            set
-            {
-                m_centerWP = value;
-                WP_CenterControl = new Controls.CQuality(value);
-            }
-        }
-
-        public Workpiece RightWorkpiece
-        {
-            get
-            {
-                try
-                {
-                    return Workpieces.Single(item => item.ID == m_rightWP.ID);
-                }
-                catch { return null; }
-            }
-            set
-            {
-                m_rightWP = value;
-                WP_RightControl = new Controls.CQuality(value);
+                catch { m_process.IssueID = null; }
             }
         }
 

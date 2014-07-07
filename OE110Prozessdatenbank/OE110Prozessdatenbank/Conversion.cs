@@ -124,6 +124,20 @@ namespace OE110Prozessdatenbank
         }
     }
 
+    public class DateTimeConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            DateTime dt = (DateTime)value;
+            return dt.ToShortDateString() +" "+ dt.ToShortTimeString();
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return DateTime.Now;
+        }
+    }
+
     public class StatusConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
