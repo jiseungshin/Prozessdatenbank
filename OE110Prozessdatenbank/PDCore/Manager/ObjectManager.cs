@@ -27,7 +27,7 @@ namespace PDCore.Manager
             //new instance of MySQL communication class 
             _myCommunicator = new MySQLCommunicator();
             _myCommunicator.Password = PDCore.Properties.Settings.Default.Password;
-            _myCommunicator.Server = PDCore.Properties.Settings.Default.Server;
+            _myCommunicator.Server = IO.SimpleIO.getClearText(@"connection.txt")[0];// PDCore.Properties.Settings.Default.Server;
             _myCommunicator.User = PDCore.Properties.Settings.Default.User;
             _myCommunicator.Database =PDCore.Properties.Settings.Default.Database;
 

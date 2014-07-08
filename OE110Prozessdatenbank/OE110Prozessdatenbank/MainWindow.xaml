@@ -44,7 +44,7 @@
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator></Separator>
-                <MenuItem Header="Ansicht schließen">
+                <MenuItem Header="Anwendung schließen" Click="mi_Terminate_Click">
                     <MenuItem.Icon>
                         <Image  Source="/OE110Prozessdatenbank;component/Icons/Close_16xLG.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </MenuItem.Icon>

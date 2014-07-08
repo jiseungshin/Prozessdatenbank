@@ -22,7 +22,7 @@ namespace PDCore.Manager
             //new instance of MySQL communication class 
             _myCommunicator = new MySQLCommunicator();
             _myCommunicator.Password = PDCore.Properties.Settings.Default.Password;
-            _myCommunicator.Server = PDCore.Properties.Settings.Default.Server;
+            _myCommunicator.Server = IO.SimpleIO.getClearText(@"connection.txt")[0]; //PDCore.Properties.Settings.Default.Server;
             _myCommunicator.User = PDCore.Properties.Settings.Default.User;
             _myCommunicator.Database =PDCore.Properties.Settings.Default.Database;
 
@@ -44,7 +44,14 @@ namespace PDCore.Manager
             m_criteriaCoating.Add(new FilterCriteria() { DatabaseField = "al."+DBCoatingLayers.Layer, Name = "Haftschicht" });
             m_criteriaCoating.Add(new FilterCriteria() { DatabaseField = DBProcessReferences.Table + "." + DBProcessReferences.RefNumber, Name = "Vorgangsnummer" });
 
+            Updater.Instance.newData += Instance_newData;
+
         
+        }
+
+        void Instance_newData(params string[] values)
+        {
+            OnUpdateTrigger();
         }
 
          void _myCommunicator_MessageThrown(Communicator.MessageType mType, Exception Message)

@@ -390,6 +390,14 @@ namespace OE110Prozessdatenbank
             new ObjectWindows.AddWorkpiece().ShowDialog();
         }
 
+        private void mi_Terminate_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Anwendung jetzt schließen?", "", MessageBoxButton.YesNo, MessageBoxImage.Question)== MessageBoxResult.Yes)
+            {
+                this.Close();
+            }
+        }
+
 
         
 
