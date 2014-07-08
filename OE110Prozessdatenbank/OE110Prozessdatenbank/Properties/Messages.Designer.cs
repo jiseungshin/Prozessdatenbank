@@ -88,6 +88,15 @@ namespace OE110Prozessdatenbank.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Soll das Material wirklich gelöscht werden? ähnelt.
+        /// </summary>
+        internal static string q_removeMaterial {
+            get {
+                return ResourceManager.GetString("q_removeMaterial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Soll der Vorgnag wirklich beendet werden? ähnelt.
         /// </summary>
         internal static string q_TerminateReference {

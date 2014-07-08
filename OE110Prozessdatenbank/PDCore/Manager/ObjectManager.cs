@@ -651,6 +651,18 @@ namespace PDCore.Manager
             _myCommunicator.executeTransactedQueries(_queries);
         }
 
+        public void Remove(BusinessObject obj)
+        {
+            string _query = "";
+            if (obj is BusinessObjects.Material)
+            {
+                _query = "DELETE FROM " + DBMAterial.Table + " WHERE " + DBMAterial.ID + "=" + obj.ID;
+            }
+
+            _myCommunicator.executeTransactedQueries(new List<string>() { _query });
+
+        }
+
 
     }
 }

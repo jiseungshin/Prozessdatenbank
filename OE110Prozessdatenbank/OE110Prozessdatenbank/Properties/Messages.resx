@@ -129,4 +129,7 @@
   <data name="q_TerminateReference" xml:space="preserve">
     <value>Soll der Vorgnag wirklich beendet werden?</value>
   </data>
+  <data name="q_removeMaterial" xml:space="preserve">
+    <value>Soll das Material wirklich gelöscht werden?</value>
+  </data>
 </root>

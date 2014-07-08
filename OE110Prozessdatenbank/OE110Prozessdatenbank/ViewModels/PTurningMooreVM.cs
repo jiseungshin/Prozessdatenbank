@@ -240,7 +240,7 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public bool CanSave()
         {
-            if (m_process.UserID != -1 /*&& m_process.ProjectID != -1 && m_process.IssueID != -1*/)
+            if (m_process.UserID != -1)
                 return true;
             else
                 return false;
