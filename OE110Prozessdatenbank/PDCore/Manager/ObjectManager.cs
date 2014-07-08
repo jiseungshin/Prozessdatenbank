@@ -42,9 +42,31 @@ namespace PDCore.Manager
 
         }
 
-        void Instance_newData()
+        void Instance_newData(params string[] values)
         {
-            update();
+            if (values.Length == 0)
+            {
+                update();
+                
+            }
+            else
+            {
+                if (values.Contains(DBMAterial.Table))
+                {
+                    getMaterials();
+                }
+            }
+
+            OnUpdateTrigger();
+        }
+
+        public delegate void UpdateHandler();
+        public event UpdateHandler newObjects;
+
+        private void OnUpdateTrigger()
+        {
+            if (newObjects != null)
+                newObjects();
         }
 
          void _myCommunicator_MessageThrown(Communicator.MessageType mType, Exception Message)

@@ -58,7 +58,7 @@ namespace OE110Prozessdatenbank.ObjectWindows
         public VMUsreAdministration()
         {
             ObjectManager.Instance.update();
-            Updater.Instance.newData += Instance_newData;
+            ObjectManager.Instance.newObjects += Instance_newObjects;
         }
 
         public ObservableCollection<User> Users
@@ -66,7 +66,7 @@ namespace OE110Prozessdatenbank.ObjectWindows
             get { return new ObservableCollection<User>(ObjectManager.Instance.Users); }
         }
 
-        void Instance_newData()
+        void Instance_newObjects()
         {
             ObjectManager.Instance.update();
             NotifyPropertyChanged("Users");

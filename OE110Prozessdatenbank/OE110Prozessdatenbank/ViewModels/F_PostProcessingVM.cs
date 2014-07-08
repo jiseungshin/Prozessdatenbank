@@ -31,10 +31,10 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public F_PostProcessingVM()
         {
-            Updater.Instance.newData += Instance_newData;
+            ProcessManager.Instance.newProcesses += Instance_newProcesses;
         }
 
-        void Instance_newData()
+        void Instance_newProcesses()
         {
             NotifyPropertyChanged("Data");
         }

@@ -82,6 +82,16 @@ namespace PDCore.Manager
         {
             getCemeconStandardProcesses();
             getLayers();
+            OnUpdateTrigger();
+        }
+
+        public delegate void UpdateHandler();
+        public event UpdateHandler newProcesses;
+
+        private void OnUpdateTrigger()
+        {
+            if (newProcesses != null)
+                newProcesses();
         }
 
         public void saveProcess(BaseProcess process, bool update)

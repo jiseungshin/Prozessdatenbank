@@ -61,7 +61,7 @@ namespace OE110Prozessdatenbank.ObjectWindows
         public VMGlassAdministration()
         {
             ObjectManager.Instance.update();
-            Updater.Instance.newData += Instance_newData;
+            ObjectManager.Instance.newObjects += Instance_newObjects;
         }
 
         public ObservableCollection<Glass> Glasses
@@ -75,7 +75,7 @@ namespace OE110Prozessdatenbank.ObjectWindows
             }
         }
 
-        void Instance_newData()
+        void Instance_newObjects()
         {
             ObjectManager.Instance.update();
             NotifyPropertyChanged("Glasses");

@@ -23,12 +23,13 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public F_GrindingVM()
         {
-            Updater.Instance.newData += Instance_newData;
+            //Updater.Instance.newData += Instance_newData;
+            ProcessManager.Instance.newProcesses += Instance_newProcesses;
             ObjectManager.Instance.update();
             m_Machine = ObjectManager.Instance.Machines[0];
         }
 
-        void Instance_newData()
+        void Instance_newProcesses()
         {
             NotifyPropertyChanged("DataRaw");
             NotifyPropertyChanged("DataPolished");

@@ -18,7 +18,8 @@ namespace OE110Prozessdatenbank.ViewModels
         {
             m_project = new Project();
             save = new RelayCommand(Save, CanSave);
-            Updater.Instance.newData += Instance_newData;
+            //Updater.Instance.newData += Instance_newData;
+            ObjectManager.Instance.newObjects += Instance_newObjects;
         }
 
         
@@ -29,11 +30,12 @@ namespace OE110Prozessdatenbank.ViewModels
             m_project.OLDDescription = m_project.Description;
             m_update = true;
             save = new RelayCommand(Save, CanSave);
-            Updater.Instance.newData += Instance_newData;
+            //Updater.Instance.newData += Instance_newData;
+            ObjectManager.Instance.newObjects += Instance_newObjects;
 
         }
 
-        void Instance_newData()
+        void Instance_newObjects()
         {
             NotifyPropertyChanged("Issues");
         }

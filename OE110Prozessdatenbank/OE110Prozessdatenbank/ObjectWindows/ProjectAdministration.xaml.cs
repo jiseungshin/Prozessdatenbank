@@ -61,11 +61,11 @@ namespace OE110Prozessdatenbank.ObjectWindows
         {
             ObjectManager.Instance.updateProjects();
             ObjectManager.Instance.updateUser();
-            Updater.Instance.newData += Instance_newData;
+            ObjectManager.Instance.newObjects += Instance_newObjects;
 
         }
 
-        void Instance_newData()
+        void Instance_newObjects()
         {
             NotifyPropertyChanged("Projects");
         }

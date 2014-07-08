@@ -29,10 +29,10 @@ namespace OE110Prozessdatenbank.ViewModels
             ObjectManager.Instance.update();
             ref_ID = RefID;
             m_analyses = ProcessManager.Instance.getAnalysis(RefID);
-            Updater.Instance.newData += Instance_newData;
+            ProcessManager.Instance.newProcesses += Instance_newProcesses;
         }
 
-        void Instance_newData()
+        void Instance_newProcesses()
         {
             m_analyses = ProcessManager.Instance.getAnalysis(ref_ID);
             NotifyPropertyChanged("Analyses");

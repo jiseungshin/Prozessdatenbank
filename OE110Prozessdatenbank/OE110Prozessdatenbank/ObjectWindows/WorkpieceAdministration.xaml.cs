@@ -63,7 +63,7 @@ namespace OE110Prozessdatenbank.ObjectWindows
         public VMWorkpieceAdministration()
         {
             ObjectManager.Instance.update();
-            Updater.Instance.newData += Instance_newData;
+            ObjectManager.Instance.newObjects += Instance_newObjects;
         }
 
         public ObservableCollection<Workpiece> Workpieces
@@ -71,7 +71,7 @@ namespace OE110Prozessdatenbank.ObjectWindows
             get { return new ObservableCollection<Workpiece>(ObjectManager.Instance.Workpieces); }
         }
 
-        void Instance_newData()
+        void Instance_newObjects()
         {
             ObjectManager.Instance.update();
             NotifyPropertyChanged("Workpieces");

@@ -63,7 +63,7 @@ namespace OE110Prozessdatenbank.ObjectWindows
         public VMCoatingProcesses()
         {
             ProcessManager.Instance.update();
-            Updater.Instance.newData += Instance_newData;
+            ProcessManager.Instance.newProcesses += Instance_newProcesses;
         }
 
         public ObservableCollection<PCoatingCemeconProcess> Processes
@@ -71,7 +71,7 @@ namespace OE110Prozessdatenbank.ObjectWindows
             get { return new ObservableCollection<PCoatingCemeconProcess>(ProcessManager.Instance.CemeConStandardProcesses); }
         }
 
-        void Instance_newData()
+        void Instance_newProcesses()
         {
             NotifyPropertyChanged("Processes");
         }

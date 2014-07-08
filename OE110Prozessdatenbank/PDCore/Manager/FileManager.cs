@@ -39,6 +39,11 @@ namespace PDCore.Manager
 
         }
 
+        void Instance_newData(params string[] values)
+        {
+            //throw new NotImplementedException();
+        }
+
         void Instance_newData()
         {
             //update();

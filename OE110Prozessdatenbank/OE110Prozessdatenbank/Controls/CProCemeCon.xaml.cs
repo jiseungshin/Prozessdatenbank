@@ -91,10 +91,10 @@ namespace OE110Prozessdatenbank.Controls
         private FilterCriteria m_criteria = ProcessManager.Instance.FilterCriteria[0];
         public VMProcessingCemeCon()
         {
-            Updater.Instance.newData += Instance_newData;
+            ProcessManager.Instance.newProcesses += Instance_newProcesses;
         }
 
-        void Instance_newData()
+        void Instance_newProcesses()
         {
             NotifyPropertyChanged("ProcessedData");
             NotifyPropertyChanged("CoatedData");

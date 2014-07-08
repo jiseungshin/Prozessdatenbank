@@ -60,7 +60,7 @@ namespace OE110Prozessdatenbank.ObjectWindows
                     if (MessageBox.Show(Properties.Messages.q_removeMaterial,"",MessageBoxButton.YesNo,MessageBoxImage.Warning)== MessageBoxResult.Yes)
                     {
                         ObjectManager.Instance.Remove(LV_Workpiece.SelectedItem as Material);
-                        Updater.Instance.forceUpdate();
+                        Updater.Instance.forceUpdate(PDCore.Database.DBMAterial.Table);
                     }
                 }
             }
@@ -73,7 +73,7 @@ namespace OE110Prozessdatenbank.ObjectWindows
         public VMMaterialAdministration()
         {
             ObjectManager.Instance.update();
-            Updater.Instance.newData += Instance_newData;
+            ObjectManager.Instance.newObjects += Instance_newObjects;
         }
 
         public ObservableCollection<Material> Materials
@@ -81,7 +81,7 @@ namespace OE110Prozessdatenbank.ObjectWindows
             get { return new ObservableCollection<Material>(ObjectManager.Instance.Materials); }
         }
 
-        void Instance_newData()
+        void Instance_newObjects()
         {
             ObjectManager.Instance.update();
             NotifyPropertyChanged("Materials");

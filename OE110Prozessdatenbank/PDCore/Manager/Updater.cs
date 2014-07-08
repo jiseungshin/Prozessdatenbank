@@ -34,16 +34,21 @@ namespace PDCore.Manager
 
         #endregion
 
-        public delegate void UpdateHandler();
+        public delegate void UpdateHandler(params string[] values);
         public event UpdateHandler newData;
 
-        private void OnUpdateTrigger()
+        private void OnUpdateTrigger(params string[] values)
         {
             if (newData != null)
-                newData();
+                newData(values);
         }
 
-        public void forceUpdate()
+        //public void forceUpdate()
+        //{
+        //    OnUpdateTrigger();
+        //}
+
+        public void forceUpdate(params string[] values)
         {
             OnUpdateTrigger();
         }

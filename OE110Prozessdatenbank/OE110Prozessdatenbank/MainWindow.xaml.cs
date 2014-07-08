@@ -333,13 +333,15 @@ namespace OE110Prozessdatenbank
             //var tt = PDCore.Manager.FileManager.Instance.getDirPth(1);
             //PDCore.Processes.PTurningMoore p = PDCore.Manager.ProcessManager.Instance.getProcess(15,11) as PDCore.Processes.PTurningMoore;
             //PDCore.Manager.ExportManager.foo(new List<PDCore.Processes.PTurningMoore>() { p });
-            List<MySQLCommunicator.ColumnValuePair> tt = new List<MySQLCommunicator.ColumnValuePair>();
+            //List<MySQLCommunicator.ColumnValuePair> tt = new List<MySQLCommunicator.ColumnValuePair>();
 
-            tt.Add(new MySQLCommunicator.ColumnValuePair(){Culumn=DBWorkpieces.Label,Value="huhu"});
-            tt.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBWorkpieces.PurchaseDate, Value = DateTime.Now });
-            tt.Add(new MySQLCommunicator.ColumnValuePair(){Culumn=DBWorkpieces.isActive,Value=true});
+            //tt.Add(new MySQLCommunicator.ColumnValuePair(){Culumn=DBWorkpieces.Label,Value="huhu"});
+            //tt.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBWorkpieces.PurchaseDate, Value = DateTime.Now });
+            //tt.Add(new MySQLCommunicator.ColumnValuePair(){Culumn=DBWorkpieces.isActive,Value=true});
 
-            string q =PDCore.Database.MySQLCommunicator.BuildUpdateQuery(DBWorkpieces.Table,tt,new MySQLCommunicator.ColumnValuePair(){Culumn=DBWorkpieces.ID,Value=1});
+            //string q =PDCore.Database.MySQLCommunicator.BuildUpdateQuery(DBWorkpieces.Table,tt,new MySQLCommunicator.ColumnValuePair(){Culumn=DBWorkpieces.ID,Value=1});
+
+            //PDCore.Manager.Updater.Instance.foo("hallo", "huhu");
         }
 
         private void mbt_CoatingAdmin_Click(object sender, RoutedEventArgs e)
