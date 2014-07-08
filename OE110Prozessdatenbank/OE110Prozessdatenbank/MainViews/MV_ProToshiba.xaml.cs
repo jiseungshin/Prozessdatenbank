@@ -67,6 +67,11 @@ namespace OE110Prozessdatenbank.MainViews
             if ((sender as ListView).SelectedIndex!=-1)
             { (sender as ListView).SelectedIndex = -1; }
         }
+
+        private void mi_AddWorkpiece_Click(object sender, RoutedEventArgs e)
+        {
+            new ObjectWindows.AddWorkpiece().ShowDialog();
+        }
     }
 
     public class VMProcessingToshiba : ViewModels.BaseViewModel

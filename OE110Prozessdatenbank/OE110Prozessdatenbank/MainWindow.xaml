@@ -58,8 +58,8 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Verwaltung" Height="26">
-                <MenuItem Header="Material anlegen"></MenuItem>
-                <MenuItem Header="Werkstück anlegen" ></MenuItem>
+                <MenuItem Header="Material anlegen" Click="mbt_addMaterial_Click"></MenuItem>
+                <MenuItem Header="Werkstück anlegen" Click="mbt_addWorkpiece_Click"></MenuItem>
                 <MenuItem Header="Projekt anlegen" Click="mbt_addProject_Click" ></MenuItem>
                 <Separator />
                 <MenuItem Header="Werkstückverwaltung" Click="mbt_WorkpieceAdmin_Click">

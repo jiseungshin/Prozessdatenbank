@@ -378,6 +378,16 @@ namespace OE110Prozessdatenbank
             new ObjectWindows.MaterialAdministration().ShowDialog();
         }
 
+        private void mbt_addMaterial_Click(object sender, RoutedEventArgs e)
+        {
+            new Controls.MaterialWindow().ShowDialog();
+        }
+
+        private void mbt_addWorkpiece_Click(object sender, RoutedEventArgs e)
+        {
+            new ObjectWindows.AddWorkpiece().ShowDialog();
+        }
+
 
         
 
