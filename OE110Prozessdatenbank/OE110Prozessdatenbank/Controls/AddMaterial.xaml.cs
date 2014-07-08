@@ -25,6 +25,12 @@ namespace OE110Prozessdatenbank.Controls
             DataContext = new ViewModels.OMaterialVM();
         }
 
+        public MaterialWindow(int MatID)
+        {
+            InitializeComponent();
+            DataContext = new ViewModels.OMaterialVM(MatID);
+        }
+
         private void bt_cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

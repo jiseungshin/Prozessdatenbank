@@ -87,7 +87,7 @@
             </ListView.View>
         </ListView>
         <ComboBox HorizontalAlignment="Left" ItemsSource="{Binding Users}" SelectedItem="{Binding User}" DisplayMemberPath="Description" Margin="143,10,0,0" VerticalAlignment="Top" Width="183" IsEnabled="False"/>
-        <ComboBox HorizontalAlignment="Left" ItemsSource="{Binding Workpieces}" SelectedItem="{Binding LowerWP}" Margin="143,64,0,0" VerticalAlignment="Top" Width="183" IsEnabled="False">
+        <ComboBox HorizontalAlignment="Left" ItemsSource="{Binding WorkpiecesLower}" SelectedItem="{Binding LowerWP}" Margin="143,64,0,0" VerticalAlignment="Top" Width="183" IsEnabled="False">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="250" Height="14" HorizontalAlignment="Stretch">
@@ -96,7 +96,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox HorizontalAlignment="Left" ItemsSource="{Binding Workpieces}" SelectedItem="{Binding UpperWP}" Margin="143,37,0,0" VerticalAlignment="Top" Width="183" IsEnabled="False">
+        <ComboBox HorizontalAlignment="Left" ItemsSource="{Binding WorkpiecesUpper}" SelectedItem="{Binding UpperWP}" Margin="143,37,0,0" VerticalAlignment="Top" Width="183" IsEnabled="False">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="250" Height="14" HorizontalAlignment="Stretch">

@@ -36,6 +36,7 @@ namespace OE110Prozessdatenbank
         private UIElement m_analysingControl;
         private UIElement m_processingControlToshiba;
         private UIElement m_processingControlCemeCon;
+        private UIElement m_processingControlFueller;
 
         private Label m_adminLabel = new Label();
 
@@ -63,6 +64,7 @@ namespace OE110Prozessdatenbank
             m_processingControlMoore = new MainViews.MV_ProMoore();
             m_processingControlToshiba = new MainViews.MV_ProToshiba();
             m_processingControlTest = new MainViews.MV_ProTestStation();
+            m_processingControlFueller = new MainViews.MV_ProFueller();
             m_analysingControl = new MainViews.MV_PostProcessing();
             m_processingControlCemeCon = new Controls.CProSemeCon();
 
@@ -231,6 +233,13 @@ namespace OE110Prozessdatenbank
                     lb_3.Foreground = Brushes.WhiteSmoke;
                     m_selectedLabel = lb_3;
                     break;
+                case "lb_35":
+                    g_content.Children.Clear();
+                    g_content.Children.Add(m_processingControlFueller);
+                    lb_3.Background = m_selectedColor;
+                    lb_3.Foreground = Brushes.WhiteSmoke;
+                    m_selectedLabel = lb_3;
+                    break;
                 case "lb_4":
                     g_content.Children.Clear();
                     g_content.Children.Add(m_analysingControl);
@@ -362,6 +371,11 @@ namespace OE110Prozessdatenbank
         private void mbt_GlassAdmin_Click(object sender, RoutedEventArgs e)
         {
             new ObjectWindows.GlassAdministration().ShowDialog();
+        }
+
+        private void mbt_MaterialAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            new ObjectWindows.MaterialAdministration().ShowDialog();
         }
 
 

@@ -71,6 +71,9 @@
     <Compile Include="Controls\ReferencePicker.xaml.cs">
       <DependentUpon>ReferencePicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainViews\MV_ProFueller.xaml.cs">
+      <DependentUpon>MV_ProFueller.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ObjectWindows\AddAnalysis.xaml.cs">
       <DependentUpon>AddAnalysis.xaml</DependentUpon>
     </Compile>
@@ -95,6 +98,9 @@
     </Compile>
     <Compile Include="ObjectWindows\HistoryViewer.xaml.cs">
       <DependentUpon>HistoryViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ObjectWindows\MaterialAdministration.xaml.cs">
+      <DependentUpon>MaterialAdministration.xaml</DependentUpon>
     </Compile>
     <Compile Include="ObjectWindows\ProjectAdministration.xaml.cs">
       <DependentUpon>ProjectAdministration.xaml</DependentUpon>
@@ -227,6 +233,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MainViews\MV_ProFueller.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ObjectWindows\AddAnalysis.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -256,6 +266,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ObjectWindows\HistoryViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ObjectWindows\MaterialAdministration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
