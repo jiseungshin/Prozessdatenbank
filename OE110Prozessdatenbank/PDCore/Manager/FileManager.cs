@@ -19,14 +19,22 @@ namespace PDCore.Manager
         static FileManager instance = null;
         static readonly object padlock = new object();
 
+        private string StandardDir = "";
+
         FileManager()
         {
+            List<string> m_data = IO.SimpleIO.getClearText(@"connection.txt");
+
             //new instance of MySQL communication class 
             _myCommunicator = new MySQLCommunicator();
-            _myCommunicator.Password = PDCore.Properties.Settings.Default.Password;
-            _myCommunicator.Server = PDCore.Properties.Settings.Default.Server;
-            _myCommunicator.User = PDCore.Properties.Settings.Default.User;
-            _myCommunicator.Database =PDCore.Properties.Settings.Default.Database;
+            _myCommunicator.Password = m_data[3]; //PDCore.Properties.Settings.Default.Password;
+            _myCommunicator.Server = m_data[0]; //PDCore.Properties.Settings.Default.Server;
+            _myCommunicator.User = m_data[2]; //PDCore.Properties.Settings.Default.User;
+            _myCommunicator.Database = m_data[1]; //PDCore.Properties.Settings.Default.Database;
+
+            StandardDir = m_data[4];
+
+
 
             //Recieve database-errors
             _myCommunicator.MessageThrown += _myCommunicator_MessageThrown;
@@ -72,45 +80,45 @@ namespace PDCore.Manager
 
         #endregion
 
-        public void createProjectDirectory(Project project)
-        {
-            Directory.CreateDirectory(Properties.Settings.Default.StandardDirPath + project.Description);
-            //Directory.CreateDirectory(@"" + project.Description);
-        }
+        //public void createProjectDirectory(Project project)
+        //{
+        //    Directory.CreateDirectory(StandardDir + project.Description);
+        //    //Directory.CreateDirectory(@"" + project.Description);
+        //}
 
-        public void updateProjectDirectory(Project Project)
-        {
-            if (Project.Description!=Project.OLDDescription)
-            {
-                try
-                {
-                    Directory.Move(Properties.Settings.Default.StandardDirPath + Project.OLDDescription, Properties.Settings.Default.StandardDirPath + Project.Description);
-                }
-                catch { System.Windows.MessageBox.Show("Das Umbenennen des Ordners konnte nicht ausgeführt werden, da der Zugruff verweigert wurde! Der Ordner muss nun manuell umbenannt werden!"); }
+        //public void updateProjectDirectory(Project Project)
+        //{
+        //    if (Project.Description!=Project.OLDDescription)
+        //    {
+        //        try
+        //        {
+        //            Directory.Move(StandardDir + Project.OLDDescription, StandardDir + Project.Description);
+        //        }
+        //        catch { System.Windows.MessageBox.Show("Das Umbenennen des Ordners konnte nicht ausgeführt werden, da der Zugruff verweigert wurde! Der Ordner muss nun manuell umbenannt werden!"); }
 
-            }
+        //    }
 
-        }
+        //}
 
-        public void createIssueDirectory(Issue Issue)
-        {
-            string Projectname = (_myCommunicator.getDataSet("SELECT * FROM " + DBProjects.Table + " WHERE " + DBProjects.ID + "=" + Issue.ProjectID).Tables[0].Rows[0]).Field<string>(DBProjects.Name);
-            Directory.CreateDirectory(Properties.Settings.Default.StandardDirPath + Projectname + "\\" + Issue.Description);
-        }
+        //public void createIssueDirectory(Issue Issue)
+        //{
+        //    string Projectname = (_myCommunicator.getDataSet("SELECT * FROM " + DBProjects.Table + " WHERE " + DBProjects.ID + "=" + Issue.ProjectID).Tables[0].Rows[0]).Field<string>(DBProjects.Name);
+        //    Directory.CreateDirectory(StandardDir + Projectname + "\\" + Issue.Description);
+        //}
 
-        public void updateIssueDirectoryName(Issue Issue)
-        {
+        //public void updateIssueDirectoryName(Issue Issue)
+        //{
 
-            if (Issue.Description != Issue.OLDDescription)
-            {
-                try
-                {
-                    string Projectname = (_myCommunicator.getDataSet("SELECT * FROM " + DBProjects.Table + " WHERE " + DBProjects.ID + "=" + Issue.ProjectID).Tables[0].Rows[0]).Field<string>(DBProjects.Name);
-                    Directory.Move(Properties.Settings.Default.StandardDirPath + Projectname + "\\" + Issue.OLDDescription, Properties.Settings.Default.StandardDirPath + Projectname + "\\" + Issue.Description);
-                }
-                catch { System.Windows.MessageBox.Show("Das Umbenennen des Ordners konnte nicht ausgeführt werden, da der Zugruff verweigert wurde! Der Ordner muss nun manuell umbenannt werden!"); }
-            }
-        }
+        //    if (Issue.Description != Issue.OLDDescription)
+        //    {
+        //        try
+        //        {
+        //            string Projectname = (_myCommunicator.getDataSet("SELECT * FROM " + DBProjects.Table + " WHERE " + DBProjects.ID + "=" + Issue.ProjectID).Tables[0].Rows[0]).Field<string>(DBProjects.Name);
+        //            Directory.Move(StandardDir + Projectname + "\\" + Issue.OLDDescription, StandardDir + Projectname + "\\" + Issue.Description);
+        //        }
+        //        catch { System.Windows.MessageBox.Show("Das Umbenennen des Ordners konnte nicht ausgeführt werden, da der Zugruff verweigert wurde! Der Ordner muss nun manuell umbenannt werden!"); }
+        //    }
+        //}
 
         public void createReferenceDirectory(int ReferenceNumber)
         {
@@ -119,7 +127,7 @@ namespace PDCore.Manager
             string ProjectName = (_myCommunicator.getDataSet("SELECT * FROM " + DBProjects.Table + " WHERE " + DBProjects.ID + "=" + _reference.Rows[0].Field<int>(DBProcessReferences.ProjectID)).Tables[0].Rows[0]).Field<string>(DBProjects.Name);
             string IssueName = (_myCommunicator.getDataSet("SELECT * FROM " + DBIssues.Table + " WHERE " + DBIssues.ID + "=" + _reference.Rows[0].Field<int>(DBProcessReferences.IssueID)).Tables[0].Rows[0]).Field<string>(DBIssues.Description);
 
-            Directory.CreateDirectory(Properties.Settings.Default.StandardDirPath + ProjectName + "\\" + IssueName + "\\" + ReferenceNumber);
+            Directory.CreateDirectory(StandardDir /*+ ProjectName + "\\" + IssueName + "\\"*/ + ReferenceNumber);
         }
 
         public void createDirectory(int ReferenceNumber, string Name)
@@ -129,28 +137,26 @@ namespace PDCore.Manager
             string ProjectName = (_myCommunicator.getDataSet("SELECT * FROM " + DBProjects.Table + " WHERE " + DBProjects.ID + "=" + _reference.Rows[0].Field<int>(DBProcessReferences.ProjectID)).Tables[0].Rows[0]).Field<string>(DBProjects.Name);
             string IssueName = (_myCommunicator.getDataSet("SELECT * FROM " + DBIssues.Table + " WHERE " + DBIssues.ID + "=" + _reference.Rows[0].Field<int>(DBProcessReferences.IssueID)).Tables[0].Rows[0]).Field<string>(DBIssues.Description);
 
-            Directory.CreateDirectory(Properties.Settings.Default.StandardDirPath + ProjectName + "\\" + IssueName + "\\" + ReferenceNumber + "\\" + Name);
+            Directory.CreateDirectory(StandardDir +/* ProjectName + "\\" + IssueName + "\\" +*/ ReferenceNumber + "\\" + Name);
         }
 
-        public void createProcessDirectory(int ProjectID, int IssueID, int PID, string Name, bool hidden)
-        {
+        //public void createProcessDirectory(int ProjectID, int IssueID, int PID, string Name, bool hidden)
+        //{
 
-            string ProjectName = (_myCommunicator.getDataSet("SELECT * FROM " + DBProjects.Table + " WHERE " + DBProjects.ID + "=" + ProjectID).Tables[0].Rows[0]).Field<string>(DBProjects.Name);
-            string IssueName = (_myCommunicator.getDataSet("SELECT * FROM " + DBIssues.Table + " WHERE " + DBIssues.ID + "=" + IssueID).Tables[0].Rows[0]).Field<string>(DBIssues.Description);
+        //    string ProjectName = (_myCommunicator.getDataSet("SELECT * FROM " + DBProjects.Table + " WHERE " + DBProjects.ID + "=" + ProjectID).Tables[0].Rows[0]).Field<string>(DBProjects.Name);
+        //    string IssueName = (_myCommunicator.getDataSet("SELECT * FROM " + DBIssues.Table + " WHERE " + DBIssues.ID + "=" + IssueID).Tables[0].Rows[0]).Field<string>(DBIssues.Description);
 
-            DirectoryInfo di = Directory.CreateDirectory(Properties.Settings.Default.StandardDirPath + ProjectName + "\\" + IssueName + "\\" + PID + " - " + Name);
+        //    DirectoryInfo di = Directory.CreateDirectory(StandardDir + ProjectName + "\\" + IssueName + "\\" + PID + " - " + Name);
 
-            if(hidden)
-                di.Attributes = FileAttributes.Directory | FileAttributes.Hidden; 
+        //    if(hidden)
+        //        di.Attributes = FileAttributes.Directory | FileAttributes.Hidden; 
 
-        }
+        //}
         public string getDirPth(int ReferenceNumber)
         {
             try
             {
-                string[] dir = Directory.GetDirectories(Properties.Settings.Default.StandardDirPath, ReferenceNumber.ToString(), SearchOption.AllDirectories);
-                string test = dir[0].Replace(Properties.Settings.Default.StandardDirPath, "");
-                string huhu = Properties.Settings.Default.StandardDirPath;
+                string[] dir = Directory.GetDirectories(StandardDir, ReferenceNumber.ToString(), SearchOption.AllDirectories);
                 return dir[0];
             }
             catch { return ""; }

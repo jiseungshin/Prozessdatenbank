@@ -116,8 +116,11 @@ namespace OE110Prozessdatenbank
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            DateTime dt = (DateTime)value;
-            return dt.ToShortDateString();
+            DateTime? dt = (DateTime?)value;
+            if (dt != null)
+                return dt.GetValueOrDefault().ToShortDateString();
+            else
+                return "--";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

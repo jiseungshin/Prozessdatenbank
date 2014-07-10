@@ -32,6 +32,17 @@
             </Grid.ColumnDefinitions>
             <Grid x:Name="g_raw">
                 <ListView Name="LV_Raw" Margin="10,67,10,10" DataContext="{Binding DataRaw, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Table}" SelectionMode="Single" MouseDoubleClick="LV_Raw_DoubvleClick">
+                    <ListView.Resources>
+                        <ContextMenu x:Key="RawContext">
+                            <MenuItem Header="Bearbeitung überspringen" Click="cmb_skip_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="/OE110Prozessdatenbank;component/Icons/StepOver_6328.png"
+                                    Height="{Binding Path=ActualHeight, ElementName=StorageContextmenu}"
+                                    Width="{Binding Path=ActualHeight, ElementName=StorageContextmenu}" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </ListView.Resources>
                     <ListView.Background>
                         <LinearGradientBrush>
                             <GradientStop  Offset="0" Color="#FFE8E8E8"/>
@@ -39,6 +50,8 @@
                     </ListView.Background>
                     <ListView.ItemContainerStyle>
                         <Style TargetType="{x:Type ListViewItem}">
+                            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="OnListViewItem_PreviewMouseLeftButtonDown" />
+                            <Setter Property="ContextMenu" Value="{StaticResource RawContext}"/>
                             <Setter Property="BorderBrush" Value="LightGray" />
                             <Setter Property="BorderThickness" Value="0,0,0,1" />
                             <Setter Property="Template">

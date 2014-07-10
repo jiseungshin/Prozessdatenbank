@@ -175,5 +175,28 @@ namespace OE110Prozessdatenbank.MainViews
                 }
             }
         }
+
+        private void cmb_nextTry_Click(object sender, RoutedEventArgs e)
+        {
+            if (listview.SelectedIndex != -1)
+            {
+                string status = ((listview).SelectedItem as DataRowView).Row.Field<string>(DBProcessReferences.Status);
+
+                if (status == DBEnum.EnumReference.CANCELLED || status == DBEnum.EnumReference.TERMINATED)
+                {
+                     MessageBox.Show(Messages.e_cannnotDoNextTry, "Hinweis", MessageBoxButton.OK, MessageBoxImage.Error);
+                   
+                }
+                else
+                {
+                    if (MessageBox.Show(Messages.q_NextTry, "Neuer Versuch", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    {
+                        int ID = Convert.ToInt32(((listview).SelectedItem as DataRowView)[DBProcessReferences.RefNumber]);
+
+                        PDCore.Manager.ProcessManager.Instance.prepareNewTry(ID, DBEnum.EnumReference.COATED);
+                    }
+                }
+            }
+        }
     }
 }

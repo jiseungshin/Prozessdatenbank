@@ -20,15 +20,19 @@ namespace PDCore.BusinessObjects
 
     public class WorkpieceQuality
     {
-        public WorkpieceQuality()
+        public WorkpieceQuality(bool initZero = false)
         {
-            MoldScratches = 0;
-            Corrosion = 0;
-            GlassAdherence = 0;
-            OverallResult = 0;
+            if (initZero)
+            {
+                MoldScratches = 0;
+                Corrosion = 0;
+                GlassAdherence = 0;
+                OverallResult = 0;
+            }
         }
 
         public int ID { get; set; }
+        public int? PID { get; set; }
         public int ReferenceNumber { get; set; }
         public int? MoldScratches { get; set; }
         public int? Corrosion { get; set; }

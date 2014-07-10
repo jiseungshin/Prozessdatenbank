@@ -99,10 +99,10 @@ namespace OE110Prozessdatenbank.ViewModels
         public Analysis Analysis
         { get { return m_analysis; } }
 
-        public DateTime Started
+        public DateTime? Started
         { get { return m_analysis.Started; } set { m_analysis.Started = value; } }
 
-        public DateTime Finished
+        public DateTime? Finished
         { get { return m_analysis.Finished; } set { m_analysis.Finished = value; } }
 
         public AnalyseTypes Description
@@ -142,7 +142,7 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public bool CanSave()
         {
-            if (m_analysis.User!=null)
+            if (m_analysis.User!=null && m_analysis.Started != null)
                 return true;
             else
                 return false;

@@ -1,1 +1,5 @@
-﻿192.168.178.49
+﻿192.168.178.24
+optik_db
+optik_db
+Pr0p-71k13JE
+D:\Prozessdatenbank\Vorgänge\

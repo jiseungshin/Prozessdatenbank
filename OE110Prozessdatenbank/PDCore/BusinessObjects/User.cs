@@ -8,6 +8,14 @@ namespace PDCore.BusinessObjects
 {
     public class User : BusinessObject
     {
+        public User()
+        {
+            isActive = true;
+            FirstName = "";
+            LastName = "";
+            Token = "";
+        }
+
         public string Token { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

@@ -9,9 +9,9 @@
     <Grid>
         <TextBox Height="23" Margin="155,41,10,0" TextWrapping="Wrap" Text="{Binding ProgramNumber, Converter={StaticResource intToNull}}" VerticalAlignment="Top"/>
         <Label Content="Programmnummer *" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.395,-0.808" FontWeight="Bold"/>
-        <ComboBox Height="23" Margin="155,67,10,0" ItemsSource="{Binding Layers}" SelectedItem="{Binding Protective}" DisplayMemberPath="Structure" VerticalAlignment="Top" IsEditable="True"/>
+        <ComboBox Height="23" Margin="155,67,10,0" ItemsSource="{Binding Layers}" Text="{Binding Protective}" DisplayMemberPath="Structure" VerticalAlignment="Top" IsEditable="True"/>
         <Label Content="Schutzschicht *" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <ComboBox Height="23" Margin="155,93,10,0" ItemsSource="{Binding Layers}" SelectedItem="{Binding Adherent}" DisplayMemberPath="Structure" VerticalAlignment="Top" IsEditable="True"/>
+        <ComboBox Height="23" Margin="155,93,10,0" ItemsSource="{Binding Layers}" Text="{Binding Adherent}" DisplayMemberPath="Structure" VerticalAlignment="Top" IsEditable="True"/>
         <Label Content="Haftschicht *" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Height="23" Margin="155,119,10,0" TextWrapping="Wrap" Text="{Binding Thickness}" VerticalAlignment="Top"/>
         <Label Content="Schichtdicke *" HorizontalAlignment="Left" Margin="10,116,0,0" VerticalAlignment="Top" FontWeight="Bold"/>

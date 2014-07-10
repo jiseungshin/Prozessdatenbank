@@ -6,58 +6,58 @@
               mc:Ignorable="d" Height="644.836" Width="931.896" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid Background="White">
         <Label Content="Datum" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Width="110"/>
-        <Label Content="Anzahl Presszyklen" HorizontalAlignment="Left" Margin="10,339,0,0" VerticalAlignment="Top" Width="151"/>
+        <Label Content="Anzahl Presszyklen *" HorizontalAlignment="Left" Margin="10,339,0,0" VerticalAlignment="Top" Width="192" FontWeight="Bold"/>
         <Label Content="Bearbeiter *" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
-        <Label Content="Programmtitel" HorizontalAlignment="Left" Margin="10,432,0,0" VerticalAlignment="Top" Width="151"/>
-        <Label Content="Temperatur max [°C]" HorizontalAlignment="Left" Margin="10,308,0,0" VerticalAlignment="Top" Width="151"/>
-        <Label Content="Temperatur bei Entnahme [°C]" HorizontalAlignment="Left" Margin="10,494,0,0" VerticalAlignment="Top" Width="151"/>
+        <Label Content="Programmtitel *" HorizontalAlignment="Left" Margin="10,432,0,0" VerticalAlignment="Top" Width="192" FontWeight="Bold"/>
+        <Label Content="Temperatur max [°C] *" HorizontalAlignment="Left" Margin="10,308,0,0" VerticalAlignment="Top" Width="192" FontWeight="Bold"/>
+        <Label Content="Temperatur bei Entnahme [°C ] *" HorizontalAlignment="Left" Margin="10,494,0,0" VerticalAlignment="Top" Width="192" FontWeight="Bold"/>
         <Label Content="Projekt *" HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
         <Label Content="Bemerkung" HorizontalAlignment="Left" Margin="10,525,0,0" VerticalAlignment="Top" Width="110"/>
         <Label Content="Fokus (mag. Dreieck)" HorizontalAlignment="Left" Margin="10,463,0,0" VerticalAlignment="Top" Width="151"/>
         <Label Content="Fragestellung/Versuchsreihe *" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top" Width="177" FontWeight="Bold"/>
         <Label Content="Glas" HorizontalAlignment="Left" Margin="10,223,0,0" VerticalAlignment="Top" Width="151"/>
-        <Label Content="Presszeit pro Zyklus [kN]" HorizontalAlignment="Left" Margin="10,370,0,0" VerticalAlignment="Top" Width="151"/>
-        <Label Content="Preskraft [kN]" HorizontalAlignment="Left" Margin="10,246,0,0" VerticalAlignment="Top" Width="151"/>
-        <Label Content="Unteres Werkstück" HorizontalAlignment="Left" Margin="10,192,0,0" VerticalAlignment="Top" Width="151"></Label>
-        <Label Content="Oberes Werkstück" HorizontalAlignment="Left" Margin="10,161,0,0" VerticalAlignment="Top" Width="151"/>
-        <Label Content="Atmosphäre" HorizontalAlignment="Left" Margin="10,401,0,0" VerticalAlignment="Top" Width="151"/>
-        <Label Content="Temperatur min [°C]" HorizontalAlignment="Left" Margin="10,277,0,0" VerticalAlignment="Top" Width="151"/>
+        <Label Content="Presszeit pro Zyklus [s] *" HorizontalAlignment="Left" Margin="10,370,0,0" VerticalAlignment="Top" Width="192" FontWeight="Bold"/>
+        <Label Content="Preskraft [kN] *" HorizontalAlignment="Left" Margin="10,246,0,0" VerticalAlignment="Top" Width="192" FontWeight="Bold"/>
+        <Label Content="Unteres Werkstück" HorizontalAlignment="Left" Margin="10,192,0,0" VerticalAlignment="Top" Width="192" FontWeight="Bold"></Label>
+        <Label Content="Oberes Werkstück" HorizontalAlignment="Left" Margin="10,161,0,0" VerticalAlignment="Top" Width="192" FontWeight="Bold"/>
+        <Label Content="Atmosphäre *" HorizontalAlignment="Left" Margin="10,401,0,0" VerticalAlignment="Top" Width="192" FontWeight="Bold"/>
+        <Label Content="Temperatur min [°C] *" HorizontalAlignment="Left" Margin="10,277,0,0" VerticalAlignment="Top" Width="192" FontWeight="Bold"/>
         <Label Content="Qualitätsmerkmale" HorizontalAlignment="Left" Margin="478,31,0,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
-        <DatePicker SelectedDate="{Binding Date}" Margin="187,33,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
-        <ComboBox x:Name="cb_user" ItemsSource="{Binding Users}" SelectedItem="{Binding User}" DisplayMemberPath="Description" Margin="187,62,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
-        <ComboBox x:Name="cb_project" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" Margin="187,89,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
-        <ComboBox x:Name="cb_Issue" ItemsSource="{Binding Issues}" SelectedItem="{Binding Issue}" DisplayMemberPath="Description" Margin="187,120,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
-        <ComboBox x:Name="cb_upperWP" ItemsSource="{Binding WorkpiecesUpper}" SelectedItem="{Binding UpperWP}" Margin="187,161,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266" SelectionChanged="cb_upperWP_SelectionChanged">
+        <DatePicker SelectedDate="{Binding Date}" Margin="198,33,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="255"/>
+        <ComboBox x:Name="cb_user" ItemsSource="{Binding Users}" SelectedItem="{Binding User}" DisplayMemberPath="Description" Margin="198,62,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="255"/>
+        <ComboBox x:Name="cb_project" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" Margin="198,89,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="255"/>
+        <ComboBox x:Name="cb_Issue" ItemsSource="{Binding Issues}" SelectedItem="{Binding Issue}" DisplayMemberPath="Description" Margin="198,120,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="255"/>
+        <ComboBox x:Name="cb_upperWP" ItemsSource="{Binding WorkpiecesUpper, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding UpperWP, UpdateSourceTrigger=PropertyChanged}" Margin="198,161,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="250" SelectionChanged="cb_upperWP_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="170" Height="14" HorizontalAlignment="Stretch">
-                        <TextBlock Text="{Binding CurrentRefereneNumber, Mode=OneWay}" HorizontalAlignment="Left"/>
+                        <TextBlock Text="{Binding CurrentReferenceNumber}" HorizontalAlignment="Left"/>
+                        <TextBlock Text="{Binding Label}" HorizontalAlignment="Right"/>
+                    </Grid>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox x:Name="cb_lowerWP" ItemsSource="{Binding WorkpiecesLower}" SelectedItem="{Binding LowerWP}" Margin="198,192,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="250" SelectionChanged="cb_lowerWP_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="170" Height="14" HorizontalAlignment="Stretch">
+                        <TextBlock Text="{Binding CurrentReferenceNumber, Mode=OneWay}" HorizontalAlignment="Left"/>
                         <TextBlock Text="{Binding Label, Mode=OneWay}" HorizontalAlignment="Right"/>
                     </Grid>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox x:Name="cb_lowerWP" ItemsSource="{Binding WorkpiecesLower}" SelectedItem="{Binding LowerWP}" Margin="187,192,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266" SelectionChanged="cb_lowerWP_SelectionChanged">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid Width="170" Height="14" HorizontalAlignment="Stretch">
-                        <TextBlock Text="{Binding CurrentRefereneNumber, Mode=OneWay}" HorizontalAlignment="Left"/>
-                        <TextBlock Text="{Binding Label, Mode=OneWay}" HorizontalAlignment="Right"/>
-                    </Grid>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <ComboBox x:Name="cb_glass" ItemsSource="{Binding Glasses}" SelectedItem="{Binding Glass}" DisplayMemberPath="VisualName" Margin="187,223,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266" SelectionChanged="cb_glass_SelectionChanged"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="187,250,0,0" TextWrapping="Wrap" Text="{Binding Force}" VerticalAlignment="Top" Width="266"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="187,281,0,0" TextWrapping="Wrap" Text="{Binding Tmin}" VerticalAlignment="Top" Width="266"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="187,312,0,0" TextWrapping="Wrap" Text="{Binding Tmax}" VerticalAlignment="Top" Width="266"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="187,343,0,0" TextWrapping="Wrap" Text="{Binding Cycles}" VerticalAlignment="Top" Width="266"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="187,374,0,0" TextWrapping="Wrap" Text="{Binding PressTime}" VerticalAlignment="Top" Width="266"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="187,405,0,0" TextWrapping="Wrap" Text="{Binding Atmosphere}" VerticalAlignment="Top" Width="266"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="187,436,0,0" TextWrapping="Wrap" Text="{Binding ProgramTitle}" VerticalAlignment="Top" Width="266"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="187,467,0,0" TextWrapping="Wrap" Text="{Binding ROI}" VerticalAlignment="Top" Width="266"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="187,498,0,0" TextWrapping="Wrap" Text="{Binding TOut}" VerticalAlignment="Top" Width="266"/>
-        <TextBox x:Name="tb_remark" Height="69" Margin="187,525,0,0" TextWrapping="Wrap" Text="{Binding Remark}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
+        <ComboBox x:Name="cb_glass" ItemsSource="{Binding Glasses}" SelectedItem="{Binding Glass}" DisplayMemberPath="VisualName" Margin="198,223,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="255" SelectionChanged="cb_glass_SelectionChanged"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="198,250,0,0" TextWrapping="Wrap" Text="{Binding Force}" VerticalAlignment="Top" Width="255"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="198,281,0,0" TextWrapping="Wrap" Text="{Binding Tmin}" VerticalAlignment="Top" Width="255"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="198,312,0,0" TextWrapping="Wrap" Text="{Binding Tmax}" VerticalAlignment="Top" Width="255"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="198,343,0,0" TextWrapping="Wrap" Text="{Binding Cycles}" VerticalAlignment="Top" Width="255"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="198,374,0,0" TextWrapping="Wrap" Text="{Binding PressTime}" VerticalAlignment="Top" Width="255"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="198,405,0,0" TextWrapping="Wrap" Text="{Binding Atmosphere}" VerticalAlignment="Top" Width="255"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="198,436,0,0" TextWrapping="Wrap" Text="{Binding ProgramTitle}" VerticalAlignment="Top" Width="255"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="198,467,0,0" TextWrapping="Wrap" Text="{Binding ROI}" VerticalAlignment="Top" Width="255"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="198,498,0,0" TextWrapping="Wrap" Text="{Binding TOut}" VerticalAlignment="Top" Width="255"/>
+        <TextBox x:Name="tb_remark" Height="69" Margin="198,525,0,0" TextWrapping="Wrap" Text="{Binding Remark}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="255"/>
 
         <Button x:Name="bt_save" Content="speichern" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Command="{Binding SaveProcess}" IsEnabled="{Binding SaveProcess.CanSave}" Click="bt_save_Click"/>
         <Button x:Name="bt_cancel" Content="abbrechen" HorizontalAlignment="Right" Margin="0,0,92,10" VerticalAlignment="Bottom" Width="75" Click="bt_cancel_Click"/>
@@ -68,6 +68,8 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
         </Grid>
+        <Button Content="Button" Click="bt_findUpper_Click" HorizontalAlignment="Left" Margin="453,161,0,0" VerticalAlignment="Top" Width="0"/>
+        <Button Content="Button" Click="bt_findLower_Click" HorizontalAlignment="Left" Margin="453,192,0,0" VerticalAlignment="Top" Width="0"/>
 
     </Grid>
 </Window>

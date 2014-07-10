@@ -386,7 +386,10 @@ namespace PDCore.Database
             }
             if (obj is DateTime)
             {
-                return "'"+Convert.ToDateTime(obj).ToString("yyyy-MM-dd HH:mm:ss")+"'";
+                if (obj != null)
+                    return "'" + Convert.ToDateTime(obj).ToString("yyyy-MM-dd HH:mm:ss") + "'";
+                else
+                    return "NULL";
             }
             else
             {

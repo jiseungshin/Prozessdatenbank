@@ -18,6 +18,7 @@ namespace OE110Prozessdatenbank.ViewModels
         private Workpiece m_lower;
         private bool m_update = false;
 
+
         private ObservableCollection<Issue> m_issues = new ObservableCollection<Issue>();
 
         public PExpMooreVM(int PID)
@@ -27,8 +28,8 @@ namespace OE110Prozessdatenbank.ViewModels
             m_process = ProcessManager.Instance.getProcess(PID, 31) as PExpMoore;
             ProcessQualityControl = new Controls.CProcessQuality(m_process);
 
-            m_process.ProjectID = ObjectManager.Instance.getProjectID(m_process.Workpieces[0].CurrentRefereneNumber);
-            m_process.IssueID = ObjectManager.Instance.getIssueID(m_process.Workpieces[0].CurrentRefereneNumber);
+            m_process.ProjectID = ObjectManager.Instance.getProjectID(m_process.Workpieces[0].CurrentReferenceNumber);
+            m_process.IssueID = ObjectManager.Instance.getIssueID(m_process.Workpieces[0].CurrentReferenceNumber);
 
             if (m_process.UpperWP != null)
             {
@@ -69,28 +70,29 @@ namespace OE110Prozessdatenbank.ViewModels
         public Controls.CQuality WP_LowerControl { get; set; }
         public Controls.CProcessQuality ProcessQualityControl { get; set; }
 
-        public ObservableCollection<Workpiece> WorkpiecesUpper
+        public List<Workpiece> WorkpiecesUpper
         {
             get
             {
                 if (m_update)
-                    return new ObservableCollection<Workpiece>(ObjectManager.Instance.Workpieces);
+                    return /*new ObservableCollection<Workpiece>*/(ObjectManager.Instance.Workpieces);
                 else
                 {
-                    return new ObservableCollection<Workpiece>(ObjectManager.Instance.CoatedWorkpieces.FindAll(item => item != m_lower));
+                    return /*new ObservableCollection<Workpiece>*/(ObjectManager.Instance.CoatedWorkpieces.FindAll(item => item != m_lower && item.Quality.PID == null));
                 }
             }
         }
 
-        public ObservableCollection<Workpiece> WorkpiecesLower
+
+        public List<Workpiece> WorkpiecesLower
         {
             get
             {
                 if (m_update)
-                    return new ObservableCollection<Workpiece>(ObjectManager.Instance.Workpieces);
+                    return /*new ObservableCollection<Workpiece>*/(ObjectManager.Instance.Workpieces);
                 else
                 {
-                    return new ObservableCollection<Workpiece>(ObjectManager.Instance.CoatedWorkpieces.FindAll(item => item != m_upper));
+                    return /*new ObservableCollection<Workpiece>*/(ObjectManager.Instance.CoatedWorkpieces.FindAll(item => item != m_upper && item.Quality.PID == null));
                 }
             }
         }
@@ -110,7 +112,20 @@ namespace OE110Prozessdatenbank.ViewModels
                     m_upper = value;
                     WP_UpperControl = new Controls.CQuality(value);
 
-                NotifyPropertyChanged("WorkpiecesLower");
+                    //try
+                    //{
+                    //    m_project = ObjectManager.Instance.Projects.Find(item => item.ID == ObjectManager.Instance.getProjectID(m_upper.CurrentReferenceNumber));
+                    //    NotifyPropertyChanged("Project");
+                    //    m_issues = new ObservableCollection<PDCore.BusinessObjects.Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == m_project.ID));
+                    //    NotifyPropertyChanged("Issues");
+                    //    m_issue = ObjectManager.Instance.Issues.Find(item => item.ID == ObjectManager.Instance.getIssueID(m_upper.CurrentReferenceNumber));
+
+                    //    NotifyPropertyChanged("Issue");
+                    //}
+                    //catch { }
+                    //NotifyPropertyChanged("WorkpiecesUpper");
+                    NotifyPropertyChanged("UpperWP");
+                    NotifyPropertyChanged("WorkpiecesLower");
             }
         }
 
@@ -128,6 +143,16 @@ namespace OE110Prozessdatenbank.ViewModels
             {
                 m_lower = value;
                 WP_LowerControl = new Controls.CQuality(value);
+
+                //try
+                //{
+                //    m_project = ObjectManager.Instance.Projects.Find(item => item.ID == ObjectManager.Instance.getProjectID(m_lower.CurrentReferenceNumber));
+                //    NotifyPropertyChanged("Project");
+                //    m_issues = new ObservableCollection<PDCore.BusinessObjects.Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == m_project.ID));
+                //    NotifyPropertyChanged("Issues");
+                //    m_issue = ObjectManager.Instance.Issues.Find(item => item.ID == ObjectManager.Instance.getIssueID(m_lower.CurrentReferenceNumber));
+                //}
+                //catch { }
 
                 NotifyPropertyChanged("WorkpiecesUpper");
             }
@@ -273,7 +298,10 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public bool CanSave()
         {
-            if (m_process.UserID != -1 && m_process.ProjectID != null && m_process.IssueID != null && (m_upper!=null|| m_lower!=null))
+            if (m_process.UserID != -1 && m_process.ProjectID != null && m_process.IssueID != null
+                && m_process.Atmosphere != null && m_process.Cycles != null && m_process.PressTime != null
+                && m_process.ProgramTitle != null && m_process.Tmax != null && m_process.Tmin != null && m_process.TOut != null
+                && (m_upper != null || m_lower != null))
                 return true;
             else
                 return false;

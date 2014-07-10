@@ -5,7 +5,7 @@
     <Grid>
         <ComboBox x:Name="cb_RefPicker" DataContext="{Binding References}" ItemsSource="{Binding Table}" DisplayMemberPath="ReferenceNumber" Margin="10,10,123,10" IsEditable="True" >
         </ComboBox>
-        <Button Content="Suche" Click="bt_search_Click" Margin="176,10,10,10"/>
+        <Button Content="Suche" Click="bt_search_Click" Margin="176,10,10,10" IsDefault="True"/>
 
     </Grid>
 </Window>

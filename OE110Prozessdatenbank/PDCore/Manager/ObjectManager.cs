@@ -26,10 +26,10 @@ namespace PDCore.Manager
         {
             //new instance of MySQL communication class 
             _myCommunicator = new MySQLCommunicator();
-            _myCommunicator.Password = PDCore.Properties.Settings.Default.Password;
-            _myCommunicator.Server = IO.SimpleIO.getClearText(@"connection.txt")[0];// PDCore.Properties.Settings.Default.Server;
-            _myCommunicator.User = PDCore.Properties.Settings.Default.User;
-            _myCommunicator.Database =PDCore.Properties.Settings.Default.Database;
+            _myCommunicator.Password = IO.SimpleIO.getClearText(@"connection.txt")[3]; //PDCore.Properties.Settings.Default.Password;
+            _myCommunicator.Server = IO.SimpleIO.getClearText(@"connection.txt")[0]; //PDCore.Properties.Settings.Default.Server;
+            _myCommunicator.User = IO.SimpleIO.getClearText(@"connection.txt")[2]; //PDCore.Properties.Settings.Default.User;
+            _myCommunicator.Database = IO.SimpleIO.getClearText(@"connection.txt")[1]; //PDCore.Properties.Settings.Default.Database;
 
             //Recieve database-errors
             _myCommunicator.MessageThrown += _myCommunicator_MessageThrown;
@@ -317,14 +317,15 @@ namespace PDCore.Manager
             int wp_ID = _ds.Tables[0].Rows[0].Field<int>(DBProcessReferences.WorkpiceID);
 
             Workpiece _wp = getWorkpiece(wp_ID);
-            _wp.CurrentRefereneNumber = RefNumber;
+            _wp.CurrentReferenceNumber = RefNumber;
 
             _wp.Quality = new WorkpieceQuality()
             {
                 Corrosion = _dsWPQuality.Field<int?>(DBWorkpieceQuality.Corrosion),
                 MoldScratches = _dsWPQuality.Field<int?>(DBWorkpieceQuality.MoldScratches),
                 GlassAdherence = _dsWPQuality.Field<int?>(DBWorkpieceQuality.GlassAdherence),
-                OverallResult = _dsWPQuality.Field<int?>(DBWorkpieceQuality.OverallResult)
+                OverallResult = _dsWPQuality.Field<int?>(DBWorkpieceQuality.OverallResult),
+                PID = _dsWPQuality.Field<int?>(DBWorkpieceQuality.PID)
             };
 
             return _wp;
@@ -339,14 +340,15 @@ namespace PDCore.Manager
             int wp_ID = _ds.Tables[0].Rows[0].Field<int>(DBProcessReferences.WorkpiceID);
 
             Workpiece _wp = getWorkpiece(wp_ID);
-            _wp.CurrentRefereneNumber = RefNumber;
+            _wp.CurrentReferenceNumber = RefNumber;
 
             _wp.Quality = new WorkpieceQuality()
             {
-                Corrosion = _dsWPQuality.Field<int>(DBWorkpieceQuality.Corrosion),
-                MoldScratches = _dsWPQuality.Field<int>(DBWorkpieceQuality.MoldScratches),
-                GlassAdherence = _dsWPQuality.Field<int>(DBWorkpieceQuality.GlassAdherence),
-                OverallResult = _dsWPQuality.Field<int>(DBWorkpieceQuality.OverallResult)
+                Corrosion = _dsWPQuality.Field<int?>(DBWorkpieceQuality.Corrosion),
+                MoldScratches = _dsWPQuality.Field<int?>(DBWorkpieceQuality.MoldScratches),
+                GlassAdherence = _dsWPQuality.Field<int?>(DBWorkpieceQuality.GlassAdherence),
+                OverallResult = _dsWPQuality.Field<int?>(DBWorkpieceQuality.OverallResult),
+                PID = _dsWPQuality.Field<int?>(DBWorkpieceQuality.PID)
             };
 
             return _wp;
@@ -357,7 +359,7 @@ namespace PDCore.Manager
             return m_materials.Find(item => item.ID == MatID);
         }
 
-        public void saveWorkpiece(Workpiece wp, bool update)
+        public void saveWorkpiece(Workpiece wp, bool update, int status = 0)
         {
 
             List<string> _queries = new List<string>();
@@ -376,6 +378,8 @@ namespace PDCore.Manager
 
 
                 _queries.Add(MySQLCommunicator.BuildUpdateQuery(DBWorkpieces.Table, values, new MySQLCommunicator.ColumnValuePair() { Culumn = DBWorkpieces.ID, Value = wp.ID }));
+                _myCommunicator.executeTransactedQueries(_queries);
+            
             }
             else
             {
@@ -398,11 +402,32 @@ namespace PDCore.Manager
                                                                              wp.isActive.ToDBObject() + ",'raw')");
 
 
+                int WPID = Convert.ToInt32(_myCommunicator.executeQuery(_queries[0]));
 
+                if (WPID!=-1 && status!=0)
+                {
+                    int reference = -1;
+                    switch(status)
+                    {
+                        case 1:
+                            reference = ProcessManager.Instance.skipInitialProcess(WPID);
+                            if (reference != -1)
+                                FileManager.Instance.createReferenceDirectory(reference);
+                            break;
+                        case 2:
+                            reference = ProcessManager.Instance.skipInitialProcess(WPID);
+                            if (reference != -1)
+                            {
+                                FileManager.Instance.createReferenceDirectory(reference);
+                                ProcessManager.Instance.skipProcess(reference, DBEnum.EnumReference.COATED);
+                            }
+                            break;
+                    }
+                }
 
             }
 
-            _myCommunicator.executeTransactedQueries(_queries);
+            
         }
 
         public void saveWorkpiece(Workpiece wp, bool update, int projectID, int IssueID)
@@ -521,14 +546,14 @@ namespace PDCore.Manager
             }
 
             bool success = _myCommunicator.executeTransactedQueries(_queries);
-            if (success && !update)
-            {
-                FileManager.Instance.createProjectDirectory(project);
-            }
-            if (success && update)
-            {
-                FileManager.Instance.updateProjectDirectory(project);
-            }
+            //if (success && !update)
+            //{
+            //    FileManager.Instance.createProjectDirectory(project);
+            //}
+            //if (success && update)
+            //{
+            //    FileManager.Instance.updateProjectDirectory(project);
+            //}
         }
 
         public void saveIssue(Issue issue, bool update)
@@ -537,9 +562,19 @@ namespace PDCore.Manager
 
             if (update)
             {
-                _queries.Add("Update " + DBIssues.Table + " Set " + DBIssues.Description + " = " + issue.Description.ToDBObject() + " WHERE " + DBIssues.ID + "=" + issue.ID);
-                _queries.Add("Update " + DBIssues.Table + " Set " + DBIssues.Remark + " = " + issue.Remark.ToDBObject() + " WHERE " + DBIssues.ID + "=" + issue.ID);
-                _queries.Add("Update " + DBIssues.Table + " Set " + DBIssues.ProjectID + " = " + issue.ProjectID.ToDBObject() + " WHERE " + DBIssues.ID + "=" + issue.ID);
+
+                List<MySQLCommunicator.ColumnValuePair> values = new List<MySQLCommunicator.ColumnValuePair>();
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBIssues.Description, Value = issue.Description});
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBIssues.Remark, Value = issue.Remark });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBIssues.ProjectID, Value = issue.ProjectID });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBIssues.Conclusion, Value = issue.Conclusion });
+
+                _queries.Add(MySQLCommunicator.BuildUpdateQuery(DBIssues.Table, values, new MySQLCommunicator.ColumnValuePair() { Culumn = DBIssues.ID, Value = issue.ID }));
+
+
+                //_queries.Add("Update " + DBIssues.Table + " Set " + DBIssues.Description + " = " + issue.Description.ToDBObject() + " WHERE " + DBIssues.ID + "=" + issue.ID);
+                //_queries.Add("Update " + DBIssues.Table + " Set " + DBIssues.Remark + " = " + issue.Remark.ToDBObject() + " WHERE " + DBIssues.ID + "=" + issue.ID);
+                //_queries.Add("Update " + DBIssues.Table + " Set " + DBIssues.ProjectID + " = " + issue.ProjectID.ToDBObject() + " WHERE " + DBIssues.ID + "=" + issue.ID);
                 
             }
             else
@@ -557,14 +592,14 @@ namespace PDCore.Manager
             }
 
             bool success = _myCommunicator.executeTransactedQueries(_queries);
-            if (success && !update)
-            {
-                FileManager.Instance.createIssueDirectory(issue);
-            }
-            if (success && update)
-            {
-                FileManager.Instance.updateIssueDirectoryName(issue);
-            }
+            //if (success && !update)
+            //{
+            //    FileManager.Instance.createIssueDirectory(issue);
+            //}
+            //if (success && update)
+            //{
+            //    FileManager.Instance.updateIssueDirectoryName(issue);
+            //}
         }
 
         public void saveUser(User user, bool update)
@@ -599,6 +634,14 @@ namespace PDCore.Manager
             }
 
             _myCommunicator.executeTransactedQueries(_queries);
+        }
+
+        public void saveLayer(string name)
+        {
+             List<string> _queries = new List<string>();
+
+             _queries.Add("INSERT INTO " + DBCoatingLayers.Table + " (" + DBCoatingLayers.Layer + ") Values (" + name.ToDBObject() + ")");
+             _myCommunicator.executeTransactedQueries(_queries);
         }
 
         public void saveGlass(Glass glass, bool update)
@@ -644,12 +687,35 @@ namespace PDCore.Manager
         private void getCoatedWorkpieces()
         {
             m_coatedWorkpieces.Clear();
-            DataSet _ds = _myCommunicator.getDataSet(Queries.QueryCoatedReferences);
+            DataSet _ds1 = _myCommunicator.getDataSet(Queries.QueryCoatedReferences);
 
-            foreach (DataRow dr in _ds.Tables[0].Rows)
+            foreach (DataRow dr in _ds1.Tables[0].Rows)
             {
-                m_coatedWorkpieces.Add(getWorkpieceByReference(dr.Field<int>(DBProcessReferences.RefNumber)));
+                int RefNumber = dr.Field<int>(DBProcessReferences.RefNumber);
+
+                DataSet _ds = _myCommunicator.getDataSet("SELECT * FROM " + DBProcessReferences.Table + " where " + DBProcessReferences.RefNumber + "=" + RefNumber);
+                DataRow _dsWPQuality = _myCommunicator.getDataSet("SELECT * FROM " + DBWorkpieceQuality.Table + " where " + DBWorkpieceQuality.ReferenceNumber + "=" + RefNumber +" AND "+DBWorkpieceQuality.PID+" is NULL").Tables[0].Rows[0];
+
+                int wp_ID = _ds.Tables[0].Rows[0].Field<int>(DBProcessReferences.WorkpiceID);
+
+                Workpiece _wp = getWorkpiece(wp_ID);
+                _wp.CurrentReferenceNumber = RefNumber;
+
+                _wp.Reference.Project = Projects.Find(item => item.ID == dr.Field<int?>(DBProcessReferences.ProjectID));
+                _wp.Reference.Issue = Issues.Find(item => item.ID == dr.Field<int?>(DBProcessReferences.IssueID));
+
+                _wp.Quality = new WorkpieceQuality()
+                {
+                    Corrosion = _dsWPQuality.Field<int?>(DBWorkpieceQuality.Corrosion),
+                    MoldScratches = _dsWPQuality.Field<int?>(DBWorkpieceQuality.MoldScratches),
+                    GlassAdherence = _dsWPQuality.Field<int?>(DBWorkpieceQuality.GlassAdherence),
+                    OverallResult = _dsWPQuality.Field<int?>(DBWorkpieceQuality.OverallResult),
+                    PID = _dsWPQuality.Field<int?>(DBWorkpieceQuality.PID)
+                };
+
+                m_coatedWorkpieces.Add(_wp);
             }
+
         }
 
         public List<Workpiece> CoatedWorkpieces
@@ -661,9 +727,9 @@ namespace PDCore.Manager
 
             _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.Status + " = 'raw' WHERE " + DBWorkpieces.ID + "=" + wp.ID);
             if (cancelled)
-                _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.Status + " = 'cancelled' WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
+                _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.Status + " = 'cancelled' WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentReferenceNumber);
             else
-                _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.Status + " = 'terminated' WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentRefereneNumber);
+                _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.Status + " = 'terminated' WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentReferenceNumber);
 
             if (wp.isOneWay)
             {

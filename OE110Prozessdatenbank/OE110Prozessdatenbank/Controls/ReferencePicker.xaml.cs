@@ -37,7 +37,7 @@ namespace OE110Prozessdatenbank.Controls
             }
 
             else
-            { MessageBox.Show("Die eingegebene Vorgangsnummer ist nicht vorhanden!","Hinweis",MessageBoxButton.OK,MessageBoxImage.Error); }
+            { MessageBox.Show(Properties.Messages.e_UnknownReference,"Hinweis",MessageBoxButton.OK,MessageBoxImage.Error); }
         }
     }
 }

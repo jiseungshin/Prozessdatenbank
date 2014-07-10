@@ -240,7 +240,8 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public bool CanSave()
         {
-            if (m_process.UserID != -1)
+            if (m_process.UserID != -1 && m_process.CuttingAngle != null && m_process.CuttingDepth != null &&
+                m_process.Radius != null && m_process.Speed != null)
                 return true;
             else
                 return false;

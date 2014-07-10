@@ -13,7 +13,7 @@ namespace PDCore.Processes
         {
             ID = -1;
             Started = DateTime.Now;
-            Finished = DateTime.Now;
+            Finished = null;
             Path = "D:\\";
         }
         public int ID { get; set; }
@@ -25,8 +25,8 @@ namespace PDCore.Processes
         public string EnumDatabase { get; set; }
 
 
-        public DateTime Started { get; set; }
-        public DateTime Finished { get; set; }
+        public DateTime? Started { get; set; }
+        public DateTime? Finished { get; set; }
     }
 
     

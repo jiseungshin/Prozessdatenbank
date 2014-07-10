@@ -15,8 +15,11 @@ namespace PDCore.BusinessObjects
             Label = "";
             isActive = true;
             Status = "raw";
+
+            Reference = new Reference();
             
         }
+        public Reference Reference { get; set; }
         public string Label { get; set; }
         public Material Material { get; set; }
         public string Geometry { get; set; }
@@ -24,7 +27,7 @@ namespace PDCore.BusinessObjects
         public string BatchNumber { get; set; }
         public DateTime? PurchaseDate { get; set; }
         public bool isOneWay { get; set; }
-        public int CurrentRefereneNumber { get; set; }
+        public int CurrentReferenceNumber { get; set; }
         public BusinessObjects.WorkpieceQuality Quality { get; set; }
         public string Status { get; set; }
         public bool isActive { get; set; }
@@ -36,7 +39,7 @@ namespace PDCore.BusinessObjects
             wp.ID = this.ID;
             wp.Label = this.Label;
             wp.Material = this.Material;
-            wp.CurrentRefereneNumber = this.CurrentRefereneNumber;
+            wp.CurrentReferenceNumber = this.CurrentReferenceNumber;
 
             return wp;
         }

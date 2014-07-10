@@ -56,7 +56,7 @@ namespace OE110Prozessdatenbank.ViewModels
         }
 
         public string Reference
-        { get { return m_wp.CurrentRefereneNumber.ToString(); } }
+        { get { return m_wp.CurrentReferenceNumber.ToString(); } }
 
         public string Label
         { get { return m_wp.Label; } }

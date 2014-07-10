@@ -6,68 +6,68 @@
              mc:Ignorable="d" Height="723.716" Width="907" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Title="Versuchsstand">
     <Grid Background="White">
 
-        <DatePicker SelectedDate="{Binding Date}" Margin="166,33,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
-        <ComboBox x:Name="cb_user" ItemsSource="{Binding Users}" SelectedItem="{Binding User}" DisplayMemberPath="Description" Margin="166,62,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
-        <ComboBox x:Name="cb_WPLeft" Margin="166,164,0,0" ItemsSource="{Binding WorkpiecesLeft, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding LeftWorkpiece, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266" SelectionChanged="cb_WPLeft_SelectionChanged">
+        <DatePicker SelectedDate="{Binding Date}" Margin="179,33,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="253"/>
+        <ComboBox x:Name="cb_user" ItemsSource="{Binding Users}" SelectedItem="{Binding User}" DisplayMemberPath="Description" Margin="179,62,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="253"/>
+        <ComboBox x:Name="cb_WPLeft" Margin="179,164,0,0" ItemsSource="{Binding WorkpiecesLeft, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding LeftWorkpiece, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="253" SelectionChanged="cb_WPLeft_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="170" Height="14" HorizontalAlignment="Stretch">
-                        <TextBlock Text="{Binding CurrentRefereneNumber, Mode=OneWay}" HorizontalAlignment="Left"/>
+                        <TextBlock Text="{Binding CurrentReferenceNumber, Mode=OneWay}" HorizontalAlignment="Left"/>
                         <TextBlock Text="{Binding Label, Mode=OneWay}" HorizontalAlignment="Right"/>
                     </Grid>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Label Content="Werkstück links" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" Width="151"/>
-        <ComboBox x:Name="cb_WPCenter" Margin="166,190,0,0" ItemsSource="{Binding WorkpiecesCenter, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding CenterWorkpiece, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266" SelectionChanged="cb_WPCenter_SelectionChanged">
+        <Label Content="Werkstück links" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
+        <ComboBox x:Name="cb_WPCenter" Margin="179,190,0,0" ItemsSource="{Binding WorkpiecesCenter, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding CenterWorkpiece, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="253" SelectionChanged="cb_WPCenter_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="170" Height="14" HorizontalAlignment="Stretch">
-                        <TextBlock Text="{Binding CurrentRefereneNumber, Mode=OneWay}" HorizontalAlignment="Left"/>
+                        <TextBlock Text="{Binding CurrentReferenceNumber, Mode=OneWay}" HorizontalAlignment="Left"/>
                         <TextBlock Text="{Binding Label, Mode=OneWay}" HorizontalAlignment="Right"/>
                     </Grid>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Label Content="Werkstück mitte" HorizontalAlignment="Left" Margin="10,187,0,0" VerticalAlignment="Top" Width="151"/>
-        <ComboBox x:Name="cb_WPRight" Margin="166,217,0,0" ItemsSource="{Binding WorkpiecesRight, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding RightWorkpiece, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266" SelectionChanged="cb_WPRight_SelectionChanged">
+        <Label Content="Werkstück mitte" HorizontalAlignment="Left" Margin="10,187,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
+        <ComboBox x:Name="cb_WPRight" Margin="179,217,0,0" ItemsSource="{Binding WorkpiecesRight, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding RightWorkpiece, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="253" SelectionChanged="cb_WPRight_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="170" Height="14" HorizontalAlignment="Stretch">
-                        <TextBlock Text="{Binding CurrentRefereneNumber, Mode=OneWay}" HorizontalAlignment="Left"/>
+                        <TextBlock Text="{Binding CurrentReferenceNumber, Mode=OneWay}" HorizontalAlignment="Left"/>
                         <TextBlock Text="{Binding Label, Mode=OneWay}" HorizontalAlignment="Right"/>
                     </Grid>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox x:Name="cb_Glass" ItemsSource="{Binding Glasses}" SelectedItem="{Binding Glass}" DisplayMemberPath="VisualName" Margin="166,266,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266" SelectionChanged="cb_Glass_SelectionChanged"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="166,293,0,0" TextWrapping="Wrap" Text="{Binding CellTemperature}" VerticalAlignment="Top" Width="266"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="166,324,0,0" TextWrapping="Wrap" Text="{Binding PressTemperature}" VerticalAlignment="Top" Width="266"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="166,355,0,0" TextWrapping="Wrap" Text="{Binding CoolingTemperature}" VerticalAlignment="Top" Width="266"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="166,386,0,0" TextWrapping="Wrap" Text="{Binding MaxForce}" VerticalAlignment="Top" Width="266"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="166,417,0,0" TextWrapping="Wrap" Text="{Binding SecondForce}" VerticalAlignment="Top" Width="266"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="166,448,0,0" TextWrapping="Wrap" Text="{Binding PressFeed}" VerticalAlignment="Top" Width="266"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="166,479,0,0" TextWrapping="Wrap" Text="{Binding PenDepth}" VerticalAlignment="Top" Width="266"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="166,510,0,0" TextWrapping="Wrap" Text="{Binding Duration}" VerticalAlignment="Top" Width="266"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="166,541,0,0" TextWrapping="Wrap" Text="{Binding Atmosphere}" VerticalAlignment="Top" Width="266"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="166,572,0,0" TextWrapping="Wrap" Text="{Binding Cycles}" VerticalAlignment="Top" Width="266"/>
-        <TextBox x:Name="tb_remark" Height="69" Margin="166,608,0,0" TextWrapping="Wrap" Text="{Binding Remark}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
+        <ComboBox x:Name="cb_Glass" ItemsSource="{Binding Glasses}" SelectedItem="{Binding Glass}" DisplayMemberPath="VisualName" Margin="179,266,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="253" SelectionChanged="cb_Glass_SelectionChanged"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,293,0,0" TextWrapping="Wrap" Text="{Binding CellTemperature}" VerticalAlignment="Top" Width="253"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,324,0,0" TextWrapping="Wrap" Text="{Binding PressTemperature}" VerticalAlignment="Top" Width="253"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,355,0,0" TextWrapping="Wrap" Text="{Binding CoolingTemperature}" VerticalAlignment="Top" Width="253"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,386,0,0" TextWrapping="Wrap" Text="{Binding MaxForce}" VerticalAlignment="Top" Width="253"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,417,0,0" TextWrapping="Wrap" Text="{Binding SecondForce}" VerticalAlignment="Top" Width="253"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,448,0,0" TextWrapping="Wrap" Text="{Binding PressFeed}" VerticalAlignment="Top" Width="253"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,479,0,0" TextWrapping="Wrap" Text="{Binding PenDepth}" VerticalAlignment="Top" Width="253"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,510,0,0" TextWrapping="Wrap" Text="{Binding Duration}" VerticalAlignment="Top" Width="253"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,541,0,0" TextWrapping="Wrap" Text="{Binding Atmosphere}" VerticalAlignment="Top" Width="253"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,572,0,0" TextWrapping="Wrap" Text="{Binding Cycles}" VerticalAlignment="Top" Width="253"/>
+        <TextBox x:Name="tb_remark" Height="69" Margin="179,608,0,0" TextWrapping="Wrap" Text="{Binding Remark}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="253"/>
 
         <Label Content="Bearbeiter *" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
         <Label Content="Datum" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Width="110"/>
         <Label Content="Bemerkung" HorizontalAlignment="Left" Margin="10,608,0,0" VerticalAlignment="Top" Width="110"/>
         <Label Content="Glas" HorizontalAlignment="Left" Margin="10,266,0,0" VerticalAlignment="Top" Width="151"/>
-        <Label Content="Kammertemperatur [°C]" HorizontalAlignment="Left" Margin="10,289,0,0" VerticalAlignment="Top" Width="151"/>
-        <Label Content="Presstemperatur [°C]" HorizontalAlignment="Left" Margin="10,320,0,0" VerticalAlignment="Top" Width="151"/>
-        <Label Content="Kühltemperatur [°C]" HorizontalAlignment="Left" Margin="10,351,0,0" VerticalAlignment="Top" Width="151"/>
+        <Label Content="Kammertemperatur [°C ] *" HorizontalAlignment="Left" Margin="10,289,0,0" VerticalAlignment="Top" Width="164" FontWeight="Bold"/>
+        <Label Content="Presstemperatur [°C] *" HorizontalAlignment="Left" Margin="10,320,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
+        <Label Content="Kühltemperatur [°C] *" HorizontalAlignment="Left" Margin="10,351,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
         <Label Content="Maximale Presskraft [kN]" HorizontalAlignment="Left" Margin="10,382,0,0" VerticalAlignment="Top" Width="151"/>
-        <Label Content="Nachpresskraft [kN]" HorizontalAlignment="Left" Margin="10,413,0,0" VerticalAlignment="Top" Width="151"/>
-        <Label Content="Pressvorschub [mm/min]" HorizontalAlignment="Left" Margin="10,444,0,0" VerticalAlignment="Top" Width="151"/>
+        <Label Content="Nachpresskraft [kN] *" HorizontalAlignment="Left" Margin="10,413,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
+        <Label Content="Pressvorschub [mm/min] *" HorizontalAlignment="Left" Margin="10,444,0,0" VerticalAlignment="Top" Width="164" FontWeight="Bold"/>
         <Label Content="Max. Eindringtiefe [mm]" HorizontalAlignment="Left" Margin="10,475,0,0" VerticalAlignment="Top" Width="151"/>
-        <Label Content="Pressdauer [s]" HorizontalAlignment="Left" Margin="10,506,0,0" VerticalAlignment="Top" Width="151"/>
-        <Label Content="Atmosphäre" HorizontalAlignment="Left" Margin="10,537,0,0" VerticalAlignment="Top" Width="151"/>
-        <Label Content="Anzahl Presszyklen" HorizontalAlignment="Left" Margin="10,568,0,0" VerticalAlignment="Top" Width="151"/>
-        <Label Content="Werkstück rechts" HorizontalAlignment="Left" Margin="10,213,0,0" VerticalAlignment="Top" Width="151"/>
+        <Label Content="Pressdauer [s] *" HorizontalAlignment="Left" Margin="10,506,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
+        <Label Content="Atmosphäre *" HorizontalAlignment="Left" Margin="10,537,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
+        <Label Content="Anzahl Presszyklen *" HorizontalAlignment="Left" Margin="10,568,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
+        <Label Content="Werkstück rechts" HorizontalAlignment="Left" Margin="10,213,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
 
         <Grid x:Name="g_quality" Height="455" Margin="445,63,10,0" VerticalAlignment="Top">
             <Grid.RowDefinitions>
@@ -83,8 +83,8 @@
         <Label Content="Qualitätsmerkmale" HorizontalAlignment="Left" Margin="455,33,0,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
         <Label Content="Projekt *" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
         <Label Content="Fragestellung/&#xD;&#xA;Versuchsreihe *" HorizontalAlignment="Left" Margin="10,112,0,0" VerticalAlignment="Top" Width="177" FontWeight="Bold"/>
-        <ComboBox x:Name="cb_project" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" Margin="166,90,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
-        <ComboBox x:Name="cb_Issue" ItemsSource="{Binding Issues}" SelectedItem="{Binding Issue}" DisplayMemberPath="Description" Margin="166,117,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="266"/>
+        <ComboBox x:Name="cb_project" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" Margin="179,90,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="253"/>
+        <ComboBox x:Name="cb_Issue" ItemsSource="{Binding Issues}" SelectedItem="{Binding Issue}" DisplayMemberPath="Description" Margin="179,117,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="253"/>
 
     </Grid>
 </Window>

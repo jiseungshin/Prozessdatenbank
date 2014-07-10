@@ -28,7 +28,7 @@
 
         <TextBox Height="23" Margin="166,208,10,0" TextWrapping="Wrap" Text="{Binding ToolRadius}" VerticalAlignment="Top"  PreviewTextInput="TextBox_PreviewTextInput"/>
         <TextBox Height="23" Margin="166,236,10,0" TextWrapping="Wrap" Text="{Binding TippRadius}" VerticalAlignment="Top" PreviewTextInput="TextBox_PreviewTextInput"/>
-        <TextBox Height="23" Margin="166,264,10,0" TextWrapping="Wrap" Text="{Binding GrindingDirection}" VerticalAlignment="Top"/>
+        <TextBox Height="23" Margin="197,264,10,0" TextWrapping="Wrap" Text="{Binding GrindingDirection}" VerticalAlignment="Top"/>
         <TextBox Height="23" Margin="166,292,10,0" TextWrapping="Wrap" Text="{Binding InFeed}" VerticalAlignment="Top"  PreviewTextInput="TextBox_PreviewTextInput"/>
         <TextBox Height="23" Margin="166,320,10,0" TextWrapping="Wrap" Text="{Binding Feed}" VerticalAlignment="Top"  PreviewTextInput="TextBox_PreviewTextInput"/>
         <TextBox Height="23" Margin="166,348,10,0" TextWrapping="Wrap" Text="{Binding ToolSpeed}" VerticalAlignment="Top"  PreviewTextInput="TextBox_PreviewTextInput"/>
@@ -45,7 +45,7 @@
         <Label Content="Datum *" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Width="110"/>
         <Label Content="Werkzeugradius *" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
         <Label Content="Tippradius *" HorizontalAlignment="Left" Margin="10,233,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
-        <Label Content="Schleifrichtung * [EtC, CtE]" HorizontalAlignment="Left" Margin="10,261,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
+        <Label Content="Schleifrichtung * [EtC, CtE]" HorizontalAlignment="Left" Margin="10,261,0,0" VerticalAlignment="Top" Width="162" FontWeight="Bold"/>
         <Label Content="Zustellung *" HorizontalAlignment="Left" Margin="10,289,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
         <Label Content="Vorschub *" HorizontalAlignment="Left" Margin="10,317,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
         <Label Content="Drehlzahl Werkstück *" HorizontalAlignment="Left" Margin="10,345,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>

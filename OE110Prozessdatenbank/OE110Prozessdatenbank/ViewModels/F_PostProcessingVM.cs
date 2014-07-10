@@ -63,7 +63,7 @@ namespace OE110Prozessdatenbank.ViewModels
                         else
                             dr["decoated"] = false;
 
-                        if (dr.Field<string>(DBProcessReferences.Conclusion) != null)
+                        if (dr.Field<string>(DBIssues.Conclusion) != null)
                             dr["terminated"] = true;
                         else
                             dr["terminated"] = false;
@@ -179,6 +179,7 @@ namespace OE110Prozessdatenbank.ViewModels
                 NotifyPropertyChanged("Data");
             }
         }
+
     }
     
 }

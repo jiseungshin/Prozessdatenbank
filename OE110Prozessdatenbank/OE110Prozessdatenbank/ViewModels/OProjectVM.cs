@@ -130,6 +130,9 @@ namespace OE110Prozessdatenbank.ViewModels
         public string Description
         { get { return m_issue.Description; } set { m_issue.Description = value; } }
 
+        public string Conclusion
+        { get { return m_issue.Conclusion; } set { m_issue.Conclusion = value; } }
+
         public RelayCommand save { get; set; }
 
         #region Command functions

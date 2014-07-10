@@ -62,9 +62,9 @@ namespace PDCore.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("D:\\Prozessdatenbank\\")]
-        public string StandardDirPath {
+        public string StandardDirPath2 {
             get {
-                return ((string)(this["StandardDirPath"]));
+                return ((string)(this["StandardDirPath2"]));
             }
         }
     }

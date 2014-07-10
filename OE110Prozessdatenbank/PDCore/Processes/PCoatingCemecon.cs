@@ -11,9 +11,12 @@ namespace PDCore.Processes
         public PCoatingCemecon()
         {
             CoatingProcessID = -1;
+            UserID = -1;
             Workpieces = new List<BusinessObjects.Workpiece>();
             Quality = new BusinessObjects.ProcessQuality();
             Processnumber = -1;
+            ProjectID = -1;
+            IssueID = -1;
         }
         public int CoatingProcessID { get; set; }
         public string Abnormalities { get; set; }

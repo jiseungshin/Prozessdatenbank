@@ -111,6 +111,24 @@ namespace OE110Prozessdatenbank.ProcessWindows
             }
         }
 
+        private void bt_findUpper_Click(object sender, RoutedEventArgs e)
+        {
+            new ObjectWindows.WorkpiecePicker(m_vm,1).ShowDialog();
+            //m_vm.NotifyPropertyChanged("UpperWP");
+            //m_vm.NotifyPropertyChanged("WorkpiecesLower");
+            //m_vm.NotifyPropertyChanged("WorkpiecesUpper");
+            //m_vm.NotifyPropertyChanged("UpperWP");
+        }
+
+        private void bt_findLower_Click(object sender, RoutedEventArgs e)
+        {
+            new ObjectWindows.WorkpiecePicker(m_vm, 3).ShowDialog();
+            //m_vm.NotifyPropertyChanged("LowerWP");
+            //m_vm.NotifyPropertyChanged("WorkpiecesUpper");
+            //m_vm.NotifyPropertyChanged("WorkpiecesLower");
+            //m_vm.NotifyPropertyChanged("LowerWP");
+        }
+
        
     }
 }

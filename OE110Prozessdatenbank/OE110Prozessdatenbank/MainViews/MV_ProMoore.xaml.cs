@@ -19,6 +19,7 @@ using PDCore.Manager;
 using PDCore.Database;
 using OE110Prozessdatenbank.Commands;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace OE110Prozessdatenbank.MainViews
 {
@@ -28,12 +29,15 @@ namespace OE110Prozessdatenbank.MainViews
     public partial class MV_ProMoore : UserControl
     {
 
-        private ProcessWindows.GenericWindow m_window;
+        private GridViewColumnHeader listViewSortCol = null;
+        private SortAdorner listViewSortAdorner = null;
+        private VMProcessingMoore m_vm;
 
         public MV_ProMoore()
         {
             InitializeComponent();
-            DataContext = new VMProcessingMoore();
+            m_vm = new VMProcessingMoore();
+            DataContext = m_vm;
             
         }
 
@@ -42,11 +46,6 @@ namespace OE110Prozessdatenbank.MainViews
             if ((sender as ListView).SelectedIndex != -1)
             {
                 int ID = Convert.ToInt32(((sender as ListView).SelectedItem as System.Data.DataRowView)[DBExpMoore.ID]);
-                //m_window = new ProcessWindows.GenericWindow();
-                //m_window.contentGrid.Children.Add(new Controls.CExpMoore(ID));
-                //m_window.Title = "Versuch - Moore";
-                //m_window.IconType = IconManager.IconType.ProcessIcon;
-                //m_window.ShowDialog();
                 new ProcessWindows.CExpMoore(ID).ShowDialog();
             }
         }
@@ -63,12 +62,37 @@ namespace OE110Prozessdatenbank.MainViews
 
         private void mbt_newProcess_Click(object sender, RoutedEventArgs e)
         {
-            //m_window = new ProcessWindows.GenericWindow();
-            //m_window.contentGrid.Children.Add(new Controls.CExpMoore());
-            //m_window.Title = "Versuch - Moore";
-            //m_window.IconType = IconManager.IconType.ProcessIcon;
-            //m_window.ShowDialog();
             new ProcessWindows.CExpMoore().ShowDialog();
+        }
+
+        //ListView ColumnClickEvent to sort elements
+        private void ListView_Header_Click(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader column = (sender as GridViewColumnHeader);
+
+            if (listViewSortCol != null)
+            {
+                AdornerLayer.GetAdornerLayer(listViewSortCol).Remove(listViewSortAdorner);
+                LV_ProcessedMoore.Items.SortDescriptions.Clear();
+            }
+
+            ListSortDirection newDir = ListSortDirection.Ascending;
+            if (listViewSortCol == column && listViewSortAdorner.Direction == newDir)
+                newDir = ListSortDirection.Descending;
+
+            listViewSortCol = column;
+            listViewSortAdorner = new SortAdorner(listViewSortCol, newDir);
+            AdornerLayer.GetAdornerLayer(listViewSortCol).Add(listViewSortAdorner);
+
+            switch (newDir)
+            {
+                case ListSortDirection.Descending:
+                    m_vm.SortString = " ORDER BY "+column.Tag.ToString() + " DESC";
+                    break;
+                default:
+                    m_vm.SortString = " ORDER BY " + column.Tag.ToString() + " ASC";
+                    break;
+            }
 
         }
     }
@@ -79,6 +103,7 @@ namespace OE110Prozessdatenbank.MainViews
 
         private string m_filter = "";
         private FilterCriteria m_criteria = ProcessManager.Instance.FilterCriteria[0];
+        private string m_sortString = "";
         public VMProcessingMoore()
         {
             ProcessManager.Instance.newProcesses += Instance_newProcesses;
@@ -93,7 +118,7 @@ namespace OE110Prozessdatenbank.MainViews
         {
             get 
             {
-                return ProcessManager.Instance.getData(Queries.QueryProcessedMoore + m_filter);
+                return ProcessManager.Instance.getData(Queries.QueryProcessedMoore + m_filter + m_sortString);
             }
         }
 
@@ -120,7 +145,51 @@ namespace OE110Prozessdatenbank.MainViews
             }
         }
 
+        public string SortString
+        {
+            set { m_sortString = value; NotifyPropertyChanged("ProcessedData"); }
+        }
 
 
+
+    }
+
+    public class SortAdorner : Adorner
+    {
+        private static Geometry ascGeometry =
+                Geometry.Parse("M 0 4 L 3.5 0 L 7 4 Z");
+
+        private static Geometry descGeometry =
+                Geometry.Parse("M 0 0 L 3.5 4 L 7 0 Z");
+
+        public ListSortDirection Direction { get; private set; }
+
+        public SortAdorner(UIElement element, ListSortDirection dir)
+            : base(element)
+        {
+            this.Direction = dir;
+        }
+
+        protected override void OnRender(DrawingContext drawingContext)
+        {
+            base.OnRender(drawingContext);
+
+            if (AdornedElement.RenderSize.Width < 20)
+                return;
+
+            TranslateTransform transform = new TranslateTransform
+                    (
+                            AdornedElement.RenderSize.Width - 15,
+                            (AdornedElement.RenderSize.Height - 5) / 2
+                    );
+            drawingContext.PushTransform(transform);
+
+            Geometry geometry = ascGeometry;
+            if (this.Direction == ListSortDirection.Descending)
+                geometry = descGeometry;
+            drawingContext.DrawGeometry(Brushes.Transparent, null, geometry);
+
+            drawingContext.Pop();
+        }
     }
 }

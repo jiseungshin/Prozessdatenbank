@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace PDCore.BusinessObjects
 {
-    class Reference
+    public class Reference
     {
+        public int ReferenceNumber { get; set; }
+        public Project Project { get; set; }
+        public Issue Issue { get; set; }
     }
 }

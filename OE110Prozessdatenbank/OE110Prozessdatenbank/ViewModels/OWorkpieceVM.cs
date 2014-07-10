@@ -17,6 +17,9 @@ namespace OE110Prozessdatenbank.ViewModels
         private Workpiece m_workpiece;
         private ObservableCollection<Workpiece> m_workieces;
         private List<string> m_geometries = new List<string>() { "Diffraktiv", "Konvex", "Konkav", "Plan" };
+
+        private int m_status = 0;
+
         public OWorkpieceVM()
         {
             ObjectManager.Instance.update();
@@ -90,13 +93,19 @@ namespace OE110Prozessdatenbank.ViewModels
             }
         }
 
+        public int Status
+        {
+            get { return m_status; }
+            set { m_status = value; }
+        }
+
         #region Command functions
         public void Save()
         {
             if (m_update)
                 ObjectManager.Instance.saveWorkpiece(m_workpiece, true);
             else
-                ObjectManager.Instance.saveWorkpiece(m_workpiece, false);
+                ObjectManager.Instance.saveWorkpiece(m_workpiece, false, Status);
 
             Updater.Instance.forceUpdate();
         }

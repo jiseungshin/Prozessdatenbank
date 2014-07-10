@@ -132,4 +132,22 @@
   <data name="q_removeMaterial" xml:space="preserve">
     <value>Soll das Material wirklich gelöscht werden?</value>
   </data>
+  <data name="e_NoProjectNoIssue" xml:space="preserve">
+    <value>Der Vorgang kann nicht übersprungen werden, da dem diesem kein Projekt oder keine Fragestellung zugeordnet ist!</value>
+  </data>
+  <data name="q_skipWorkpieceCoating" xml:space="preserve">
+    <value>Soll das Werkstück  wirklich in den Prozesszustand 'Versuch durchgeführt' versetzt werden?</value>
+  </data>
+  <data name="q_skipWorkpieceGrinding" xml:space="preserve">
+    <value>Soll das Werkstück  wirklich in den Prozesszustand 'Bearbeitet' versetzt werden?</value>
+  </data>
+  <data name="q_NextTry" xml:space="preserve">
+    <value>Soll das Werkstück wirklich für einen weiteren Versuch freigegeben werden?</value>
+  </data>
+  <data name="e_cannnotDoNextTry" xml:space="preserve">
+    <value>Es kann kein weiterer Versuch durchgeführt werden, da der Vorgang bereits beendet wurde!</value>
+  </data>
+  <data name="e_UnknownReference" xml:space="preserve">
+    <value>Die eingegebene Vorgangsnummer ist nicht vorhanden!</value>
+  </data>
 </root>

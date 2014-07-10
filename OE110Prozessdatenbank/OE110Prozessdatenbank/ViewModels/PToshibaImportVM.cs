@@ -189,15 +189,19 @@ namespace OE110Prozessdatenbank.ViewModels
             {
                 m_upper = value;
 
-                m_project = ObjectManager.Instance.Projects.Find(item=>item.ID == ObjectManager.Instance.getProjectID(m_upper.CurrentRefereneNumber));
-                NotifyPropertyChanged("Project");
-                m_issues = new ObservableCollection<PDCore.BusinessObjects.Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == m_project.ID));
-                NotifyPropertyChanged("Issues");
-                m_issue = ObjectManager.Instance.Issues.Find(item => item.ID == ObjectManager.Instance.getIssueID(m_upper.CurrentRefereneNumber));
+                try
+                {
+                    m_project = ObjectManager.Instance.Projects.Find(item => item.ID == ObjectManager.Instance.getProjectID(m_upper.CurrentReferenceNumber));
+                    NotifyPropertyChanged("Project");
+                    m_issues = new ObservableCollection<PDCore.BusinessObjects.Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == m_project.ID));
+                    NotifyPropertyChanged("Issues");
+                    m_issue = ObjectManager.Instance.Issues.Find(item => item.ID == ObjectManager.Instance.getIssueID(m_upper.CurrentReferenceNumber));
+
+                    NotifyPropertyChanged("Issue");
+                }
+                catch { }
 
                 NotifyPropertyChanged("WorkpiecesLower");
-                
-                NotifyPropertyChanged("Issue");
             }
         }
 
@@ -215,15 +219,19 @@ namespace OE110Prozessdatenbank.ViewModels
             {
                 m_lower = value;
 
-                m_project = ObjectManager.Instance.Projects.Find(item => item.ID == ObjectManager.Instance.getProjectID(m_lower.CurrentRefereneNumber));
-                NotifyPropertyChanged("Project");
-                m_issues = new ObservableCollection<PDCore.BusinessObjects.Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == m_project.ID));
-                NotifyPropertyChanged("Issues");
-                m_issue = ObjectManager.Instance.Issues.Find(item => item.ID == ObjectManager.Instance.getIssueID(m_lower.CurrentRefereneNumber));
-
-                NotifyPropertyChanged("WorkpiecesUpper");
+                try
+                {
+                    m_project = ObjectManager.Instance.Projects.Find(item => item.ID == ObjectManager.Instance.getProjectID(m_lower.CurrentReferenceNumber));
+                    NotifyPropertyChanged("Project");
+                    m_issues = new ObservableCollection<PDCore.BusinessObjects.Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == m_project.ID));
+                    NotifyPropertyChanged("Issues");
+                    m_issue = ObjectManager.Instance.Issues.Find(item => item.ID == ObjectManager.Instance.getIssueID(m_lower.CurrentReferenceNumber));
+                }
+                catch { }
                 
                 NotifyPropertyChanged("Issue");
+
+                NotifyPropertyChanged("WorkpiecesUpper");
             }
         }
 

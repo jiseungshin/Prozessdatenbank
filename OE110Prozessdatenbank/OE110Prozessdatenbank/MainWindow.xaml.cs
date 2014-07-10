@@ -329,6 +329,8 @@ namespace OE110Prozessdatenbank
 
         private void Debug_click(object sender, RoutedEventArgs e)
         {
+            PDCore.Manager.Updater.Instance.forceUpdate();
+
             //var tt = PDCore.Manager.ProcessManager.Instance.getWorkpieceHistory(1);
             //var tt = PDCore.Manager.FileManager.Instance.getDirPth(1);
             //PDCore.Processes.PTurningMoore p = PDCore.Manager.ProcessManager.Instance.getProcess(15,11) as PDCore.Processes.PTurningMoore;
@@ -341,7 +343,13 @@ namespace OE110Prozessdatenbank
 
             //string q =PDCore.Database.MySQLCommunicator.BuildUpdateQuery(DBWorkpieces.Table,tt,new MySQLCommunicator.ColumnValuePair(){Culumn=DBWorkpieces.ID,Value=1});
 
-            //PDCore.Manager.Updater.Instance.foo("hallo", "huhu");
+            ////PDCore.Manager.Updater.Instance.foo("hallo", "huhu");
+            //MessageBox.Show(PDCore.Manager.ProcessManager.Instance.checkNewTry(2).ToString());
+            //int a = 0;
+
+            //List<PDCore.BusinessObjects.Workpiece> wps = PDCore.Manager.ObjectManager.Instance.Workpieces;
+
+            //new ObjectWindows.WorkpiecePicker().ShowDialog();
         }
 
         private void mbt_CoatingAdmin_Click(object sender, RoutedEventArgs e)
@@ -395,6 +403,20 @@ namespace OE110Prozessdatenbank
             if (MessageBox.Show("Anwendung jetzt schließen?", "", MessageBoxButton.YesNo, MessageBoxImage.Question)== MessageBoxResult.Yes)
             {
                 this.Close();
+            }
+        }
+
+        private void mbt_GetReference_Click(object sender, RoutedEventArgs e)
+        {
+            new Controls.ReferencePicker().ShowDialog();
+        }
+
+        private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                //Close Application
+                new Controls.ReferencePicker().ShowDialog();
             }
         }
 

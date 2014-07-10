@@ -36,5 +36,6 @@ namespace PDCore.BusinessObjects
         public string Remark { get; set; }
         public DateTime Started { get; set; }
         public DateTime Finished { get; set; }
+        public string Conclusion { get; set; }
     }
 }

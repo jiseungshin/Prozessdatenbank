@@ -14,7 +14,7 @@
     <Setting Name="Password" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Pr0p-71k13JE</Value>
     </Setting>
-    <Setting Name="StandardDirPath" Type="System.String" Scope="Application">
+    <Setting Name="StandardDirPath2" Type="System.String" Scope="Application">
       <Value Profile="(Default)">D:\Prozessdatenbank\</Value>
     </Setting>
   </Settings>

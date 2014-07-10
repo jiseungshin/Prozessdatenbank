@@ -52,6 +52,14 @@
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator></Separator>
+                    <MenuItem Header="weiteren Versuch durchführen" Click="cmb_nextTry_Click">
+                        <MenuItem.Icon>
+                            <Image Source="/OE110Prozessdatenbank;component/Icons/Stepout_6327.png"
+                                   Height="{Binding Path=ActualHeight, ElementName=StorageContextmenu}"
+                                    Width="{Binding Path=ActualHeight, ElementName=StorageContextmenu}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator></Separator>
                     <MenuItem Header="Vorgang abbrechen" Click="cmb_cancel_Click">
                         <MenuItem.Icon>
                             <Image Source="/OE110Prozessdatenbank;component/Icons/StatusAnnotations_Critical_16xLG_color.png"

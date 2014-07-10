@@ -11,7 +11,7 @@
         <Label Content="{Binding Workpiece.Label}" HorizontalAlignment="Left" Margin="150,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.184,0.423"/>
         <Label Content="{Binding Project.Description}" HorizontalAlignment="Left" Margin="150,36,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.184,0.423"/>
         <Label Content="{Binding Issue.Description}" HorizontalAlignment="Left" Margin="150,62,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.184,0.423"/>
-        <Button Content="speichern" Command="{Binding SaveReference}" IsEnabled="{Binding SaveReference.CanSave}" Click="Button_Click" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75"/>
+        <Button Content="speichern" Command="{Binding SaveReference}" IsEnabled="{Binding SaveReference.CanSave}" Click="bt_Save_Click" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75"/>
         <Button Content="abbrechen" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75" Click="Button_Click"/>
 
     </Grid>

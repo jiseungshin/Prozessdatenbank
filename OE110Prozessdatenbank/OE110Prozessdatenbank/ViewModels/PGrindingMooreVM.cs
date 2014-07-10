@@ -197,7 +197,8 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public bool CanSave()
         {
-            if (m_process.UserID != -1)
+            if (m_process.UserID != -1 && m_process.GrindingDirection != null && m_process.GrindingWheelSpeed != null && m_process.InFeed != null &&
+                m_process.TippRadius != null && m_process.ToolRadius != null && m_process.ToolSpeed != null)
                 return true;
             else
                 return false;

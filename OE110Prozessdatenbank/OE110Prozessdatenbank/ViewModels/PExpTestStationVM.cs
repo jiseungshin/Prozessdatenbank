@@ -34,8 +34,8 @@ namespace OE110Prozessdatenbank.ViewModels
 
             m_process = ProcessManager.Instance.getProcess(PID, 32) as PExpTestStation;
 
-            m_process.ProjectID = ObjectManager.Instance.getProjectID(m_process.Workpieces[0].CurrentRefereneNumber);
-            m_process.IssueID = ObjectManager.Instance.getIssueID(m_process.Workpieces[0].CurrentRefereneNumber);
+            m_process.ProjectID = ObjectManager.Instance.getProjectID(m_process.Workpieces[0].CurrentReferenceNumber);
+            m_process.IssueID = ObjectManager.Instance.getIssueID(m_process.Workpieces[0].CurrentReferenceNumber);
 
             ProcessQualityControl = new Controls.CProcessQuality(m_process);
             if (m_process.LeftWorkpieceID != null)
@@ -330,7 +330,10 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public bool CanSave()
         {
-            if (m_process.UserID != -1 && m_process.ProjectID != -1 && m_process.IssueID != -1)
+            if (m_process.UserID != -1 && m_process.ProjectID != -1 && m_process.IssueID != -1
+                && m_process.Celltemperature!= null && m_process.PressFedd != null && m_process.PressTemperature !=null
+                && m_process.Duration != null && m_process.CoolingTempretaure!=null && m_process.Atmosphere!= null
+                && m_process.Cycles != null && m_process.SecondForce != null && (LeftWorkpiece != null || RightWorkpiece != null || CenterWorkpiece != null))
                 return true;
             else
                 return false;

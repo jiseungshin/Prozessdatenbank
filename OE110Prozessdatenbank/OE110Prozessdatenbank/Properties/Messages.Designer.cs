@@ -61,11 +61,38 @@ namespace OE110Prozessdatenbank.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Es kann kein weiterer Versuch durchgeführt werden, da der Vorgang bereits beendet wurde! ähnelt.
+        /// </summary>
+        internal static string e_cannnotDoNextTry {
+            get {
+                return ResourceManager.GetString("e_cannnotDoNextTry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Der Vorgang kann nicht übersprungen werden, da dem diesem kein Projekt oder keine Fragestellung zugeordnet ist! ähnelt.
+        /// </summary>
+        internal static string e_NoProjectNoIssue {
+            get {
+                return ResourceManager.GetString("e_NoProjectNoIssue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Es wurde kein Listenelement ausgewählt! ähnelt.
         /// </summary>
         internal static string e_NoSelectedListElement {
             get {
                 return ResourceManager.GetString("e_NoSelectedListElement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Die eingegebene Vorgangsnummer ist nicht vorhanden! ähnelt.
+        /// </summary>
+        internal static string e_UnknownReference {
+            get {
+                return ResourceManager.GetString("e_UnknownReference", resourceCulture);
             }
         }
         
@@ -88,11 +115,38 @@ namespace OE110Prozessdatenbank.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Soll das Werkstück wirklich für einen weiteren Versuch freigegeben werden? ähnelt.
+        /// </summary>
+        internal static string q_NextTry {
+            get {
+                return ResourceManager.GetString("q_NextTry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Soll das Material wirklich gelöscht werden? ähnelt.
         /// </summary>
         internal static string q_removeMaterial {
             get {
                 return ResourceManager.GetString("q_removeMaterial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Soll das Werkstück  wirklich in den Prozesszustand &apos;Versuch durchgeführt&apos; versetzt werden? ähnelt.
+        /// </summary>
+        internal static string q_skipWorkpieceCoating {
+            get {
+                return ResourceManager.GetString("q_skipWorkpieceCoating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Soll das Werkstück  wirklich in den Prozesszustand &apos;Bearbeitet&apos; versetzt werden? ähnelt.
+        /// </summary>
+        internal static string q_skipWorkpieceGrinding {
+            get {
+                return ResourceManager.GetString("q_skipWorkpieceGrinding", resourceCulture);
             }
         }
         

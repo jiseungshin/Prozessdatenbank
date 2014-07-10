@@ -30,5 +30,11 @@ namespace OE110Prozessdatenbank.Controls
         {
             this.Close();
         }
+
+        private void bt_Save_Click(object sender, RoutedEventArgs e)
+        {
+            
+            this.Close();
+        }
     }
 }
