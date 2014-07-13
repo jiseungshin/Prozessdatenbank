@@ -9,9 +9,9 @@ namespace PDCore.Database
         {
             get
             {
-                return "SELECT Workpieces.Label, Materials.Name, Workpieces.WorkPiece_ID FROM Workpieces " +
+                return "SELECT * FROM Workpieces " +
                           "INNER JOIN Materials ON Workpieces.Material_ID = Materials.Material_ID " +
-                          "WHERE Workpieces.Status='raw' AND Workpieces.isActive=1 ";
+                          "WHERE Workpieces.Status='raw' AND Workpieces.isActive=1";
             }
         }
 
@@ -299,6 +299,22 @@ namespace PDCore.Database
                                                  " LEFT JOIN " + DBWorkpieces.Table +
                                                  " On " + DBWorkpieces.Table + "." + DBWorkpieces.ID +
                                                  "=" + DBProcessReferences.Table + "." + DBProcessReferences.WorkpiceID +
+
+                                                  //join Material
+                                                 " LEFT JOIN " + DBMAterial.Table +
+                                                 " On " + DBMAterial.Table + "." + DBMAterial.ID +
+                                                 "=" + DBWorkpieces.Table + "." + DBWorkpieces.MaterialID +
+
+                                                 //join project
+                                                 " LEFT JOIN " + DBProjects.Table +
+                                                 " On " + DBProjects.Table + "." + DBProjects.ID +
+                                                 "=" + DBProcessReferences.Table + "." + DBProcessReferences.ProjectID +
+                                                 
+                                                 //join issues
+                                                 " LEFT JOIN " + DBIssues.Table +
+                                                 " On " + DBIssues.Table + "." + DBIssues.ID +
+                                                 "=" + DBProcessReferences.Table + "." + DBProcessReferences.IssueID +
+
                                                  " WHERE " + DBProcessReferences.Table + "." + DBProcessReferences.Status + "='coated'";
 
 

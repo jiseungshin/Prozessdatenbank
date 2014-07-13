@@ -29,6 +29,7 @@ namespace PDCore.Processes
         {
             CoatingProcessID = -1;
             Processnumber = -1;
+            UserID = -1;
             Workpieces = new List<BusinessObjects.Workpiece>();
             Quality = new BusinessObjects.ProcessQuality();
         }

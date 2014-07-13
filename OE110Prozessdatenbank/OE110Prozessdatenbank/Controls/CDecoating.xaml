@@ -10,7 +10,7 @@
         <Label Content="Werkstück" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <DatePicker SelectedDate="{Binding Date}" Margin="150,90,10,0" VerticalAlignment="Top"/>
         <ComboBox Margin="150,119,10,0" ItemsSource="{Binding Users}" SelectedItem="{Binding User}" DisplayMemberPath="Description" VerticalAlignment="Top"/>
-        <TextBox Height="23" Margin="150,173,10,0" TextWrapping="Wrap" Text="{Binding ProcessNumber, Converter={StaticResource intToNull}}" VerticalAlignment="Top"/>
+        <TextBox Height="23" Margin="150,173,10,0" TextWrapping="Wrap" Text="{Binding ProcessNumber, Converter={StaticResource intToNull}}" PreviewTextInput="TextBox_PreviewDecimalTextInput"  VerticalAlignment="Top"/>
         <Label Content="Projekt" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,1.885"/>
         <Label Content="Fragestellung" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,1.885"/>
         <Label Content="Datum *" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,1.885" FontWeight="Bold"/>

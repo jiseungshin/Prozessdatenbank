@@ -212,7 +212,6 @@ namespace PDCore.Database
                 m_mySqlCommand.Connection = m_mySqlConnection;
                 m_mySqlConnection.Open();
                 object res = m_mySqlCommand.ExecuteScalar();
-                //System.Windows.MessageBox.Show(res.ToString());
                 if (res.ToString() == "")
                     res = 0;
                 return Convert.ToInt32(res) + 1;

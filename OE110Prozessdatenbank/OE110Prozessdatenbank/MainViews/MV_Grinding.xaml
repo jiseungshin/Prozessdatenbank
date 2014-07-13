@@ -27,7 +27,7 @@
         </Grid.RowDefinitions>
         <Grid Margin="0,2,0,0" Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="350"/>
                 <ColumnDefinition Width="296*"/>
             </Grid.ColumnDefinitions>
             <Grid x:Name="g_raw">
@@ -87,8 +87,9 @@
                     </ListView.ItemContainerStyle>
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Werkstück" DisplayMemberBinding="{Binding Path=Label}" Width="130"/>
-                            <GridViewColumn Header="Material" DisplayMemberBinding="{Binding Path=Name}" Width="130"/>
+                            <GridViewColumn Header="Werkstück" DisplayMemberBinding="{Binding Label}" Width="110"/>
+                            <GridViewColumn Header="Material" DisplayMemberBinding="{Binding Name}" Width="110"/>
+                            <GridViewColumn Header="Geometrie" DisplayMemberBinding="{Binding Geometry}" Width="95"/>
                         </GridView>
 
                     </ListView.View>
@@ -96,7 +97,6 @@
                 <TextBox x:Name="tb_raw" Height="23" Margin="59,39,10,0" TextWrapping="Wrap" Text="{Binding RawFilter, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
                 <Label Content="Suche:" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
                 <Label Content="Unbearbeitete Werkstücke" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" FontStyle="Italic" Foreground="#FF303030"/>
-                <Label Content="Bearbeitete Werkstücke" HorizontalAlignment="Left" Margin="311,0,-198,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" FontStyle="Italic" Foreground="#FF303030"/>
             </Grid>
             <Grid Grid.Column="1">
                 <ListView Name="LV_Polished" Margin="10,67,10,10" DataContext="{Binding DataPolished, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Table}" SelectionMode="Single" MouseDoubleClick="MaterialListView_MouseDoubleClick">
@@ -158,6 +158,7 @@
                 </ComboBox>
                 <Label Content="Maschine:" HorizontalAlignment="Right" Margin="0,36,182,0" VerticalAlignment="Top"/>
                 <Label Content="Suche:" HorizontalAlignment="Left" Margin="11,36,0,0" VerticalAlignment="Top"/>
+                <Label Content="Bearbeitete Werkstücke" HorizontalAlignment="Left" Margin="10,1,0,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" FontStyle="Italic" Foreground="#FF303030"/>
             </Grid>
         </Grid>
         <Grid Background="#FFB4B4B4">

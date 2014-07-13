@@ -30,6 +30,10 @@ namespace PDCore.BusinessObjects
 
     public class Issue : BusinessObject
     {
+        public Issue()
+        {
+            Description = "";
+        }
         public string Description { get; set; }
         public string OLDDescription { get; set; }
         public int ProjectID { get; set; }

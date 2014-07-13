@@ -99,12 +99,13 @@ namespace OE110Prozessdatenbank.ViewModels
                 //int _refID = ProcessManager.Instance.getReference(ID)[0];
                 PCoatingCemecon _p = ProcessManager.Instance.getProcess(ID, 21) as PCoatingCemecon;
 
-
-                Project = new PDCore.BusinessObjects.Project() { ID = Convert.ToInt32(_p.ProjectID) };
-                NotifyPropertyChanged("Project");
-                Issue = new PDCore.BusinessObjects.Issue() { ID = Convert.ToInt32(_p.IssueID) };
-                NotifyPropertyChanged("Issue");
-                m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == _p.ProjectID));
+                m_process.Date = _p.Date;
+                m_process.Processnumber = _p.Processnumber;
+                //Project = new PDCore.BusinessObjects.Project() { ID = Convert.ToInt32(_p.ProjectID) };
+                //NotifyPropertyChanged("Project");
+                //Issue = new PDCore.BusinessObjects.Issue() { ID = Convert.ToInt32(_p.IssueID) };
+                //NotifyPropertyChanged("Issue");
+                //m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == _p.ProjectID));
 
                 m_process.CoatingProcessID = _p.CoatingProcessID;
                 m_process.UserID = _p.UserID;
@@ -112,6 +113,8 @@ namespace OE110Prozessdatenbank.ViewModels
                 
 
                 NotifyPropertyChanged("Process");
+                NotifyPropertyChanged("Date");
+                NotifyPropertyChanged("ProcessNumber");
                 NotifyPropertyChanged("User");
                 NotifyPropertyChanged("Project");
                 NotifyPropertyChanged("Issue");

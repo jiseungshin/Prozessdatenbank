@@ -294,7 +294,7 @@ namespace PDCore.Manager
         { get { return m_machines; } }
 
         public List<User> Users
-        { get { return m_users; } }
+        { get { return m_users.OrderBy(item=>item.Token).ToList(); } }
 
         public List<Project> Projects
         { get { return m_projects; } }
@@ -314,32 +314,93 @@ namespace PDCore.Manager
             DataSet _ds = _myCommunicator.getDataSet("SELECT * FROM " + DBProcessReferences.Table +" where " + DBProcessReferences.RefNumber + "=" + RefNumber);
             DataRow _dsWPQuality = _myCommunicator.getDataSet("SELECT * FROM " + DBWorkpieceQuality.Table + " where " + DBWorkpieceQuality.ReferenceNumber + "=" + RefNumber).Tables[0].Rows[0];
 
+
             int wp_ID = _ds.Tables[0].Rows[0].Field<int>(DBProcessReferences.WorkpiceID);
 
-            Workpiece _wp = getWorkpiece(wp_ID);
+            Workpiece _wp; //;= getWorkpiece(wp_ID);
+            //---------------------------------------------------------------------------------------------------------------
+            Material mm;
+            DataRow row = _myCommunicator.getDataSet("SELECT * FROM " + DBWorkpieces.Table +
+
+                                                        //join materials
+                                                        " LEFT JOIN " + DBMAterial.Table +
+                                                        " On " + DBMAterial.Table + "." + DBMAterial.ID +
+                                                        "=" + DBWorkpieces.Table + "." + DBWorkpieces.MaterialID + " WHERE " + DBWorkpieces.ID + "=" + wp_ID).Tables[0].Rows[0];
+
+
+            mm = new Material() { ID = row.Field<int>(DBMAterial.ID), Name = row.Field<string>(DBMAterial.Name) };
+            _wp = new Workpiece()
+            {
+                ID = row.Field<int>(DBWorkpieces.ID),
+                Label = row.Field<string>(DBWorkpieces.Label),
+                Material = mm,
+                BatchNumber = row.Field<string>(DBWorkpieces.BatchNumber),
+                PurchaseDate = row.Field<DateTime?>(DBWorkpieces.PurchaseDate),
+                Geometry = row.Field<string>(DBWorkpieces.Geometry),
+                isOneWay = row.Field<bool>(DBWorkpieces.isOneWay),
+                KindOfProbe = row.Field<string>(DBWorkpieces.KindOfProbe),
+                Status = row.Field<string>(DBWorkpieces.Status),
+                isActive = row.Field<bool>(DBWorkpieces.isActive)
+            };
+
+            //-------------------------------------------------------------------------------------------------------------------------------
             _wp.CurrentReferenceNumber = RefNumber;
 
-            _wp.Quality = new WorkpieceQuality()
-            {
-                Corrosion = _dsWPQuality.Field<int?>(DBWorkpieceQuality.Corrosion),
-                MoldScratches = _dsWPQuality.Field<int?>(DBWorkpieceQuality.MoldScratches),
-                GlassAdherence = _dsWPQuality.Field<int?>(DBWorkpieceQuality.GlassAdherence),
-                OverallResult = _dsWPQuality.Field<int?>(DBWorkpieceQuality.OverallResult),
-                PID = _dsWPQuality.Field<int?>(DBWorkpieceQuality.PID)
-            };
+            //_wp.Quality = new WorkpieceQuality()
+            //{
+            //    Corrosion = _dsWPQuality.Field<int?>(DBWorkpieceQuality.Corrosion),
+            //    MoldScratches = _dsWPQuality.Field<int?>(DBWorkpieceQuality.MoldScratches),
+            //    GlassAdherence = _dsWPQuality.Field<int?>(DBWorkpieceQuality.GlassAdherence),
+            //    OverallResult = _dsWPQuality.Field<int?>(DBWorkpieceQuality.OverallResult),
+            //    PID = _dsWPQuality.Field<int?>(DBWorkpieceQuality.PID)
+            //};
 
             return _wp;
         }
 
-        public Workpiece getWorkpieceByReference(int RefNumber, int PID)
+        public Workpiece getWorkpieceByReference(int RefNumber, int? PID)
         {
+             DataRow _dsWPQuality;
+           
+            if (PID!=null)
+                _dsWPQuality = _myCommunicator.getDataSet("SELECT * FROM " + DBWorkpieceQuality.Table + " where " + DBWorkpieceQuality.ReferenceNumber + "=" + RefNumber +" AND "+DBWorkpieceQuality.PID+"="+Convert.ToInt32(PID)).Tables[0].Rows[0];
+           else
+                _dsWPQuality = _myCommunicator.getDataSet("SELECT * FROM " + DBWorkpieceQuality.Table + " where " + DBWorkpieceQuality.ReferenceNumber + "=" + RefNumber + " AND " + DBWorkpieceQuality.PID + " IS NULL").Tables[0].Rows[0];
+
 
             DataSet _ds = _myCommunicator.getDataSet("SELECT * FROM " + DBProcessReferences.Table + " where " + DBProcessReferences.RefNumber + "=" + RefNumber);
-            DataRow _dsWPQuality = _myCommunicator.getDataSet("SELECT * FROM " + DBWorkpieceQuality.Table + " where " + DBWorkpieceQuality.ReferenceNumber + "=" + RefNumber +" AND "+DBWorkpieceQuality.PID+"="+PID).Tables[0].Rows[0];
+           
 
             int wp_ID = _ds.Tables[0].Rows[0].Field<int>(DBProcessReferences.WorkpiceID);
 
-            Workpiece _wp = getWorkpiece(wp_ID);
+            Workpiece _wp; //;= getWorkpiece(wp_ID);
+            //---------------------------------------------------------------------------------------------------------------
+            Material mm;
+            DataRow row = _myCommunicator.getDataSet("SELECT * FROM " + DBWorkpieces.Table +
+
+                                                        //join materials
+                                                        " LEFT JOIN " + DBMAterial.Table +
+                                                        " On " + DBMAterial.Table + "." + DBMAterial.ID +
+                                                        "=" + DBWorkpieces.Table + "." + DBWorkpieces.MaterialID + " WHERE " + DBWorkpieces.ID + "=" + wp_ID).Tables[0].Rows[0];
+
+
+                mm = new Material() { ID = row.Field<int>(DBMAterial.ID), Name = row.Field<string>(DBMAterial.Name) };
+                _wp = new Workpiece()
+                {
+                    ID = row.Field<int>(DBWorkpieces.ID),
+                    Label = row.Field<string>(DBWorkpieces.Label),
+                    Material = mm,
+                    BatchNumber = row.Field<string>(DBWorkpieces.BatchNumber),
+                    PurchaseDate = row.Field<DateTime?>(DBWorkpieces.PurchaseDate),
+                    Geometry = row.Field<string>(DBWorkpieces.Geometry),
+                    isOneWay = row.Field<bool>(DBWorkpieces.isOneWay),
+                    KindOfProbe = row.Field<string>(DBWorkpieces.KindOfProbe),
+                    Status = row.Field<string>(DBWorkpieces.Status),
+                    isActive = row.Field<bool>(DBWorkpieces.isActive)
+                };
+            
+            //-------------------------------------------------------------------------------------------------------------------------------
+
             _wp.CurrentReferenceNumber = RefNumber;
 
             _wp.Quality = new WorkpieceQuality()
@@ -701,8 +762,8 @@ namespace PDCore.Manager
                 Workpiece _wp = getWorkpiece(wp_ID);
                 _wp.CurrentReferenceNumber = RefNumber;
 
-                _wp.Reference.Project = Projects.Find(item => item.ID == dr.Field<int?>(DBProcessReferences.ProjectID));
-                _wp.Reference.Issue = Issues.Find(item => item.ID == dr.Field<int?>(DBProcessReferences.IssueID));
+                _wp.Reference.Project = Projects.Find(item => item.ID == dr.Field<int?>(DBProcessReferences.ProjectID)) ?? new Project();
+                _wp.Reference.Issue = Issues.Find(item => item.ID == dr.Field<int?>(DBProcessReferences.IssueID)) ?? new Issue();
 
                 _wp.Quality = new WorkpieceQuality()
                 {

@@ -1,5 +1,7 @@
-﻿192.168.178.24
+﻿192.168.178.22
 optik_db
+root
+1234
+D:\Prozessdatenbank\Vorgänge\
 optik_db
 Pr0p-71k13JE
-D:\Prozessdatenbank\Vorgänge\

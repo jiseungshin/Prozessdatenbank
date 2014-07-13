@@ -45,20 +45,28 @@ namespace OE110Prozessdatenbank.MainViews
 
         private void cmb_conclusion_Click(object sender, RoutedEventArgs e)
         {
-            int ID = Convert.ToInt32(((listview).SelectedItem as DataRowView)[DBProcessReferences.RefNumber]);
-            new Controls.CConclusion(ID).ShowDialog();
+            if (listview.SelectedIndex != -1)
+            {
+                int ID = Convert.ToInt32(((listview).SelectedItem as DataRowView)[DBProcessReferences.RefNumber]);
+                new Controls.CConclusion(ID).ShowDialog();
+            }
         }
 
         private void cmb_decoating_Click(object sender, RoutedEventArgs e)
         {
-            int ID = Convert.ToInt32(((listview).SelectedItem as DataRowView)[DBProcessReferences.RefNumber]);
-            new Controls.CDecoating(ID).ShowDialog();
+            if (listview.SelectedIndex != -1)
+            {
+                int ID = Convert.ToInt32(((listview).SelectedItem as DataRowView)[DBProcessReferences.RefNumber]);
+                new Controls.CDecoating(ID).ShowDialog();
+            }
         }
-
         private void cmb_analyse_Click(object sender, RoutedEventArgs e)
         {
-            int ID = Convert.ToInt32(((listview).SelectedItem as DataRowView)[DBProcessReferences.RefNumber]);
-            new Controls.CAnalyses(ID).ShowDialog();
+            if (listview.SelectedIndex != -1)
+            {
+                int ID = Convert.ToInt32(((listview).SelectedItem as DataRowView)[DBProcessReferences.RefNumber]);
+                new Controls.CAnalyses(ID).ShowDialog();
+            }
         }
 
         #region ContxtMenuHelper
@@ -156,10 +164,20 @@ namespace OE110Prozessdatenbank.MainViews
         {
             if (listview.SelectedIndex != -1)
             {
-                if (MessageBox.Show(Messages.q_CancelReference, "Vorgang abbrechen", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                string status = ((listview).SelectedItem as DataRowView).Row.Field<string>(DBProcessReferences.Status);
+
+                if (status == DBEnum.EnumReference.CANCELLED || status == DBEnum.EnumReference.TERMINATED)
                 {
-                    int ID = Convert.ToInt32(((listview).SelectedItem as DataRowView)[DBProcessReferences.RefNumber]);
-                    PDCore.Manager.ProcessManager.Instance.OverrideReferenceStatus(PDCore.Manager.ObjectManager.Instance.getWorkpieceByReference(ID), DBEnum.EnumReference.CANCELLED);
+                    MessageBox.Show(Messages.e_cannotCancelProcess, "Hinweis", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                }
+                else
+                {
+                    if (MessageBox.Show(Messages.q_CancelReference, "Vorgang abbrechen", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    {
+                        int ID = Convert.ToInt32(((listview).SelectedItem as DataRowView)[DBProcessReferences.RefNumber]);
+                        PDCore.Manager.ProcessManager.Instance.OverrideReferenceStatus(PDCore.Manager.ObjectManager.Instance.getWorkpieceByReference(ID), DBEnum.EnumReference.CANCELLED);
+                    }
                 }
             }
         }
@@ -168,11 +186,21 @@ namespace OE110Prozessdatenbank.MainViews
         {
             if (listview.SelectedIndex != -1)
             {
-                if (MessageBox.Show(Messages.q_TerminateReference, "Vorgang beenden", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
-                {
-                    int ID = Convert.ToInt32(((listview).SelectedItem as DataRowView)[DBProcessReferences.RefNumber]);
-                    PDCore.Manager.ProcessManager.Instance.OverrideReferenceStatus(PDCore.Manager.ObjectManager.Instance.getWorkpieceByReference(ID), DBEnum.EnumReference.CANCELLED);
-                }
+                 string status = ((listview).SelectedItem as DataRowView).Row.Field<string>(DBProcessReferences.Status);
+
+                 if (status == DBEnum.EnumReference.CANCELLED || status == DBEnum.EnumReference.TERMINATED)
+                 {
+                     MessageBox.Show(Messages.e_cannnotDoNextTry, "Hinweis", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                 }
+                 else
+                 {
+                     if (MessageBox.Show(Messages.q_TerminateReference, "Vorgang beenden", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                     {
+                         int ID = Convert.ToInt32(((listview).SelectedItem as DataRowView)[DBProcessReferences.RefNumber]);
+                         PDCore.Manager.ProcessManager.Instance.OverrideReferenceStatus(PDCore.Manager.ObjectManager.Instance.getWorkpieceByReference(ID), DBEnum.EnumReference.CANCELLED);
+                     }
+                 }
             }
         }
 

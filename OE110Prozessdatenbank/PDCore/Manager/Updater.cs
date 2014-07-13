@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Security.Permissions;
 
 namespace PDCore.Manager
 {
@@ -15,6 +17,7 @@ namespace PDCore.Manager
 
         Updater()
         {
+            initUpdateWatcher();
         }
 
         public static Updater Instance
@@ -50,7 +53,44 @@ namespace PDCore.Manager
 
         public void forceUpdate(params string[] values)
         {
+
+            try
+            {
+                IO.SimpleIO.saveClearText(@"update\upd.txt", new List<string>() { DateTime.Now.ToString() });
+            }
+            catch
+            {
+
+                OnUpdateTrigger();
+            }
+        }
+
+        FileSystemWatcher watcher;
+        private void initUpdateWatcher()
+        {
+            watcher = new FileSystemWatcher();
+            watcher.Path = @"update\\";
+            watcher.Filter = "upd.txt";
+
+            watcher.NotifyFilter = NotifyFilters.LastWrite;
+
+            watcher.Changed += new FileSystemEventHandler(OnChanged);
+            watcher.EnableRaisingEvents = true;
+        }
+        int i = 0;
+        private void OnChanged(object source, FileSystemEventArgs e)
+        {
             OnUpdateTrigger();
+            //if (i == 1)
+            //{
+            //    //System.Windows.MessageBox.Show(i.ToString());
+            //    OnUpdateTrigger();
+            //    i = 0;
+            //}
+            //else
+            //    i++;
+
+            
         }
     }
 }

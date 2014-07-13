@@ -710,7 +710,7 @@ namespace PDCore.Manager
                     AdherentLayer = Layer.Find(item => item.ID == row.Field<int>(DBCoatingCemeconProcess.AdherentLayer)),
                     ProtectiveLayer = Layer.Find(item => item.ID == row.Field<int>(DBCoatingCemeconProcess.ProtectiveLayer)),
                     ProgramNumber = row.Field<int>(DBCoatingCemeconProcess.ProgramNumber),
-                    Thickness = row.Field<int>(DBCoatingCemeconProcess.Thickness),
+                    Thickness = row.Field<double?>(DBCoatingCemeconProcess.Thickness),
                     Date = row.Field<DateTime>(DBCoatingCemeconProcess.Date),
                     Remark = row.Field<string>(DBCoatingCemeconProcess.Remark),
                     isDecoating = row.Field<bool>(DBCoatingCemeconProcess.IsDecoating),
@@ -929,7 +929,9 @@ namespace PDCore.Manager
                 _queries.Add("Update " + DBGrindingPhoenix.Table + " Set " + DBGrindingPhoenix.UserID + " = " + Process.UserID.ToDBObject() + " WHERE " + DBGrindingPhoenix.ID + "=" + Process.ID);
                 _queries.Add("Update " + DBGrindingPhoenix.Table + " Set " + DBGrindingPhoenix.Date + " = " + Process.Date.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + " WHERE " + DBGrindingPhoenix.ID + "=" + Process.ID);
                 _queries.Add("Update " + DBGrindingPhoenix.Table + " Set " + DBGrindingPhoenix.Remark + " = " + Process.Remark.ToDBObject() + " WHERE " + DBGrindingPhoenix.ID + "=" + Process.ID);
-                
+
+                _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.ProjectID + " = " + process.ProjectID.ToDBObject() + " WHERE " + DBProcessReferences.RefNumber + "=" + Process.Workpieces[0].CurrentReferenceNumber);
+                _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.IssueID + " = " + process.IssueID.ToDBObject() + " WHERE " + DBProcessReferences.RefNumber + "=" + Process.Workpieces[0].CurrentReferenceNumber);
 
             }
             else
@@ -1665,7 +1667,7 @@ namespace PDCore.Manager
                     _queries.Add("INSERT INTO " + DBProcessReferenceRelation.Table + " (" + DBProcessReferenceRelation.PID + "," + DBProcessReferenceRelation.MachineID + "," + DBProcessReferenceRelation.RefNumber +
                                    ") VALUES (" + _pro + ", " + 51 + "," + wp.CurrentReferenceNumber + ")");
 
-
+                    _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.Status + " = 'raw' WHERE " + DBWorkpieces.ID + "=" + wp.ID);
                     _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.Status + " = 'terminated' WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentReferenceNumber);
                     _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.ProjectID + " = " + process.ProjectID + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentReferenceNumber);
                     _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.IssueID + " = " + process.IssueID + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentReferenceNumber);
@@ -1991,8 +1993,8 @@ namespace PDCore.Manager
                                                                             DBWorkpieceQuality.Grinding_RA + "," +
                                                                             DBWorkpieceQuality.Grinding_PV + ")" +
                                                                             " VALUES (" + ReferenceNumber + "," +
-                                                                            dr.Field<int?>(DBWorkpieceQuality.Grinding_RA) + "," +
-                                                                            dr.Field<int?>(DBWorkpieceQuality.Grinding_PV) + ")");
+                                                                            dr.Field<int?>(DBWorkpieceQuality.Grinding_RA).ToDBObject() + "," +
+                                                                            dr.Field<int?>(DBWorkpieceQuality.Grinding_PV).ToDBObject() + ")");
             _myCommunicator.executeTransactedQueries(_queries);
             Updater.Instance.forceUpdate();
         }

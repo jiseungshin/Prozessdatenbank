@@ -70,6 +70,15 @@ namespace OE110Prozessdatenbank.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Der Vorgang ist bereits beendet worden! ähnelt.
+        /// </summary>
+        internal static string e_cannotCancelProcess {
+            get {
+                return ResourceManager.GetString("e_cannotCancelProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Der Vorgang kann nicht übersprungen werden, da dem diesem kein Projekt oder keine Fragestellung zugeordnet ist! ähnelt.
         /// </summary>
         internal static string e_NoProjectNoIssue {
@@ -93,6 +102,15 @@ namespace OE110Prozessdatenbank.Properties {
         internal static string e_UnknownReference {
             get {
                 return ResourceManager.GetString("e_UnknownReference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Das Werkstück befindet sich aktuell nicht im Durchlauf! ähnelt.
+        /// </summary>
+        internal static string n_WorkpieceNotInUse {
+            get {
+                return ResourceManager.GetString("n_WorkpieceNotInUse", resourceCulture);
             }
         }
         

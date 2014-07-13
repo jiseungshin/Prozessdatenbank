@@ -53,9 +53,9 @@ namespace OE110Prozessdatenbank.ViewModels
         { get { return m_adherentLayer; } set { m_adherentLayer = value; } }
 
         public string  Protective
-        { get { return m_protectiveLayer; } set { m_adherentLayer = value; } }
+        { get { return m_protectiveLayer; } set { m_protectiveLayer = value; } }
 
-        public int? Thickness
+        public double? Thickness
         { get { return m_process.Thickness; } set { m_process.Thickness = value; } }
 
         public string Remark
@@ -98,7 +98,7 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public bool CanSave()
         {
-            if (m_process.ProtectiveLayer !=null && m_process.AdherentLayer != null && m_process.ProgramNumber !=-1)
+            if (m_process.ProgramNumber !=-1)
                 return true;
             else
                 return false;

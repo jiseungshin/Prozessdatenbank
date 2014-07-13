@@ -124,8 +124,8 @@ namespace PDCore.Manager
         {
             DataTable _reference = (_myCommunicator.getDataSet("SELECT * FROM " + DBProcessReferences.Table + " WHERE " + DBProcessReferences.RefNumber + "=" + ReferenceNumber).Tables[0]);
 
-            string ProjectName = (_myCommunicator.getDataSet("SELECT * FROM " + DBProjects.Table + " WHERE " + DBProjects.ID + "=" + _reference.Rows[0].Field<int>(DBProcessReferences.ProjectID)).Tables[0].Rows[0]).Field<string>(DBProjects.Name);
-            string IssueName = (_myCommunicator.getDataSet("SELECT * FROM " + DBIssues.Table + " WHERE " + DBIssues.ID + "=" + _reference.Rows[0].Field<int>(DBProcessReferences.IssueID)).Tables[0].Rows[0]).Field<string>(DBIssues.Description);
+            //string ProjectName = (_myCommunicator.getDataSet("SELECT * FROM " + DBProjects.Table + " WHERE " + DBProjects.ID + "=" + _reference.Rows[0].Field<int>(DBProcessReferences.ProjectID)).Tables[0].Rows[0]).Field<string>(DBProjects.Name);
+            //string IssueName = (_myCommunicator.getDataSet("SELECT * FROM " + DBIssues.Table + " WHERE " + DBIssues.ID + "=" + _reference.Rows[0].Field<int>(DBProcessReferences.IssueID)).Tables[0].Rows[0]).Field<string>(DBIssues.Description);
 
             Directory.CreateDirectory(StandardDir /*+ ProjectName + "\\" + IssueName + "\\"*/ + ReferenceNumber);
         }

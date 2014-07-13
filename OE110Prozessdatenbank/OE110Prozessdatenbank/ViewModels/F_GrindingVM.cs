@@ -115,8 +115,8 @@ namespace OE110Prozessdatenbank.ViewModels
             {
                 if (value != "")
                 {
-                    m_rawFilter = " AND " + DBWorkpieces .Table+ "." + DBWorkpieces.Label + " LIKE ('%" + value + "%')" +
-                              " OR " + DBMAterial.Table+ "." + DBMAterial.Name + " LIKE ('%" + value + "%')";
+                    m_rawFilter = " AND (" + DBWorkpieces .Table+ "." + DBWorkpieces.Label + " LIKE ('%" + value + "%')" +
+                              " OR " + DBMAterial.Table+ "." + DBMAterial.Name + " LIKE ('%" + value + "%'))";
                 }
                 else
                     m_rawFilter = value;

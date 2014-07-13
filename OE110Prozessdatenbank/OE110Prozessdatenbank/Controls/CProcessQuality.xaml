@@ -11,8 +11,9 @@
         <ComboBox Margin="326,43,0,0" VerticalAlignment="Top" SelectedIndex="{Binding OverallResult}" HorizontalAlignment="Left" Width="84">
             <ComboBoxItem Content="sehr gut"/>
             <ComboBoxItem Content="gut"/>
-            <ComboBoxItem Content="mäßig"/>
+            <ComboBoxItem Content="akzeptabel"/>
             <ComboBoxItem Content="schlecht"/>
+            <ComboBoxItem Content="sehr schlecht"/>
         </ComboBox>
 
         <Label Content="Gesamturteil" HorizontalAlignment="Left" Margin="244,39,0,0" VerticalAlignment="Top"/>

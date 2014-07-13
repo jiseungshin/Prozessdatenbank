@@ -1,11 +1,12 @@
 ﻿<Window x:Class="OE110Prozessdatenbank.Controls.ReferencePicker"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Vorgangsabfrage" Height="90" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/OE110Prozessdatenbank;component/Icons/magnifier_16xLG.png">
+        Title="Vorgangsabfrage" Height="105" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/OE110Prozessdatenbank;component/Icons/magnifier_16xLG.png">
     <Grid>
-        <ComboBox x:Name="cb_RefPicker" DataContext="{Binding References}" ItemsSource="{Binding Table}" DisplayMemberPath="ReferenceNumber" Margin="10,10,123,10" IsEditable="True" >
-        </ComboBox>
-        <Button Content="Suche" Click="bt_search_Click" Margin="176,10,10,10" IsDefault="True"/>
-
+        <ComboBox x:Name="cb_RefPicker" DataContext="{Binding References}" ItemsSource="{Binding Table}" DisplayMemberPath="ReferenceNumber" Margin="10,32,123,10" IsEditable="True"/>
+        <ComboBox x:Name="cb_WPPicker" DataContext="{Binding Label}" ItemsSource="{Binding Table}" DisplayMemberPath="Label" Margin="10,32,123,10" IsEditable="True"/>
+        <Button Content="Suche" Click="bt_search_Click" Margin="176,32,10,10" IsDefault="True"/>
+        <RadioButton x:Name="rb_reference" IsChecked="True" Content="Vorgangsnummer" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="rb_reference_Click"/>
+        <RadioButton x:Name="rb_workpiece" Content="Werkstück" HorizontalAlignment="Left" Margin="143,10,0,0" VerticalAlignment="Top" Click="rb_workpiece_Click"/>
     </Grid>
 </Window>

@@ -213,7 +213,7 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public bool CanSave()
         {
-            if (m_process.CoatingProcessID!=-1)
+            if (m_process.CoatingProcessID != -1 && m_process.UserID != -1 /* && m_process.Processnumber != -1*/)
                 return true;
             else
                 return false;

@@ -38,7 +38,7 @@ namespace OE110Prozessdatenbank.ViewModels
                 m_process = new PExpCemeCon();
                 m_process.ProjectID = ObjectManager.Instance.getProjectID(ID);
                 m_process.IssueID = ObjectManager.Instance.getIssueID(ID);
-                m_process.Workpieces.Add(ObjectManager.Instance.getWorkpieceByReference(ID));
+                m_process.Workpieces.Add(ObjectManager.Instance.getWorkpieceByReference(ID, null));
 
                 WorkpieceQualityControl = new Controls.CQuality(m_process.Workpieces[0]);
 
@@ -69,9 +69,9 @@ namespace OE110Prozessdatenbank.ViewModels
         {
             set
             {
-                int ID = value.Row.Field<int>(DBExpCemeCon.ID);
+                int PID = value.Row.Field<int>(DBExpCemeCon.ID);
 
-                PExpCemeCon _p = ProcessManager.Instance.getProcess(ID, 33) as PExpCemeCon;
+                PExpCemeCon _p = ProcessManager.Instance.getProcess(PID, 33) as PExpCemeCon;
 
                 m_process.Atmosphere = _p.Atmosphere;
                 m_process.Duration = _p.Duration;
@@ -218,7 +218,7 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public bool CanSave()
         {
-            if (m_process.UserID != -1 && m_process.ProjectID != -1 && m_process.IssueID != -1)
+            if (m_process.UserID != -1 && m_process.ProjectID != -1 && m_process.IssueID != -1 /*&& m_process.ProcessID!=null*/)
                 return true;
             else
                 return false;

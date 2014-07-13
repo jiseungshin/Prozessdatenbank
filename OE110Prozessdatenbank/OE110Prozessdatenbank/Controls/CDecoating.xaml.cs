@@ -29,5 +29,10 @@ namespace OE110Prozessdatenbank.Controls
         {
             this.Close();
         }
+
+        private void TextBox_PreviewDecimalTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Input.DecimalRegex.IsMatch((sender as TextBox).Text + e.Text);
+        }
     }
 }

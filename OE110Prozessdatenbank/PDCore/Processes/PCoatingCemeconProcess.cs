@@ -22,7 +22,7 @@ namespace PDCore.Processes
 
         public int AdherentLayerID { get; set; }
         public int ProtectiveLayerID { get; set; }
-        public int? Thickness { get; set; }
+        public double? Thickness { get; set; }
         public bool isDecoating { get; set; }
 
         public string Description { get { return "ID: " + ProgramNumber + " , HS: " + AdherentLayer.GetValueOrDefault().Structure + " , SS: " + ProtectiveLayer.GetValueOrDefault().Structure; } }

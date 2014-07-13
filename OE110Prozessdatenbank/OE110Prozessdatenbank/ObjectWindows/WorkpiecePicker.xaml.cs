@@ -24,17 +24,11 @@ namespace OE110Prozessdatenbank.ObjectWindows
     public partial class WorkpiecePicker : Window
     {
 
-        ViewModels.PExpMooreVM b_vm;
-        int m_wpLocation = 0;
-
-        public WorkpiecePicker(ViewModels.PExpMooreVM vm, int WPLocation)
+        Workpiece m_workpice = null;
+        public WorkpiecePicker(ObservableCollection<Workpiece> workpieces)
         {
             InitializeComponent();
-            b_vm = vm;
-            DataContext = new VMWorkpiecePicker(b_vm);
-            m_wpLocation = WPLocation;
-           
-
+            DataContext = new VMWorkpiecePicker(workpieces);
         }
 
 
@@ -42,46 +36,16 @@ namespace OE110Prozessdatenbank.ObjectWindows
         {
             if ((sender as ListView).SelectedIndex != -1)
             {
-                if (m_wpLocation==1)
-                {
-                    if (b_vm is ViewModels.PExpMooreVM)
-                    {
-                        (b_vm).UpperWP = b_vm.WorkpiecesUpper.Find(item => item.ID == ((sender as ListView).SelectedItem as Workpiece).ID);
-                    }
 
-                    //if (b_vm is ViewModels.PExpTestStationVM)
-                    //{
-                    //    (b_vm as ViewModels.PExpTestStationVM).LeftWorkpiece = ((sender as ListView).SelectedItem as Workpiece);
-                    //}
 
-                }
-
-                if (m_wpLocation == 2)
-                {
-                    //if (b_vm is ViewModels.PExpTestStationVM)
-                    //{
-                    //    (b_vm as ViewModels.PExpTestStationVM).CenterWorkpiece = ((sender as ListView).SelectedItem as Workpiece);
-                    //}
-
-                }
-
-                if (m_wpLocation == 3)
-                {
-                    if (b_vm is ViewModels.PExpMooreVM)
-                    {
-                        (b_vm).LowerWP = b_vm.WorkpiecesLower.Find(item => item.ID == ((sender as ListView).SelectedItem as Workpiece).ID);
-                    }
-
-                    //if (b_vm is ViewModels.PExpTestStationVM)
-                    //{
-                    //    (b_vm as ViewModels.PExpTestStationVM).RightWorkpiece = ((sender as ListView).SelectedItem as Workpiece);
-                    //}
-
-                }
-                
+                m_workpice = ((sender as ListView).SelectedItem as Workpiece);
+          
                 this.Close();
             }
         }
+
+        public Workpiece Workpice
+        { get { return m_workpice; } }
 
         private void bt_Add_Click(object sender, RoutedEventArgs e)
         {
@@ -97,12 +61,12 @@ namespace OE110Prozessdatenbank.ObjectWindows
     public class VMWorkpiecePicker : ViewModels.BaseViewModel
     {
         private string m_filter = "";
-        ViewModels.PExpMooreVM m_vm;
-        public VMWorkpiecePicker(ViewModels.PExpMooreVM vm)
+        ObservableCollection<Workpiece> m_workpieces;
+        public VMWorkpiecePicker(ObservableCollection<Workpiece> workpieces)
         {
             ObjectManager.Instance.update();
             ObjectManager.Instance.newObjects += Instance_newObjects;
-            m_vm = vm;
+            m_workpieces = workpieces;
 
         }
 
@@ -113,7 +77,7 @@ namespace OE110Prozessdatenbank.ObjectWindows
 
         //}
 
-        public List<Workpiece> Workpieces
+        public ObservableCollection<Workpiece> Workpieces
         {
             get
             {
@@ -121,9 +85,11 @@ namespace OE110Prozessdatenbank.ObjectWindows
                 //                                  item.Material.Name.ToLower().Contains(Filter.ToLower()) ||
                 //                                  item.Label.ToLower().Contains(Filter.ToLower())));
 
-                return m_vm.WorkpiecesUpper.FindAll(item => item.CurrentReferenceNumber.ToString().Contains(Filter) ||
+                return new ObservableCollection<PDCore.BusinessObjects.Workpiece>(m_workpieces.ToList().FindAll(item => item.CurrentReferenceNumber.ToString().Contains(Filter) ||
                                                   item.Material.Name.ToLower().Contains(Filter.ToLower()) ||
-                                                  item.Label.ToLower().Contains(Filter.ToLower()));
+                                                  item.Label.ToLower().Contains(Filter.ToLower()) ||
+                                                  item.Reference.Project.Description.ToLower().Contains(Filter.ToLower()) ||
+                                                  item.Reference.Issue.Description.ToLower().Contains(Filter.ToLower())));
                 
             }
         }

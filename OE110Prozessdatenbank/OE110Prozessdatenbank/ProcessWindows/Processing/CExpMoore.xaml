@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-              mc:Ignorable="d" Height="644.836" Width="931.896" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+              mc:Ignorable="d" Height="644.836" Width="931.896" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="window_loaded">
     <Grid Background="White">
         <Label Content="Datum" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Width="110"/>
         <Label Content="Anzahl Presszyklen *" HorizontalAlignment="Left" Margin="10,339,0,0" VerticalAlignment="Top" Width="192" FontWeight="Bold"/>
@@ -27,7 +27,7 @@
         <ComboBox x:Name="cb_user" ItemsSource="{Binding Users}" SelectedItem="{Binding User}" DisplayMemberPath="Description" Margin="198,62,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="255"/>
         <ComboBox x:Name="cb_project" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" Margin="198,89,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="255"/>
         <ComboBox x:Name="cb_Issue" ItemsSource="{Binding Issues}" SelectedItem="{Binding Issue}" DisplayMemberPath="Description" Margin="198,120,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="255"/>
-        <ComboBox x:Name="cb_upperWP" ItemsSource="{Binding WorkpiecesUpper, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding UpperWP, UpdateSourceTrigger=PropertyChanged}" Margin="198,161,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="250" SelectionChanged="cb_upperWP_SelectionChanged">
+        <!--<ComboBox x:Name="cb_upperWP" ItemsSource="{Binding WorkpiecesUpper, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding UpperWP, UpdateSourceTrigger=PropertyChanged}" Margin="198,161,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" SelectionChanged="cb_upperWP_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="170" Height="14" HorizontalAlignment="Stretch">
@@ -36,8 +36,8 @@
                     </Grid>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
-        </ComboBox>
-        <ComboBox x:Name="cb_lowerWP" ItemsSource="{Binding WorkpiecesLower}" SelectedItem="{Binding LowerWP}" Margin="198,192,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="250" SelectionChanged="cb_lowerWP_SelectionChanged">
+        </ComboBox>-->
+        <!--<ComboBox x:Name="cb_lowerWP" ItemsSource="{Binding WorkpiecesLower}" SelectedItem="{Binding LowerWP}" Margin="198,192,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" SelectionChanged="cb_lowerWP_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="170" Height="14" HorizontalAlignment="Stretch">
@@ -46,17 +46,17 @@
                     </Grid>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
-        </ComboBox>
+        </ComboBox>-->
         <ComboBox x:Name="cb_glass" ItemsSource="{Binding Glasses}" SelectedItem="{Binding Glass}" DisplayMemberPath="VisualName" Margin="198,223,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="255" SelectionChanged="cb_glass_SelectionChanged"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="198,250,0,0" TextWrapping="Wrap" Text="{Binding Force}" VerticalAlignment="Top" Width="255"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="198,281,0,0" TextWrapping="Wrap" Text="{Binding Tmin}" VerticalAlignment="Top" Width="255"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="198,312,0,0" TextWrapping="Wrap" Text="{Binding Tmax}" VerticalAlignment="Top" Width="255"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="198,343,0,0" TextWrapping="Wrap" Text="{Binding Cycles}" VerticalAlignment="Top" Width="255"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="198,374,0,0" TextWrapping="Wrap" Text="{Binding PressTime}" VerticalAlignment="Top" Width="255"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="198,250,0,0" TextWrapping="Wrap" Text="{Binding Force}" PreviewTextInput="TextBox_PreviewDecimalTextInput" VerticalAlignment="Top" Width="255"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="198,281,0,0" TextWrapping="Wrap" Text="{Binding Tmin}" PreviewTextInput="TextBox_PreviewDecimalTextInput" VerticalAlignment="Top" Width="255"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="198,312,0,0" TextWrapping="Wrap" Text="{Binding Tmax}" PreviewTextInput="TextBox_PreviewDecimalTextInput" VerticalAlignment="Top" Width="255"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="198,343,0,0" TextWrapping="Wrap" Text="{Binding Cycles}" PreviewTextInput="TextBox_PreviewDecimalTextInput" VerticalAlignment="Top" Width="255"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="198,374,0,0" TextWrapping="Wrap" Text="{Binding PressTime}" PreviewTextInput="TextBox_PreviewDecimalTextInput" VerticalAlignment="Top" Width="255"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="198,405,0,0" TextWrapping="Wrap" Text="{Binding Atmosphere}" VerticalAlignment="Top" Width="255"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="198,436,0,0" TextWrapping="Wrap" Text="{Binding ProgramTitle}" VerticalAlignment="Top" Width="255"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="198,467,0,0" TextWrapping="Wrap" Text="{Binding ROI}" VerticalAlignment="Top" Width="255"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="198,498,0,0" TextWrapping="Wrap" Text="{Binding TOut}" VerticalAlignment="Top" Width="255"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="198,498,0,0" TextWrapping="Wrap" Text="{Binding TOut}" PreviewTextInput="TextBox_PreviewDecimalTextInput" VerticalAlignment="Top" Width="255"/>
         <TextBox x:Name="tb_remark" Height="69" Margin="198,525,0,0" TextWrapping="Wrap" Text="{Binding Remark}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="255"/>
 
         <Button x:Name="bt_save" Content="speichern" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Command="{Binding SaveProcess}" IsEnabled="{Binding SaveProcess.CanSave}" Click="bt_save_Click"/>
@@ -68,8 +68,10 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
         </Grid>
-        <Button Content="Button" Click="bt_findUpper_Click" HorizontalAlignment="Left" Margin="453,161,0,0" VerticalAlignment="Top" Width="0"/>
-        <Button Content="Button" Click="bt_findLower_Click" HorizontalAlignment="Left" Margin="453,192,0,0" VerticalAlignment="Top" Width="0"/>
+        <Button x:Name="bt_findUpper" Content="auswählen" Click="bt_findUpper_Click" HorizontalAlignment="Left" Margin="383,164,0,0" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.5,0.5"/>
+        <Button x:Name="bt_findLower" Content="auswählen" Click="bt_findLower_Click" HorizontalAlignment="Left" Margin="383,192,0,0" VerticalAlignment="Top" Width="70"/>
+        <Label Content="{Binding UpperWP.Label, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="198,161,0,0" VerticalAlignment="Top" Height="auto" Width="auto"/>
+        <Label Content="{Binding LowerWP.Label, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="198,192,0,0" VerticalAlignment="Top" Height="auto" Width="auto"/>
 
     </Grid>
 </Window>

@@ -27,17 +27,25 @@
         </Grid.RowDefinitions>
         <Grid Margin="0,2,0,0" Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="600"/>
                 <ColumnDefinition Width="296*"/>
             </Grid.ColumnDefinitions>
             <Grid x:Name="g_raw">
-                <ListView Name="LD_Polished" Margin="10,36,10,10" DataContext="{Binding DataPolished, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Table}" SelectionMode="Single" MouseDoubleClick="LV_Raw_DoubvleClick">
+                <ListView Name="LD_Polished" Margin="10,67,10,10" DataContext="{Binding DataPolished, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Table}" SelectionMode="Single" MouseDoubleClick="LV_Raw_DoubvleClick">
                     <ListView.Resources>
                         <ContextMenu x:Key="PolishedContext">
                             <MenuItem Header="Beschichtung überspringen" Click="cmb_skip_Click">
                                 <MenuItem.Icon>
                                     <Image Source="/OE110Prozessdatenbank;component/Icons/StepOver_6328.png"
                                     Height="{Binding Path=ActualHeight, ElementName=StorageContextmenu}"
+                                    Width="{Binding Path=ActualHeight, ElementName=StorageContextmenu}" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator></Separator>
+                            <MenuItem Header="Vorgang abbrechen" Click="cmb_cancel_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="/OE110Prozessdatenbank;component/Icons/StatusAnnotations_Critical_16xLG_color.png"
+                                   Height="{Binding Path=ActualHeight, ElementName=StorageContextmenu}"
                                     Width="{Binding Path=ActualHeight, ElementName=StorageContextmenu}" />
                                 </MenuItem.Icon>
                             </MenuItem>
@@ -88,17 +96,20 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="V-Nr." DisplayMemberBinding="{Binding Path=ReferenceNumber}" Width="50"/>
-                            <GridViewColumn Header="Werkstück" DisplayMemberBinding="{Binding Path=Label}" Width="115"/>
-                            <GridViewColumn Header="Material" DisplayMemberBinding="{Binding Path=Name}" Width="115"/>
+                            <GridViewColumn Header="Werkstück" DisplayMemberBinding="{Binding Path=Label}" Width="100"/>
+                            <GridViewColumn Header="Material" DisplayMemberBinding="{Binding Path=Name}" Width="100"/>
+                            <GridViewColumn Header="Projekt" DisplayMemberBinding="{Binding Path=ProjectName}" Width="130"/>
+                            <GridViewColumn Header="Fragestellung" DisplayMemberBinding="{Binding Path=Description}" Width="150"/>
                         </GridView>
 
                     </ListView.View>
                 </ListView>
-                <TextBox x:Name="tb_raw" Height="23" Margin="59,5,10,0" TextWrapping="Wrap" Text="{Binding PolishedFilter, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
-                <Label Content="Suche:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="tb_raw" Height="23" Margin="59,39,334,0" TextWrapping="Wrap" Text="{Binding PolishedFilter, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
+                <Label Content="Suche:" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
+                <Label Content="Zu beschichtende Werkstücke" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" FontStyle="Italic" Foreground="#FF303030"/>
             </Grid>
             <Grid Grid.Column="1">
-                <ListView Name="LV_Coated" Margin="10,36,10,10" DataContext="{Binding DataCoated, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Table}" SelectionMode="Single" MouseDoubleClick="MaterialListView_MouseDoubleClick">
+                <ListView Name="LV_Coated" Margin="10,67,10,10" DataContext="{Binding DataCoated, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Table}" SelectionMode="Single" MouseDoubleClick="MaterialListView_MouseDoubleClick">
                     <ListView.Background>
                         <LinearGradientBrush>
                             <GradientStop  Offset="0" Color="#FFE8E8E8"/>
@@ -155,10 +166,11 @@
 
                     </ListView.View>
                 </ListView>
-                <TextBox x:Name="tb_polished" HorizontalAlignment="Left" Height="23" Margin="59,5,0,0" TextWrapping="Wrap" Text="{Binding CoatedFilter, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="220"/>
-                <ComboBox HorizontalAlignment="Left" Margin="284,5,0,0" ItemsSource="{Binding FilterCriteria}" SelectedItem="{Binding Criterium}" DisplayMemberPath="Name" VerticalAlignment="Top" Width="161" SelectedIndex="0">
+                <TextBox x:Name="tb_polished" HorizontalAlignment="Left" Height="23" Margin="59,40,0,0" TextWrapping="Wrap" Text="{Binding CoatedFilter, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="220"/>
+                <ComboBox HorizontalAlignment="Left" Margin="284,40,0,0" ItemsSource="{Binding FilterCriteria}" SelectedItem="{Binding Criterium}" DisplayMemberPath="Name" VerticalAlignment="Top" Width="161" SelectedIndex="0">
                 </ComboBox>
-                <Label Content="Suche:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
+                <Label Content="Suche:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
+                <Label Content="Beschichtetete Werkstücke (Historie)" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" FontStyle="Italic" Foreground="#FF303030"/>
             </Grid>
         </Grid>
         <Grid Background="#FFB4B4B4">

@@ -11,20 +11,20 @@
         <ComboBox x:Name="cb_WPLeft" Margin="179,164,0,0" ItemsSource="{Binding WorkpiecesLeft, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding LeftWorkpiece, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="253" SelectionChanged="cb_WPLeft_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="170" Height="14" HorizontalAlignment="Stretch">
-                        <TextBlock Text="{Binding CurrentReferenceNumber, Mode=OneWay}" HorizontalAlignment="Left"/>
-                        <TextBlock Text="{Binding Label, Mode=OneWay}" HorizontalAlignment="Right"/>
+                    <Grid Width="250" Height="16">
+                        <TextBlock Text="{Binding CurrentReferenceNumber, StringFormat=Vorgang: {0}, Mode=OneWay}" Margin="0,-1,0,0"/>
+                        <TextBlock Text="{Binding Label, StringFormat=Werkstück: {0}, Mode=OneWay}" Margin="100,-1,0,0"/>
                     </Grid>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Label Content="Werkstück links" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
+        <Label Content="Werkstück innen" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
         <ComboBox x:Name="cb_WPCenter" Margin="179,190,0,0" ItemsSource="{Binding WorkpiecesCenter, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding CenterWorkpiece, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="253" SelectionChanged="cb_WPCenter_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="170" Height="14" HorizontalAlignment="Stretch">
-                        <TextBlock Text="{Binding CurrentReferenceNumber, Mode=OneWay}" HorizontalAlignment="Left"/>
-                        <TextBlock Text="{Binding Label, Mode=OneWay}" HorizontalAlignment="Right"/>
+                    <Grid Width="250" Height="16">
+                        <TextBlock Text="{Binding CurrentReferenceNumber, StringFormat=Vorgang: {0}, Mode=OneWay}" Margin="0,-1,0,0"/>
+                        <TextBlock Text="{Binding Label, StringFormat=Werkstück: {0}, Mode=OneWay}" Margin="100,-1,0,0"/>
                     </Grid>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
@@ -33,24 +33,24 @@
         <ComboBox x:Name="cb_WPRight" Margin="179,217,0,0" ItemsSource="{Binding WorkpiecesRight, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding RightWorkpiece, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="253" SelectionChanged="cb_WPRight_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="170" Height="14" HorizontalAlignment="Stretch">
-                        <TextBlock Text="{Binding CurrentReferenceNumber, Mode=OneWay}" HorizontalAlignment="Left"/>
-                        <TextBlock Text="{Binding Label, Mode=OneWay}" HorizontalAlignment="Right"/>
+                    <Grid Width="250" Height="16">
+                        <TextBlock Text="{Binding CurrentReferenceNumber, StringFormat=Vorgang: {0}, Mode=OneWay}" Margin="0,-1,0,0"/>
+                        <TextBlock Text="{Binding Label, StringFormat=Werkstück: {0}, Mode=OneWay}" Margin="100,-1,0,0"/>
                     </Grid>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
         <ComboBox x:Name="cb_Glass" ItemsSource="{Binding Glasses}" SelectedItem="{Binding Glass}" DisplayMemberPath="VisualName" Margin="179,266,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="253" SelectionChanged="cb_Glass_SelectionChanged"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,293,0,0" TextWrapping="Wrap" Text="{Binding CellTemperature}" VerticalAlignment="Top" Width="253"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,324,0,0" TextWrapping="Wrap" Text="{Binding PressTemperature}" VerticalAlignment="Top" Width="253"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,355,0,0" TextWrapping="Wrap" Text="{Binding CoolingTemperature}" VerticalAlignment="Top" Width="253"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,293,0,0" TextWrapping="Wrap" Text="{Binding CellTemperature}" PreviewTextInput="TextBox_PreviewDecimalTextInput" VerticalAlignment="Top" Width="253"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,324,0,0" TextWrapping="Wrap" Text="{Binding PressTemperature}" PreviewTextInput="TextBox_PreviewDecimalTextInput" VerticalAlignment="Top" Width="253"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,355,0,0" TextWrapping="Wrap" Text="{Binding CoolingTemperature}" PreviewTextInput="TextBox_PreviewDecimalTextInput" VerticalAlignment="Top" Width="253"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="179,386,0,0" TextWrapping="Wrap" Text="{Binding MaxForce}" VerticalAlignment="Top" Width="253"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,417,0,0" TextWrapping="Wrap" Text="{Binding SecondForce}" VerticalAlignment="Top" Width="253"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,448,0,0" TextWrapping="Wrap" Text="{Binding PressFeed}" VerticalAlignment="Top" Width="253"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,417,0,0" TextWrapping="Wrap" Text="{Binding SecondForce}" PreviewTextInput="TextBox_PreviewDecimalTextInput" VerticalAlignment="Top" Width="253"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,448,0,0" TextWrapping="Wrap" Text="{Binding PressFeed}" PreviewTextInput="TextBox_PreviewDecimalTextInput" VerticalAlignment="Top" Width="253"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="179,479,0,0" TextWrapping="Wrap" Text="{Binding PenDepth}" VerticalAlignment="Top" Width="253"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,510,0,0" TextWrapping="Wrap" Text="{Binding Duration}" VerticalAlignment="Top" Width="253"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,510,0,0" TextWrapping="Wrap" Text="{Binding Duration}" PreviewTextInput="TextBox_PreviewDecimalTextInput" VerticalAlignment="Top" Width="253"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="179,541,0,0" TextWrapping="Wrap" Text="{Binding Atmosphere}" VerticalAlignment="Top" Width="253"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,572,0,0" TextWrapping="Wrap" Text="{Binding Cycles}" VerticalAlignment="Top" Width="253"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,572,0,0" TextWrapping="Wrap" Text="{Binding Cycles}" PreviewTextInput="TextBox_PreviewDecimalTextInput" VerticalAlignment="Top" Width="253"/>
         <TextBox x:Name="tb_remark" Height="69" Margin="179,608,0,0" TextWrapping="Wrap" Text="{Binding Remark}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="253"/>
 
         <Label Content="Bearbeiter *" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
@@ -67,7 +67,7 @@
         <Label Content="Pressdauer [s] *" HorizontalAlignment="Left" Margin="10,506,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
         <Label Content="Atmosphäre *" HorizontalAlignment="Left" Margin="10,537,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
         <Label Content="Anzahl Presszyklen *" HorizontalAlignment="Left" Margin="10,568,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
-        <Label Content="Werkstück rechts" HorizontalAlignment="Left" Margin="10,213,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
+        <Label Content="Werkstück außen" HorizontalAlignment="Left" Margin="10,213,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
 
         <Grid x:Name="g_quality" Height="455" Margin="445,63,10,0" VerticalAlignment="Top">
             <Grid.RowDefinitions>

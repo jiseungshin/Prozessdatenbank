@@ -22,6 +22,7 @@ namespace OE110Prozessdatenbank.ProcessWindows
     public partial class CExpMoore : Window
     {
         ViewModels.PExpMooreVM m_vm;
+        bool m_update = false;
         public CExpMoore()
         {
             InitializeComponent();
@@ -33,12 +34,14 @@ namespace OE110Prozessdatenbank.ProcessWindows
         public CExpMoore(int PID)
         {
             InitializeComponent();
+            m_update = true;
             m_vm = new ViewModels.PExpMooreVM(PID);
             DataContext = m_vm;
 
-            cb_upperWP.IsEnabled = false;
-            cb_lowerWP.IsEnabled = false;
+            bt_findLower.Visibility = System.Windows.Visibility.Hidden;
+            bt_findUpper.Visibility = System.Windows.Visibility.Hidden;
             cb_glass.IsEnabled = false;
+            
         }
 
         private void bt_cancel_Click(object sender, RoutedEventArgs e)
@@ -51,36 +54,17 @@ namespace OE110Prozessdatenbank.ProcessWindows
             Window.GetWindow(this).Close();
         }
 
-        private void cb_lowerWP_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            if (!m_set.Contains(1))
-            {
-                m_set.Add(1);
-            }
-            setQualityControls();
-            
-        }
-
-        private void cb_upperWP_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            if (!m_set.Contains(2))
-            {
-                m_set.Add(2);
-            }
-
-            setQualityControls();
-        }
-
         private void cb_glass_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!m_set.Contains(3))
+            if (!m_update)
             {
-                m_set.Add(3);
-            }
+                if (!m_set.Contains(3))
+                {
+                    m_set.Add(3);
+                }
 
-            setQualityControls();
+                setQualityControls();
+            }
         }
 
         private List<int> m_set = new List<int>();
@@ -111,22 +95,91 @@ namespace OE110Prozessdatenbank.ProcessWindows
             }
         }
 
+        ObjectWindows.WorkpiecePicker UpperWPPicker;
+        ObjectWindows.WorkpiecePicker LowerWPPicker;
         private void bt_findUpper_Click(object sender, RoutedEventArgs e)
         {
-            new ObjectWindows.WorkpiecePicker(m_vm,1).ShowDialog();
-            //m_vm.NotifyPropertyChanged("UpperWP");
-            //m_vm.NotifyPropertyChanged("WorkpiecesLower");
-            //m_vm.NotifyPropertyChanged("WorkpiecesUpper");
-            //m_vm.NotifyPropertyChanged("UpperWP");
+            UpperWPPicker = new ObjectWindows.WorkpiecePicker(m_vm.WorkpiecesUpper);
+            
+            UpperWPPicker.Closing += owp_Closing;
+            UpperWPPicker.Show();
+        }
+
+        void owp_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (UpperWPPicker.Workpice != null)
+            {
+                m_vm.UpperWP = UpperWPPicker.Workpice;
+                if (!m_set.Contains(2))
+                {
+                    m_set.Add(2);
+                }
+
+                setQualityControls();
+            }
         }
 
         private void bt_findLower_Click(object sender, RoutedEventArgs e)
         {
-            new ObjectWindows.WorkpiecePicker(m_vm, 3).ShowDialog();
-            //m_vm.NotifyPropertyChanged("LowerWP");
-            //m_vm.NotifyPropertyChanged("WorkpiecesUpper");
-            //m_vm.NotifyPropertyChanged("WorkpiecesLower");
-            //m_vm.NotifyPropertyChanged("LowerWP");
+            LowerWPPicker = new ObjectWindows.WorkpiecePicker(m_vm.WorkpiecesLower);
+            
+            LowerWPPicker.Closing += LowerWPPicker_Closing;
+            LowerWPPicker.Show();
+        }
+
+        void LowerWPPicker_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (LowerWPPicker.Workpice != null)
+            {
+                m_vm.LowerWP = LowerWPPicker.Workpice;
+                if (!m_set.Contains(1))
+                {
+                    m_set.Add(1);
+                }
+                setQualityControls();
+            }
+        }
+
+        private void window_loaded(object sender, RoutedEventArgs e)
+        {
+            if (m_update)
+            {
+                //lower
+                if (m_vm.LowerWP != null)
+                {
+                    if (!m_set.Contains(1))
+                    {
+                        m_set.Add(1);
+                    }
+                    setQualityControls();
+                }
+                //upper
+                if (m_vm.UpperWP != null)
+                {
+                    if (!m_set.Contains(2))
+                    {
+                        m_set.Add(2);
+                    }
+
+                    setQualityControls();
+                }
+                //glass
+                if (m_vm.Glass != null)
+                {
+                    if (!m_set.Contains(3))
+                    {
+                        m_set.Add(3);
+                    }
+
+                    setQualityControls();
+                }
+            }
+
+        }
+
+        private void TextBox_PreviewDecimalTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Input.DecimalRegex.IsMatch((sender as TextBox).Text + e.Text);
         }
 
        

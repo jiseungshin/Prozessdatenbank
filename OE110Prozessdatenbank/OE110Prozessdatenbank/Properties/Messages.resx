@@ -136,7 +136,7 @@
     <value>Der Vorgang kann nicht übersprungen werden, da dem diesem kein Projekt oder keine Fragestellung zugeordnet ist!</value>
   </data>
   <data name="q_skipWorkpieceCoating" xml:space="preserve">
-    <value>Soll das Werkstück  wirklich in den Prozesszustand 'Versuch durchgeführt' versetzt werden?</value>
+    <value>Soll das Werkstück  wirklich in den Prozesszustand 'Beschichtet' versetzt werden?</value>
   </data>
   <data name="q_skipWorkpieceGrinding" xml:space="preserve">
     <value>Soll das Werkstück  wirklich in den Prozesszustand 'Bearbeitet' versetzt werden?</value>
@@ -149,5 +149,14 @@
   </data>
   <data name="e_UnknownReference" xml:space="preserve">
     <value>Die eingegebene Vorgangsnummer ist nicht vorhanden!</value>
+  </data>
+  <data name="n_WorkpieceNotInUse" xml:space="preserve">
+    <value>Das Werkstück befindet sich aktuell nicht im Durchlauf!</value>
+  </data>
+  <data name="e_cannotCancelProcess" xml:space="preserve">
+    <value>Der Vorgang ist bereits beendet worden!</value>
+  </data>
+  <data name="q_skipWorkpieceProcessing" xml:space="preserve">
+    <value>Soll das Werkstück  wirklich in den Prozesszustand 'Versuch durchgeführt' versetzt werden?</value>
   </data>
 </root>

@@ -40,15 +40,18 @@ namespace OE110Prozessdatenbank.ViewModels
             ProcessQualityControl = new Controls.CProcessQuality(m_process);
             if (m_process.LeftWorkpieceID != null)
             {
-                LeftWorkpiece = ObjectManager.Instance.getWorkpiece(Convert.ToInt32(m_process.LeftWorkpieceID));
+                //LeftWorkpiece = ObjectManager.Instance.getWorkpiece(Convert.ToInt32(m_process.LeftWorkpieceID));
+                LeftWorkpiece = m_process.Workpieces.Find(item => item.ID == m_process.LeftWorkpieceID);
             }
             if (m_process.CenterWorkpieceID != null)
             {
-                CenterWorkpiece = ObjectManager.Instance.getWorkpiece(Convert.ToInt32(m_process.CenterWorkpieceID));
+                //CenterWorkpiece = ObjectManager.Instance.getWorkpiece(Convert.ToInt32(m_process.CenterWorkpieceID));
+                CenterWorkpiece = m_process.Workpieces.Find(item => item.ID == m_process.CenterWorkpieceID);
             }
             if (m_process.RightWorkpieceID != null)
             {
-                RightWorkpiece = ObjectManager.Instance.getWorkpiece(Convert.ToInt32(m_process.RightWorkpieceID));
+                //RightWorkpiece = ObjectManager.Instance.getWorkpiece(Convert.ToInt32(m_process.RightWorkpieceID));
+                RightWorkpiece = m_process.Workpieces.Find(item => item.ID == m_process.RightWorkpieceID);
             }
 
             m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == m_process.ProjectID));
@@ -307,20 +310,20 @@ namespace OE110Prozessdatenbank.ViewModels
                 ProcessManager.Instance.saveProcess(m_process, true);
             else
             {
-                if (LeftWorkpiece != null)
+                if (m_leftWP != null)
                 {
-                    m_process.Workpieces.Add(LeftWorkpiece);
-                    m_process.LeftWorkpieceID = LeftWorkpiece.ID;
+                    m_process.Workpieces.Add(m_leftWP);
+                    m_process.LeftWorkpieceID = m_leftWP.ID;
                 }
-                if (CenterWorkpiece != null)
+                if (m_centerWP != null)
                 {
-                    m_process.Workpieces.Add(CenterWorkpiece);
-                    m_process.CenterWorkpieceID = CenterWorkpiece.ID;
+                    m_process.Workpieces.Add(m_centerWP);
+                    m_process.CenterWorkpieceID = m_centerWP.ID;
                 }
-                if (RightWorkpiece != null)
+                if (m_rightWP != null)
                 {
-                    m_process.Workpieces.Add(RightWorkpiece);
-                    m_process.RightWorkpieceID = RightWorkpiece.ID;
+                    m_process.Workpieces.Add(m_rightWP);
+                    m_process.RightWorkpieceID = m_rightWP.ID;
                 }
                 ProcessManager.Instance.saveProcess(m_process, false);
             }
@@ -333,7 +336,7 @@ namespace OE110Prozessdatenbank.ViewModels
             if (m_process.UserID != -1 && m_process.ProjectID != -1 && m_process.IssueID != -1
                 && m_process.Celltemperature!= null && m_process.PressFedd != null && m_process.PressTemperature !=null
                 && m_process.Duration != null && m_process.CoolingTempretaure!=null && m_process.Atmosphere!= null
-                && m_process.Cycles != null && m_process.SecondForce != null && (LeftWorkpiece != null || RightWorkpiece != null || CenterWorkpiece != null))
+                && m_process.Cycles != null && m_process.SecondForce != null && (m_leftWP != null || m_rightWP != null || m_centerWP != null))
                 return true;
             else
                 return false;

@@ -37,9 +37,11 @@ namespace OE110Prozessdatenbank
             {
 
                 Exception ex = (Exception)e.ExceptionObject;
-                LogError(ex);
+                LogError(ex, Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\ErrorLog_" + DateTime.Now.ToShortDateString().Replace(".", "") + "" + DateTime.Now.ToLongTimeString().Replace(":", "") + ".txt");
+                LogError(ex, @"ErrorLog_" + DateTime.Now.ToShortDateString().Replace(".", "") + "" + DateTime.Now.ToLongTimeString().Replace(":", "") + ".txt");
 
-                MessageBox.Show("Entschuldigung, das hätte nicht passieren dürfen. Ein unerwarteter Fehler führte zum Absturz der Anwendung. Es wurde ein Fehlerbericht erstellt!\n\n" +
+                MessageBox.Show("Entschuldigung, das hätte nicht passieren dürfen. Ein unerwarteter Fehler führte zum Absturz der Anwendung. Es wurde ein Fehlerbericht erstellt und auf den Desktop kopiert."+
+                    " Bitte schicke diesen Bericht an\n\n'ndf-kh@ipt.rwth-aachen.de',\n\n damit der Fehler schnellstmöglich behoben werden kann!\n\n" +
                         "Fehler:\n" +
                         ex.Message,
                     "Fataler Fehler", MessageBoxButton.OK, MessageBoxImage.Stop);
@@ -50,12 +52,13 @@ namespace OE110Prozessdatenbank
             }
         }
 
-        private string LogError(Exception exception)
+        private string LogError(Exception exception, string path)
         {
             Assembly caller = Assembly.GetEntryAssembly();
             Process thisProcess = Process.GetCurrentProcess();
-            MessageBox.Show(DateTime.Now.ToLongTimeString());
-            using (StreamWriter sw = new StreamWriter(@"ErrorLog_"+DateTime.Now.ToShortDateString().Replace(".","")+""+DateTime.Now.ToLongTimeString().Replace(":","")+".txt"))
+            //MessageBox.Show(DateTime.Now.ToLongTimeString());
+            //string test = ;
+            using (StreamWriter sw = new StreamWriter(path))
             {
                 sw.WriteLine("==============================================================================");
                 sw.WriteLine(caller.FullName);

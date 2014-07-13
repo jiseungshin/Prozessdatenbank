@@ -83,14 +83,15 @@ namespace OE110Prozessdatenbank.ViewModels
                 PGrindingOther _p = ProcessManager.Instance.getProcess(ID, 14) as PGrindingOther;
 
                 m_process.Remark = _p.Remark;
-                m_process.UserID = _p.UserID;
+                //m_process.UserID = _p.UserID;
                 m_process.ProjectID = _p.ProjectID;
+                m_process.Date = _p.Date;
                 m_issues = new ObservableCollection<Issue>(ObjectManager.Instance.Issues.FindAll(item => item.ProjectID == _p.ProjectID));
                 NotifyPropertyChanged("Issues");
                 m_process.IssueID = _p.IssueID;
                 NotifyPropertyChanged("Issue");
 
-                NotifyPropertyChanged("UserID");
+                NotifyPropertyChanged("Date");
                 NotifyPropertyChanged("User");
                 NotifyPropertyChanged("Project");
 

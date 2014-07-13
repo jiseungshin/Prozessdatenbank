@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using PDCore.BusinessObjects;
 using PDCore.Manager;
 using OE110Prozessdatenbank.Commands;
+using System.Windows;
 using System.Collections.ObjectModel;
+using PDCore.Database;
 
 namespace OE110Prozessdatenbank.ViewModels
 {
@@ -17,6 +19,7 @@ namespace OE110Prozessdatenbank.ViewModels
         {
             m_history = ProcessManager.Instance.getWorkpieceHistory(ReferenceNumber);
             SaveReference = new RelayCommand(Save, CanSave);
+            CancelProcess = new RelayCommand(cancelProcess, canCancelProcess);
 
         }
 
@@ -40,8 +43,27 @@ namespace OE110Prozessdatenbank.ViewModels
 
 
         public RelayCommand SaveReference { get; set; }
+        public RelayCommand CancelProcess { get; set; }
 
         #region Command functions
+
+        public void cancelProcess()
+        {
+            if (MessageBox.Show(Properties.Messages.q_CancelReference, "Vorgang abbrechen", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                PDCore.Manager.ProcessManager.Instance.OverrideReferenceStatus(Workpiece, DBEnum.EnumReference.CANCELLED);
+            }
+        }
+
+        public bool canCancelProcess()
+        {
+            if (Status == DBEnum.EnumReference.CANCELLED || Status == DBEnum.EnumReference.TERMINATED)
+                return false;
+            else
+                return true;
+        
+        }
+
         public void Save()
         {
 

@@ -20,11 +20,13 @@ namespace OE110Prozessdatenbank.ObjectWindows
     public partial class HistoryViewer : Window
     {
         ViewModels.OReferenceVM m_vm;
+        int refID;
         public HistoryViewer(int RefID)
         {
             InitializeComponent();
             m_vm = new ViewModels.OReferenceVM(RefID);
             DataContext = m_vm;
+            refID = RefID;
         }
 
         private void LV_History_DoubleClick(object sender, MouseButtonEventArgs e)
@@ -69,6 +71,16 @@ namespace OE110Prozessdatenbank.ObjectWindows
                 }
 
             }
+        }
+
+        private void bt_cancelProcess_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

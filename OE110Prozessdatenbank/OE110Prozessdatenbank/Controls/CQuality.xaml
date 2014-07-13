@@ -7,14 +7,17 @@
     <Grid x:Name="g_content">
         <ComboBox Margin="128,57,0,0" VerticalAlignment="Top" SelectedIndex="{Binding MoldScratches}" HorizontalAlignment="Left" Width="84">
             <ComboBoxItem Content="keine"/>
+            <ComboBoxItem Content="minimal"/>
             <ComboBoxItem Content="wenig"/>
             <ComboBoxItem Content="viele"/>
+            <ComboBoxItem Content="sehr viele"/>
         </ComboBox>
         <ComboBox Margin="331,84,0,0" VerticalAlignment="Top" SelectedIndex="{Binding OverallResult}" HorizontalAlignment="Left" Width="84">
             <ComboBoxItem Content="sehr gut"/>
             <ComboBoxItem Content="gut"/>
-            <ComboBoxItem Content="mäßig"/>
+            <ComboBoxItem Content="akzeptabel"/>
             <ComboBoxItem Content="schlecht"/>
+            <ComboBoxItem Content="sehr schlecht"/>
         </ComboBox>
         <Label Content="Kratzer auf Mold" HorizontalAlignment="Left" Margin="0,57,0,0" VerticalAlignment="Top"/>
         <Label Content="Korrosion" HorizontalAlignment="Left" Margin="0,83,0,0" VerticalAlignment="Top"/>
@@ -22,13 +25,17 @@
         <Label Content="Gesamturteil" HorizontalAlignment="Left" Margin="239,84,0,0" VerticalAlignment="Top"/>
         <ComboBox Margin="128,84,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84" SelectedIndex="{Binding Corrosion}" >
             <ComboBoxItem Content="keine"/>
+            <ComboBoxItem Content="minimal"/>
             <ComboBoxItem Content="wenig"/>
-            <ComboBoxItem Content="viele"/>
+            <ComboBoxItem Content="viel"/>
+            <ComboBoxItem Content="sehr viel"/>
         </ComboBox>
         <ComboBox Margin="331,57,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84" SelectedIndex="{Binding GlassAdherence}" >
             <ComboBoxItem Content="keine"/>
+            <ComboBoxItem Content="minimal"/>
             <ComboBoxItem Content="wenig"/>
-            <ComboBoxItem Content="viele"/>
+            <ComboBoxItem Content="viel"/>
+            <ComboBoxItem Content="sehr viel"/>
         </ComboBox>
         <Label Content="Werkstück:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label Content="Vorgangsnummer:" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top"/>

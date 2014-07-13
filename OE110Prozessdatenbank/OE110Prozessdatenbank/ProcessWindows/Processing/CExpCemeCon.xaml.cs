@@ -42,6 +42,16 @@ namespace OE110Prozessdatenbank.ProcessWindows
             this.Close();
         }
 
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Input.IntegerRegex.IsMatch((sender as TextBox).Text + e.Text);
+        }
+
+        private void TextBox_PreviewDecimalTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Input.DecimalRegex.IsMatch((sender as TextBox).Text + e.Text);
+        }
+
         private void cb_glass_changed(object sender, SelectionChangedEventArgs e)
         {
             if (g_quality.Children.Count==2)
@@ -49,5 +59,6 @@ namespace OE110Prozessdatenbank.ProcessWindows
             g_quality.Children.Add(m_vm.ProcessQualityControl);
             Grid.SetRow(m_vm.ProcessQualityControl, 1);
         }
+
     }
 }

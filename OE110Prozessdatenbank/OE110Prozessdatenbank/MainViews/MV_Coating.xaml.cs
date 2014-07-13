@@ -67,26 +67,26 @@ namespace OE110Prozessdatenbank.MainViews
             if (LD_Polished.SelectedIndex != -1)
             {
 
-                int? projectID = (LD_Polished.SelectedItem as System.Data.DataRowView).Row.Field<int?>(DBProcessReferences.ProjectID);
-                int? IssueID = (LD_Polished.SelectedItem as System.Data.DataRowView).Row.Field<int?>(DBProcessReferences.IssueID);
+                //int? projectID = (LD_Polished.SelectedItem as System.Data.DataRowView).Row.Field<int?>(DBProcessReferences.ProjectID);
+                //int? IssueID = (LD_Polished.SelectedItem as System.Data.DataRowView).Row.Field<int?>(DBProcessReferences.IssueID);
 
-                if (projectID != null && IssueID != null)
-                {
+                //if (projectID != null && IssueID != null)
+                //{
                     
                     if (MessageBox.Show(Properties.Messages.q_skipWorkpieceCoating, "", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                     {
                         int RefNumber = Convert.ToInt32((LD_Polished.SelectedItem as System.Data.DataRowView)[DBProcessReferences.RefNumber]);
 
                         {
-                            PDCore.Manager.ProcessManager.Instance.skipProcess(RefNumber, DBEnum.EnumReference.PROCESSED);
+                            PDCore.Manager.ProcessManager.Instance.skipProcess(RefNumber, DBEnum.EnumReference.COATED);
                         }
                     }
-                }
+                //}
 
-                else
-                {
-                    MessageBox.Show(Properties.Messages.e_NoProjectNoIssue, "Hinweis", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                //else
+                //{
+                //    MessageBox.Show(Properties.Messages.e_NoProjectNoIssue, "Hinweis", MessageBoxButton.OK, MessageBoxImage.Error);
+                //}
             }
         }
 
@@ -147,6 +147,18 @@ namespace OE110Prozessdatenbank.MainViews
         }
 
         #endregion
+
+        private void cmb_cancel_Click(object sender, RoutedEventArgs e)
+        {
+            if (LD_Polished.SelectedIndex != -1)
+            {
+                if (MessageBox.Show(Properties.Messages.q_CancelReference, "Vorgang abbrechen", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    int ID = Convert.ToInt32(((LD_Polished).SelectedItem as DataRowView)[DBProcessReferences.RefNumber]);
+                    PDCore.Manager.ProcessManager.Instance.OverrideReferenceStatus(PDCore.Manager.ObjectManager.Instance.getWorkpieceByReference(ID), DBEnum.EnumReference.CANCELLED);
+                }
+            }
+        }
 
         
     }
