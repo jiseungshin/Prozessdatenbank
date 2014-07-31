@@ -203,7 +203,7 @@ namespace OE110Prozessdatenbank
                 case "PROF":
                     return "Profilometer";
                 case "PHOTO":
-                    return "im Fotodoku";
+                    return "Fotodoku";
                 default:
                     return value.ToString();
             }
