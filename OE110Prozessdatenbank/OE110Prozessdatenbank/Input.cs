@@ -11,7 +11,7 @@ namespace OE110Prozessdatenbank
     {
         private static Regex m_decimalRegex = new Regex(@"^[0-9]{1,6}([,][0-9]{0,10})?$");
         private static Regex m_integerRegex = new Regex(@"^[0-9]+$");
-        private static Regex m_characterRegex = new Regex(@"^[a-zA-Z0-9\-_+-,.:;/&=öäü]?$");
+        private static Regex m_characterRegex = new Regex(@"^[a-zA-Z0-9\-_+-,.:;/&=öäü]+$");
 
         public static Regex DecimalRegex
         { get { return m_decimalRegex; } }
