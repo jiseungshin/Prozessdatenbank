@@ -151,7 +151,7 @@ namespace OE110Prozessdatenbank.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Soll das Werkstück  wirklich in den Prozesszustand &apos;Versuch durchgeführt&apos; versetzt werden? ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Soll das Werkstück  wirklich in den Prozesszustand &apos;Beschichtet&apos; versetzt werden? ähnelt.
         /// </summary>
         internal static string q_skipWorkpieceCoating {
             get {
@@ -165,6 +165,15 @@ namespace OE110Prozessdatenbank.Properties {
         internal static string q_skipWorkpieceGrinding {
             get {
                 return ResourceManager.GetString("q_skipWorkpieceGrinding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Soll das Werkstück  wirklich in den Prozesszustand &apos;Versuch durchgeführt&apos; versetzt werden? ähnelt.
+        /// </summary>
+        internal static string q_skipWorkpieceProc1 {
+            get {
+                return ResourceManager.GetString("q_skipWorkpieceProc1", resourceCulture);
             }
         }
         

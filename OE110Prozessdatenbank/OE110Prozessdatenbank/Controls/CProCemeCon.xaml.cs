@@ -162,7 +162,7 @@ namespace OE110Prozessdatenbank.Controls
                 if (projectID != null && IssueID != null)
                 {
 
-                    if (MessageBox.Show(Properties.Messages.q_skipWorkpieceCoating, "", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    if (MessageBox.Show(Properties.Messages.q_skipWorkpieceProc1, "", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
                     int RefNumber = Convert.ToInt32((LV_Coated.SelectedItem as System.Data.DataRowView)[DBProcessReferences.RefNumber]);
 

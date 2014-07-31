@@ -156,7 +156,7 @@
   <data name="e_cannotCancelProcess" xml:space="preserve">
     <value>Der Vorgang ist bereits beendet worden!</value>
   </data>
-  <data name="q_skipWorkpieceProcessing" xml:space="preserve">
+  <data name="q_skipWorkpieceProc1" xml:space="preserve">
     <value>Soll das Werkstück  wirklich in den Prozesszustand 'Versuch durchgeführt' versetzt werden?</value>
   </data>
 </root>

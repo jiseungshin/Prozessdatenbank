@@ -206,6 +206,11 @@
     <Compile Include="ProcessWindows\ToshibaImportPreparation.xaml.cs">
       <DependentUpon>ToshibaImportPreparation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Messages1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\F_CoatingVM.cs" />
     <Compile Include="ViewModels\F_GrindingVM.cs" />
@@ -443,11 +448,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Messages.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Messages.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -455,6 +455,7 @@
     </Compile>
     <EmbeddedResource Include="Properties\Messages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
