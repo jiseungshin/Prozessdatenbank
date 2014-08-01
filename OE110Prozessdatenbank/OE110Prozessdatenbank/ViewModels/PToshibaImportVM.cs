@@ -19,6 +19,7 @@ namespace OE110Prozessdatenbank.ViewModels
         private User m_user;
         private string m_lensName = "";
         private Glass m_glass;
+        private int m_LensIndex = 1;
 
         private Project m_project;
         private Issue m_issue;
@@ -99,6 +100,9 @@ namespace OE110Prozessdatenbank.ViewModels
         
         public string LensName
         { get { return m_lensName; } set { m_lensName = value; } }
+
+        public int LensStartNumber
+        { get { return m_LensIndex; } set { m_LensIndex = value; } }
 
         public ObservableCollection<Project> Projects { get { return new ObservableCollection<PDCore.BusinessObjects.Project>(ObjectManager.Instance.Projects); } }
         public ObservableCollection<Issue> Issues { get { return m_issues; } }

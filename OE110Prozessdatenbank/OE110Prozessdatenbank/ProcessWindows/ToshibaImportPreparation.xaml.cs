@@ -43,7 +43,7 @@ namespace OE110Prozessdatenbank.ProcessWindows
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 Cursor = Cursors.Wait;
-                int id = 1;
+                int id = m_vm.LensStartNumber;
                 foreach (var path in _ofd.FileNames)
                 {
 
