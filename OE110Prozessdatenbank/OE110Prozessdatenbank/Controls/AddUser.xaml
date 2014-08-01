@@ -4,11 +4,11 @@
         Title="Benutzerformular" Height="207" Width="307" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="/OE110Prozessdatenbank;component/Icons/user_16xLG.png">
     <Grid>
         <Label Content="Vorname *" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="81" FontWeight="Bold"/>
-        <TextBox Height="23" Margin="96,13,10,0" TextWrapping="Wrap" Text="{Binding FirstName}" VerticalAlignment="Top"/>
+        <TextBox Height="23" Margin="96,13,10,0" TextWrapping="Wrap" Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
         <Label Content="Nachname *" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="81" FontWeight="Bold"/>
-        <TextBox Height="23" Margin="96,44,10,0" TextWrapping="Wrap" Text="{Binding LastName}" VerticalAlignment="Top"/>
+        <TextBox Height="23" Margin="96,44,10,0" TextWrapping="Wrap" Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
         <Label Content="Kürzel *" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="81" FontWeight="Bold"/>
-        <TextBox Height="23" Margin="96,75,10,0" TextWrapping="Wrap" Text="{Binding Token}" VerticalAlignment="Top"/>
+        <TextBox Height="23" Margin="96,75,10,0" TextWrapping="Wrap" Text="{Binding Token, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
         <CheckBox Content="Aktiv" HorizontalAlignment="Left" IsChecked="{Binding isActive}" Margin="96,103,0,0" VerticalAlignment="Top"/>
         <Button x:Name="bt_save" Content="speichern" Command="{Binding SaveUser}" IsEnabled="{Binding SaveUser.CanSave}" Margin="0,0,10,18" VerticalAlignment="Bottom" Click="bt_save_Click" HorizontalAlignment="Right" Width="84"/>
         <Button x:Name="bt_cancel" Content="abbrechen" Margin="0,0,99,18" VerticalAlignment="Bottom" Click="bt_cancel_Click" HorizontalAlignment="Right" Width="84"/>

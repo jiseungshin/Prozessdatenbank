@@ -161,6 +161,8 @@ namespace PDCore.Manager
                 Project _p = new Project() { ID = row.Field<int>(DBProjects.ID), Description = row.Field<string>(DBProjects.Name) };
                 _p.User = Users.Find(item => item.ID == row.Field<int>(DBProjects.UserID));
                 _p.Remark = row.Field<string>(DBProjects.Remark);
+                _p.Started = row.Field<DateTime>(DBProjects.Started);
+                _p.Finished = row.Field<DateTime?>(DBProjects.Finished);
 
                 DataSet _dsIssue = _myCommunicator.getDataSet("SELECT * FROM " + DBIssues.Table + " WHERE " + DBIssues.ProjectID + "=" + _p.ID);
 
