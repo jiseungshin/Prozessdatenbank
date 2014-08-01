@@ -29,9 +29,15 @@ namespace OE110Prozessdatenbank.ViewModels
 
             //Inint QualityControls
             if (m_process.UpperWorkpiece!=null)
+            {
                 WP_UpperControl = new Controls.CQuality(process.Workpieces.Find(item => item.ID == m_process.UpperWorkpiece));
+                
+            }
+
             if (m_process.LowerWorkpiece != null)
+            {
                 WP_LowerControl = new Controls.CQuality(process.Workpieces.Find(item => item.ID == m_process.LowerWorkpiece));
+            }
             PV_Control = new Controls.CPVControl(m_process);
             ProcessQualityControl = new Controls.CProcessQuality(m_process);
 
@@ -118,9 +124,14 @@ namespace OE110Prozessdatenbank.ViewModels
 
             //Inint QualityControls
             if (m_process.UpperWorkpiece != null)
-                WP_UpperControl = new Controls.CQuality(ObjectManager.Instance.Workpieces.Find(item => item.ID == m_process.UpperWorkpiece));
+            {
+                UpperWorkpiece = m_process.Workpieces.Find(item => item.ID == m_process.UpperWorkpiece);
+            }
             if (m_process.LowerWorkpiece != null)
-                WP_LowerControl = new Controls.CQuality(ObjectManager.Instance.Workpieces.Find(item => item.ID == m_process.LowerWorkpiece));
+            {
+                LowerWorkpiece = m_process.Workpieces.Find(item => item.ID == m_process.LowerWorkpiece);
+            }
+               
             PV_Control = new Controls.CPVControl(m_process);
             ProcessQualityControl = new Controls.CProcessQuality(m_process);
 
@@ -236,10 +247,21 @@ namespace OE110Prozessdatenbank.ViewModels
         }
 
         public Workpiece UpperWorkpiece
-        { get { return m_process.Workpieces.Find(item => item.ID == m_process.UpperWorkpiece); } }
+        {
+            get { return m_process.Workpieces.Find(item => item.ID == m_process.UpperWorkpiece); }
+            set
+            {
+                WP_UpperControl = new Controls.CQuality(value);
+            }
+        }
 
         public Workpiece LowerWorkpiece
-        { get { return m_process.Workpieces.Find(item => item.ID == m_process.LowerWorkpiece); } }
+        { get { return m_process.Workpieces.Find(item => item.ID == m_process.LowerWorkpiece); }
+            set
+            {
+                WP_LowerControl = new Controls.CQuality(value);
+            }
+        }
 
         public Controls.CQuality WP_UpperControl { get; set; }
         public Controls.CQuality WP_LowerControl { get; set; }
