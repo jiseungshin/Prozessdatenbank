@@ -57,6 +57,7 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Vorgang" DisplayMemberBinding="{Binding ReferenceNumber}" Width="60"/>
+                    <GridViewColumn Header="Werkstück" DisplayMemberBinding="{Binding Workpiece.Label}" Width="120"/>
                     <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status, Converter={StaticResource StatusConv}}" Width="170"/>
                     <GridViewColumn Header="Projekt" DisplayMemberBinding="{Binding Project.Description}" Width="200"/>
                     <GridViewColumn Header="Fragestellung/V.-Reihe" DisplayMemberBinding="{Binding Issue.Description}" Width="250"/>

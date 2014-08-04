@@ -90,7 +90,7 @@
                             <GridViewColumn Header="Werkstück" DisplayMemberBinding="{Binding Label}" Width="110"/>
                             <GridViewColumn Header="Material" DisplayMemberBinding="{Binding Name}" Width="110"/>
                             <GridViewColumn Header="Geometrie" DisplayMemberBinding="{Binding Geometry}" Width="95"/>
-                            <GridViewColumn Header="Erstelller" DisplayMemberBinding="{Binding Token}" Width="60"/>
+                            <!--<GridViewColumn Header="Erstelller" DisplayMemberBinding="{Binding Token}" Width="60"/>-->
                         </GridView>
 
                     </ListView.View>
