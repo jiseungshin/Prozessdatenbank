@@ -145,22 +145,22 @@ namespace PDCore.Database
         public static string Description { get { return "Glass_Name"; } }
         public static string Company { get { return "Company"; } }
 
-        public static string Softening_Point { get { return "Softening Point"; } }
-        public static string Annealing_Point { get { return "Annealing Point"; } }
-        public static string Strain_Point { get { return "Strain Point"; } }
-        public static string Transformation_Temperature { get { return "Transformation Temperature"; } }
-        public static string Yield_Point { get { return "Yield Point"; } }
-        public static string Wärmeausdehnungskoeffizient { get { return "Wärmeausdehnungskoeffizient"; } }
-        public static string Wärmeleitfähigkeit { get { return "Wärmeleitfähigkeit"; } }
-        public static string Weathering_Resistance { get { return "Weathering Resistance"; } }
-        public static string Acid_Resistance_SR { get { return "Acid Resistance SR"; } }
-        public static string Specific_Gravity { get { return "Specific Gravity"; } }
+        public static string Softening_Point { get { return "SofteningPoint"; } }
+        public static string Annealing_Point { get { return "AnnealingPoint"; } }
+        public static string Strain_Point { get { return "StrainPoint"; } }
+        public static string Transformation_Temperature { get { return "TransformationTemperature"; } }
+        public static string Yield_Point { get { return "YieldPoint"; } }
+        public static string Wärmeausdehnungskoeffizient { get { return "thermal_expansion_coefficient"; } }
+        public static string Wärmeleitfähigkeit { get { return "thermoconductivity"; } }
+        public static string Weathering_Resistance { get { return "WeatheringResistance"; } }
+        public static string Acid_Resistance_SR { get { return "Acid_Resistance_SR"; } }
+        public static string Specific_Gravity { get { return "SpecificGravity"; } }
         public static string Abrasion { get { return "Abrasion"; } }
-        public static string Water_Resistance { get { return "Water Resistance"; } }
-        public static string Acid_Resistance_RA(p) { get { return "Acid Resistance RA(p)"; } }
-        public static string Phospahte_Resistance { get { return "Phospahte Resistance"; } }
-        public static string Knoop_Hardness { get { return "Knoop Hardness"; } }
-        public static string Photoelastic_Constant { get { return "Photoelastic Constant"; } }
+        public static string Water_Resistance { get { return "WaterResistance"; } }
+        public static string Acid_Resistance { get { return "Acid_Resistance_RA"; } }
+        public static string Phospahte_Resistance { get { return "PhospahteResistance"; } }
+        public static string Knoop_Hardness { get { return "KnoopHardness"; } }
+        public static string Photoelastic_Constant { get { return "PhotoelasticConstant"; } }
         public static string Boroxid { get { return "Boroxid"; } }
         public static string Fluor { get { return "Fluor"; } }
         public static string Kaliumoxid { get { return "Kaliumoxid"; } }
@@ -180,20 +180,20 @@ namespace PDCore.Database
         public static string Titanoxid { get { return "Titanoxid"; } }
         public static string Tellurium { get { return "Tellurium"; } }
         public static string Calciumoxid { get { return "Calciumoxid"; } }
-        public static string Tungsten_Oxid { get { return "Tungsten Oxid"; } }
-        public static string Lanthanum_fluoride { get { return "Lanthanum fluoride"; } }
-        public static string Phosphorus_oxide { get { return "Phosphorus oxide"; } }
-        public static string Strontium_fluoride { get { return "Strontium fluoride"; } }
-        public static string Calcium_fluoride { get { return "Calcium fluoride"; } }
-        public static string Barium_fluoride { get { return "Barium fluoride"; } }
-        public static string Magnecium_fluoride { get { return "Magnecium fluoride"; } }
-        public static string Aluminium_fluoride { get { return "Aluminium fluoride"; } }
-        public static string Yttrium_fluoride { get { return "Yttrium fluoride"; } }
+        public static string Tungsten_Oxid { get { return "TungstenOxid"; } }
+        public static string Lanthanum_fluoride { get { return "Lanthanumfluoride"; } }
+        public static string Phosphorus_oxide { get { return "Phosphorusoxide"; } }
+        public static string Strontium_fluoride { get { return "Strontiumfluoride"; } }
+        public static string Calcium_fluoride { get { return "Calciumfluoride"; } }
+        public static string Barium_fluoride { get { return "Bariumfluoride"; } }
+        public static string Magnecium_fluoride { get { return "Magneciumfluoride"; } }
+        public static string Aluminium_fluoride { get { return "Aluminiumfluoride"; } }
+        public static string Yttrium_fluoride { get { return "Yttriumfluoride"; } }
         public static string Wismutoxid { get { return "Wismutoxid"; } }
         public static string Caesiumoxid { get { return "Caesiumoxid"; } }
         public static string Germaniumoxid { get { return "Germaniumoxid"; } }
         public static string Wolframtrioxid { get { return "Wolframtrioxid"; } }
-        public static string Molding_Temperature { get { return "Molding Temperature"; } }
+        public static string Molding_Temperature { get { return "MoldingTemperature"; } }
     }
     public static class DBUser
     {

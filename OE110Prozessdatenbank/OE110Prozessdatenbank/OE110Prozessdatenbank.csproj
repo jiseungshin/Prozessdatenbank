@@ -96,6 +96,9 @@
     <Compile Include="Controls\CAnalyses.xaml.cs">
       <DependentUpon>CAnalyses.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ObjectWindows\GlassStructureWindow.xaml.cs">
+      <DependentUpon>GlassStructureWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ObjectWindows\HistoryViewer.xaml.cs">
       <DependentUpon>HistoryViewer.xaml</DependentUpon>
     </Compile>
@@ -276,6 +279,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\CAnalyses.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ObjectWindows\GlassStructureWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

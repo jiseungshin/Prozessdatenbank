@@ -165,4 +165,7 @@
   <data name="q_editProject" xml:space="preserve">
     <value>Soll das Projekt wirklich geändert werden?</value>
   </data>
+  <data name="n_SaveGlassParameters" xml:space="preserve">
+    <value>Achtung! Die Änderungen werden erst durch klicken auf 'speichern' übernommen!</value>
+  </data>
 </root>

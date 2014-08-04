@@ -11,42 +11,27 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using OE110Prozessdatenbank.ViewModels;
 
 namespace OE110Prozessdatenbank.ObjectWindows
 {
     /// <summary>
-    /// Interaktionslogik für AddGlass.xaml
+    /// Interaktionslogik für GlassStructureWindow.xaml
     /// </summary>
-    public partial class AddGlass : Window
+    public partial class GlassStructureWindow : Window
     {
-        ViewModels.OGlassVM m_vm;
-        public AddGlass()
+        OGlassVM m_vm;
+        public GlassStructureWindow(OGlassVM vm)
         {
             InitializeComponent();
-            m_vm = new ViewModels.OGlassVM();
-            DataContext = m_vm;
-        }
-
-        public AddGlass(int GID)
-        {
-            InitializeComponent();
-            m_vm = new ViewModels.OGlassVM(GID);
+            m_vm = vm;
             DataContext = m_vm;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show(Properties.Messages.n_SaveGlassParameters, "Hinweis", MessageBoxButton.OK, MessageBoxImage.Warning);
             this.Close();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void bt_params_Click(object sender, RoutedEventArgs e)
-        {
-            new ObjectWindows.GlassStructureWindow(m_vm).ShowDialog();
         }
     }
 }

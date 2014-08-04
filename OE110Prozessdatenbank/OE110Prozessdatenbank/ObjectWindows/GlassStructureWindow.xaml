@@ -1,0 +1,111 @@
+﻿<Window x:Class="OE110Prozessdatenbank.ObjectWindows.GlassStructureWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:core="clr-namespace:OE110Prozessdatenbank"
+        Title="Glasparameter" Height="557.313" Width="776.209">
+    <Window.Resources>
+        <core:NullableConverter x:Key="nullConv"></core:NullableConverter>
+    </Window.Resources>
+    <Grid>
+        <Label Content="SofteningPoint" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="137,9,0,0" TextWrapping="Wrap" Text="{Binding Softening_Point, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Button Content="OK" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Click="Button_Click"/>
+        <Label Content="AnnealingPoint" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="137,37,0,0" TextWrapping="Wrap" Text="{Binding Annealing_Point, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="StrainPoint" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="137,65,0,0" TextWrapping="Wrap" Text="{Binding Strain_Point, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Trans.-Temperature" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="137,93,0,0" TextWrapping="Wrap" Text="{Binding Transformation_Temperature, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="YieldPoint" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="137,121,0,0" TextWrapping="Wrap" Text="{Binding Yield_Point, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Thermal Exp-Coeff." HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="137,149,0,0" TextWrapping="Wrap" Text="{Binding Wärmeausdehnungskoeffizient, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Thermoconductivity" HorizontalAlignment="Left" Margin="10,174,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="137,177,0,0" TextWrapping="Wrap" Text="{Binding Wärmeleitfähigkeit, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="WeatheringResistance" HorizontalAlignment="Left" Margin="10,202,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="137,205,0,0" TextWrapping="Wrap" Text="{Binding Weathering_Resistance, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Acid_Resistance_SR" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="137,233,0,0" TextWrapping="Wrap" Text="{Binding Acid_Resistance_SR, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="SpecificGravity" HorizontalAlignment="Left" Margin="10,258,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="137,261,0,0" TextWrapping="Wrap" Text="{Binding Specific_Gravity, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Abrasion" HorizontalAlignment="Left" Margin="10,286,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="137,289,0,0" TextWrapping="Wrap" Text="{Binding Abrasion, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="WaterResistance" HorizontalAlignment="Left" Margin="10,314,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="137,317,0,0" TextWrapping="Wrap" Text="{Binding Water_Resistance, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Acid_Resistance_RA" HorizontalAlignment="Left" Margin="10,342,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="137,345,0,0" TextWrapping="Wrap" Text="{Binding Acid_Resistance_RA, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="PhospahteResistance" HorizontalAlignment="Left" Margin="10,370,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="137,373,0,0" TextWrapping="Wrap" Text="{Binding Phospahte_Resistance, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="KnoopHardness" HorizontalAlignment="Left" Margin="10,398,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="137,401,0,0" TextWrapping="Wrap" Text="{Binding Knoop_Hardness, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="PhotoelasticConstant" HorizontalAlignment="Left" Margin="10,426,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="137,429,0,0" TextWrapping="Wrap" Text="{Binding Photoelastic_Constant, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Boroxid" HorizontalAlignment="Left" Margin="10,454,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="137,457,0,0" TextWrapping="Wrap" Text="{Binding Boroxid, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Fluor" HorizontalAlignment="Left" Margin="255,7,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="382,10,0,0" TextWrapping="Wrap" Text="{Binding Fluor, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Kaliumoxid" HorizontalAlignment="Left" Margin="255,35,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="382,38,0,0" TextWrapping="Wrap" Text="{Binding Kaliumoxid, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Antimonoxid" HorizontalAlignment="Left" Margin="255,63,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="382,66,0,0" TextWrapping="Wrap" Text="{Binding Antimonoxid, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Siliziumdioxid" HorizontalAlignment="Left" Margin="255,91,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="382,94,0,0" TextWrapping="Wrap" Text="{Binding Siliziumdioxid, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Lanthanoxid" HorizontalAlignment="Left" Margin="255,119,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="382,122,0,0" TextWrapping="Wrap" Text="{Binding Lanthanoxid, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Zinkoxid" HorizontalAlignment="Left" Margin="255,147,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="382,150,0,0" TextWrapping="Wrap" Text="{Binding Zinkoxid, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Tantaloxid" HorizontalAlignment="Left" Margin="255,175,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="382,178,0,0" TextWrapping="Wrap" Text="{Binding Tantaloxid, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Niobpentoxid" HorizontalAlignment="Left" Margin="255,203,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="382,206,0,0" TextWrapping="Wrap" Text="{Binding Niobpentoxid, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Zirkonoxid" HorizontalAlignment="Left" Margin="255,231,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="382,234,0,0" TextWrapping="Wrap" Text="{Binding Zirkonoxid, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Yttriumoxid" HorizontalAlignment="Left" Margin="255,259,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="382,262,0,0" TextWrapping="Wrap" Text="{Binding Yttriumoxid, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Lithiumoxid" HorizontalAlignment="Left" Margin="255,287,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="382,290,0,0" TextWrapping="Wrap" Text="{Binding Lithiumoxid, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Aluminiumoxid" HorizontalAlignment="Left" Margin="255,315,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="382,318,0,0" TextWrapping="Wrap" Text="{Binding Aluminiumoxid, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Bariumoxid" HorizontalAlignment="Left" Margin="255,343,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="382,346,0,0" TextWrapping="Wrap" Text="{Binding Bariumoxid, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Natriumoxid" HorizontalAlignment="Left" Margin="255,371,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="382,374,0,0" TextWrapping="Wrap" Text="{Binding Natriumoxid, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Strontiumoxid" HorizontalAlignment="Left" Margin="255,399,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="382,402,0,0" TextWrapping="Wrap" Text="{Binding Strontiumoxid, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Titanoxid" HorizontalAlignment="Left" Margin="255,427,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="382,430,0,0" TextWrapping="Wrap" Text="{Binding Titanoxid, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Tellurium" HorizontalAlignment="Left" Margin="255,455,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="382,458,0,0" TextWrapping="Wrap" Text="{Binding Tellurium, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Calciumoxid" HorizontalAlignment="Left" Margin="515,6,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="642,9,0,0" TextWrapping="Wrap" Text="{Binding Calciumoxid, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="TungstenOxid" HorizontalAlignment="Left" Margin="515,36,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="642,39,0,0" TextWrapping="Wrap" Text="{Binding Tungsten_Oxid, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Lanthanumfluoride" HorizontalAlignment="Left" Margin="515,64,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="642,67,0,0" TextWrapping="Wrap" Text="{Binding Lanthanum_fluoride, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Phosphorusoxide" HorizontalAlignment="Left" Margin="515,92,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="642,95,0,0" TextWrapping="Wrap" Text="{Binding Phosphorus_oxide, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Strontiumfluoride" HorizontalAlignment="Left" Margin="515,120,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="642,123,0,0" TextWrapping="Wrap" Text="{Binding Strontium_fluoride, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Calciumfluoride" HorizontalAlignment="Left" Margin="515,147,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="642,150,0,0" TextWrapping="Wrap" Text="{Binding Calcium_fluoride, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Bariumfluoride" HorizontalAlignment="Left" Margin="515,176,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="642,179,0,0" TextWrapping="Wrap" Text="{Binding Barium_fluoride, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Magneciumfluoride" HorizontalAlignment="Left" Margin="515,204,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="642,207,0,0" TextWrapping="Wrap" Text="{Binding Magnecium_fluoride, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Aluminiumfluoride" HorizontalAlignment="Left" Margin="515,232,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="642,235,0,0" TextWrapping="Wrap" Text="{Binding Aluminium_fluoride, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Yttriumfluoride" HorizontalAlignment="Left" Margin="515,260,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="642,263,0,0" TextWrapping="Wrap" Text="{Binding Yttrium_fluoride, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Wismutoxid" HorizontalAlignment="Left" Margin="515,288,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="642,291,0,0" TextWrapping="Wrap" Text="{Binding Wismutoxid, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Caesiumoxid" HorizontalAlignment="Left" Margin="515,316,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="642,319,0,0" TextWrapping="Wrap" Text="{Binding Caesiumoxid, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Germaniumoxid" HorizontalAlignment="Left" Margin="515,344,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="642,347,0,0" TextWrapping="Wrap" Text="{Binding Germaniumoxid, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Wolframtrioxid" HorizontalAlignment="Left" Margin="515,372,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="642,375,0,0" TextWrapping="Wrap" Text="{Binding Wolframtrioxid, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+        <Label Content="MoldingTemperature" HorizontalAlignment="Left" Margin="515,400,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="642,403,0,0" TextWrapping="Wrap" Text="{Binding Molding_Temperature, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource nullConv}}" VerticalAlignment="Top" Width="85"/>
+
+    </Grid>
+</Window>

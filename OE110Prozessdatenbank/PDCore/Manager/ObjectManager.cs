@@ -713,23 +713,243 @@ namespace PDCore.Manager
 
             if (update)
             {
-                _queries.Add("Update " + DBGlasses.Table + " Set " + DBGlasses.Description + " = " + glass.Name.ToDBObject() + " WHERE " + DBGlasses.ID + "=" + glass.ID);
-                _queries.Add("Update " + DBGlasses.Table + " Set " + DBGlasses.Company + " = " + glass.Comapany.ToDBObject() + " WHERE " + DBGlasses.ID + "=" + glass.ID);
+                #region update
+                List<MySQLCommunicator.ColumnValuePair> values = new List<MySQLCommunicator.ColumnValuePair>();
 
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Description, Value = glass.Name });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Company, Value = glass.Comapany });
+
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Abrasion, Value = glass.Abrasion });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Acid_Resistance, Value = glass.Acid_Resistance_RA });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Acid_Resistance_SR, Value = glass.Acid_Resistance_SR });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Aluminium_fluoride, Value = glass.Aluminium_fluoride });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Aluminiumoxid, Value = glass.Aluminiumoxid });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Annealing_Point, Value = glass.Annealing_Point });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Antimonoxid, Value = glass.Antimonoxid });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Barium_fluoride, Value = glass.Barium_fluoride });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Bariumoxid, Value = glass.Bariumoxid });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Boroxid, Value = glass.Boroxid });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Caesiumoxid, Value = glass.Caesiumoxid });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Calcium_fluoride, Value = glass.Calcium_fluoride });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Calciumoxid, Value = glass.Calciumoxid });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Fluor, Value = glass.Fluor });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Germaniumoxid, Value = glass.Germaniumoxid });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Kaliumoxid, Value = glass.Kaliumoxid });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Knoop_Hardness, Value = glass.Knoop_Hardness });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Lanthanoxid, Value = glass.Lanthanoxid });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Lanthanum_fluoride, Value = glass.Lanthanum_fluoride });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Lithiumoxid, Value = glass.Lithiumoxid });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Magnecium_fluoride, Value = glass.Magnecium_fluoride });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Molding_Temperature, Value = glass.Molding_Temperature });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Natriumoxid, Value = glass.Natriumoxid });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Niobpentoxid, Value = glass.Niobpentoxid });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Phospahte_Resistance, Value = glass.Phospahte_Resistance });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Phosphorus_oxide, Value = glass.Phosphorus_oxide });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Photoelastic_Constant, Value = glass.Photoelastic_Constant });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Siliziumdioxid, Value = glass.Siliziumdioxid });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Softening_Point, Value = glass.Softening_Point });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Specific_Gravity, Value = glass.Specific_Gravity });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Strain_Point, Value = glass.Strain_Point });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Strontium_fluoride, Value = glass.Strontium_fluoride });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Strontiumoxid, Value = glass.Strontiumoxid });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Tantaloxid, Value = glass.Tantaloxid });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Tellurium, Value = glass.Tellurium });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Titanoxid, Value = glass.Titanoxid });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Transformation_Temperature, Value = glass.Transformation_Temperature });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Tungsten_Oxid, Value = glass.Tungsten_Oxid });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Wärmeausdehnungskoeffizient, Value = glass.Wärmeausdehnungskoeffizient });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Wärmeleitfähigkeit, Value = glass.Wärmeleitfähigkeit });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Water_Resistance, Value = glass.Water_Resistance });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Weathering_Resistance, Value = glass.Weathering_Resistance });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Wismutoxid, Value = glass.Wismutoxid });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Wolframtrioxid, Value = glass.Wolframtrioxid });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Yield_Point, Value = glass.Yield_Point });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Yttrium_fluoride, Value = glass.Yttrium_fluoride });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Yttriumoxid, Value = glass.Yttriumoxid });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Zinkoxid, Value = glass.Zinkoxid });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.Zirkonoxid, Value = glass.Zirkonoxid });
+
+                _queries.Add(MySQLCommunicator.BuildUpdateQuery(DBGlasses.Table, values, new MySQLCommunicator.ColumnValuePair() { Culumn = DBGlasses.ID, Value = glass.ID }));
+                #endregion
             }
             else
             {
+                #region save
                 _queries.Add("INSERT INTO " + DBGlasses.Table + " (" + DBGlasses.Description + "," +
-                                                                                     DBGlasses.Company + ") Values (" +
+                                                                       DBGlasses.Company + 
+                                                                       DBGlasses.Abrasion+
+                                                                       DBGlasses.Acid_Resistance+
+                                                                       DBGlasses.Acid_Resistance_SR+
+                                                                       DBGlasses.Aluminium_fluoride+
+                                                                       DBGlasses.Aluminiumoxid+
+                                                                       DBGlasses.Annealing_Point+
+                                                                       DBGlasses.Antimonoxid+
+                                                                       DBGlasses.Barium_fluoride+
+                                                                       DBGlasses.Bariumoxid+
+                                                                       DBGlasses.Boroxid+
+                                                                       DBGlasses.Caesiumoxid+
+                                                                       DBGlasses.Calcium_fluoride+
+                                                                       DBGlasses.Calciumoxid+
+                                                                       DBGlasses.Fluor+
+                                                                       DBGlasses.Germaniumoxid+
+                                                                       DBGlasses.Kaliumoxid+
+                                                                       DBGlasses.Knoop_Hardness+
+                                                                       DBGlasses.Lanthanoxid+
+                                                                       DBGlasses.Lanthanum_fluoride+
+                                                                       DBGlasses.Lithiumoxid+
+                                                                       DBGlasses.Magnecium_fluoride+
+                                                                       DBGlasses.Molding_Temperature+
+                                                                       DBGlasses.Natriumoxid+
+                                                                       DBGlasses.Niobpentoxid+
+                                                                       DBGlasses.Phospahte_Resistance+
+                                                                       DBGlasses.Phosphorus_oxide+
+                                                                       DBGlasses.Photoelastic_Constant+
+                                                                       DBGlasses.Siliziumdioxid+
+                                                                       DBGlasses.Softening_Point+
+                                                                       DBGlasses.Specific_Gravity+
+                                                                       DBGlasses.Strain_Point+
+                                                                       DBGlasses.Strontium_fluoride+
+                                                                       DBGlasses.Strontiumoxid+
+                                                                       DBGlasses.Tantaloxid+
+                                                                       DBGlasses.Tellurium+
+                                                                       DBGlasses.Titanoxid+
+                                                                       DBGlasses.Transformation_Temperature+
+                                                                       DBGlasses.Tungsten_Oxid+
+                                                                       DBGlasses.Wärmeausdehnungskoeffizient+
+                                                                       DBGlasses.Wärmeleitfähigkeit+
+                                                                       DBGlasses.Water_Resistance+
+                                                                       DBGlasses.Weathering_Resistance+
+                                                                       DBGlasses.Wismutoxid+
+                                                                       DBGlasses.Wolframtrioxid+
+                                                                       DBGlasses.Yield_Point+
+                                                                       DBGlasses.Yttrium_fluoride+
+                                                                       DBGlasses.Yttriumoxid+
+                                                                       DBGlasses.Zinkoxid+
+                                                                       DBGlasses.Zirkonoxid+ ") Values (" +
                                                                             glass.Name.ToDBObject() + "," +
-                                                                             glass.Comapany.ToDBObject() + ")");
+                                                                            glass.Comapany.ToDBObject() + 
+                                                                            glass.Abrasion.ToDBObject()+
+                                                                            glass.Acid_Resistance_RA.ToDBObject() +
+                                                                            glass.Acid_Resistance_SR.ToDBObject() +
+                                                                            glass.Aluminium_fluoride.ToDBObject() +
+                                                                            glass.Aluminiumoxid.ToDBObject() +
+                                                                            glass.Annealing_Point.ToDBObject() +
+                                                                            glass.Antimonoxid.ToDBObject() +
+                                                                            glass.Barium_fluoride.ToDBObject() +
+                                                                            glass.Bariumoxid.ToDBObject() +
+                                                                            glass.Boroxid.ToDBObject() +
+                                                                            glass.Caesiumoxid.ToDBObject() +
+                                                                            glass.Calcium_fluoride.ToDBObject() +
+                                                                            glass.Calciumoxid.ToDBObject() +
+                                                                            glass.Fluor.ToDBObject() +
+                                                                            glass.Germaniumoxid.ToDBObject() +
+                                                                            glass.Kaliumoxid.ToDBObject() +
+                                                                            glass.Knoop_Hardness.ToDBObject() +
+                                                                            glass.Lanthanoxid.ToDBObject() +
+                                                                            glass.Lanthanum_fluoride.ToDBObject() +
+                                                                            glass.Lithiumoxid.ToDBObject() +
+                                                                            glass.Magnecium_fluoride.ToDBObject() +
+                                                                            glass.Molding_Temperature.ToDBObject() +
+                                                                            glass.Natriumoxid.ToDBObject() +
+                                                                            glass.Niobpentoxid.ToDBObject() +
+                                                                            glass.Phospahte_Resistance.ToDBObject() +
+                                                                            glass.Phosphorus_oxide.ToDBObject() +
+                                                                            glass.Photoelastic_Constant.ToDBObject() +
+                                                                            glass.Siliziumdioxid.ToDBObject() +
+                                                                            glass.Softening_Point.ToDBObject() +
+                                                                            glass.Specific_Gravity.ToDBObject() +
+                                                                            glass.Strain_Point.ToDBObject() +
+                                                                            glass.Strontium_fluoride.ToDBObject() +
+                                                                            glass.Strontiumoxid.ToDBObject() + glass.Abrasion.ToDBObject() +
+                                                                            glass.Tantaloxid.ToDBObject() +
+                                                                            glass.Tellurium.ToDBObject() +
+                                                                            glass.Titanoxid.ToDBObject() +
+                                                                            glass.Transformation_Temperature.ToDBObject() +
+                                                                            glass.Tungsten_Oxid.ToDBObject() +
+                                                                            glass.Wärmeausdehnungskoeffizient.ToDBObject() +
+                                                                            glass.Wärmeleitfähigkeit.ToDBObject() +
+                                                                            glass.Water_Resistance.ToDBObject() +
+                                                                            glass.Weathering_Resistance.ToDBObject() +
+                                                                            glass.Wismutoxid.ToDBObject() +
+                                                                            glass.Wolframtrioxid.ToDBObject() +
+                                                                            glass.Yield_Point.ToDBObject() +
+                                                                            glass.Yttrium_fluoride.ToDBObject() +
+                                                                            glass.Yttriumoxid.ToDBObject() +
+                                                                            glass.Zinkoxid.ToDBObject() +
+                                                                            glass.Zirkonoxid.ToDBObject() +")");
 
 
-
+                #endregion
 
             }
 
             _myCommunicator.executeTransactedQueries(_queries);
+        }
+
+        public Glass getGlass(int ID)
+
+        {
+            DataRow dr = _myCommunicator.getDataSet("SELECT * FROM " + DBGlasses.Table + " WHERE " + DBGlasses.ID+"="+ID).Tables[0].Rows[0];
+
+            Glass m_glass = new Glass()
+            {
+                ID = dr.Field<int>(DBGlasses.ID),
+                Name = dr.Field<string>(DBGlasses.Description),
+                Comapany = dr.Field<string>(DBGlasses.Company),
+
+                Abrasion = dr.Field<double?>(DBGlasses.Abrasion),
+                Acid_Resistance_RA = dr.Field<double?>(DBGlasses.Acid_Resistance),
+                Acid_Resistance_SR = dr.Field<double?>(DBGlasses.Acid_Resistance_SR),
+                Aluminium_fluoride = dr.Field<double?>(DBGlasses.Aluminium_fluoride),
+                Aluminiumoxid = dr.Field<double?>(DBGlasses.Aluminiumoxid),
+                Annealing_Point = dr.Field<double?>(DBGlasses.Annealing_Point),
+                Antimonoxid = dr.Field<double?>(DBGlasses.Antimonoxid),
+                Barium_fluoride = dr.Field<double?>(DBGlasses.Barium_fluoride),
+                Bariumoxid = dr.Field<double?>(DBGlasses.Bariumoxid),
+                Boroxid = dr.Field<double?>(DBGlasses.Boroxid),
+                Caesiumoxid = dr.Field<double?>(DBGlasses.Caesiumoxid),
+                Calcium_fluoride = dr.Field<double?>(DBGlasses.Calcium_fluoride),
+                Calciumoxid = dr.Field<double?>(DBGlasses.Calciumoxid),
+                Fluor = dr.Field<double?>(DBGlasses.Fluor),
+                Germaniumoxid = dr.Field<double?>(DBGlasses.Germaniumoxid),
+                Kaliumoxid = dr.Field<double?>(DBGlasses.Kaliumoxid),
+                Knoop_Hardness = dr.Field<double?>(DBGlasses.Knoop_Hardness),
+                Lanthanoxid = dr.Field<double?>(DBGlasses.Lanthanoxid),
+                Lanthanum_fluoride = dr.Field<double?>(DBGlasses.Lanthanum_fluoride),
+                Lithiumoxid = dr.Field<double?>(DBGlasses.Lithiumoxid),
+                Magnecium_fluoride = dr.Field<double?>(DBGlasses.Magnecium_fluoride),
+                Molding_Temperature = dr.Field<double?>(DBGlasses.Molding_Temperature),
+                Natriumoxid = dr.Field<double?>(DBGlasses.Natriumoxid),
+                Niobpentoxid = dr.Field<double?>(DBGlasses.Niobpentoxid),
+                Phospahte_Resistance = dr.Field<double?>(DBGlasses.Phospahte_Resistance),
+                Phosphorus_oxide = dr.Field<double?>(DBGlasses.Phosphorus_oxide),
+                Photoelastic_Constant = dr.Field<double?>(DBGlasses.Photoelastic_Constant),
+                Siliziumdioxid = dr.Field<double?>(DBGlasses.Siliziumdioxid),
+                Softening_Point = dr.Field<double?>(DBGlasses.Softening_Point),
+                Specific_Gravity = dr.Field<double?>(DBGlasses.Specific_Gravity),
+                Strain_Point = dr.Field<double?>(DBGlasses.Strain_Point),
+                Strontium_fluoride = dr.Field<double?>(DBGlasses.Strontium_fluoride),
+                Strontiumoxid = dr.Field<double?>(DBGlasses.Strontiumoxid),
+                Tantaloxid = dr.Field<double?>(DBGlasses.Tantaloxid),
+                Tellurium = dr.Field<double?>(DBGlasses.Tellurium),
+                Titanoxid = dr.Field<double?>(DBGlasses.Titanoxid),
+                Transformation_Temperature = dr.Field<double?>(DBGlasses.Transformation_Temperature),
+                Tungsten_Oxid = dr.Field<double?>(DBGlasses.Tungsten_Oxid),
+                Wärmeausdehnungskoeffizient = dr.Field<double?>(DBGlasses.Wärmeausdehnungskoeffizient),
+                Wärmeleitfähigkeit = dr.Field<double?>(DBGlasses.Wärmeleitfähigkeit),
+                Water_Resistance = dr.Field<double?>(DBGlasses.Water_Resistance),
+                Weathering_Resistance = dr.Field<double?>(DBGlasses.Weathering_Resistance),
+                Wismutoxid = dr.Field<double?>(DBGlasses.Wismutoxid),
+                Wolframtrioxid = dr.Field<double?>(DBGlasses.Wolframtrioxid),
+                Yield_Point = dr.Field<double?>(DBGlasses.Yield_Point),
+                Yttrium_fluoride = dr.Field<double?>(DBGlasses.Yttrium_fluoride),
+                Yttriumoxid = dr.Field<double?>(DBGlasses.Yttriumoxid),
+                Zinkoxid = dr.Field<double?>(DBGlasses.Zinkoxid),
+                Zirkonoxid = dr.Field<double?>(DBGlasses.Zirkonoxid)
+            };
+
+            return m_glass;
+
         }
 
         public User getUser(int UID)

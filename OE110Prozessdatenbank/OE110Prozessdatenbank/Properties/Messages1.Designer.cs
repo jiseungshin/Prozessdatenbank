@@ -106,6 +106,15 @@ namespace OE110Prozessdatenbank.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Achtung! Die Änderungen werden erst durch klicken auf &apos;speichern&apos; übernommen! ähnelt.
+        /// </summary>
+        internal static string n_SaveGlassParameters {
+            get {
+                return ResourceManager.GetString("n_SaveGlassParameters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Das Werkstück befindet sich aktuell nicht im Durchlauf! ähnelt.
         /// </summary>
         internal static string n_WorkpieceNotInUse {
