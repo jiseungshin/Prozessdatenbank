@@ -31,6 +31,7 @@ namespace PDCore.BusinessObjects
         public BusinessObjects.WorkpieceQuality Quality { get; set; }
         public string Status { get; set; }
         public bool isActive { get; set; }
+        public int? InitiatorID { get; set; }
 
         public Workpiece clone()
         {

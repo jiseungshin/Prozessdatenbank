@@ -108,6 +108,9 @@
     <Compile Include="ObjectWindows\IssuePicker.xaml.cs">
       <DependentUpon>IssuePicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ObjectWindows\ProjectHistory.xaml.cs">
+      <DependentUpon>ProjectHistory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ObjectWindows\ProjectPicker.xaml.cs">
       <DependentUpon>ProjectPicker.xaml</DependentUpon>
     </Compile>
@@ -242,6 +245,7 @@
     <Compile Include="ViewModels\PGrindingMooreVM.cs" />
     <Compile Include="ViewModels\PGrindingOtherVM.cs" />
     <Compile Include="ViewModels\PGrindingPhoenixVMcs.cs" />
+    <Compile Include="ViewModels\ProjectHistoryVM.cs" />
     <Compile Include="ViewModels\PToshibaImportVM.cs" />
     <Compile Include="ViewModels\PToshibaVM.cs" />
     <Compile Include="ViewModels\PTurningMooreVM.cs" />
@@ -297,6 +301,10 @@
     <Page Include="ObjectWindows\IssuePicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ObjectWindows\ProjectHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ObjectWindows\ProjectPicker.xaml">
       <Generator>MSBuild:Compile</Generator>

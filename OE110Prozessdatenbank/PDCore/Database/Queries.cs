@@ -9,7 +9,8 @@ namespace PDCore.Database
         {
             get
             {
-                return "SELECT * FROM Workpieces " +
+                return "SELECT * FROM " + DBWorkpieces.Table +
+                          " LEFT JOIN User ON Workpieces.Initiator_ID = User.User_ID " +
                           "INNER JOIN Materials ON Workpieces.Material_ID = Materials.Material_ID " +
                           "WHERE Workpieces.Status='raw' AND Workpieces.isActive=1";
             }

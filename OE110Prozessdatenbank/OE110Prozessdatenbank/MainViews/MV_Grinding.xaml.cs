@@ -167,7 +167,7 @@ namespace OE110Prozessdatenbank.MainViews
                 if (MessageBox.Show(Properties.Messages.q_skipWorkpieceGrinding,"",MessageBoxButton.YesNo,MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
                     int ID = Convert.ToInt32((LV_Raw.SelectedItem as DataRowView)[DBWorkpieces.ID]);
-                    PDCore.Manager.ProcessManager.Instance.skipInitialProcess(ID);
+                    PDCore.Manager.ProcessManager.Instance.skipInitialProcess(PDCore.Manager.ObjectManager.Instance.getWorkpiece(ID));
                 }
             }
 

@@ -105,7 +105,11 @@ namespace OE110Prozessdatenbank.ViewModels
             if (m_update)
                 ObjectManager.Instance.saveWorkpiece(m_workpiece, true);
             else
+            {
+                if (UserManager.CurrentUser!=null)
+                    m_workpiece.InitiatorID = UserManager.CurrentUser.ID;
                 ObjectManager.Instance.saveWorkpiece(m_workpiece, false, Status);
+            }
 
             Updater.Instance.forceUpdate();
         }

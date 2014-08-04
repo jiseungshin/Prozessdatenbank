@@ -194,6 +194,21 @@ namespace PDCore.Manager
             return m_list;
         }
 
+        public List<WorkpieceHistory> getReferences(int ProjectID)
+        {
+            DataSet _ds = _myCommunicator.getDataSet("SELECT * from " + DBProcessReferences.Table +
+                                                            " where " + DBProcessReferences.ProjectID + "=" + ProjectID);
+
+
+            List<WorkpieceHistory> m_list = new List<WorkpieceHistory>();
+            foreach(DataRow dr in _ds.Tables[0].Rows)
+            {
+                m_list.Add(getWorkpieceHistory(dr.Field<int>(DBProcessReferences.RefNumber)));
+            }
+            
+            return m_list;
+        }
+
         public DataSet getData(string query)
         {
             return _myCommunicator.getDataSet(query);
@@ -1669,8 +1684,8 @@ namespace PDCore.Manager
 
                     _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.Status + " = 'raw' WHERE " + DBWorkpieces.ID + "=" + wp.ID);
                     _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.Status + " = 'terminated' WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentReferenceNumber);
-                    _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.ProjectID + " = " + process.ProjectID.ToDBObject() + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentReferenceNumber);
-                    _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.IssueID + " = " + process.IssueID.ToDBObject() + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentReferenceNumber);
+                    _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.ProjectID.ToDBObject() + " = " + process.ProjectID.ToDBObject() + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentReferenceNumber);
+                    _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.IssueID.ToDBObject() + " = " + process.IssueID.ToDBObject() + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentReferenceNumber);
                 }
 
 
@@ -1889,7 +1904,7 @@ namespace PDCore.Manager
 
                 m_history.Status = _dt.Rows[0].Field<string>(DBProcessReferences.Status);
                 m_history.Project = ObjectManager.Instance.Projects.Find(item => item.ID == _dt.Rows[0].Field<int?>(DBProcessReferences.ProjectID));
-                m_history.Issue = ObjectManager.Instance.Issues.Find(item => item.ID == _dt.Rows[0].Field<int?>(DBProcessReferences.IssueID));
+                m_history.Issue = ObjectManager.Instance.Issues.Find(item => item.ID == _dt.Rows[0].Field<int?>(DBProcessReferences.IssueID))?? new Issue();
                 m_history.Workpiece = ObjectManager.Instance.getWorkpieceByReference(ReferenceNumber);  //ObjectManager.Instance.Workpieces.Find(item => item.ID == _dt.Rows[0].Field<int>(DBProcessReferences.WorkpiceID));
                 m_history.Conclusion = _dt.Rows[0].Field<string>(DBIssues.Conclusion);
 
@@ -2011,18 +2026,24 @@ namespace PDCore.Manager
         /// </summary>
         /// <param name="WorkpieceID"></param>
         /// <returns>The created reference number</returns>
-        public int skipInitialProcess(int WorkpieceID)
+        public int skipInitialProcess(Workpiece workpiece)
         {
             List<string> _queries = new List<string>();
             
             int _ref = getNextRefNumber();
 
             _queries.Add("INSERT INTO " + DBProcessReferences.Table + " (" + DBProcessReferences.RefNumber + "," + DBProcessReferences.WorkpiceID + "," + DBProcessReferences.ProjectID + "," + DBProcessReferences.IssueID + "," + DBProcessReferences.Status +
-                            ") VALUES (" + _ref + ", " + WorkpieceID + ", NULL, NULL, " + DBEnum.EnumReference.POLISHED.ToDBObject() + ")");
+                            ") VALUES (" + _ref + ", " + workpiece.ID + ", NULL, NULL, " + DBEnum.EnumReference.POLISHED.ToDBObject() + ")");
 
             _queries.Add("INSERT INTO " + DBWorkpieceQuality.Table + " (" + DBProcessReferences.RefNumber + ") VALUES (" + _ref + ")");
 
-            _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.Status + " = 'INPROCESS' WHERE " + DBWorkpieces.ID + "=" + WorkpieceID);
+            _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.Status + " = 'INPROCESS' WHERE " + DBWorkpieces.ID + "=" + workpiece.ID);
+
+            //check if workpice is oneway
+            if (workpiece.isOneWay)
+            {
+                _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.Label + " = "+ (workpiece.Label+_ref).ToDBObject() +" WHERE " + DBWorkpieces.ID + "=" + workpiece.ID);
+            }
 
             bool success =_myCommunicator.executeTransactedQueries(_queries);
 

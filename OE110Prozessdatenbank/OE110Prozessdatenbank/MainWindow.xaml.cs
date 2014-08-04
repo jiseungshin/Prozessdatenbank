@@ -415,8 +415,12 @@ namespace OE110Prozessdatenbank
         {
             if (e.Key == Key.F && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
-                //Close Application
                 new Controls.ReferencePicker().ShowDialog();
+            }
+
+            if (e.Key == Key.P && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                new ObjectWindows.ProjectHistory().ShowDialog();
             }
         }
 

@@ -82,6 +82,7 @@ namespace PDCore.Database
     {
         public static string Table { get { return "Workpieces"; } }
         public static string ID { get { return "Workpiece_ID"; } }
+        public static string Initiator_ID { get { return "Initiator_ID"; } }
         public static string Status { get { return "Status"; } }
         public static string Label { get { return "Label"; } }
         public static string MaterialID { get { return "Material_ID"; } }

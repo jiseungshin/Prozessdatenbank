@@ -125,9 +125,8 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public bool canSkip()
         {
-            if (m_history.Status != DBEnum.EnumReference.CANCELLED || 
-                m_history.Status != DBEnum.EnumReference.TERMINATED ||
-                m_history.Status != DBEnum.EnumReference.PROCESSED)
+            if (m_history.Status == DBEnum.EnumReference.POLISHED ||
+                m_history.Status == DBEnum.EnumReference.COATED)
                 return true;
             else
                 return false;

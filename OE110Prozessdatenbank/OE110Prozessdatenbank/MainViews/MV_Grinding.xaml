@@ -27,10 +27,10 @@
         </Grid.RowDefinitions>
         <Grid Margin="0,2,0,0" Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="350"/>
-                <ColumnDefinition Width="296*"/>
+                <ColumnDefinition Width="443"/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Grid x:Name="g_raw">
+            <Grid x:Name="g_raw" Margin="0,0,10,0">
                 <ListView Name="LV_Raw" Margin="10,67,10,10" DataContext="{Binding DataRaw, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Table}" SelectionMode="Single" MouseDoubleClick="LV_Raw_DoubvleClick">
                     <ListView.Resources>
                         <ContextMenu x:Key="RawContext">
@@ -90,6 +90,7 @@
                             <GridViewColumn Header="Werkstück" DisplayMemberBinding="{Binding Label}" Width="110"/>
                             <GridViewColumn Header="Material" DisplayMemberBinding="{Binding Name}" Width="110"/>
                             <GridViewColumn Header="Geometrie" DisplayMemberBinding="{Binding Geometry}" Width="95"/>
+                            <GridViewColumn Header="Erstelller" DisplayMemberBinding="{Binding Token}" Width="60"/>
                         </GridView>
 
                     </ListView.View>
@@ -98,7 +99,7 @@
                 <Label Content="Suche:" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
                 <Label Content="Unbearbeitete Werkstücke" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" FontStyle="Italic" Foreground="#FF303030"/>
             </Grid>
-            <Grid Grid.Column="1">
+            <Grid Grid.Column="1" Margin="10,0,0,0">
                 <ListView Name="LV_Polished" Margin="10,67,10,10" DataContext="{Binding DataPolished, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Table}" SelectionMode="Single" MouseDoubleClick="MaterialListView_MouseDoubleClick">
                     <ListView.Background>
                         <LinearGradientBrush>

@@ -254,6 +254,11 @@ namespace PDCore.Manager
             Material mm;
             DataSet _ds = _myCommunicator.getDataSet("SELECT * FROM " + DBWorkpieces.Table +
 
+                                                        //join user
+                                                        " LEFT JOIN " + DBUser.Table +
+                                                        " On " + DBUser.Table + "." + DBUser.ID +
+                                                        "=" + DBWorkpieces.Table + "." + DBWorkpieces.Initiator_ID +
+                                                        
                                                         //join materials
                                                         " LEFT JOIN " + DBMAterial.Table +
                                                         " On " + DBMAterial.Table + "." + DBMAterial.ID +
@@ -273,7 +278,8 @@ namespace PDCore.Manager
                     isOneWay = row.Field<bool>(DBWorkpieces.isOneWay),
                     KindOfProbe = row.Field<string>(DBWorkpieces.KindOfProbe),
                     Status = row.Field<string>(DBWorkpieces.Status),
-                    isActive = row.Field<bool>(DBWorkpieces.isActive)
+                    isActive = row.Field<bool>(DBWorkpieces.isActive),
+                    InitiatorID = row.Field<int?>(DBWorkpieces.Initiator_ID)
                 });
             }
         }
@@ -447,6 +453,7 @@ namespace PDCore.Manager
             else
             {
                 _queries.Add("INSERT INTO " + DBWorkpieces.Table + " (" + DBWorkpieces.Label + "," +
+                                                                           DBWorkpieces.Initiator_ID + "," +
                                                                            DBWorkpieces.BatchNumber + "," +
                                                                            DBWorkpieces.Geometry + "," +
                                                                            DBWorkpieces.isOneWay + "," +
@@ -456,6 +463,7 @@ namespace PDCore.Manager
                                                                            DBWorkpieces.isActive + "," +
                                                                                      DBWorkpieces.Status + ") Values (" +
                                                                             wp.Label.ToDBObject() + "," +
+                                                                            wp.InitiatorID.ToDBObject() + "," +
                                                                             wp.BatchNumber.ToDBObject() + "," +
                                                                             wp.Geometry.ToDBObject() + "," +
                                                                             wp.isOneWay.ToDBObject() + "," +
@@ -473,12 +481,12 @@ namespace PDCore.Manager
                     switch(status)
                     {
                         case 1:
-                            reference = ProcessManager.Instance.skipInitialProcess(WPID);
+                            reference = ProcessManager.Instance.skipInitialProcess(wp);
                             if (reference != -1)
                                 FileManager.Instance.createReferenceDirectory(reference);
                             break;
                         case 2:
-                            reference = ProcessManager.Instance.skipInitialProcess(WPID);
+                            reference = ProcessManager.Instance.skipInitialProcess(wp);
                             if (reference != -1)
                             {
                                 FileManager.Instance.createReferenceDirectory(reference);
