@@ -144,6 +144,56 @@ namespace PDCore.Database
         public static string ID { get { return "Glass_ID"; } }
         public static string Description { get { return "Glass_Name"; } }
         public static string Company { get { return "Company"; } }
+
+        public static string Softening_Point { get { return "Softening Point"; } }
+        public static string Annealing_Point { get { return "Annealing Point"; } }
+        public static string Strain_Point { get { return "Strain Point"; } }
+        public static string Transformation_Temperature { get { return "Transformation Temperature"; } }
+        public static string Yield_Point { get { return "Yield Point"; } }
+        public static string Wärmeausdehnungskoeffizient { get { return "Wärmeausdehnungskoeffizient"; } }
+        public static string Wärmeleitfähigkeit { get { return "Wärmeleitfähigkeit"; } }
+        public static string Weathering_Resistance { get { return "Weathering Resistance"; } }
+        public static string Acid_Resistance_SR { get { return "Acid Resistance SR"; } }
+        public static string Specific_Gravity { get { return "Specific Gravity"; } }
+        public static string Abrasion { get { return "Abrasion"; } }
+        public static string Water_Resistance { get { return "Water Resistance"; } }
+        public static string Acid_Resistance_RA(p) { get { return "Acid Resistance RA(p)"; } }
+        public static string Phospahte_Resistance { get { return "Phospahte Resistance"; } }
+        public static string Knoop_Hardness { get { return "Knoop Hardness"; } }
+        public static string Photoelastic_Constant { get { return "Photoelastic Constant"; } }
+        public static string Boroxid { get { return "Boroxid"; } }
+        public static string Fluor { get { return "Fluor"; } }
+        public static string Kaliumoxid { get { return "Kaliumoxid"; } }
+        public static string Antimonoxid { get { return "Antimonoxid"; } }
+        public static string Siliziumdioxid { get { return "Siliziumdioxid"; } }
+        public static string Lanthanoxid { get { return "Lanthanoxid"; } }
+        public static string Zinkoxid { get { return "Zinkoxid"; } }
+        public static string Tantaloxid { get { return "Tantaloxid"; } }
+        public static string Niobpentoxid { get { return "Niobpentoxid"; } }
+        public static string Zirkonoxid { get { return "Zirkonoxid"; } }
+        public static string Yttriumoxid { get { return "Yttriumoxid"; } }
+        public static string Lithiumoxid { get { return "Lithiumoxid"; } }
+        public static string Aluminiumoxid { get { return "Aluminiumoxid"; } }
+        public static string Bariumoxid { get { return "Bariumoxid"; } }
+        public static string Natriumoxid { get { return "Natriumoxid"; } }
+        public static string Strontiumoxid { get { return "Strontiumoxid"; } }
+        public static string Titanoxid { get { return "Titanoxid"; } }
+        public static string Tellurium { get { return "Tellurium"; } }
+        public static string Calciumoxid { get { return "Calciumoxid"; } }
+        public static string Tungsten_Oxid { get { return "Tungsten Oxid"; } }
+        public static string Lanthanum_fluoride { get { return "Lanthanum fluoride"; } }
+        public static string Phosphorus_oxide { get { return "Phosphorus oxide"; } }
+        public static string Strontium_fluoride { get { return "Strontium fluoride"; } }
+        public static string Calcium_fluoride { get { return "Calcium fluoride"; } }
+        public static string Barium_fluoride { get { return "Barium fluoride"; } }
+        public static string Magnecium_fluoride { get { return "Magnecium fluoride"; } }
+        public static string Aluminium_fluoride { get { return "Aluminium fluoride"; } }
+        public static string Yttrium_fluoride { get { return "Yttrium fluoride"; } }
+        public static string Wismutoxid { get { return "Wismutoxid"; } }
+        public static string Caesiumoxid { get { return "Caesiumoxid"; } }
+        public static string Germaniumoxid { get { return "Germaniumoxid"; } }
+        public static string Wolframtrioxid { get { return "Wolframtrioxid"; } }
+        public static string Molding_Temperature { get { return "Molding Temperature"; } }
     }
     public static class DBUser
     {
