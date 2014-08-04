@@ -71,11 +71,31 @@
             </ListView.Resources>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding ReferenceNumber}" Header="V-Nr." Width="50"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Label}" Header="Werkstück" Width="90"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Material" Width="90"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding ProjectName}" Header="Projekt" Width="100"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Fragestellung" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding ReferenceNumber}" Width="50">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="ProcessReferences.ReferenceNumber" Click="ListView_Header_Click">V-Nr.</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Label}" Width="90">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Workpieces.Label" Click="ListView_Header_Click">Werkstück</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="90">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Materials.Name" Click="ListView_Header_Click">Material</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding ProjectName}" Width="100">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Projects.ProjectName" Click="ListView_Header_Click">Projekt</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Description}" Width="150">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Issues.Description" Click="ListView_Header_Click">Fragestellung</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
                     <GridViewColumn Header="analysiert" Width="70">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -103,7 +123,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Status" Width="130">
+                    <GridViewColumn Width="130">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="ProcessReferences.Status" Click="ListView_Header_Click">Status</GridViewColumnHeader>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Width="120" HorizontalAlignment="Center">
@@ -179,8 +202,9 @@
             </ToolBarTray>
 
         </Grid>
-        <CheckBox Content="Versuch durchgeführt" IsChecked="{Binding Processed}" Margin="0,10,10,0" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Width="135"/>
-        <CheckBox Content="Analysiert" IsChecked="{Binding Analysed}" Margin="0,30,73,0" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Width="72"/>
-        <CheckBox Content="Decoated" IsChecked="{Binding Decoated}" Margin="0,50,74,0" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Width="71"/>
+        <CheckBox Content="Versuch durchgeführt" IsChecked="{Binding Processed}" Margin="0,10,131,0" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Width="135"/>
+        <CheckBox Content="Analysiert" IsChecked="{Binding Analysed}" Margin="0,30,194,0" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Width="72"/>
+        <CheckBox Content="Decoated" IsChecked="{Binding Decoated}" Margin="0,50,195,0" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Width="71"/>
+        <CheckBox Content="Beendet" IsChecked="{Binding Terminated}" Margin="0,10,35,0" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Width="71"/>
     </Grid>
 </UserControl>

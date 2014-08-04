@@ -375,25 +375,32 @@ namespace PDCore.Database
                 return "NULL";
             }
             else
+            {
                 if (obj is bool)
                 {
                     return obj.ToString();
                 }
-            if (obj is int || obj is double)
-            {
-                return obj.ToString().Replace(',', '.');
-            }
-            if (obj is DateTime)
-            {
-                if (obj != null)
-                    return "'" + Convert.ToDateTime(obj).ToString("yyyy-MM-dd HH:mm:ss") + "'";
+                if (obj is int || obj is double)
+                {
+                    return obj.ToString().Replace(',', '.');
+                }
+                if (obj is DateTime)
+                {
+                    if (obj != null)
+                        return "'" + Convert.ToDateTime(obj).ToString("yyyy-MM-dd HH:mm:ss") + "'";
+                    else
+                        return "NULL";
+                }
+                if (obj is string)
+                {
+                    return "'" + obj.ToString().Replace("'", "\\'") + "'";
+                }
                 else
-                    return "NULL";
+                {
+                    return "'" + obj + "'";
+                }
             }
-            else
-            {
-                return "'" + obj + "'";
-            }
+            
 
         }
     }   

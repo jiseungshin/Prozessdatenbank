@@ -17,6 +17,7 @@ namespace OE110Prozessdatenbank.ViewModels
         private string m_processedConstraint = "ProcessReferences.Status='processed'";
         private string m_AnalysedCostraint = "ProcessReferences.Status='analysed'";
         private string m_DecoatedConstraint = "ProcessReferences.Status='decoated'";
+        private string m_terminatedContraint = "ProcessReferences.Status='terminated' OR ProcessReferences.Status='cancelled'";
         private string m_FullConstraint = " WHERE (ProcessReferences.Status='processed' "+
                                             "OR ProcessReferences.Status='analysed' "+
                                             "OR ProcessReferences.Status='terminated' " +
@@ -25,9 +26,12 @@ namespace OE110Prozessdatenbank.ViewModels
 
         private string m_Filter = "";
 
+        private string m_sortString = "";
+
         private bool m_p = true;
         private bool m_a = true;
         private bool m_d = true;
+        private bool m_t = true;
 
         public F_PostProcessingVM()
         {
@@ -43,7 +47,7 @@ namespace OE110Prozessdatenbank.ViewModels
         {
             get
             {
-                DataSet _ds = ProcessManager.Instance.getData(Queries.QueryPostProcessing + m_FullConstraint + m_Filter);
+                DataSet _ds = ProcessManager.Instance.getData(Queries.QueryPostProcessing + m_FullConstraint + m_Filter + m_sortString);
                 if (_ds.Tables[0].Rows.Count > 0)
                 {
                     _ds.Tables[0].Columns.Add("analysed", typeof(bool));
@@ -130,6 +134,26 @@ namespace OE110Prozessdatenbank.ViewModels
             }
         }
 
+        public bool Terminated
+        {
+            set
+            {
+                if (value == true)
+                {
+                    m_terminatedContraint = " ProcessReferences.Status='terminated' OR ProcessReferences.Status='cancelled' ";
+                }
+                else
+                    m_terminatedContraint = "";
+
+                generateFullConstraint();
+                m_t = value;
+            }
+            get
+            {
+                return m_t;
+            }
+        }
+
         private void generateFullConstraint()
         {
             m_FullConstraint = " WHERE (";
@@ -150,13 +174,18 @@ namespace OE110Prozessdatenbank.ViewModels
                 m_FullConstraint += m_DecoatedConstraint; m_FullConstraint += " OR ";
             }
 
-            m_FullConstraint += "ProcessReferences.Status='cancelled' " +
-                                "OR ProcessReferences.Status='terminated')";
+            if (m_terminatedContraint != "")
+            {
+                m_FullConstraint += m_terminatedContraint; m_FullConstraint += " OR ";
+            }
 
-            //m_FullConstraint = m_FullConstraint.Remove(m_FullConstraint.Length - 4, 3);
-            //m_FullConstraint += ")";
+            //m_FullConstraint += "ProcessReferences.Status='cancelled' " +
+            //                    "OR ProcessReferences.Status='terminated')";
 
-            if (m_processedConstraint == "" && m_AnalysedCostraint == "" && m_DecoatedConstraint == "")
+            m_FullConstraint = m_FullConstraint.Remove(m_FullConstraint.Length - 4, 3);
+            m_FullConstraint += ")";
+
+            if (m_processedConstraint == "" && m_AnalysedCostraint == "" && m_DecoatedConstraint == "" && m_terminatedContraint == "")
                 m_FullConstraint = " WHERE ProcessReferences.ReferenceNumber=-1";
 
             NotifyPropertyChanged("Data");
@@ -178,6 +207,11 @@ namespace OE110Prozessdatenbank.ViewModels
 
                 NotifyPropertyChanged("Data");
             }
+        }
+
+        public string SortString
+        {
+            set { m_sortString = value; NotifyPropertyChanged("Data"); }
         }
 
     }

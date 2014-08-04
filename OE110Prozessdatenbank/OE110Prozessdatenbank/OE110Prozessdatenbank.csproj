@@ -67,6 +67,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SortAdorner.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Controls\ReferencePicker.xaml.cs">
       <DependentUpon>ReferencePicker.xaml</DependentUpon>

@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Data;
 using PDCore.Database;
 using OE110Prozessdatenbank.Properties;
+using System.ComponentModel;
 
 namespace OE110Prozessdatenbank.MainViews
 {
@@ -22,10 +23,15 @@ namespace OE110Prozessdatenbank.MainViews
     /// </summary>
     public partial class MV_PostProcessing : UserControl
     {
+        private GridViewColumnHeader listViewSortCol = null;
+        private SortAdorner listViewSortAdorner = null;
+        private ViewModels.F_PostProcessingVM m_vm;
+
         public MV_PostProcessing()
         {
             InitializeComponent();
-            DataContext = new ViewModels.F_PostProcessingVM();
+            m_vm = new ViewModels.F_PostProcessingVM();
+            DataContext = m_vm;
         }
 
         private void LV_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -41,6 +47,36 @@ namespace OE110Prozessdatenbank.MainViews
             {
                 overflowGrid.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void ListView_Header_Click(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader column = (sender as GridViewColumnHeader);
+
+            if (listViewSortCol != null)
+            {
+                AdornerLayer.GetAdornerLayer(listViewSortCol).Remove(listViewSortAdorner);
+                listview.Items.SortDescriptions.Clear();
+            }
+
+            ListSortDirection newDir = ListSortDirection.Ascending;
+            if (listViewSortCol == column && listViewSortAdorner.Direction == newDir)
+                newDir = ListSortDirection.Descending;
+
+            listViewSortCol = column;
+            listViewSortAdorner = new SortAdorner(listViewSortCol, newDir);
+            AdornerLayer.GetAdornerLayer(listViewSortCol).Add(listViewSortAdorner);
+
+            switch (newDir)
+            {
+                case ListSortDirection.Descending:
+                    m_vm.SortString = " ORDER BY " + column.Tag.ToString() + " DESC";
+                    break;
+                default:
+                    m_vm.SortString = " ORDER BY " + column.Tag.ToString() + " ASC";
+                    break;
+            }
+
         }
 
         private void cmb_conclusion_Click(object sender, RoutedEventArgs e)
