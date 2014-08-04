@@ -60,6 +60,8 @@ namespace OE110Prozessdatenbank.ObjectWindows
     public class VMWorkpieceAdministration : ViewModels.BaseViewModel
     {
 
+        private string m_filter = "";
+
         public VMWorkpieceAdministration()
         {
             ObjectManager.Instance.update();
@@ -68,13 +70,25 @@ namespace OE110Prozessdatenbank.ObjectWindows
 
         public ObservableCollection<Workpiece> Workpieces
         {
-            get { return new ObservableCollection<Workpiece>(ObjectManager.Instance.Workpieces); }
+            get 
+            { 
+                if (m_filter=="")
+                    return new ObservableCollection<Workpiece>(ObjectManager.Instance.Workpieces);
+                else
+                    return new ObservableCollection<Workpiece>(ObjectManager.Instance.Workpieces.Where(item => item.Label.ToLower().Contains(Filter.ToLower()) || item.Material.Name.ToLower().Contains(Filter.ToLower())));
+            }
         }
 
         void Instance_newObjects()
         {
             ObjectManager.Instance.update();
             NotifyPropertyChanged("Workpieces");
+        }
+
+        public string Filter
+        {
+            get { return m_filter; }
+            set { m_filter = value; NotifyPropertyChanged("Workpieces"); }
         }
     }
 }
