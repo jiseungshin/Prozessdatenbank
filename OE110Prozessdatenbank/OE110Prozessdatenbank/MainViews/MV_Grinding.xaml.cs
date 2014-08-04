@@ -137,7 +137,7 @@ namespace OE110Prozessdatenbank.MainViews
                     {
                         processes.Add(PDCore.Manager.ProcessManager.Instance.getProcess(Convert.ToInt32(rowview[DBTurningMoore.ID]), 11) as PDCore.Processes.PTurningMoore);
                     }
-                    PDCore.Manager.ExportManager.foo(processes);
+                    //PDCore.Manager.ExportManager.foo(processes);
                     break;
                 //case 12:
                 //    ID = Convert.ToInt32((LV_Polished.SelectedItem as System.Data.DataRowView)[DBGrindingMoore.ID]);

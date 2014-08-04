@@ -58,16 +58,31 @@
         <Label Content="aktueller Status" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
         <Label Content="{Binding ReferenceNumber}" HorizontalAlignment="Left" Margin="168,10,0,0" VerticalAlignment="Top"/>
         <Label Content="{Binding Workpiece.Label}" HorizontalAlignment="Left" Margin="168,36,0,0" VerticalAlignment="Top"/>
-        <Label Content="{Binding Status,Converter={StaticResource StatusConv}}" HorizontalAlignment="Left" Margin="168,62,0,0" VerticalAlignment="Top"/>
+        <Label Content="{Binding Status,Converter={StaticResource StatusConv}, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="168,62,0,0" VerticalAlignment="Top"/>
         <Label Content="Projekt" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"/>
         <Label Content="Fragestellung" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top"/>
-        <Label Content="{Binding Project.Description}" HorizontalAlignment="Left" Margin="168,88,0,0" VerticalAlignment="Top"/>
+        <Label Content="{Binding Project.Description, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="168,88,0,0" VerticalAlignment="Top"/>
         <Label Content="{Binding Issue.Description}" HorizontalAlignment="Left" Margin="168,114,0,0" VerticalAlignment="Top"/>
         <Button Content="schließen" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Click="Button_Click"/>
         <Button HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="144" Click="bt_cancelProcess_Click" Command="{Binding CancelProcess}" IsEnabled="{Binding CancelProcess.canCancelProcess}">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/OE110Prozessdatenbank;component/Icons/StatusAnnotations_Critical_16xLG_color.png" Height="16" HorizontalAlignment="Left" Margin="-5,0,0,0"></Image>
                 <TextBlock Text="Vorgang abbrechen" Margin="5,0,0,0"></TextBlock>
+            </StackPanel>
+        </Button>
+        <Button x:Name="bt_editProject" HorizontalAlignment="Right" Margin="0,94,10,0" VerticalAlignment="Top" Width="25" Click="bt_editProject_Click" ToolTip="Projektzuordnung ändern">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/OE110Prozessdatenbank;component/Icons/Edit_16xLG.png" Height="16" HorizontalAlignment="Left" Margin="0,0,0,0"></Image>
+            </StackPanel>
+        </Button>
+        <Button x:Name="bt_editIssue" HorizontalAlignment="Right" Margin="0,120,10,0" VerticalAlignment="Top" Width="25" Click="bt_editIssue_Click" ToolTip="Fragestellung ändern">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/OE110Prozessdatenbank;component/Icons/Edit_16xLG.png" Height="16" HorizontalAlignment="Left" Margin="0,0,0,0"></Image>
+            </StackPanel>
+        </Button>
+        <Button x:Name="bt_stepOver" Command="{Binding Skip}" IsEnabled="{Binding Skip.canSkip}" HorizontalAlignment="Right" Margin="0,69,10,0" VerticalAlignment="Top" Width="25" ToolTip="{Binding SkipToolTip}">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/OE110Prozessdatenbank;component/Icons/StepOver_6328.png" Height="16" HorizontalAlignment="Left" Margin="0,0,0,0"/>
             </StackPanel>
         </Button>
 

@@ -159,4 +159,10 @@
   <data name="q_skipWorkpieceProc1" xml:space="preserve">
     <value>Soll das Werkstück  wirklich in den Prozesszustand 'Versuch durchgeführt' versetzt werden?</value>
   </data>
+  <data name="q_editIssue" xml:space="preserve">
+    <value>Soll die Fragestellung wirklich geändert werden?</value>
+  </data>
+  <data name="q_editProject" xml:space="preserve">
+    <value>Soll das Projekt wirklich geändert werden?</value>
+  </data>
 </root>

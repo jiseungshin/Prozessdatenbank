@@ -31,8 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data">
-      <HintPath>..\..\..\dmud_ProductionSuite\PSCore\bin\Debug\MySql.Data.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\..\..\Bibliotheken\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />

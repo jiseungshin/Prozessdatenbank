@@ -124,6 +124,24 @@ namespace OE110Prozessdatenbank.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Soll die Fragestellung wirklich geändert werden? ähnelt.
+        /// </summary>
+        internal static string q_editIssue {
+            get {
+                return ResourceManager.GetString("q_editIssue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Soll das Projekt wirklich geändert werden? ähnelt.
+        /// </summary>
+        internal static string q_editProject {
+            get {
+                return ResourceManager.GetString("q_editProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Prozessdaten jetzt importieren? Spätere Änderungen sind nur für einzelene Prozesse möglich! ähnelt.
         /// </summary>
         internal static string q_importToshiba {

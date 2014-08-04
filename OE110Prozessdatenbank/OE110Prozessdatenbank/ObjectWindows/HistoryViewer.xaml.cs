@@ -82,5 +82,15 @@ namespace OE110Prozessdatenbank.ObjectWindows
         {
             this.Close();
         }
+
+        private void bt_editProject_Click(object sender, RoutedEventArgs e)
+        {
+            new ObjectWindows.ProjectPicker(m_vm).ShowDialog();
+        }
+
+        private void bt_editIssue_Click(object sender, RoutedEventArgs e)
+        {
+            new ObjectWindows.IssuePicker(m_vm).ShowDialog();
+        }
     }
 }

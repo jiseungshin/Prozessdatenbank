@@ -102,6 +102,12 @@
     <Compile Include="ObjectWindows\MaterialAdministration.xaml.cs">
       <DependentUpon>MaterialAdministration.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ObjectWindows\IssuePicker.xaml.cs">
+      <DependentUpon>IssuePicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ObjectWindows\ProjectPicker.xaml.cs">
+      <DependentUpon>ProjectPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ObjectWindows\ProjectAdministration.xaml.cs">
       <DependentUpon>ProjectAdministration.xaml</DependentUpon>
     </Compile>
@@ -280,6 +286,14 @@
     <Page Include="ObjectWindows\MaterialAdministration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ObjectWindows\IssuePicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ObjectWindows\ProjectPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ObjectWindows\ProjectAdministration.xaml">
       <SubType>Designer</SubType>
@@ -570,6 +584,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\Stepout_6327.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Edit_16xLG.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1948,7 +1948,14 @@ namespace PDCore.Manager
         {
             List<string> _queries = new List<string>();
 
-            _queries.Add("Update " + DBIssues.Table + " Set " + DBIssues.Conclusion + " = " + WPH.Conclusion.ToDBObject() + " WHERE " + DBIssues.ID + "=" + WPH.Issue.ID);
+            
+            if (WPH.Project!=null)
+                _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.ProjectID + " = " + WPH.Project.ID.ToDBObject() + " WHERE " + DBProcessReferences.RefNumber + "=" + WPH.ReferenceNumber);
+            if (WPH.Issue != null)
+            {
+                _queries.Add("Update " + DBIssues.Table + " Set " + DBIssues.Conclusion + " = " + WPH.Conclusion.ToDBObject() + " WHERE " + DBIssues.ID + "=" + WPH.Issue.ID);
+                _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.IssueID + " = " + WPH.Issue.ID.ToDBObject() + " WHERE " + DBProcessReferences.RefNumber + "=" + WPH.ReferenceNumber);
+            }
 
             //if (WPH.Conclusion!="" && WPH.Status!= DBEnum.EnumReference.CANCELLED || WPH.Status != DBEnum.EnumReference.TERMINATED)
             //{
