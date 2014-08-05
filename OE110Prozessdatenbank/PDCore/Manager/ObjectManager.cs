@@ -784,106 +784,106 @@ namespace PDCore.Manager
             {
                 #region save
                 _queries.Add("INSERT INTO " + DBGlasses.Table + " (" + DBGlasses.Description + "," +
-                                                                       DBGlasses.Company + 
-                                                                       DBGlasses.Abrasion+
-                                                                       DBGlasses.Acid_Resistance+
-                                                                       DBGlasses.Acid_Resistance_SR+
-                                                                       DBGlasses.Aluminium_fluoride+
-                                                                       DBGlasses.Aluminiumoxid+
-                                                                       DBGlasses.Annealing_Point+
-                                                                       DBGlasses.Antimonoxid+
-                                                                       DBGlasses.Barium_fluoride+
-                                                                       DBGlasses.Bariumoxid+
-                                                                       DBGlasses.Boroxid+
-                                                                       DBGlasses.Caesiumoxid+
-                                                                       DBGlasses.Calcium_fluoride+
-                                                                       DBGlasses.Calciumoxid+
-                                                                       DBGlasses.Fluor+
-                                                                       DBGlasses.Germaniumoxid+
-                                                                       DBGlasses.Kaliumoxid+
-                                                                       DBGlasses.Knoop_Hardness+
-                                                                       DBGlasses.Lanthanoxid+
-                                                                       DBGlasses.Lanthanum_fluoride+
-                                                                       DBGlasses.Lithiumoxid+
-                                                                       DBGlasses.Magnecium_fluoride+
-                                                                       DBGlasses.Molding_Temperature+
-                                                                       DBGlasses.Natriumoxid+
-                                                                       DBGlasses.Niobpentoxid+
-                                                                       DBGlasses.Phospahte_Resistance+
-                                                                       DBGlasses.Phosphorus_oxide+
-                                                                       DBGlasses.Photoelastic_Constant+
-                                                                       DBGlasses.Siliziumdioxid+
-                                                                       DBGlasses.Softening_Point+
-                                                                       DBGlasses.Specific_Gravity+
-                                                                       DBGlasses.Strain_Point+
-                                                                       DBGlasses.Strontium_fluoride+
-                                                                       DBGlasses.Strontiumoxid+
-                                                                       DBGlasses.Tantaloxid+
-                                                                       DBGlasses.Tellurium+
-                                                                       DBGlasses.Titanoxid+
-                                                                       DBGlasses.Transformation_Temperature+
-                                                                       DBGlasses.Tungsten_Oxid+
-                                                                       DBGlasses.Wärmeausdehnungskoeffizient+
-                                                                       DBGlasses.Wärmeleitfähigkeit+
-                                                                       DBGlasses.Water_Resistance+
-                                                                       DBGlasses.Weathering_Resistance+
-                                                                       DBGlasses.Wismutoxid+
-                                                                       DBGlasses.Wolframtrioxid+
-                                                                       DBGlasses.Yield_Point+
-                                                                       DBGlasses.Yttrium_fluoride+
-                                                                       DBGlasses.Yttriumoxid+
-                                                                       DBGlasses.Zinkoxid+
+                                                                       DBGlasses.Company + "," +
+                                                                       DBGlasses.Abrasion + "," +
+                                                                       DBGlasses.Acid_Resistance + "," +
+                                                                       DBGlasses.Acid_Resistance_SR + "," +
+                                                                       DBGlasses.Aluminium_fluoride + "," +
+                                                                       DBGlasses.Aluminiumoxid + "," +
+                                                                       DBGlasses.Annealing_Point + "," +
+                                                                       DBGlasses.Antimonoxid + "," +
+                                                                       DBGlasses.Barium_fluoride + "," +
+                                                                       DBGlasses.Bariumoxid + "," +
+                                                                       DBGlasses.Boroxid + "," +
+                                                                       DBGlasses.Caesiumoxid + "," +
+                                                                       DBGlasses.Calcium_fluoride + "," +
+                                                                       DBGlasses.Calciumoxid + "," +
+                                                                       DBGlasses.Fluor + "," +
+                                                                       DBGlasses.Germaniumoxid + "," +
+                                                                       DBGlasses.Kaliumoxid + "," +
+                                                                       DBGlasses.Knoop_Hardness + "," +
+                                                                       DBGlasses.Lanthanoxid + "," +
+                                                                       DBGlasses.Lanthanum_fluoride + "," +
+                                                                       DBGlasses.Lithiumoxid + "," +
+                                                                       DBGlasses.Magnecium_fluoride + "," +
+                                                                       DBGlasses.Molding_Temperature + "," +
+                                                                       DBGlasses.Natriumoxid + "," +
+                                                                       DBGlasses.Niobpentoxid + "," +
+                                                                       DBGlasses.Phospahte_Resistance + "," +
+                                                                       DBGlasses.Phosphorus_oxide + "," +
+                                                                       DBGlasses.Photoelastic_Constant + "," +
+                                                                       DBGlasses.Siliziumdioxid + "," +
+                                                                       DBGlasses.Softening_Point + "," +
+                                                                       DBGlasses.Specific_Gravity + "," +
+                                                                       DBGlasses.Strain_Point + "," +
+                                                                       DBGlasses.Strontium_fluoride + "," +
+                                                                       DBGlasses.Strontiumoxid + "," +
+                                                                       DBGlasses.Tantaloxid + "," +
+                                                                       DBGlasses.Tellurium + "," +
+                                                                       DBGlasses.Titanoxid + "," +
+                                                                       DBGlasses.Transformation_Temperature + "," +
+                                                                       DBGlasses.Tungsten_Oxid + "," +
+                                                                       DBGlasses.Wärmeausdehnungskoeffizient + "," +
+                                                                       DBGlasses.Wärmeleitfähigkeit + "," +
+                                                                       DBGlasses.Water_Resistance + "," +
+                                                                       DBGlasses.Weathering_Resistance + "," +
+                                                                       DBGlasses.Wismutoxid + "," +
+                                                                       DBGlasses.Wolframtrioxid + "," +
+                                                                       DBGlasses.Yield_Point + "," +
+                                                                       DBGlasses.Yttrium_fluoride + "," +
+                                                                       DBGlasses.Yttriumoxid + "," +
+                                                                       DBGlasses.Zinkoxid + "," +
                                                                        DBGlasses.Zirkonoxid+ ") Values (" +
                                                                             glass.Name.ToDBObject() + "," +
-                                                                            glass.Comapany.ToDBObject() + 
-                                                                            glass.Abrasion.ToDBObject()+
-                                                                            glass.Acid_Resistance_RA.ToDBObject() +
-                                                                            glass.Acid_Resistance_SR.ToDBObject() +
-                                                                            glass.Aluminium_fluoride.ToDBObject() +
-                                                                            glass.Aluminiumoxid.ToDBObject() +
-                                                                            glass.Annealing_Point.ToDBObject() +
-                                                                            glass.Antimonoxid.ToDBObject() +
-                                                                            glass.Barium_fluoride.ToDBObject() +
-                                                                            glass.Bariumoxid.ToDBObject() +
-                                                                            glass.Boroxid.ToDBObject() +
-                                                                            glass.Caesiumoxid.ToDBObject() +
-                                                                            glass.Calcium_fluoride.ToDBObject() +
-                                                                            glass.Calciumoxid.ToDBObject() +
-                                                                            glass.Fluor.ToDBObject() +
-                                                                            glass.Germaniumoxid.ToDBObject() +
-                                                                            glass.Kaliumoxid.ToDBObject() +
-                                                                            glass.Knoop_Hardness.ToDBObject() +
-                                                                            glass.Lanthanoxid.ToDBObject() +
-                                                                            glass.Lanthanum_fluoride.ToDBObject() +
-                                                                            glass.Lithiumoxid.ToDBObject() +
-                                                                            glass.Magnecium_fluoride.ToDBObject() +
-                                                                            glass.Molding_Temperature.ToDBObject() +
-                                                                            glass.Natriumoxid.ToDBObject() +
-                                                                            glass.Niobpentoxid.ToDBObject() +
-                                                                            glass.Phospahte_Resistance.ToDBObject() +
-                                                                            glass.Phosphorus_oxide.ToDBObject() +
-                                                                            glass.Photoelastic_Constant.ToDBObject() +
-                                                                            glass.Siliziumdioxid.ToDBObject() +
-                                                                            glass.Softening_Point.ToDBObject() +
-                                                                            glass.Specific_Gravity.ToDBObject() +
-                                                                            glass.Strain_Point.ToDBObject() +
-                                                                            glass.Strontium_fluoride.ToDBObject() +
-                                                                            glass.Strontiumoxid.ToDBObject() + glass.Abrasion.ToDBObject() +
-                                                                            glass.Tantaloxid.ToDBObject() +
-                                                                            glass.Tellurium.ToDBObject() +
-                                                                            glass.Titanoxid.ToDBObject() +
-                                                                            glass.Transformation_Temperature.ToDBObject() +
-                                                                            glass.Tungsten_Oxid.ToDBObject() +
-                                                                            glass.Wärmeausdehnungskoeffizient.ToDBObject() +
-                                                                            glass.Wärmeleitfähigkeit.ToDBObject() +
-                                                                            glass.Water_Resistance.ToDBObject() +
-                                                                            glass.Weathering_Resistance.ToDBObject() +
-                                                                            glass.Wismutoxid.ToDBObject() +
-                                                                            glass.Wolframtrioxid.ToDBObject() +
-                                                                            glass.Yield_Point.ToDBObject() +
-                                                                            glass.Yttrium_fluoride.ToDBObject() +
-                                                                            glass.Yttriumoxid.ToDBObject() +
-                                                                            glass.Zinkoxid.ToDBObject() +
+                                                                            glass.Comapany.ToDBObject() + "," +
+                                                                            glass.Abrasion.ToDBObject() + "," +
+                                                                            glass.Acid_Resistance_RA.ToDBObject() + "," +
+                                                                            glass.Acid_Resistance_SR.ToDBObject() + "," +
+                                                                            glass.Aluminium_fluoride.ToDBObject() + "," +
+                                                                            glass.Aluminiumoxid.ToDBObject() + "," +
+                                                                            glass.Annealing_Point.ToDBObject() + "," +
+                                                                            glass.Antimonoxid.ToDBObject() + "," +
+                                                                            glass.Barium_fluoride.ToDBObject() + "," +
+                                                                            glass.Bariumoxid.ToDBObject() + "," +
+                                                                            glass.Boroxid.ToDBObject() + "," +
+                                                                            glass.Caesiumoxid.ToDBObject() + "," +
+                                                                            glass.Calcium_fluoride.ToDBObject() + "," +
+                                                                            glass.Calciumoxid.ToDBObject() + "," +
+                                                                            glass.Fluor.ToDBObject() + "," +
+                                                                            glass.Germaniumoxid.ToDBObject() + "," +
+                                                                            glass.Kaliumoxid.ToDBObject() + "," +
+                                                                            glass.Knoop_Hardness.ToDBObject() + "," +
+                                                                            glass.Lanthanoxid.ToDBObject() + "," +
+                                                                            glass.Lanthanum_fluoride.ToDBObject() + "," +
+                                                                            glass.Lithiumoxid.ToDBObject() + "," +
+                                                                            glass.Magnecium_fluoride.ToDBObject() + "," +
+                                                                            glass.Molding_Temperature.ToDBObject() + "," +
+                                                                            glass.Natriumoxid.ToDBObject() + "," +
+                                                                            glass.Niobpentoxid.ToDBObject() + "," +
+                                                                            glass.Phospahte_Resistance.ToDBObject() + "," +
+                                                                            glass.Phosphorus_oxide.ToDBObject() + "," +
+                                                                            glass.Photoelastic_Constant.ToDBObject() + "," +
+                                                                            glass.Siliziumdioxid.ToDBObject() + "," +
+                                                                            glass.Softening_Point.ToDBObject() + "," +
+                                                                            glass.Specific_Gravity.ToDBObject() + "," +
+                                                                            glass.Strain_Point.ToDBObject() + "," +
+                                                                            glass.Strontium_fluoride.ToDBObject() + "," +
+                                                                            glass.Strontiumoxid.ToDBObject() + "," +
+                                                                            glass.Tantaloxid.ToDBObject() + "," +
+                                                                            glass.Tellurium.ToDBObject() + "," +
+                                                                            glass.Titanoxid.ToDBObject() + "," +
+                                                                            glass.Transformation_Temperature.ToDBObject() + "," +
+                                                                            glass.Tungsten_Oxid.ToDBObject() + "," +
+                                                                            glass.Wärmeausdehnungskoeffizient.ToDBObject() + "," +
+                                                                            glass.Wärmeleitfähigkeit.ToDBObject() + "," +
+                                                                            glass.Water_Resistance.ToDBObject() + "," +
+                                                                            glass.Weathering_Resistance.ToDBObject() + "," +
+                                                                            glass.Wismutoxid.ToDBObject() + "," +
+                                                                            glass.Wolframtrioxid.ToDBObject() + "," +
+                                                                            glass.Yield_Point.ToDBObject() + "," +
+                                                                            glass.Yttrium_fluoride.ToDBObject() + "," +
+                                                                            glass.Yttriumoxid.ToDBObject() + "," +
+                                                                            glass.Zinkoxid.ToDBObject() + "," +
                                                                             glass.Zirkonoxid.ToDBObject() +")");
 
 

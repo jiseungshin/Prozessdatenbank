@@ -92,8 +92,19 @@
                 <MenuItem Header="Beschichtungsprozesse" Click="mbt_CoatingAdmin_Click"></MenuItem>
                 <MenuItem Header="Polierprozesse (Phoenix)"></MenuItem>
             </MenuItem>
-            <MenuItem Header="Update" Click="Debug_click" Height="26"></MenuItem>
-            <MenuItem Header="Abfrage Vorgangsnummer" Click="mbt_GetReference_Click" Height="26"></MenuItem>
+            
+            <MenuItem Header="Abfragen">
+                <MenuItem Header="Abfrage Vorgangsnummer" Click="mbt_GetReference_Click" Height="26"></MenuItem>
+                <MenuItem Header="Projektabfrage" Click="mbt_GetRefereProjectHistory_Click" Height="26"></MenuItem>
+            </MenuItem>
+            <MenuItem Click="Debug_click" Height="26" ToolTip="Daten aktualisieren">
+                <MenuItem.Header>
+                    <StackPanel>
+                        <Image Width="15" Source="/OE110Prozessdatenbank;component/Icons/refresh_16xLG.png" Height="15" />
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            
 
         </Menu>
         <Grid x:Name="g_selector" Grid.Row="1">

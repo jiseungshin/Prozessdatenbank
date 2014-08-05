@@ -411,6 +411,11 @@ namespace OE110Prozessdatenbank
             new Controls.ReferencePicker().ShowDialog();
         }
 
+        private void mbt_GetRefereProjectHistory_Click(object sender, RoutedEventArgs e)
+        {
+            new ObjectWindows.ProjectHistory().ShowDialog();
+        }
+
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.F && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
@@ -423,6 +428,8 @@ namespace OE110Prozessdatenbank
                 new ObjectWindows.ProjectHistory().ShowDialog();
             }
         }
+
+       
 
 
         
