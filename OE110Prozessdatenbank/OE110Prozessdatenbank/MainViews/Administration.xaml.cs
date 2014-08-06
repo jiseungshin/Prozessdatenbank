@@ -25,7 +25,7 @@ namespace OE110Prozessdatenbank.MainViews
         public Administration()
         {
             InitializeComponent();
-            ObjectManager.Instance.update();
+            //ObjectManager.Instance.update();
 
         }
 

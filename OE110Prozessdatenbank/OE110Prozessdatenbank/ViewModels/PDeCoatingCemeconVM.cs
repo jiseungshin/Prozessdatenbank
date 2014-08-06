@@ -25,7 +25,9 @@ namespace OE110Prozessdatenbank.ViewModels
             List<int> PIDList = ProcessManager.Instance.getPIDbyReference(refID, 51);
             if (PIDList.Count > 0)
                 m_update = true;
-            ObjectManager.Instance.update();
+            ObjectManager.Instance.update(DBUser.Table);
+            ObjectManager.Instance.update(DBProjects.Table);
+            ObjectManager.Instance.update(DBIssues.Table);
             ProcessManager.Instance.update();
 
             //newProcess

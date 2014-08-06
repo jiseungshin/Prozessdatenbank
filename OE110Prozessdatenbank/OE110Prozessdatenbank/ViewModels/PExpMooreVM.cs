@@ -23,7 +23,10 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public PExpMooreVM(int PID)
         {
-            ObjectManager.Instance.update();
+            ObjectManager.Instance.update(PDCore.Database.DBUser.Table);
+            ObjectManager.Instance.update(PDCore.Database.DBProjects.Table);
+            ObjectManager.Instance.update(PDCore.Database.DBIssues.Table);
+            ObjectManager.Instance.update(PDCore.Database.DBGlasses.Table);
             m_update = true;
             m_process = ProcessManager.Instance.getProcess(PID, 31) as PExpMoore;
             ProcessQualityControl = new Controls.CProcessQuality(m_process);
@@ -50,7 +53,13 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public PExpMooreVM()
         {
-            ObjectManager.Instance.update();
+            ObjectManager.Instance.update(PDCore.Database.DBUser.Table);
+            ObjectManager.Instance.update(PDCore.Database.DBProjects.Table);
+            ObjectManager.Instance.update(PDCore.Database.DBIssues.Table);
+            ObjectManager.Instance.update(PDCore.Database.DBGlasses.Table);
+
+            //ObjectManager.Instance.update();
+
             m_process = new PExpMoore();
             SaveProcess = new RelayCommand(Save, CanSave);
             ProcessQualityControl = new Controls.CProcessQuality(m_process);
@@ -123,7 +132,7 @@ namespace OE110Prozessdatenbank.ViewModels
             set
             {
                     m_upper = value;
-                    WP_UpperControl = new Controls.CQuality(m_upper);
+                    WP_UpperControl = new Controls.CQuality(value);
 
                     //try
                     //{

@@ -47,6 +47,9 @@ namespace PDCore.Manager
 
         }
 
+        public string StandardDirectory
+        { get { return StandardDir; } }
+
         void Instance_newData(params string[] values)
         {
             //throw new NotImplementedException();

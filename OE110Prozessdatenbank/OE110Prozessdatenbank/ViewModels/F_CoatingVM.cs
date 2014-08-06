@@ -19,6 +19,8 @@ namespace OE110Prozessdatenbank.ViewModels
         private string m_coatedFilter = "";
         private FilterCriteria m_CoatedCriterium = ProcessManager.Instance.FilterCriteria[0];
 
+        private string m_sortString = "";
+
         public F_CoatingVM()
         {
             ProcessManager.Instance.update();
@@ -33,7 +35,7 @@ namespace OE110Prozessdatenbank.ViewModels
         }
         public DataSet DataPolished
         {
-            get { return ProcessManager.Instance.getData(Queries.QueryGrinded + m_polishedFilter); }
+            get { return ProcessManager.Instance.getData(Queries.QueryGrinded + m_polishedFilter + m_sortString); }
         }
 
         public DataSet DataCoated
@@ -98,6 +100,11 @@ namespace OE110Prozessdatenbank.ViewModels
         {
             get { return m_CoatedCriterium; }
             set { m_CoatedCriterium = value; }
+        }
+
+        public string SortString
+        {
+            set { m_sortString = value; NotifyPropertyChanged("DataPolished"); }
         }
     }
 }

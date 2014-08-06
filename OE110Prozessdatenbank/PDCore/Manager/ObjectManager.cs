@@ -131,19 +131,26 @@ namespace PDCore.Manager
 
         public void update(string Table)
         {
-            switch (Table)
+            if (Table == DBUser.Table)
+                getUser();
+            if (Table == DBProjects.Table)
+                getProjects();
+            if (Table == DBIssues.Table)
+                getIssues();
+            if (Table == DBMAterial.Table)
+                getMaterials();
+            if (Table == DBGlasses.Table)
+                getGlasses();
+            if (Table == DBWorkpieces.Table)
             {
-                //case DBUser.Table.ToString():
-                //    getUser();
-                //    break;
+                getWorkpieces();
+                getCoatedWorkpieces();
+                
             }
+
+            if (Table == DBMachine.Table)
+                getMachines();
         }
-
-        public void updateProjects()
-        { getProjects(); getIssues(); }
-
-        public void updateUser()
-        { getUser(); }
 
         private void getGlasses()
         {

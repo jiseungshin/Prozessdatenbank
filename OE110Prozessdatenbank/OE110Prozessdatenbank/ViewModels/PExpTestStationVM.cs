@@ -29,7 +29,10 @@ namespace OE110Prozessdatenbank.ViewModels
         { get { return m_process; } }
         public PExpTestStationVM(int PID)
         {
-            ObjectManager.Instance.update();
+            ObjectManager.Instance.update(DBUser.Table);
+            ObjectManager.Instance.update(DBProjects.Table);
+            ObjectManager.Instance.update(DBIssues.Table);
+            ObjectManager.Instance.update(DBGlasses.Table);
             m_update = true;
 
             m_process = ProcessManager.Instance.getProcess(PID, 32) as PExpTestStation;
@@ -63,7 +66,10 @@ namespace OE110Prozessdatenbank.ViewModels
         public PExpTestStationVM()
         {
             m_update = false;
-            ObjectManager.Instance.update();
+            ObjectManager.Instance.update(DBUser.Table);
+            ObjectManager.Instance.update(DBProjects.Table);
+            ObjectManager.Instance.update(DBIssues.Table);
+            ObjectManager.Instance.update(DBGlasses.Table);
 
             m_process = new PExpTestStation();
             ProcessQualityControl = new Controls.CProcessQuality(m_process);

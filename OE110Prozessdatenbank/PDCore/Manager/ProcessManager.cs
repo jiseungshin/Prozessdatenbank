@@ -1820,7 +1820,7 @@ namespace PDCore.Manager
 
         public List<Analysis> getAnalysis(int RefID)
         {
-            ObjectManager.Instance.update();
+            //ObjectManager.Instance.update();
             DataTable _dt = _myCommunicator.getDataSet("SELECT * FROM " + DBAnalyses.Table +
                                                 
                                               //join References
@@ -1859,7 +1859,8 @@ namespace PDCore.Manager
                         User = ObjectManager.Instance.Users.Find(item => item.ID == _dt.Rows[i].Field<int>(DBUser.ID)),
                         Description = _dt.Rows[i].Field<string>(DBAnalyses.Type),
                         ReferenceNumber = _dt.Rows[i].Field<int>(DBAnalyses.RefNumber),
-                        Path = FileManager.Instance.getDirPth(_dt.Rows[i].Field<int>(DBAnalyses.RefNumber)) + "\\Analysen\\" + _dt.Rows[i].Field<string>(DBAnalyses.Type)
+                        //Path = FileManager.Instance.getDirPth(_dt.Rows[i].Field<int>(DBAnalyses.RefNumber)) + "\\Analysen\\" + _dt.Rows[i].Field<string>(DBAnalyses.Type)
+                        Path = FileManager.Instance.StandardDirectory + _dt.Rows[i].Field<int>(DBAnalyses.RefNumber) + "\\Analysen\\" + _dt.Rows[i].Field<string>(DBAnalyses.Type)
                     });
             }}
 
@@ -2102,10 +2103,19 @@ namespace PDCore.Manager
 
             bool success =_myCommunicator.executeTransactedQueries(_queries);
 
-            Updater.Instance.forceUpdate();
+
 
             if (success)
+            {
+                if (workpiece.isOneWay)
+                {
+                    Workpiece ClonedWorpiece = workpiece.clone();
+                    ClonedWorpiece.isActive = true;
+                    ObjectManager.Instance.saveWorkpiece(ClonedWorpiece, false);
+                }
+                Updater.Instance.forceUpdate();
                 return _ref;
+            }
             else
                 return -1;
         }

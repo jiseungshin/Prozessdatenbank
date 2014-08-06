@@ -21,7 +21,11 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public PGrindingMooreVM(int RefID, bool update)
         {
-            ObjectManager.Instance.update();
+            ObjectManager.Instance.update(DBUser.Table);
+            ObjectManager.Instance.update(DBProjects.Table);
+            ObjectManager.Instance.update(DBIssues.Table);
+            ObjectManager.Instance.update(DBWorkpieces.Table);
+
             SaveProcess = new RelayCommand(Save, CanSave);
             m_update = update;
 
@@ -75,9 +79,14 @@ namespace OE110Prozessdatenbank.ViewModels
         }
 
 
-        public DataTable AvailableProcesses
+        public DataView AvailableProcesses
         {
-            get { return ProcessManager.Instance.getData(Queries.QueryGrindingMoore).Tables[0]; }
+            get
+            {
+                DataView dv = ProcessManager.Instance.getData(Queries.QueryGrindingMoore).Tables[0].DefaultView;
+                dv.Sort = "Date DESC";
+                return dv;
+            }
         }
 
         public DataRowView SelectedProcess

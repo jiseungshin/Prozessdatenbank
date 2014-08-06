@@ -35,7 +35,7 @@ namespace OE110Prozessdatenbank.Controls
             DataContext = m_analysisVM;
 
             cb_analysis.IsEnabled = false;
-            cb_user.IsEnabled = false;
+            //cb_user.IsEnabled = false;
         }
 
         private void bt_save_Click(object sender, RoutedEventArgs e)

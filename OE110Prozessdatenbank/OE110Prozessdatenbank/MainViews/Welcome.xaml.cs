@@ -25,7 +25,7 @@ namespace OE110Prozessdatenbank.MainWindows
         public Welcome(ILogin control)
         {
             InitializeComponent();
-            ObjectManager.Instance.update();
+            ObjectManager.Instance.update(PDCore.Database.DBUser.Table);
             cb_user.DataContext = ObjectManager.Instance.Users.FindAll(item => item.isActive).OrderBy(item=>item.LastName);
             //MessageBox.Show(Environment.UserName);
             cb_user.SelectedItem = ObjectManager.Instance.Users.Find(item => item.Token.ToUpper() == Environment.UserName.ToUpper());

@@ -22,7 +22,10 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public PCoatingCemeconVM(int refID, bool update)
         {
-            ObjectManager.Instance.update();
+            ObjectManager.Instance.update(DBUser.Table);
+            ObjectManager.Instance.update(DBProjects.Table);
+            ObjectManager.Instance.update(DBIssues.Table);
+            
             ProcessManager.Instance.update();
             m_update = update;
             //newProcess
@@ -86,9 +89,14 @@ namespace OE110Prozessdatenbank.ViewModels
         public ObservableCollection<Issue> Issues
         { get { return m_issues; } }
 
-        public DataTable AvailableProcesses
+        public DataView AvailableProcesses
         {
-            get { return ProcessManager.Instance.getData(Queries.QueryCoated).Tables[0]; }
+            get
+            {
+                DataView dv = ProcessManager.Instance.getData(Queries.QueryCoated).Tables[0].DefaultView;
+                dv.Sort = "Date DESC";
+                return dv;
+            }
         }
 
         public DataRowView SelectedProcess

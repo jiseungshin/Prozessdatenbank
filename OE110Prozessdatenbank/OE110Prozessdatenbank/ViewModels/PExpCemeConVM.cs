@@ -22,7 +22,10 @@ namespace OE110Prozessdatenbank.ViewModels
         private ObservableCollection<Issue> m_issues = new ObservableCollection<Issue>();
         public PExpCemeConVM(int ID, bool update)
         {
-            ObjectManager.Instance.update();
+            ObjectManager.Instance.update(DBUser.Table);
+            ObjectManager.Instance.update(DBProjects.Table);
+            ObjectManager.Instance.update(DBIssues.Table);
+            ObjectManager.Instance.update(DBGlasses.Table);
             m_update = update;
             //update
             if (update)

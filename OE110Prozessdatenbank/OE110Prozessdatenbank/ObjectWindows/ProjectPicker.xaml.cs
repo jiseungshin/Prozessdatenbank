@@ -48,7 +48,7 @@ namespace OE110Prozessdatenbank.ObjectWindows
     {
         public VMProjectPicker()
         {
-            ObjectManager.Instance.updateProjects();
+            ObjectManager.Instance.update(PDCore.Database.DBProjects.Table);
             ObjectManager.Instance.newObjects += Instance_newObjects;
 
         }

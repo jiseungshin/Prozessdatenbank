@@ -10,6 +10,12 @@
     <Grid>
         
         <ListView x:Name="LV_Workpiece" Margin="10,77,10,10" ItemsSource="{Binding Workpieces, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" MouseDoubleClick="LV_Workpiece_DoubleClick">
+            <ListView.Resources>
+                <ContextMenu x:Key="WPAdminContext">
+                    <MenuItem Header="zum Vorgang" Click="cmb_goToReference_Click">
+                    </MenuItem>
+                </ContextMenu>
+            </ListView.Resources>
             <ListView.Background>
                 <LinearGradientBrush>
                     <GradientStop  Offset="0" Color="#FFE8E8E8"/>
@@ -17,6 +23,8 @@
             </ListView.Background>
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
+                    <EventSetter Event="PreviewMouseLeftButtonDown" Handler="OnListViewItem_PreviewMouseLeftButtonDown" />
+                    <Setter Property="ContextMenu" Value="{StaticResource WPAdminContext}"/>
                     <Setter Property="BorderBrush" Value="LightGray" />
                     <Setter Property="BorderThickness" Value="0,0,0,1" />
                     <Setter Property="Template">

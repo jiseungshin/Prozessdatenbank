@@ -57,7 +57,7 @@ namespace OE110Prozessdatenbank.ObjectWindows
 
         public VMUsreAdministration()
         {
-            ObjectManager.Instance.update();
+            //ObjectManager.Instance.update();
             ObjectManager.Instance.newObjects += Instance_newObjects;
         }
 
@@ -68,7 +68,7 @@ namespace OE110Prozessdatenbank.ObjectWindows
 
         void Instance_newObjects()
         {
-            ObjectManager.Instance.update();
+            //ObjectManager.Instance.update();
             NotifyPropertyChanged("Users");
         }
     }

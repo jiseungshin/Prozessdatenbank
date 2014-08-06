@@ -17,28 +17,25 @@ namespace OE110Prozessdatenbank.ViewModels
         private string m_processedConstraint = "ProcessReferences.Status='processed'";
         private string m_AnalysedCostraint = "ProcessReferences.Status='analysed'";
         private string m_DecoatedConstraint = "ProcessReferences.Status='decoated'";
-        private string m_terminatedContraint = "ProcessReferences.Status='terminated' OR ProcessReferences.Status='cancelled'";
+        private string m_terminatedContraint = "";//;"ProcessReferences.Status='terminated' OR ProcessReferences.Status='cancelled'";
         private string m_FullConstraint = " WHERE (ProcessReferences.Status='processed' "+
                                             "OR ProcessReferences.Status='analysed' "+
-                                            "OR ProcessReferences.Status='terminated' " +
-                                            "OR ProcessReferences.Status='cancelled' " +
                                             "OR ProcessReferences.Status='decoated') " ;
 
         private string m_Filter = "";
 
         private string m_sortString = "";
 
-        private bool m_p = true;
-        private bool m_a = true;
-        private bool m_d = true;
-        private bool m_t = true;
+        private bool m_p = true;    //processed
+        private bool m_a = true;    //analysed
+        private bool m_d = true;    //decoated
+        private bool m_t = false;   //terminated or cancelled
 
         private DataSet m_data;
 
         public F_PostProcessingVM()
         {
             ProcessManager.Instance.newProcesses += Instance_newProcesses;
-
             Instance_newProcesses();
         }
 

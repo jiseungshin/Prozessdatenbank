@@ -95,11 +95,31 @@
                     </ListView.ItemContainerStyle>
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="V-Nr." DisplayMemberBinding="{Binding Path=ReferenceNumber}" Width="50"/>
-                            <GridViewColumn Header="Werkstück" DisplayMemberBinding="{Binding Path=Label}" Width="100"/>
-                            <GridViewColumn Header="Material" DisplayMemberBinding="{Binding Path=Name}" Width="100"/>
-                            <GridViewColumn Header="Projekt" DisplayMemberBinding="{Binding Path=ProjectName}" Width="130"/>
-                            <GridViewColumn Header="Fragestellung" DisplayMemberBinding="{Binding Path=Description}" Width="150"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=ReferenceNumber}" Width="50">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="ProcessReferences.ReferenceNumber" Click="ListView_Header_Click">V-Nr.</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Label}" Width="100">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Workpieces.Label" Click="ListView_Header_Click">Werkstück</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Width="100">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Materials.Name" Click="ListView_Header_Click">Material</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=ProjectName}" Width="130">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Projects.ProjectName" Click="ListView_Header_Click">Projekt</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Description}" Width="150">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Issues.Description" Click="ListView_Header_Click">Fragestellung</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
                         </GridView>
 
                     </ListView.View>

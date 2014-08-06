@@ -26,7 +26,12 @@ namespace OE110Prozessdatenbank.ViewModels
         {
             //Updater.Instance.newData += Instance_newData;
             ProcessManager.Instance.newProcesses += Instance_newProcesses;
-            ObjectManager.Instance.update();
+            ObjectManager.Instance.update(DBWorkpieces.Table);
+            ObjectManager.Instance.update(DBProjects.Table);
+            ObjectManager.Instance.update(DBIssues.Table);
+            ObjectManager.Instance.update(DBUser.Table);
+            ObjectManager.Instance.update(DBMachine.Table);
+            
             m_Machine = ObjectManager.Instance.Machines[0];
         }
 

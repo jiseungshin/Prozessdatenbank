@@ -60,7 +60,7 @@ namespace OE110Prozessdatenbank.ObjectWindows
 
         public VMGlassAdministration()
         {
-            ObjectManager.Instance.update();
+            ObjectManager.Instance.update(PDCore.Database.DBGlasses.Table);
             ObjectManager.Instance.newObjects += Instance_newObjects;
         }
 
@@ -77,7 +77,6 @@ namespace OE110Prozessdatenbank.ObjectWindows
 
         void Instance_newObjects()
         {
-            ObjectManager.Instance.update();
             NotifyPropertyChanged("Glasses");
         }
 

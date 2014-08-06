@@ -72,7 +72,7 @@ namespace OE110Prozessdatenbank.ObjectWindows
 
         public VMMaterialAdministration()
         {
-            ObjectManager.Instance.update();
+            ObjectManager.Instance.update(PDCore.Database.DBMAterial.Table);
             ObjectManager.Instance.newObjects += Instance_newObjects;
         }
 
@@ -83,7 +83,7 @@ namespace OE110Prozessdatenbank.ObjectWindows
 
         void Instance_newObjects()
         {
-            ObjectManager.Instance.update();
+            //ObjectManager.Instance.update();
             NotifyPropertyChanged("Materials");
         }
     }

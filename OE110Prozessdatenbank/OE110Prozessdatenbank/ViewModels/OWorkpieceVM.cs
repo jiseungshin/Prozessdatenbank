@@ -22,7 +22,8 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public OWorkpieceVM()
         {
-            ObjectManager.Instance.update();
+            ObjectManager.Instance.update(PDCore.Database.DBWorkpieces.Table);
+            ObjectManager.Instance.update(PDCore.Database.DBMAterial.Table);
             m_workpiece = new Workpiece();
             m_workieces = new ObservableCollection<Workpiece>(ObjectManager.Instance.Workpieces);
             SaveWorkpiece = new RelayCommand(Save, CanSave);

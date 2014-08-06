@@ -64,7 +64,7 @@ namespace OE110Prozessdatenbank.ObjectWindows
         ObservableCollection<Workpiece> m_workpieces;
         public VMWorkpiecePicker(ObservableCollection<Workpiece> workpieces)
         {
-            ObjectManager.Instance.update();
+            ObjectManager.Instance.update(PDCore.Database.DBWorkpieces.Table);
             ObjectManager.Instance.newObjects += Instance_newObjects;
             m_workpieces = workpieces;
 
@@ -96,7 +96,7 @@ namespace OE110Prozessdatenbank.ObjectWindows
 
         void Instance_newObjects()
         {
-            ObjectManager.Instance.update();
+            //ObjectManager.Instance.update();
             NotifyPropertyChanged("Workpieces");
         }
 
