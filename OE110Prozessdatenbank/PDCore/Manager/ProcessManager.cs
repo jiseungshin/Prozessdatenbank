@@ -1739,8 +1739,8 @@ namespace PDCore.Manager
 
                     _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.Status + " = 'raw' WHERE " + DBWorkpieces.ID + "=" + wp.ID);
                     _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.Status + " = 'terminated' WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentReferenceNumber);
-                    _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.ProjectID.ToDBObject() + " = " + process.ProjectID.ToDBObject() + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentReferenceNumber);
-                    _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.IssueID.ToDBObject() + " = " + process.IssueID.ToDBObject() + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentReferenceNumber);
+                    _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.ProjectID + " = " + process.ProjectID.ToDBObject() + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentReferenceNumber);
+                    _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.IssueID + " = " + process.IssueID.ToDBObject() + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentReferenceNumber);
                 }
 
 
