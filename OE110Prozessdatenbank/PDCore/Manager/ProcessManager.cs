@@ -780,6 +780,13 @@ namespace PDCore.Manager
 
                 _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.Status + " = 'INPROCESS' WHERE " + DBWorkpieces.ID + "=" + wp.ID);
 
+                //check if workpice is oneway and append ReferenceNumber
+                if (wp.isOneWay)
+                {
+                    _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.Label + " = " + (wp.Label + _ref).ToDBObject() + " WHERE " + DBWorkpieces.ID + "=" + wp.ID);
+                          
+                }
+
             }
             return _queries;
         }
@@ -859,6 +866,14 @@ namespace PDCore.Manager
             {
                 foreach (var refnr in _refs)
                     FileManager.Instance.createReferenceDirectory(refnr);
+
+                foreach (var wp in process.Workpieces)
+                {
+                    //Copy Workpiece
+                    Workpiece ClonedWorpiece = wp.clone();
+                    ClonedWorpiece.isActive = true;
+                    ObjectManager.Instance.saveWorkpiece(ClonedWorpiece, false);
+                }
             }
         }
 
@@ -943,6 +958,14 @@ namespace PDCore.Manager
             {
                 foreach (var refnr in _refs)
                     FileManager.Instance.createReferenceDirectory(refnr);
+
+                foreach (var wp in process.Workpieces)
+                {
+                    //Copy Workpiece
+                    Workpiece ClonedWorpiece = wp.clone();
+                    ClonedWorpiece.isActive = true;
+                    ObjectManager.Instance.saveWorkpiece(ClonedWorpiece, false);
+                }
             }
         }
 
@@ -995,6 +1018,14 @@ namespace PDCore.Manager
             {
                 foreach (var refnr in _refs)
                     FileManager.Instance.createReferenceDirectory(refnr);
+
+                foreach (var wp in process.Workpieces)
+                {
+                    //Copy Workpiece
+                    Workpiece ClonedWorpiece = wp.clone();
+                    ClonedWorpiece.isActive = true;
+                    ObjectManager.Instance.saveWorkpiece(ClonedWorpiece, false);
+                }
             }
         }
 
@@ -1039,6 +1070,14 @@ namespace PDCore.Manager
             {
                 foreach (var refnr in _refs)
                     FileManager.Instance.createReferenceDirectory(refnr);
+
+                foreach (var wp in process.Workpieces)
+                {
+                    //Copy Workpiece
+                    Workpiece ClonedWorpiece = wp.clone();
+                    ClonedWorpiece.isActive = true;
+                    ObjectManager.Instance.saveWorkpiece(ClonedWorpiece, false);
+                }
             }
         }
 
@@ -2055,7 +2094,7 @@ namespace PDCore.Manager
 
             _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.Status + " = 'INPROCESS' WHERE " + DBWorkpieces.ID + "=" + workpiece.ID);
 
-            //check if workpice is oneway
+            //check if workpice is oneway and append ReferenceNumber
             if (workpiece.isOneWay)
             {
                 _queries.Add("Update " + DBWorkpieces.Table + " Set " + DBWorkpieces.Label + " = "+ (workpiece.Label+_ref).ToDBObject() +" WHERE " + DBWorkpieces.ID + "=" + workpiece.ID);

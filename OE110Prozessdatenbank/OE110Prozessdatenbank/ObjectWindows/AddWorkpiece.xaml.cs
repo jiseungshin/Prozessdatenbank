@@ -43,7 +43,7 @@ namespace OE110Prozessdatenbank.ObjectWindows
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !Input.CharacterRegex.IsMatch((sender as TextBox).Text + e.Text);
+            //e.Handled = !Input.CharacterRegex.IsMatch((sender as TextBox).Text + e.Text);
         }
     }
 }

@@ -41,6 +41,13 @@ namespace PDCore.BusinessObjects
             wp.Label = this.Label;
             wp.Material = this.Material;
             wp.CurrentReferenceNumber = this.CurrentReferenceNumber;
+            wp.Geometry = this.Geometry;
+            wp.PurchaseDate = this.PurchaseDate;
+            wp.BatchNumber = this.BatchNumber;
+            wp.InitiatorID = this.InitiatorID;
+            wp.isActive = this.isActive;
+            wp.isOneWay = this.isOneWay;
+            wp.KindOfProbe = this.KindOfProbe;
 
             return wp;
         }

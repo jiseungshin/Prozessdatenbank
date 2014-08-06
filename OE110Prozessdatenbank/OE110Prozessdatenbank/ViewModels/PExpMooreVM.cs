@@ -123,7 +123,7 @@ namespace OE110Prozessdatenbank.ViewModels
             set
             {
                     m_upper = value;
-                    WP_UpperControl = new Controls.CQuality(value);
+                    WP_UpperControl = new Controls.CQuality(m_upper);
 
                     //try
                     //{
@@ -298,12 +298,12 @@ namespace OE110Prozessdatenbank.ViewModels
             {
                 if (LowerWP != null)
                 {
-                    m_process.Workpieces.Add(LowerWP);
+                    m_process.Workpieces.Add(m_lower);
                     m_process.LowerWP = LowerWP.ID;
                 }
                 if (UpperWP != null)
                 {
-                    m_process.Workpieces.Add(UpperWP);
+                    m_process.Workpieces.Add(m_upper);
                     m_process.UpperWP = UpperWP.ID;
                 }
                 ProcessManager.Instance.saveProcess(m_process, false);

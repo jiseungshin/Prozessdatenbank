@@ -8,7 +8,7 @@
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Grid x:Name="g_content" Margin="0,26,0,0"/>
-        <Menu Height="26" VerticalAlignment="Top" Background="#FFB4B4B4" Margin="0,0,275,0">
+        <Menu Height="26" VerticalAlignment="Top" Background="#FFB4B4B4" Margin="0,0,232,0">
             <MenuItem Header="Datei" Height="26">
                 <MenuItem Header="wechseln zu">
                     <MenuItem.Icon>
@@ -93,10 +93,10 @@
                 <MenuItem Header="Polierprozesse (Phoenix)"></MenuItem>
             </MenuItem>
             
-            <MenuItem Header="Abfragen">
+
                 <MenuItem Header="Abfrage Vorgangsnummer" Click="mbt_GetReference_Click" Height="26"></MenuItem>
                 <MenuItem Header="Projektabfrage" Click="mbt_GetRefereProjectHistory_Click" Height="26"></MenuItem>
-            </MenuItem>
+
             <MenuItem Click="Debug_click" Height="26" ToolTip="Daten aktualisieren">
                 <MenuItem.Header>
                     <StackPanel>

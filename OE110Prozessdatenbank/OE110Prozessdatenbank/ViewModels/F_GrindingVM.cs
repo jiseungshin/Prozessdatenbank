@@ -20,6 +20,7 @@ namespace OE110Prozessdatenbank.ViewModels
         private string m_PolshedFilter = "";
         private string m_PolishedKrit = DBProjects.Table + "." + DBProjects.Name;
         private FilterCriteria m_polishedCriterium = ProcessManager.Instance.FilterCriteria[0];
+        private string m_sortString="";
 
         public F_GrindingVM()
         {
@@ -77,7 +78,7 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public DataSet DataRaw
         {
-            get {return ProcessManager.Instance.getData(Queries.QueryRaw + m_rawFilter); }
+            get {return ProcessManager.Instance.getData(Queries.QueryRaw + m_rawFilter + m_sortString); }
         }
 
         public ObservableCollection<FilterCriteria> FilterCriteria
@@ -143,6 +144,11 @@ namespace OE110Prozessdatenbank.ViewModels
 
                 NotifyPropertyChanged("DataPolished");
             }
+        }
+
+        public string SortString
+        {
+            set { m_sortString = value; NotifyPropertyChanged("DataRaw"); }
         }
 
         

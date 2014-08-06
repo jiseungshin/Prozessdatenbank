@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data;
 using PDCore.Database;
+using System.ComponentModel;
 
 namespace OE110Prozessdatenbank.MainViews
 {
@@ -23,6 +24,10 @@ namespace OE110Prozessdatenbank.MainViews
     {
         ViewModels.F_GrindingVM m_vm;
         ProcessWindows.GenericWindow gw;
+
+        private GridViewColumnHeader listViewSortCol = null;
+        private SortAdorner listViewSortAdorner = null;
+
         public MV_Grinding()
         {
             InitializeComponent();
@@ -230,6 +235,41 @@ namespace OE110Prozessdatenbank.MainViews
         }
 
         #endregion
+
+
+        private void ListView_Header_Click(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader column = (sender as GridViewColumnHeader);
+
+            if (listViewSortCol != null)
+            {
+                AdornerLayer.GetAdornerLayer(listViewSortCol).Remove(listViewSortAdorner);
+                LV_Raw.Items.SortDescriptions.Clear();
+                
+            }
+
+            ListSortDirection newDir = ListSortDirection.Ascending;
+            if (listViewSortCol == column && listViewSortAdorner.Direction == newDir)
+                newDir = ListSortDirection.Descending;
+
+            listViewSortCol = column;
+            listViewSortAdorner = new SortAdorner(listViewSortCol, newDir);
+            AdornerLayer.GetAdornerLayer(listViewSortCol).Add(listViewSortAdorner);
+
+            switch (newDir)
+            {
+                case ListSortDirection.Descending:
+                    m_vm.SortString = " ORDER BY " + column.Tag.ToString() + " DESC";
+                    break;
+                default:
+                    m_vm.SortString = " ORDER BY " + column.Tag.ToString() + " ASC";
+                    break;
+            }
+
+        }
+        
+
+
 
 
     }

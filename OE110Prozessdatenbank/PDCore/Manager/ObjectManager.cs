@@ -129,6 +129,16 @@ namespace PDCore.Manager
             getCoatedWorkpieces();
         }
 
+        public void update(string Table)
+        {
+            switch (Table)
+            {
+                //case DBUser.Table.ToString():
+                //    getUser();
+                //    break;
+            }
+        }
+
         public void updateProjects()
         { getProjects(); getIssues(); }
 

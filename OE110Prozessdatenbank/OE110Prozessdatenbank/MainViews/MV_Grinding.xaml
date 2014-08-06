@@ -87,10 +87,26 @@
                     </ListView.ItemContainerStyle>
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Werkstück" DisplayMemberBinding="{Binding Label}" Width="110"/>
-                            <GridViewColumn Header="Material" DisplayMemberBinding="{Binding Name}" Width="110"/>
-                            <GridViewColumn Header="Geometrie" DisplayMemberBinding="{Binding Geometry}" Width="95"/>
-                            <!--<GridViewColumn Header="Erstelller" DisplayMemberBinding="{Binding Token}" Width="60"/>-->
+                            <GridViewColumn DisplayMemberBinding="{Binding Label}" Width="110">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Workpieces.Label" Click="ListView_Header_Click">Werkstück</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="110">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Materials.Name" Click="ListView_Header_Click">Material</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Geometry}" Width="95">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Workpieces.Geometry" Click="ListView_Header_Click">Geometrie</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Token}" Width="60">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="User.Token" Click="ListView_Header_Click">Erstelller</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
                         </GridView>
 
                     </ListView.View>
@@ -99,7 +115,7 @@
                 <Label Content="Suche:" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
                 <Label Content="Unbearbeitete Werkstücke" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" FontStyle="Italic" Foreground="#FF303030"/>
             </Grid>
-            <Grid Grid.Column="1" Margin="10,0,0,0">
+            <Grid Grid.Column="1">
                 <ListView Name="LV_Polished" Margin="10,67,10,10" DataContext="{Binding DataPolished, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Table}" SelectionMode="Single" MouseDoubleClick="MaterialListView_MouseDoubleClick">
                     <ListView.Background>
                         <LinearGradientBrush>

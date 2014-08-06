@@ -41,7 +41,7 @@
 
 
         <Label Content="Bearbeiter *" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
-        <Label Content="Projekt *" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,124,0,0" VerticalAlignment="Top" Width="110"/>
+        <Label Content="Projekt" HorizontalAlignment="Left" Margin="10,124,0,0" VerticalAlignment="Top" Width="110"/>
         <Label Content="Datum *" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Width="110"/>
         <Label Content="Werkzeugradius [mm] *" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
         <Label Content="Tippradius [mm] *" HorizontalAlignment="Left" Margin="10,233,0,0" VerticalAlignment="Top" Width="133" FontWeight="Bold"/>
@@ -56,7 +56,7 @@
         <Label Content="Werkstück:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="79"/>
         <Label x:Name="lb_workpiece" Content="{Binding WorkpieceLabel}" HorizontalAlignment="Left" Margin="163,0,0,0" VerticalAlignment="Top" Width="79"/>
         <Label Content="Drehlzahl Schleifscheibe [1/min] *" HorizontalAlignment="Left" Margin="10,376,0,0" VerticalAlignment="Top" Width="206" FontWeight="Bold"/>
-        <Label Content="Fragestellung /&#xD;&#xA;Versuchsreihe *" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top" Width="110"/>
+        <Label Content="Fragestellung /&#xD;&#xA;Versuchsreihe" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top" Width="110"/>
 
         <Button x:Name="bt_save" Content="speichern" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Command="{Binding SaveProcess}" IsEnabled="{Binding SaveProcess.CanSave}" Click="bt_save_Click"/>
         <Button x:Name="bt_cancel" Content="abbrechen" HorizontalAlignment="Right" Margin="0,0,92,10" VerticalAlignment="Bottom" Width="75" Click="bt_cancel_Click"/>
