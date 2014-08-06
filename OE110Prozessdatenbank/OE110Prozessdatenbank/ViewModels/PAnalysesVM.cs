@@ -26,7 +26,7 @@ namespace OE110Prozessdatenbank.ViewModels
         int ref_ID = -1;
         public PAnalysesVM(int RefID)
         {
-            ObjectManager.Instance.update();
+            //ObjectManager.Instance.update();
             ref_ID = RefID;
             m_analyses = ProcessManager.Instance.getAnalysis(RefID);
             ProcessManager.Instance.newProcesses += Instance_newProcesses;

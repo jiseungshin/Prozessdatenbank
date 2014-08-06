@@ -70,10 +70,10 @@ namespace OE110Prozessdatenbank.MainViews
             switch (newDir)
             {
                 case ListSortDirection.Descending:
-                    m_vm.SortString = " ORDER BY " + column.Tag.ToString() + " DESC";
+                    m_vm.SortString = /*" ORDER BY " +*/ column.Tag.ToString() + " DESC";
                     break;
                 default:
-                    m_vm.SortString = " ORDER BY " + column.Tag.ToString() + " ASC";
+                    m_vm.SortString = /*" ORDER BY " +*/ column.Tag.ToString() + " ASC";
                     break;
             }
 

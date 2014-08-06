@@ -73,30 +73,33 @@
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding ReferenceNumber}" Width="50">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="ProcessReferences.ReferenceNumber" Click="ListView_Header_Click">V-Nr.</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="ReferenceNumber" Click="ListView_Header_Click">V-Nr.</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
                     <GridViewColumn DisplayMemberBinding="{Binding Label}" Width="90">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="Workpieces.Label" Click="ListView_Header_Click">Werkstück</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="Label" Click="ListView_Header_Click">Werkstück</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
                     <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="90">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="Materials.Name" Click="ListView_Header_Click">Material</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="Name" Click="ListView_Header_Click">Material</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
                     <GridViewColumn DisplayMemberBinding="{Binding ProjectName}" Width="100">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="Projects.ProjectName" Click="ListView_Header_Click">Projekt</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="ProjectName" Click="ListView_Header_Click">Projekt</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
                     <GridViewColumn DisplayMemberBinding="{Binding Description}" Width="150">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="Issues.Description" Click="ListView_Header_Click">Fragestellung</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="Description" Click="ListView_Header_Click">Fragestellung</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
-                    <GridViewColumn Header="analysiert" Width="70">
+                    <GridViewColumn Width="70">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="analysed" Click="ListView_Header_Click">analysiert</GridViewColumnHeader>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Width="60">
@@ -105,7 +108,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="decoating" Width="70">
+                    <GridViewColumn Width="70">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="decoated" Click="ListView_Header_Click">decoating</GridViewColumnHeader>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Width="60">
@@ -114,7 +120,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Fazit" Width="70">
+                    <GridViewColumn Width="70">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="terminated" Click="ListView_Header_Click">Fazit</GridViewColumnHeader>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Width="60">
@@ -125,7 +134,7 @@
                     </GridViewColumn>
                     <GridViewColumn Width="130">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="ProcessReferences.Status" Click="ListView_Header_Click">Status</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="Status" Click="ListView_Header_Click">Status</GridViewColumnHeader>
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>

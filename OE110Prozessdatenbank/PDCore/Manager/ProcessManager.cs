@@ -209,6 +209,22 @@ namespace PDCore.Manager
             return m_list;
         }
 
+        public List<WorkpieceHistory> getReferences(int ProjectID, int IssueID)
+        {
+            DataSet _ds = _myCommunicator.getDataSet("SELECT * from " + DBProcessReferences.Table +
+                                                            " where " + DBProcessReferences.ProjectID + "=" + ProjectID +
+                                                            " AND " + DBProcessReferences.IssueID + "=" + IssueID);
+
+
+            List<WorkpieceHistory> m_list = new List<WorkpieceHistory>();
+            foreach (DataRow dr in _ds.Tables[0].Rows)
+            {
+                m_list.Add(getWorkpieceHistory(dr.Field<int>(DBProcessReferences.RefNumber)));
+            }
+
+            return m_list;
+        }
+
         public DataSet getData(string query)
         {
             return _myCommunicator.getDataSet(query);

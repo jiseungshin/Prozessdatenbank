@@ -75,12 +75,8 @@ namespace OE110Prozessdatenbank.ViewModels
         {
             get 
             {
-                if (m_issue != null)
-                {
-                    return new ObservableCollection<WorkpieceHistory>(m_history.FindAll(item => item.Issue.ID == m_issue.ID));
-                }
-                else
-                    return new ObservableCollection<WorkpieceHistory>(m_history);
+
+                return new ObservableCollection<WorkpieceHistory>(m_history);
             }
         }
 
@@ -89,7 +85,11 @@ namespace OE110Prozessdatenbank.ViewModels
         public void getHistory()
         {
             m_history.Clear();
-            m_history = ProcessManager.Instance.getReferences(m_project.ID);
+            if (m_issue==null)
+                m_history = ProcessManager.Instance.getReferences(m_project.ID);
+            else
+                m_history = ProcessManager.Instance.getReferences(m_project.ID, m_issue.ID);
+            
             NotifyPropertyChanged("History");
         }
 

@@ -33,50 +33,67 @@ namespace OE110Prozessdatenbank.ViewModels
         private bool m_d = true;
         private bool m_t = true;
 
+        private DataSet m_data;
+
         public F_PostProcessingVM()
         {
             ProcessManager.Instance.newProcesses += Instance_newProcesses;
+
+            Instance_newProcesses();
         }
 
         void Instance_newProcesses()
         {
+            DataSet _ds = ProcessManager.Instance.getData(Queries.QueryPostProcessing + m_FullConstraint);
+            if (_ds.Tables[0].Rows.Count > 0)
+            {
+                _ds.Tables[0].Columns.Add("analysed", typeof(bool));
+                _ds.Tables[0].Columns.Add("decoated", typeof(bool));
+                _ds.Tables[0].Columns.Add("terminated", typeof(bool));
+
+                foreach (DataRow dr in _ds.Tables[0].Rows)
+                {
+
+                    if (ProcessManager.Instance.getCountOf(DBAnalyses.Table, DBAnalyses.RefNumber, dr.Field<int>(DBProcessReferences.RefNumber)) > 0)
+                        dr["analysed"] = true;
+                    else
+                        dr["analysed"] = false;
+
+                    if (ProcessManager.Instance.getCountOf(DBProcessReferenceRelation.Table, DBProcessReferenceRelation.RefNumber + " = " + dr.Field<int>(DBProcessReferences.RefNumber) + " AND Machine_ID=51") > 0)
+                        dr["decoated"] = true;
+                    else
+                        dr["decoated"] = false;
+
+                    if (dr.Field<string>(DBIssues.Conclusion) != null)
+                        dr["terminated"] = true;
+                    else
+                        dr["terminated"] = false;
+                }
+            }
+
+            m_data = _ds;//.Tables[0];
+            
             NotifyPropertyChanged("Data");
         }
 
-        public DataTable Data
+        public DataView Data
         {
             get
             {
-                DataSet _ds = ProcessManager.Instance.getData(Queries.QueryPostProcessing + m_FullConstraint + m_Filter + m_sortString);
-                if (_ds.Tables[0].Rows.Count > 0)
-                {
-                    _ds.Tables[0].Columns.Add("analysed", typeof(bool));
-                    _ds.Tables[0].Columns.Add("decoated", typeof(bool));
-                    _ds.Tables[0].Columns.Add("terminated", typeof(bool));
+                DataView dv = m_data.Tables[0].DefaultView;
+                
 
-                    foreach (DataRow dr in _ds.Tables[0].Rows)
-                    {
+                 //m_Filter = " AND (" + DBWorkpieces.Table + "." + DBWorkpieces.Label + " LIKE ('%" + value + "%')" +
+                 //             " OR " + DBProcessReferences.Table + "." + DBProcessReferences.RefNumber + " LIKE ('%" + value + "%')" +
+                 //             " OR " + DBMAterial.Table + "." + DBMAterial.Name + " LIKE ('%" + value + "%'))";
 
-                        if (ProcessManager.Instance.getCountOf(DBAnalyses.Table, DBAnalyses.RefNumber, dr.Field<int>(DBProcessReferences.RefNumber)) > 0)
-                            dr["analysed"] = true;
-                        else
-                            dr["analysed"] = false;
+                dv.RowFilter = DBWorkpieces.Label + " LIKE ('%" + m_Filter + "%') OR " +
+                    "Convert(" + DBProcessReferences.RefNumber + ",System.String) LIKE '%" + m_Filter + "%' OR " +
+                    DBMAterial.Name + " LIKE '%" + m_Filter + "%'";
 
-                        if (ProcessManager.Instance.getCountOf(DBProcessReferenceRelation.Table, DBProcessReferenceRelation.RefNumber + " = " + dr.Field<int>(DBProcessReferences.RefNumber) + " AND Machine_ID=51") > 0)
-                            dr["decoated"] = true;
-                        else
-                            dr["decoated"] = false;
+                dv.Sort = m_sortString;
 
-                        if (dr.Field<string>(DBIssues.Conclusion) != null)
-                            dr["terminated"] = true;
-                        else
-                            dr["terminated"] = false;
-                    }
-                }
-
-
-
-                return _ds.Tables[0];
+                return dv;
             }
         }
 
@@ -188,6 +205,7 @@ namespace OE110Prozessdatenbank.ViewModels
             if (m_processedConstraint == "" && m_AnalysedCostraint == "" && m_DecoatedConstraint == "" && m_terminatedContraint == "")
                 m_FullConstraint = " WHERE ProcessReferences.ReferenceNumber=-1";
 
+            Instance_newProcesses();
             NotifyPropertyChanged("Data");
 
         }
@@ -198,9 +216,11 @@ namespace OE110Prozessdatenbank.ViewModels
             {
                 if (value != "")
                 {
-                    m_Filter = " AND (" + DBWorkpieces.Table + "." + DBWorkpieces.Label + " LIKE ('%" + value + "%')" +
-                              " OR " + DBProcessReferences.Table + "." + DBProcessReferences.RefNumber + " LIKE ('%" + value + "%')" +
-                              " OR " + DBMAterial.Table + "." + DBMAterial.Name + " LIKE ('%" + value + "%'))";
+                    //m_Filter = " AND (" + DBWorkpieces.Table + "." + DBWorkpieces.Label + " LIKE ('%" + value + "%')" +
+                    //          " OR " + DBProcessReferences.Table + "." + DBProcessReferences.RefNumber + " LIKE ('%" + value + "%')" +
+                    //          " OR " + DBMAterial.Table + "." + DBMAterial.Name + " LIKE ('%" + value + "%'))";
+
+                    m_Filter = value;
                 }
                 else
                     m_Filter = value;
