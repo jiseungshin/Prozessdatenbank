@@ -82,6 +82,9 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public bool isActive
         { get { return m_workpiece.isActive; } set { m_workpiece.isActive = value; } }
+
+        public string Remark
+        { get { return m_workpiece.Remark; } set { m_workpiece.Remark = value; } }
         
         public bool canChangeActive
         {

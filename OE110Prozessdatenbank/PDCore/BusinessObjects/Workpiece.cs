@@ -33,6 +33,8 @@ namespace PDCore.BusinessObjects
         public bool isActive { get; set; }
         public int? InitiatorID { get; set; }
 
+        public string Remark { get; set; }
+
         public Workpiece clone()
         {
 

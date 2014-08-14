@@ -92,6 +92,7 @@ namespace PDCore.Database
         public static string BatchNumber { get { return "BatchNumber"; } }
         public static string isOneWay { get { return "isOneWay"; } }
         public static string isActive { get { return "isActive"; } }
+        public static string Remark { get { return "Remark"; } }
 
     }
     public static class DBWorkpieceQuality
