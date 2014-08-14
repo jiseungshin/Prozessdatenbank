@@ -491,7 +491,7 @@ namespace PDCore.Manager
                                                                             wp.KindOfProbe.ToDBObject() + "," +
                                                                             wp.PurchaseDate.ToDBObject() + "," +
                                                                             wp.Material.ID.ToDBObject() + "," +
-                                                                             wp.isActive.ToDBObject() + 
+                                                                             wp.isActive.ToDBObject() + ","+ 
                                                                              wp.Remark.ToDBObject() + ",'raw')");
 
 
