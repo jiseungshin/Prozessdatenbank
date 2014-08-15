@@ -159,12 +159,36 @@
                     </ListView.ItemContainerStyle>
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="V-Nr." DisplayMemberBinding="{Binding Path=ReferenceNumber}" Width="130"/>
-                            <GridViewColumn Header="Werkstück" DisplayMemberBinding="{Binding Path=Label}" Width="130"/>
-                            <GridViewColumn Header="Material" DisplayMemberBinding="{Binding Path=Name}" Width="130"/>
-                            <GridViewColumn Header="Projekt" DisplayMemberBinding="{Binding Path=ProjectName}" Width="130"/>
-                            <GridViewColumn Header="Bearbeiter" DisplayMemberBinding="{Binding Path=Token}" Width="130"/>
-                            <GridViewColumn Header="Datum" DisplayMemberBinding="{Binding Path=Date,Converter={StaticResource dateConv}}" Width="130"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding ReferenceNumber}" Width="130">
+                                    <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="ProcessReferences.ReferenceNumber" Click="ListViewProcessed_Header_Click">V-Nr.</GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Label}" Width="130">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Label" Click="ListViewProcessed_Header_Click">Werkstück</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Width="130">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Name" Click="ListViewProcessed_Header_Click">Material</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=ProjectName}" Width="130">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="ProjectName" Click="ListViewProcessed_Header_Click">Projekt</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Token}" Width="130">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Token" Click="ListViewProcessed_Header_Click">Bearbeiter</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Date,Converter={StaticResource dateConv}}" Width="130">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="Date" Click="ListViewProcessed_Header_Click">Datum</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
                         </GridView>
 
                     </ListView.View>

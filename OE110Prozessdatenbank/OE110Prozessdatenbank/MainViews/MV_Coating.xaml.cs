@@ -24,6 +24,7 @@ namespace OE110Prozessdatenbank.MainViews
     {
 
         private GridViewColumnHeader listViewSortCol = null;
+        private GridViewColumnHeader listViewSortColProcessed = null;
         private SortAdorner listViewSortAdorner = null;
 
         private ViewModels.F_CoatingVM m_vm;
@@ -194,6 +195,36 @@ namespace OE110Prozessdatenbank.MainViews
                     break;
                 default:
                     m_vm.SortString = " ORDER BY " + column.Tag.ToString() + " ASC";
+                    break;
+            }
+        }
+
+        private void ListViewProcessed_Header_Click(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader column = (sender as GridViewColumnHeader);
+
+            if (listViewSortColProcessed != null)
+            {
+                AdornerLayer.GetAdornerLayer(listViewSortColProcessed).Remove(listViewSortAdorner);
+                LD_Polished.Items.SortDescriptions.Clear();
+
+            }
+
+            ListSortDirection newDir = ListSortDirection.Ascending;
+            if (listViewSortColProcessed == column && listViewSortAdorner.Direction == newDir)
+                newDir = ListSortDirection.Descending;
+
+            listViewSortColProcessed = column;
+            listViewSortAdorner = new SortAdorner(listViewSortColProcessed, newDir);
+            AdornerLayer.GetAdornerLayer(listViewSortColProcessed).Add(listViewSortAdorner);
+
+            switch (newDir)
+            {
+                case ListSortDirection.Descending:
+                    m_vm.SortStringProcessed = " ORDER BY " + column.Tag.ToString() + " DESC";
+                    break;
+                default:
+                    m_vm.SortStringProcessed = " ORDER BY " + column.Tag.ToString() + " ASC";
                     break;
             }
         }

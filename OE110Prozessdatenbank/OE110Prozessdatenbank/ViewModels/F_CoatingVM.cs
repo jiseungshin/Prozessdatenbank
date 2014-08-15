@@ -20,6 +20,7 @@ namespace OE110Prozessdatenbank.ViewModels
         private FilterCriteria m_CoatedCriterium = ProcessManager.Instance.FilterCriteria[0];
 
         private string m_sortString = "";
+        private string m_sortStringProcessed = "";
 
         public F_CoatingVM()
         {
@@ -42,7 +43,7 @@ namespace OE110Prozessdatenbank.ViewModels
         {
             get
             {
-                DataSet _ds = ProcessManager.Instance.getData(Queries.QueryCoated + m_coatedFilter);
+                DataSet _ds = ProcessManager.Instance.getData(Queries.QueryCoated + m_coatedFilter + m_sortStringProcessed);
                 //_ds.Tables[0].Columns.Add("al", typeof(string));
                 //_ds.Tables[0].Columns.Add("pl", typeof(string));
                 //foreach(DataRow dr in _ds.Tables[0].Rows)
@@ -105,6 +106,11 @@ namespace OE110Prozessdatenbank.ViewModels
         public string SortString
         {
             set { m_sortString = value; NotifyPropertyChanged("DataPolished"); }
+        }
+
+        public string SortStringProcessed
+        {
+            set { m_sortStringProcessed = value; NotifyPropertyChanged("DataCoated"); }
         }
     }
 }

@@ -21,6 +21,7 @@ namespace OE110Prozessdatenbank.ViewModels
         private string m_PolishedKrit = DBProjects.Table + "." + DBProjects.Name;
         private FilterCriteria m_polishedCriterium = ProcessManager.Instance.FilterCriteria[0];
         private string m_sortString="";
+        private string m_sortStringProcessed = "";
 
         public F_GrindingVM()
         {
@@ -102,13 +103,13 @@ namespace OE110Prozessdatenbank.ViewModels
                 switch (Machine.ID)
                 {
                     case 11:
-                        return ProcessManager.Instance.getData(Queries.QueryTurningMoore + m_PolshedFilter);
+                        return ProcessManager.Instance.getData(Queries.QueryTurningMoore + m_PolshedFilter + m_sortStringProcessed);
                     case 12:
-                        return ProcessManager.Instance.getData(Queries.QueryGrindingMoore + m_PolshedFilter);
+                        return ProcessManager.Instance.getData(Queries.QueryGrindingMoore + m_PolshedFilter + m_sortStringProcessed);
                     case 13:
-                        return ProcessManager.Instance.getData(Queries.QueryGrindingPhoenix + m_PolshedFilter);
+                        return ProcessManager.Instance.getData(Queries.QueryGrindingPhoenix + m_PolshedFilter + m_sortStringProcessed);
                     case 14:
-                        return ProcessManager.Instance.getData(Queries.QueryGrindingOther + m_PolshedFilter);
+                        return ProcessManager.Instance.getData(Queries.QueryGrindingOther + m_PolshedFilter + m_sortStringProcessed);
 
                 }
                 return null;
@@ -154,6 +155,11 @@ namespace OE110Prozessdatenbank.ViewModels
         public string SortString
         {
             set { m_sortString = value; NotifyPropertyChanged("DataRaw"); }
+        }
+
+        public string SortStringProcessed
+        {
+            set { m_sortStringProcessed = value; NotifyPropertyChanged("DataPolished"); }
         }
 
         
