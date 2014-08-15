@@ -81,7 +81,10 @@
                     <GridViewColumn Header="V-Nr." DisplayMemberBinding="{Binding Path=ReferenceNumber}" Width="50"/>
                     <GridViewColumn Header="Werkstück" DisplayMemberBinding="{Binding Path=Label}" Width="90"/>
                     <GridViewColumn Header="Material" DisplayMemberBinding="{Binding Path=Name}" Width="90"/>
-                    <GridViewColumn Header="Glas" DisplayMemberBinding="{Binding Path=GlassName,Converter={StaticResource NullToString}}" Width="90"/>
+                    <GridViewColumn Header="Glas" DisplayMemberBinding="{Binding Path=Glass_Name,Converter={StaticResource NullToString}}" Width="90"/>
+                    <GridViewColumn Header="Kammertemp." DisplayMemberBinding="{Binding Path=CellTemperature}" Width="90"/>
+                    <GridViewColumn Header="Presstemp." DisplayMemberBinding="{Binding Path=PressTemperature}" Width="90"/>
+                    <GridViewColumn Header="Kühltemp." DisplayMemberBinding="{Binding Path=CoolingTemperature}" Width="90"/>
                     <GridViewColumn Header="Projekt" DisplayMemberBinding="{Binding Path=ProjectName}" Width="100"/>
                     <GridViewColumn Header="Bearbeiter" DisplayMemberBinding="{Binding Path=Token}" Width="90"/>
                     <GridViewColumn Header="Datum" DisplayMemberBinding="{Binding Path=Date, Converter={StaticResource DateConverter}}" Width="130"/>
