@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
 using System.Data;
 using PDCore.Processes;
@@ -28,13 +29,77 @@ namespace OE110Prozessdatenbank.Controls
     public partial class CProSemeCon : UserControl
     {
 
-        private ProcessWindows.GenericWindow m_window;
+        private GridViewColumnHeader listViewSortCol = null;
+        private GridViewColumnHeader listViewSortColCoated = null;
+        private SortAdorner listViewSortAdorner = null;
+        private VMProcessingCemeCon m_vm;
 
         public CProSemeCon()
         {
             InitializeComponent();
-            DataContext = new VMProcessingCemeCon();
+            m_vm = new VMProcessingCemeCon();
+            DataContext = m_vm;
             
+        }
+
+        private void ListView_Header_Click(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader column = (sender as GridViewColumnHeader);
+
+            if (listViewSortCol != null)
+            {
+                AdornerLayer.GetAdornerLayer(listViewSortCol).Remove(listViewSortAdorner);
+                LV_ProcessedMoore.Items.SortDescriptions.Clear();
+            }
+
+            ListSortDirection newDir = ListSortDirection.Ascending;
+            if (listViewSortCol == column && listViewSortAdorner.Direction == newDir)
+                newDir = ListSortDirection.Descending;
+
+            listViewSortCol = column;
+            listViewSortAdorner = new SortAdorner(listViewSortCol, newDir);
+            AdornerLayer.GetAdornerLayer(listViewSortCol).Add(listViewSortAdorner);
+
+            switch (newDir)
+            {
+                case ListSortDirection.Descending:
+                    m_vm.SortStringProcessed = " ORDER BY " + column.Tag.ToString() + " DESC";
+                    break;
+                default:
+                    m_vm.SortStringProcessed = " ORDER BY " + column.Tag.ToString() + " ASC";
+                    break;
+            }
+
+        }
+
+        private void ListViewCoated_Header_Click(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader column = (sender as GridViewColumnHeader);
+
+            if (listViewSortColCoated != null)
+            {
+                AdornerLayer.GetAdornerLayer(listViewSortColCoated).Remove(listViewSortAdorner);
+                LV_ProcessedMoore.Items.SortDescriptions.Clear();
+            }
+
+            ListSortDirection newDir = ListSortDirection.Ascending;
+            if (listViewSortColCoated == column && listViewSortAdorner.Direction == newDir)
+                newDir = ListSortDirection.Descending;
+
+            listViewSortColCoated = column;
+            listViewSortAdorner = new SortAdorner(listViewSortColCoated, newDir);
+            AdornerLayer.GetAdornerLayer(listViewSortColCoated).Add(listViewSortAdorner);
+
+            switch (newDir)
+            {
+                case ListSortDirection.Descending:
+                    m_vm.SortString = " ORDER BY " + column.Tag.ToString() + " DESC";
+                    break;
+                default:
+                    m_vm.SortString = " ORDER BY " + column.Tag.ToString() + " ASC";
+                    break;
+            }
+
         }
 
         private void LV_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -95,6 +160,8 @@ namespace OE110Prozessdatenbank.Controls
             if (item.Focusable && !item.IsFocused)
                 item.Focus();
         }
+
+
 
         public static class MyVisualTreeHelper
         {
@@ -187,6 +254,8 @@ namespace OE110Prozessdatenbank.Controls
 
         private string m_filter = "";
         private string m_coatedFilter = "";
+        private string m_sortString = "";
+        private string m_sortStringProcessed = "";
         private FilterCriteria m_criteria = ProcessManager.Instance.FilterCriteria[0];
         public VMProcessingCemeCon()
         {
@@ -203,13 +272,13 @@ namespace OE110Prozessdatenbank.Controls
         {
             get 
             {
-                return ProcessManager.Instance.getData(Queries.QueryProcessedCemeCon + m_filter);
+                return ProcessManager.Instance.getData(Queries.QueryProcessedCemeCon + m_filter + m_sortStringProcessed);
             }
         }
 
         public DataSet CoatedData
         {
-            get { return ProcessManager.Instance.getData(Queries.QueryCoatedReferences + m_coatedFilter); }
+            get { return ProcessManager.Instance.getData(Queries.QueryCoatedReferences + m_coatedFilter + m_sortString); }
         }
 
         public ObservableCollection<FilterCriteria> FilterCriteria
@@ -250,6 +319,16 @@ namespace OE110Prozessdatenbank.Controls
 
                 NotifyPropertyChanged("CoatedData");
             }
+        }
+
+        public string SortStringProcessed
+        {
+            set { m_sortStringProcessed = value; NotifyPropertyChanged("ProcessedData"); }
+        }
+
+        public string SortString
+        {
+            set { m_sortString = value; NotifyPropertyChanged("CoatedData"); }
         }
 
 

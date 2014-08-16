@@ -79,14 +79,71 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="V-Nr." DisplayMemberBinding="{Binding Path=ReferenceNumber}" Width="50"/>
-                    <GridViewColumn Header="Werkstück" DisplayMemberBinding="{Binding Path=Label}" Width="90"/>
-                    <GridViewColumn Header="Material" DisplayMemberBinding="{Binding Path=Name}" Width="90"/>
-                    <GridViewColumn Header="Glas" DisplayMemberBinding="{Binding Path=GlassName,Converter={StaticResource NullToString}}" Width="90"/>
-                    <GridViewColumn Header="Projekt" DisplayMemberBinding="{Binding Path=ProjectName}" Width="100"/>
-                    <GridViewColumn Header="Bearbeiter" DisplayMemberBinding="{Binding Path=Token}" Width="90"/>
-                    <GridViewColumn Header="Datum" DisplayMemberBinding="{Binding Path=Date, Converter={StaticResource DateConverter}}" Width="130"/>
-                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Path=Status,Converter={StaticResource StatusConverter}}" Width="130"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ReferenceNumber}" Width="50">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="ProcessReferences.ReferenceNumber" Click="ListView_Header_Click">V-Nr.</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Label}" Width="90">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Label" Click="ListView_Header_Click">Werkstück</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Width="90">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Name" Click="ListView_Header_Click">Material</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Glass_Name,Converter={StaticResource NullToString}}" Width="90">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Glass_Name" Click="ListView_Header_Click">Glas</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Process_ID}" Width="90">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Exp_CemeCon.Process_ID" Click="ListView_Header_Click">Prozessnummer</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Temperature}" Width="90">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Temperature" Click="ListView_Header_Click">Temperatur</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Duration}" Width="90">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Duration" Click="ListView_Header_Click">Dauer</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Atmosphere}" Width="90">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Atmosphere" Click="ListView_Header_Click">Atmosphähre</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Pressure}" Width="90">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Pressure" Click="ListView_Header_Click">Druck</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ProjectName}" Width="100">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="ProjectName" Click="ListView_Header_Click">Projekt</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Token}" Width="90">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Token" Click="ListView_Header_Click">Bearbeiter</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Date, Converter={StaticResource DateConverter}}" Width="130">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Date" Click="ListView_Header_Click">Datum</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Status,Converter={StaticResource StatusConverter}}" Width="130">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="ProcessReferences.Status" Click="ListView_Header_Click">Status</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
                 </GridView>
 
             </ListView.View>
@@ -158,9 +215,21 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="V-Nr." DisplayMemberBinding="{Binding ReferenceNumber}" Width="50"/>
-                    <GridViewColumn Header="Werkstück" DisplayMemberBinding="{Binding Label}" Width="115"/>
-                    <GridViewColumn Header="Material" DisplayMemberBinding="{Binding Name}" Width="115"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding ReferenceNumber}" Width="50">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="ReferenceNumber" Click="ListViewCoated_Header_Click">V-Nr.</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Label}" Width="115">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Label" Click="ListViewCoated_Header_Click">Werkstück</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="115">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Name" Click="ListViewCoated_Header_Click">Material</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
                 </GridView>
 
             </ListView.View>

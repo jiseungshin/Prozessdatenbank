@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
 using System.Data;
 using PDCore.Processes;
@@ -27,13 +28,15 @@ namespace OE110Prozessdatenbank.MainViews
     /// </summary>
     public partial class MV_ProTestStation : UserControl
     {
-
-
+        private GridViewColumnHeader listViewSortCol = null;
+        private SortAdorner listViewSortAdorner = null;
+        private VMProcessingTestStation m_vm;
 
         public MV_ProTestStation()
         {
             InitializeComponent();
-            DataContext = new VMProcessingTestStation();
+            m_vm = new VMProcessingTestStation();
+            DataContext = m_vm;
             
         }
 
@@ -60,12 +63,43 @@ namespace OE110Prozessdatenbank.MainViews
         {
             new ProcessWindows.CExpTestStation().ShowDialog();
         }
+
+        private void ListView_Header_Click(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader column = (sender as GridViewColumnHeader);
+
+            if (listViewSortCol != null)
+            {
+                AdornerLayer.GetAdornerLayer(listViewSortCol).Remove(listViewSortAdorner);
+                LV_ProcessedMoore.Items.SortDescriptions.Clear();
+            }
+
+            ListSortDirection newDir = ListSortDirection.Ascending;
+            if (listViewSortCol == column && listViewSortAdorner.Direction == newDir)
+                newDir = ListSortDirection.Descending;
+
+            listViewSortCol = column;
+            listViewSortAdorner = new SortAdorner(listViewSortCol, newDir);
+            AdornerLayer.GetAdornerLayer(listViewSortCol).Add(listViewSortAdorner);
+
+            switch (newDir)
+            {
+                case ListSortDirection.Descending:
+                    m_vm.SortString = " ORDER BY " + column.Tag.ToString() + " DESC";
+                    break;
+                default:
+                    m_vm.SortString = " ORDER BY " + column.Tag.ToString() + " ASC";
+                    break;
+            }
+
+        }
     }
 
     public class VMProcessingTestStation : ViewModels.BaseViewModel
     {
 
         private string m_filter = "";
+        private string m_sortString = "";
         private FilterCriteria m_criteria = ProcessManager.Instance.FilterCriteria[0];
         public VMProcessingTestStation()
         {
@@ -81,7 +115,7 @@ namespace OE110Prozessdatenbank.MainViews
         {
             get 
             {
-                return ProcessManager.Instance.getData(Queries.QueryProcessedTestStation + m_filter);
+                return ProcessManager.Instance.getData(Queries.QueryProcessedTestStation + m_filter + m_sortString);
             }
         }
 
@@ -107,6 +141,13 @@ namespace OE110Prozessdatenbank.MainViews
                 NotifyPropertyChanged("ProcessedData");
             }
         }
+
+
+        public string SortString
+        {
+            set { m_sortString = value; NotifyPropertyChanged("ProcessedData"); }
+        }
+       
 
 
 
