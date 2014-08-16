@@ -45,11 +45,13 @@ namespace OE110Prozessdatenbank
         {
             InitializeComponent();
 
+            //Set culture to german
             Thread.CurrentThread.CurrentCulture = new CultureInfo("de-DE");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("de-DE");
 
             FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(
             XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
+
 
             m_adminLabel.Name = "lb_0";
             lbLoginName.Content = "";
