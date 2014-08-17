@@ -29,7 +29,13 @@ namespace OE110Prozessdatenbank.Controls
             m_RefID = ID;
             m_vm = new ViewModels.PAnalysesVM(ID);
             DataContext = m_vm;
+            //this.Closing += CAnalyses_Closing;
         }
+
+        //void CAnalyses_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        //{
+        //    PDCore.Manager.Updater.Instance.forceUpdate();
+        //}
 
         private void LV_DoubleClick(object sender, MouseButtonEventArgs e)
         {

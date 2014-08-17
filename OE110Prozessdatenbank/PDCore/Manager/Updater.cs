@@ -46,11 +46,6 @@ namespace PDCore.Manager
                 newData(values);
         }
 
-        //public void forceUpdate()
-        //{
-        //    OnUpdateTrigger();
-        //}
-
         public void forceUpdate(params string[] values)
         {
 
@@ -80,17 +75,8 @@ namespace PDCore.Manager
         int i = 0;
         private void OnChanged(object source, FileSystemEventArgs e)
         {
-            OnUpdateTrigger();
-            //if (i == 1)
-            //{
-            //    //System.Windows.MessageBox.Show(i.ToString());
-            //    OnUpdateTrigger();
-            //    i = 0;
-            //}
-            //else
-            //    i++;
-
             
+            OnUpdateTrigger();           
         }
     }
 }

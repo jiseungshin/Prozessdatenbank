@@ -44,18 +44,28 @@ namespace OE110Prozessdatenbank.ViewModels
             DataSet _ds = ProcessManager.Instance.getData(Queries.QueryPostProcessing + m_FullConstraint);
             if (_ds.Tables[0].Rows.Count > 0)
             {
-                _ds.Tables[0].Columns.Add("analysed", typeof(bool));
+                _ds.Tables[0].Columns.Add("analysed", typeof(int));
                 _ds.Tables[0].Columns.Add("decoated", typeof(bool));
                 _ds.Tables[0].Columns.Add("terminated", typeof(bool));
 
                 foreach (DataRow dr in _ds.Tables[0].Rows)
                 {
-
-                    if (ProcessManager.Instance.getCountOf(DBAnalyses.Table, DBAnalyses.RefNumber, dr.Field<int>(DBProcessReferences.RefNumber)) > 0)
-                        dr["analysed"] = true;
+                    int CountOfAnalysed = ProcessManager.Instance.getCountOf(DBAnalyses.Table, DBAnalyses.RefNumber, dr.Field<int>(DBProcessReferences.RefNumber));
+                    if (CountOfAnalysed > 0)
+                    {
+                        int CountOfTerminated = ProcessManager.Instance.getCountOf(DBAnalyses.Table, DBAnalyses.RefNumber+"="+ dr.Field<int>(DBProcessReferences.RefNumber) + " AND " + DBAnalyses.isTerminated + "=1");
+                        if (CountOfAnalysed == CountOfTerminated)
+                        {
+                            dr["analysed"] = 2;
+                        }
+                        else
+                            dr["analysed"] = 1;
+                    }
                     else
-                        dr["analysed"] = false;
+                        dr["analysed"] = 0;
 
+                    
+                    
                     if (ProcessManager.Instance.getCountOf(DBProcessReferenceRelation.Table, DBProcessReferenceRelation.RefNumber + " = " + dr.Field<int>(DBProcessReferences.RefNumber) + " AND Machine_ID=51") > 0)
                         dr["decoated"] = true;
                     else

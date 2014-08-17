@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:src="clr-namespace:OE110Prozessdatenbank"
         xmlns:local="clr-namespace:OE110Prozessdatenbank"
-        Title="Analysen" Height="268" Width="533" WindowStartupLocation="CenterScreen" Icon="/OE110Prozessdatenbank;component/Icons/Analysis_9699.png">
+        Title="{Binding Title}" Height="268" Width="642" WindowStartupLocation="CenterScreen" Icon="/OE110Prozessdatenbank;component/Icons/Analysis_9699.png">
     <Window.Resources>
         <local:AnalysisConverter x:Key="aconv"></local:AnalysisConverter>
+        <local:BoolToImage x:Key="boolToImage"></local:BoolToImage>
     </Window.Resources>
     <Grid>
         <Grid.Resources>
@@ -67,8 +68,16 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                </GridView>
-
+                    <GridViewColumn Header="abgeschlossen" Width="90">
+                        <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Width="60">
+                                <Image RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding terminated,Converter={StaticResource boolToImage}}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    </GridView>
             </ListView.View>
         </ListView>
         <Button x:Name="bt_add" Content="Analyse hinzufügen" Margin="10,10,10,0" VerticalAlignment="Top" Height="24" Click="bt_add_Click"/>

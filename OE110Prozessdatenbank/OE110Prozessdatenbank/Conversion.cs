@@ -66,6 +66,39 @@ namespace OE110Prozessdatenbank
         }
     }
 
+    public class IntToImage : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+
+            switch((int)value)
+            {
+                case 1:
+                    return new BitmapImage(new Uri(@"pack://application:,,,/Icons/processBlue_16xLG.png", UriKind.RelativeOrAbsolute));
+                case 2:
+                    return new BitmapImage(new Uri(@"pack://application:,,,/Icons/Status_ok_16xMD.png", UriKind.RelativeOrAbsolute));
+                default:
+                    return new BitmapImage(new Uri(@"pack://application:,,,/Icons/Status_Blocked_16xMD.png", UriKind.RelativeOrAbsolute));
+            }
+
+            //if ((int)value == 2)
+            //{
+            //    return new BitmapImage(new Uri(@"pack://application:,,,/Icons/Status_ok_16xMD.png", UriKind.RelativeOrAbsolute));
+            //}
+            //if ((int)value == 1)
+            //{
+            //    return new BitmapImage(new Uri(@"pack://application:,,,/Icons/Status_ok_16xMD.png", UriKind.RelativeOrAbsolute));
+            //}
+            //if ((int)value == 0)
+            //    return new BitmapImage(new Uri(@"pack://application:,,,/Icons/Status_Blocked_16xMD.png", UriKind.RelativeOrAbsolute));
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value;
+        }
+    }
+
     //public class LoadFactorToPercent : IValueConverter
     //{
     //    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

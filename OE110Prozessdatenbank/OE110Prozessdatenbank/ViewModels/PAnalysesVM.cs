@@ -14,19 +14,10 @@ namespace OE110Prozessdatenbank.ViewModels
     public class PAnalysesVM : BaseViewModel
     {
         List<Analysis> m_analyses;
-        //public PAnalysesVM()
-        //{
-        //    ObjectManager.Instance.update();
-        //    m_analyses = new List<Analysis>();
-        //    Updater.Instance.newData += Instance_newData;
-        //    SaveAnalyses = new RelayCommand(Save, CanSave);
-        //}
-
 
         int ref_ID = -1;
         public PAnalysesVM(int RefID)
         {
-            //ObjectManager.Instance.update();
             ref_ID = RefID;
             m_analyses = ProcessManager.Instance.getAnalysis(RefID);
             ProcessManager.Instance.newProcesses += Instance_newProcesses;
@@ -42,6 +33,9 @@ namespace OE110Prozessdatenbank.ViewModels
         { get { return new ObservableCollection<Analysis>(m_analyses); }
             set { m_analyses = value.ToList(); }
         }
+
+        public string Title
+        { get { return "Vorgang " + ref_ID + " - Analysen"; } }
 
     }
 
@@ -111,6 +105,9 @@ namespace OE110Prozessdatenbank.ViewModels
         public string Path
         { get { return m_analysis.Path; } }
 
+        public bool Terminated
+        { get { return m_analysis.terminated; } set { m_analysis.terminated = value; } }
+
         public ObservableCollection<AnalyseTypes> AvailableAnalyses
         {
 
@@ -137,7 +134,8 @@ namespace OE110Prozessdatenbank.ViewModels
         public void Save()
         {
             ProcessManager.Instance.SaveAnalyses(new List<Analysis>() { m_analysis });
-            Updater.Instance.forceUpdate();
+            //Updater.Instance.forceUpdate();
+
         }
 
         public bool CanSave()

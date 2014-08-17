@@ -354,6 +354,8 @@ namespace PDCore.Database
         public static string Started { get { return "Started"; } }
         public static string Finished { get { return "Finished"; } }
         public static string Type { get { return "Type"; } }
+        public static string isTerminated { get { return "isTerminated"; } }
+    
     }
 
     public static class DBExpToshiba

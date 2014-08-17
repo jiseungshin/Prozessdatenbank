@@ -92,6 +92,9 @@ namespace PDCore.Manager
             OnUpdateTrigger();
         }
 
+        public void TriggerUpdate()
+        { OnUpdateTrigger(); }
+
         public delegate void UpdateHandler();
         public event UpdateHandler newProcesses;
 
@@ -869,10 +872,13 @@ namespace PDCore.Manager
 
                 foreach (var wp in process.Workpieces)
                 {
-                    //Copy Workpiece
-                    Workpiece ClonedWorpiece = wp.clone();
-                    ClonedWorpiece.isActive = true;
-                    ObjectManager.Instance.saveWorkpiece(ClonedWorpiece, false);
+                    if (wp.isOneWay)
+                    {
+                        //Copy Workpiece
+                        Workpiece ClonedWorpiece = wp.clone();
+                        ClonedWorpiece.isActive = true;
+                        ObjectManager.Instance.saveWorkpiece(ClonedWorpiece, false);
+                    }
                 }
             }
         }
@@ -961,10 +967,13 @@ namespace PDCore.Manager
 
                 foreach (var wp in process.Workpieces)
                 {
-                    //Copy Workpiece
-                    Workpiece ClonedWorpiece = wp.clone();
-                    ClonedWorpiece.isActive = true;
-                    ObjectManager.Instance.saveWorkpiece(ClonedWorpiece, false);
+                    if (wp.isOneWay)
+                    {
+                        //Copy Workpiece
+                        Workpiece ClonedWorpiece = wp.clone();
+                        ClonedWorpiece.isActive = true;
+                        ObjectManager.Instance.saveWorkpiece(ClonedWorpiece, false);
+                    }
                 }
             }
         }
@@ -1021,10 +1030,13 @@ namespace PDCore.Manager
 
                 foreach (var wp in process.Workpieces)
                 {
-                    //Copy Workpiece
-                    Workpiece ClonedWorpiece = wp.clone();
-                    ClonedWorpiece.isActive = true;
-                    ObjectManager.Instance.saveWorkpiece(ClonedWorpiece, false);
+                    if (wp.isOneWay)
+                    {
+                        //Copy Workpiece
+                        Workpiece ClonedWorpiece = wp.clone();
+                        ClonedWorpiece.isActive = true;
+                        ObjectManager.Instance.saveWorkpiece(ClonedWorpiece, false);
+                    }
                 }
             }
         }
@@ -1073,10 +1085,13 @@ namespace PDCore.Manager
 
                 foreach (var wp in process.Workpieces)
                 {
-                    //Copy Workpiece
-                    Workpiece ClonedWorpiece = wp.clone();
-                    ClonedWorpiece.isActive = true;
-                    ObjectManager.Instance.saveWorkpiece(ClonedWorpiece, false);
+                    if (wp.isOneWay)
+                    {
+                        //Copy Workpiece
+                        Workpiece ClonedWorpiece = wp.clone();
+                        ClonedWorpiece.isActive = true;
+                        ObjectManager.Instance.saveWorkpiece(ClonedWorpiece, false);
+                    }
                 }
             }
         }
@@ -1859,7 +1874,7 @@ namespace PDCore.Manager
                         User = ObjectManager.Instance.Users.Find(item => item.ID == _dt.Rows[i].Field<int>(DBUser.ID)),
                         Description = _dt.Rows[i].Field<string>(DBAnalyses.Type),
                         ReferenceNumber = _dt.Rows[i].Field<int>(DBAnalyses.RefNumber),
-                        //Path = FileManager.Instance.getDirPth(_dt.Rows[i].Field<int>(DBAnalyses.RefNumber)) + "\\Analysen\\" + _dt.Rows[i].Field<string>(DBAnalyses.Type)
+                        terminated = _dt.Rows[i].Field<bool>(DBAnalyses.isTerminated),
                         Path = FileManager.Instance.StandardDirectory + _dt.Rows[i].Field<int>(DBAnalyses.RefNumber) + "\\Analysen\\" + _dt.Rows[i].Field<string>(DBAnalyses.Type)
                     });
             }}
@@ -1883,11 +1898,13 @@ namespace PDCore.Manager
                                                                           DBAnalyses.Started + "," +
                                                                           DBAnalyses.Finished + "," +
                                                                           DBAnalyses.UserID + "," +
+                                                                          DBAnalyses.isTerminated + "," +
                                                                           DBAnalyses.Type + ") Values (" +
                                                                           ana.ReferenceNumber + "," +
                                                                            ana.Started.ToDBObject() + "," +
                                                                             ana.Finished.ToDBObject() + "," +
                                                                              ana.User.ID.ToDBObject() + "," +
+                                                                             ana.terminated.ToDBObject() + "," +
                                                                                ana.Description.ToDBObject() + ")");
                     if (getCurrentStatus(ana.ReferenceNumber)== "processed")
                         _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.Status + " = 'analysed' WHERE " + DBProcessReferences.RefNumber + "=" + ana.ReferenceNumber);
@@ -1898,6 +1915,7 @@ namespace PDCore.Manager
                     _queries.Add("Update " + DBAnalyses.Table + " Set " + DBAnalyses.Started + " = " + ana.Started.ToDBObject() + " WHERE " + DBAnalyses.ID + "=" + ana.ID);
                     _queries.Add("Update " + DBAnalyses.Table + " Set " + DBAnalyses.Finished + " = " + ana.Finished.ToDBObject() + " WHERE " + DBAnalyses.ID + "=" + ana.ID);
                     _queries.Add("Update " + DBAnalyses.Table + " Set " + DBAnalyses.UserID+ " = " + ana.User.ID+ " WHERE " + DBAnalyses.ID + "=" + ana.ID);
+                    _queries.Add("Update " + DBAnalyses.Table + " Set " + DBAnalyses.isTerminated + " = " + ana.terminated + " WHERE " + DBAnalyses.ID + "=" + ana.ID);
                 }
             
             }
@@ -1908,6 +1926,7 @@ namespace PDCore.Manager
             { FileManager.Instance.createDirectory(refID, "Analysen\\"+description); }
 
             Updater.Instance.forceUpdate();
+            //OnUpdateTrigger();
         }
 
         public string getCurrentStatus(int RefID)

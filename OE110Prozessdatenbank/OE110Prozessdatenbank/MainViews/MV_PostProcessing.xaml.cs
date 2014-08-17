@@ -36,7 +36,11 @@ namespace OE110Prozessdatenbank.MainViews
 
         private void LV_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            if (listview.SelectedIndex != -1)
+            {
+                int ID = Convert.ToInt32(((listview).SelectedItem as DataRowView)[DBProcessReferences.RefNumber]);
+                new Controls.PostProcessingPicker(ID).ShowDialog();
+            }
         }
 
         private void ToolBar_Loaded(object sender, RoutedEventArgs e)

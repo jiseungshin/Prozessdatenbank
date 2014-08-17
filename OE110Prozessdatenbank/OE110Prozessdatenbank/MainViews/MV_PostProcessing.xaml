@@ -8,6 +8,7 @@
         <OE110Prozessdatenbank:DateConverter x:Key="DateConverter"/>
         <OE110Prozessdatenbank:StatusConverter x:Key="StatusConverter"/>
         <OE110Prozessdatenbank:BoolToImage x:Key="boolToImage"></OE110Prozessdatenbank:BoolToImage>
+        <OE110Prozessdatenbank:IntToImage x:Key="intToImage"></OE110Prozessdatenbank:IntToImage>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -103,7 +104,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Width="60">
-                                    <Image RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding analysed,Converter={StaticResource boolToImage}}"/>
+                                    <Image RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Height="16" Width="16" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding analysed,Converter={StaticResource intToImage}}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
