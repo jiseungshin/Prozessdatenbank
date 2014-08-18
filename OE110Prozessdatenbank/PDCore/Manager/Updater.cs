@@ -51,7 +51,7 @@ namespace PDCore.Manager
 
             try
             {
-                IO.SimpleIO.saveClearText(@"update\upd.txt", new List<string>() { DateTime.Now.ToString() });
+                IO.SimpleIO.saveClearText(@"update\upd.txt", new List<string>() { DateTime.Now.ToString(), Environment.UserName });
             }
             catch
             {
