@@ -499,6 +499,7 @@ namespace PDCore.Manager
 
                 if (WPID!=-1 && status!=0)
                 {
+                    wp.ID = WPID;
                     int reference = -1;
                     switch(status)
                     {
