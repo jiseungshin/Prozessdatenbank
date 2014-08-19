@@ -393,6 +393,21 @@ namespace PDCore.Database
         public static string CoolingUpper { get { return "CoolingUpper"; } }
         public static string CoolingLower { get { return "CoolingLower"; } }
         public static string GlassName { get { return "GlassName"; } }
+
+        public static string N2U_A { get { return "N2U_A"; } }
+        public static string N2U_B { get { return "N2U_B"; } }
+        public static string N2U_C { get { return "N2U_C"; } }
+        public static string N2U_AA { get { return "N2U_AA"; } }
+        public static string N2U_BB { get { return "N2U_BB"; } }
+        public static string N2U_CC { get { return "N2U_CC"; } }
+        public static string N2L_A { get { return "N2L_A"; } }
+        public static string N2L_B { get { return "N2L_B"; } }
+        public static string N2L_C { get { return "N2L_C"; } }
+        public static string N2L_AA { get { return "N2L_AA"; } }
+        public static string N2L_BB { get { return "N2L_BB"; } }
+        public static string N2L_CC { get { return "N2L_CC"; } }
+        public static string OutpU { get { return "OutpU"; } }
+        public static string OutpL { get { return "OutpL"; } }
     }
 
     public static class DBExpToshibaMachineData

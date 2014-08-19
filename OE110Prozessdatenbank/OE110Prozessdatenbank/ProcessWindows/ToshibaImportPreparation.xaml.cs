@@ -24,6 +24,7 @@ namespace OE110Prozessdatenbank.ProcessWindows
         public ToshibaImportPreparation()
         {
             InitializeComponent();
+
             m_vm = new ViewModels.PToshibaImportVM();
             DataContext = m_vm;
         }

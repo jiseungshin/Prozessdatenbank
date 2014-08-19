@@ -687,6 +687,21 @@ namespace PDCore.Manager
             _p.InputData.Z1 = _drProcess.Field<double?>(DBExpToshiba.Z1);
             _p.InputData.Z2 = _drProcess.Field<double?>(DBExpToshiba.Z2);
 
+            _p.InputData.N2L_A = _drProcess.Field<double?>(DBExpToshiba.N2L_A);
+            _p.InputData.N2L_AA = _drProcess.Field<double?>(DBExpToshiba.N2L_AA);
+            _p.InputData.N2L_B = _drProcess.Field<double?>(DBExpToshiba.N2L_B);
+            _p.InputData.N2L_BB = _drProcess.Field<double?>(DBExpToshiba.N2L_BB);
+            _p.InputData.N2L_C = _drProcess.Field<double?>(DBExpToshiba.N2L_C);
+            _p.InputData.N2L_CC = _drProcess.Field<double?>(DBExpToshiba.N2L_CC);
+            _p.InputData.N2U_A = _drProcess.Field<double?>(DBExpToshiba.N2U_A);
+            _p.InputData.N2U_AA = _drProcess.Field<double?>(DBExpToshiba.N2U_AA);
+            _p.InputData.N2U_B = _drProcess.Field<double?>(DBExpToshiba.N2U_B);
+            _p.InputData.N2U_BB = _drProcess.Field<double?>(DBExpToshiba.N2U_BB);
+            _p.InputData.N2U_C = _drProcess.Field<double?>(DBExpToshiba.N2U_C);
+            _p.InputData.N2U_CC = _drProcess.Field<double?>(DBExpToshiba.N2U_CC);
+            _p.InputData.OutpL = _drProcess.Field<double?>(DBExpToshiba.OutpL);
+            _p.InputData.OutpU = _drProcess.Field<double?>(DBExpToshiba.OutpU);
+
             _p.ProjectID = _drProject.Field<int?>(DBProcessReferences.ProjectID);
             _p.IssueID = _drProject.Field<int?>(DBProcessReferences.IssueID);
 
@@ -1448,6 +1463,21 @@ namespace PDCore.Manager
                 values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpToshiba.Z1, Value = Process.InputData.Z1 });
                 values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpToshiba.Z2, Value = Process.InputData.Z2 });
 
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpToshiba.N2L_A, Value = Process.InputData.N2L_A });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpToshiba.N2L_B, Value = Process.InputData.N2L_B });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpToshiba.N2L_C, Value = Process.InputData.N2L_C });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpToshiba.N2L_AA, Value = Process.InputData.N2L_AA });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpToshiba.N2L_BB, Value = Process.InputData.N2L_BB });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpToshiba.N2L_CC, Value = Process.InputData.N2L_CC });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpToshiba.N2U_A, Value = Process.InputData.N2U_A });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpToshiba.N2U_B, Value = Process.InputData.N2U_B });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpToshiba.N2U_C, Value = Process.InputData.N2U_C });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpToshiba.N2U_AA, Value = Process.InputData.N2U_AA });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpToshiba.N2U_BB, Value = Process.InputData.N2U_BB });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpToshiba.N2U_CC, Value = Process.InputData.N2U_CC });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpToshiba.OutpL, Value = Process.InputData.OutpL });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpToshiba.OutpU, Value = Process.InputData.OutpU });
+
                 #endregion
 
 
@@ -1537,7 +1567,21 @@ namespace PDCore.Manager
                                                                            DBExpToshiba.V2 + "," +
                                                                            DBExpToshiba.V3 + "," +
                                                                            DBExpToshiba.Z2 + "," +
-                                                                           DBExpToshiba.Z1 + ") Values (" +
+                                                                           DBExpToshiba.Z1 + "," +
+                                                                           DBExpToshiba.N2L_A + "," +
+                                                                           DBExpToshiba.N2L_B + "," +
+                                                                           DBExpToshiba.N2L_C + "," +
+                                                                           DBExpToshiba.N2L_AA + "," +
+                                                                           DBExpToshiba.N2L_BB + "," +
+                                                                           DBExpToshiba.N2L_CC + "," +
+                                                                           DBExpToshiba.N2U_A+ "," +
+                                                                           DBExpToshiba.N2U_B + "," +
+                                                                           DBExpToshiba.N2U_C + "," +
+                                                                           DBExpToshiba.N2U_AA + "," +
+                                                                           DBExpToshiba.N2U_BB + "," +
+                                                                           DBExpToshiba.N2U_CC + "," +
+                                                                           DBExpToshiba.OutpL + "," +
+                                                                           DBExpToshiba.OutpU + ") Values (" +
 
                                                                            _pro + "," +
                                                                            Process.InputData.CoolingLower.ToDBObject() + "," +
@@ -1570,7 +1614,21 @@ namespace PDCore.Manager
                                                                            Process.InputData.V2.ToDBObject() + "," +
                                                                            Process.InputData.V3.ToDBObject() + "," +
                                                                            Process.InputData.Z2.ToDBObject() + "," +
-                                                                           Process.InputData.Z1.ToDBObject() + ")");
+                                                                           Process.InputData.Z1.ToDBObject() + "," +
+                                                                           Process.InputData.N2L_A.ToDBObject() + "," +
+                                                                           Process.InputData.N2L_B.ToDBObject() + "," +
+                                                                           Process.InputData.N2L_C.ToDBObject() + "," +
+                                                                           Process.InputData.N2L_AA.ToDBObject() + "," +
+                                                                           Process.InputData.N2L_BB.ToDBObject() + "," +
+                                                                           Process.InputData.N2L_CC.ToDBObject() + "," +
+                                                                           Process.InputData.N2U_A.ToDBObject() + "," +
+                                                                           Process.InputData.N2U_B.ToDBObject() + "," +
+                                                                           Process.InputData.N2U_C.ToDBObject() + "," +
+                                                                           Process.InputData.N2U_AA.ToDBObject() + "," +
+                                                                           Process.InputData.N2U_BB.ToDBObject() + "," +
+                                                                           Process.InputData.N2U_CC.ToDBObject() + "," +
+                                                                           Process.InputData.OutpL.ToDBObject() + "," +
+                                                                           Process.InputData.OutpU.ToDBObject() + ")");
 
                 //TODO: MachineData speichen
 

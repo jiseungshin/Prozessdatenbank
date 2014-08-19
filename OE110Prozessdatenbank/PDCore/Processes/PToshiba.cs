@@ -53,6 +53,21 @@ namespace PDCore.Processes
             public string CoolingUpper { get; set; }
             public string CoolingLower { get; set; }
 
+            public double? N2U_A { get; set; }
+            public double? N2U_B { get; set; }
+            public double? N2U_C { get; set; }
+            public double? N2U_AA { get; set; }
+            public double? N2U_BB { get; set; }
+            public double? N2U_CC { get; set; }
+            public double? N2L_A { get; set; }
+            public double? N2L_B { get; set; }
+            public double? N2L_C { get; set; }
+            public double? N2L_AA { get; set; }
+            public double? N2L_BB { get; set; }
+            public double? N2L_CC { get; set; }
+            public double? OutpU { get; set; }
+            public double? OutpL { get; set; }
+
         }
 
         public class ToshibaMachineData

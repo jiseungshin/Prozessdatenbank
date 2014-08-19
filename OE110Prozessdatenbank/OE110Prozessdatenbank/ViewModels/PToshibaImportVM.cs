@@ -29,7 +29,8 @@ namespace OE110Prozessdatenbank.ViewModels
         public PToshibaImportVM(List<PToshiba> processes)
         {
             m_ProcessVms = new List<PToshibaVM>();
-            m_user = UserManager.CurrentUser;
+            //if (UserManager.CurrentUser != null)
+                m_user = UserManager.CurrentUser;
 
             foreach(var p in processes)
             {
@@ -39,6 +40,9 @@ namespace OE110Prozessdatenbank.ViewModels
         }
         public PToshibaImportVM()
         {
+
+            ObjectManager.Instance.update(PDCore.Database.DBGlasses.Table);
+
             m_ProcessVms = new List<PToshibaVM>();
             if (UserManager.CurrentUser!=null)
                 m_user = ObjectManager.Instance.Users.Find(item => item.ID == UserManager.CurrentUser.ID);

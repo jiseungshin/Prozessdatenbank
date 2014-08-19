@@ -105,6 +105,8 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public PToshibaVM(int PID)
         {
+            ObjectManager.Instance.update(PDCore.Database.DBGlasses.Table);
+
             SaveProcess = new RelayCommand(Save, CanSave);
 
             m_process = ProcessManager.Instance.getProcess(PID, 34) as PToshiba;
@@ -333,6 +335,35 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public double? Z2
         { get { return m_process.InputData.Z2; } set { m_process.InputData.Z2 = value; } }
+
+        public double? N2U_A
+        { get { return m_process.InputData.N2U_A; } set { m_process.InputData.N2U_A = value; } }
+        public double? N2U_B
+        { get { return m_process.InputData.N2U_B; } set { m_process.InputData.N2U_B = value; } }
+        public double? N2U_C
+        { get { return m_process.InputData.N2U_C; } set { m_process.InputData.N2U_C = value; } }
+        public double? N2U_AA
+        { get { return m_process.InputData.N2U_AA; } set { m_process.InputData.N2U_AA = value; } }
+        public double? N2U_BB
+        { get { return m_process.InputData.N2U_BB; } set { m_process.InputData.N2U_BB = value; } }
+        public double? N2U_CC
+        { get { return m_process.InputData.N2U_CC; } set { m_process.InputData.N2U_CC = value; } }
+        public double? N2L_A
+        { get { return m_process.InputData.N2L_A; } set { m_process.InputData.N2L_A = value; } }
+        public double? N2L_B
+        { get { return m_process.InputData.N2L_B; } set { m_process.InputData.N2L_B = value; } }
+        public double? N2L_C
+        { get { return m_process.InputData.N2L_C; } set { m_process.InputData.N2L_C = value; } }
+        public double? N2L_AA
+        { get { return m_process.InputData.N2L_AA; } set { m_process.InputData.N2L_AA = value; } }
+        public double? N2L_BB
+        { get { return m_process.InputData.N2L_BB; } set { m_process.InputData.N2L_BB = value; } }
+        public double? N2L_CC
+        { get { return m_process.InputData.N2L_CC; } set { m_process.InputData.N2L_CC = value; } }
+        public double? OutpU
+        { get { return m_process.InputData.OutpU; } set { m_process.InputData.OutpU = value; } }
+        public double? OutpL
+        { get { return m_process.InputData.OutpL; } set { m_process.InputData.OutpL = value; } }
 
         #region Command functions
 

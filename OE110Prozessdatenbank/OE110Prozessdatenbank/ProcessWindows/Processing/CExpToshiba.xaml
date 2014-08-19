@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:OE110Prozessdatenbank"
         xmlns:oxy="http://oxyplot.codeplex.com"
-       Title="Prozessdaten Editor" Height="585" Width="495.896" Icon="/OE110Prozessdatenbank;component/Icons/Editor_16xLG.png">
+       Title="Prozessdaten Editor" Height="687.985" Width="495.896" Icon="/OE110Prozessdatenbank;component/Icons/Editor_16xLG.png">
     <Window.Resources>
         <local:DateTimeConverter x:Key="dateTimeConv"></local:DateTimeConverter>
     </Window.Resources>
@@ -19,7 +19,7 @@
                     <Label Content="unteres Werkstück:" HorizontalAlignment="Left" Margin="10,158,0,0" VerticalAlignment="Top"/>
                     <Label Content="Glassorte" HorizontalAlignment="Left" Margin="10,184,0,0" VerticalAlignment="Top"/>
                     <Label Content="Bezeichnung:" HorizontalAlignment="Left" Margin="10,210,0,0" VerticalAlignment="Top"/>
-                    
+
                     <Label Content="{Binding Project.Description}" HorizontalAlignment="Left" Margin="162,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.342,-2.192"/>
                     <Label Content="{Binding Issue.Description}" HorizontalAlignment="Left" Margin="162,36,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.342,-2.192"/>
                     <Label Content="{Binding Date, Converter={StaticResource dateTimeConv}}" HorizontalAlignment="Left" Margin="162,62,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.342,-2.192"/>
@@ -33,7 +33,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Prozessparameter">
-                <Grid Background="#FFE5E5E5">
+                <Grid Background="#FFE5E5E5" Margin="0,-1,0,1">
                     <Grid Margin="10,10,-16,10">
                         <TextBox x:Name="tb_P1" HorizontalAlignment="Left" Height="21" Margin="43,234,0,0" TextWrapping="Wrap" Text="{Binding P1}" VerticalAlignment="Top" Width="50"/>
                         <Label Content="P1" HorizontalAlignment="Left" Margin="10,231,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692" Height="24" Width="23"/>
@@ -85,6 +85,32 @@
                         <TextBox HorizontalAlignment="Left" Height="21" Margin="132,353,0,0" TextWrapping="Wrap" Text="{Binding V2}" VerticalAlignment="Top" Width="49"/>
                         <TextBox HorizontalAlignment="Left" Height="23" Margin="132,379,0,0" TextWrapping="Wrap" Text="{Binding Z2}" VerticalAlignment="Top" Width="49"/>
                         <TextBox HorizontalAlignment="Left" Height="21" Margin="225,353,0,0" TextWrapping="Wrap" Text="{Binding V3}" VerticalAlignment="Top" Width="49"/>
+                        <Label Content="Stickstofffluss" HorizontalAlignment="Left" Margin="10,420,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Height="27" Width="102"/>
+                        <Label HorizontalAlignment="Left" Margin="9,452,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692" Height="24" Width="23"/>
+                        <Label Content="N2L" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692" Height="24" Width="43" Margin="11,508,0,0"/>
+                        <Label Content="N2U" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692" Height="24" Width="41" Margin="11,479,0,0"/>
+                        <Label Content="A" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692" Height="24" Width="29" Margin="66,458,0,0"/>
+                        <Label Content="B" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692" Height="24" Width="29" Margin="101,458,0,0"/>
+                        <Label Content="C" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="1.713,0.597" Height="24" Width="29" Margin="135,458,0,0"/>
+                        <Label Content="A" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="1.713,0.597" Height="24" Width="29" Margin="178,458,0,0"/>
+                        <Label Content="B" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="1.713,0.597" Height="24" Width="29" Margin="212,458,0,0"/>
+                        <Label Content="C" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="1.713,0.597" Height="24" Width="29" Margin="246,458,0,0"/>
+                        <Label Content="Outp U" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692" Height="24" Width="52" Margin="297,479,0,0"/>
+                        <Label Content="Outp L" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.261,0.692" Height="24" Width="52" Margin="297,503,0,0"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="63,482,0,0" TextWrapping="Wrap" Text="{Binding N2U_A}" VerticalAlignment="Top" Width="32"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="98,482,0,0" TextWrapping="Wrap" Text="{Binding N2U_B}" VerticalAlignment="Top" Width="32"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="135,482,0,0" TextWrapping="Wrap" Text="{Binding N2U_C}" VerticalAlignment="Top" Width="32"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="172,482,0,0" TextWrapping="Wrap" Text="{Binding N2U_AA}" VerticalAlignment="Top" Width="32"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="209,482,0,0" TextWrapping="Wrap" Text="{Binding N2U_BB}" VerticalAlignment="Top" Width="32"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="246,482,0,0" TextWrapping="Wrap" Text="{Binding N2U_CC}" VerticalAlignment="Top" Width="32"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="63,510,0,0" TextWrapping="Wrap" Text="{Binding N2L_A}" VerticalAlignment="Top" Width="32"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="98,510,0,0" TextWrapping="Wrap" Text="{Binding N2L_B}" VerticalAlignment="Top" Width="32"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="135,510,0,0" TextWrapping="Wrap" Text="{Binding N2L_C}" VerticalAlignment="Top" Width="32"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="172,510,0,0" TextWrapping="Wrap" Text="{Binding N2L_AA}" VerticalAlignment="Top" Width="32"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="209,509,0,0" TextWrapping="Wrap" Text="{Binding N2L_BB}" VerticalAlignment="Top" Width="32"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="246,508,0,0" TextWrapping="Wrap" Text="{Binding N2L_CC}" VerticalAlignment="Top" Width="32"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="371,508,0,0" TextWrapping="Wrap" Text="{Binding OutpL}" VerticalAlignment="Top" Width="42"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="371,480,0,0" TextWrapping="Wrap" Text="{Binding OutpU}" VerticalAlignment="Top" Width="42"/>
 
 
 
