@@ -2073,6 +2073,7 @@ namespace PDCore.Manager
                 foreach (DataRow dr in _dtAnalyses.Rows)
                 {
                     BusinessObjects.Machine m = new Machine();
+                    m.Process = 40;
                     m.ID = 40;
                     m.Name = "Analyse (" + dr.Field<string>(DBAnalyses.Type) + ")";
                     m_history.Processes.Add(new ProcessMetaData()
@@ -2083,6 +2084,9 @@ namespace PDCore.Manager
                         PID = -1
                     });
                 }
+
+                //Sort Processes by Machine ID --> Frank Spezial Decoating hinter Analyse
+                m_history.Processes = m_history.Processes.OrderBy(item => item.Machine.Process).ToList();
 
                 return m_history;
             
