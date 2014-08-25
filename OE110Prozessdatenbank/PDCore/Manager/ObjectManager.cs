@@ -616,10 +616,14 @@ namespace PDCore.Manager
 
             if (update)
             {
-                _queries.Add("Update " + DBProjects.Table + " Set " + DBProjects.Name + " = " + project.Description.ToDBObject() + " WHERE " + DBProjects.ID + "=" + project.ID);
-                _queries.Add("Update " + DBProjects.Table + " Set " + DBProjects.Remark + " = " + project.Remark.ToDBObject() + " WHERE " + DBProjects.ID + "=" + project.ID);
-                _queries.Add("Update " + DBProjects.Table + " Set " + DBProjects.Finished + " = " + project.Finished.ToDBObject() + " WHERE " + DBProjects.ID + "=" + project.ID);
-                _queries.Add("Update " + DBProjects.Table + " Set " + DBProjects.Started + " = " + project.Started.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + " WHERE " + DBProjects.ID + "=" + project.ID);
+                List<MySQLCommunicator.ColumnValuePair> values = new List<MySQLCommunicator.ColumnValuePair>();
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBProjects.Name, Value = project.Description });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBProjects.Remark, Value = project.Remark });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBProjects.Finished, Value = project.Finished });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBProjects.Started, Value = project.Started });
+
+                _queries.Add(MySQLCommunicator.BuildUpdateQuery(DBProjects.Table, values, new MySQLCommunicator.ColumnValuePair() { Culumn = DBProjects.ID, Value = project.ID }));
+
             }
             else
             {
@@ -664,11 +668,6 @@ namespace PDCore.Manager
                 values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBIssues.Conclusion, Value = issue.Conclusion });
 
                 _queries.Add(MySQLCommunicator.BuildUpdateQuery(DBIssues.Table, values, new MySQLCommunicator.ColumnValuePair() { Culumn = DBIssues.ID, Value = issue.ID }));
-
-
-                //_queries.Add("Update " + DBIssues.Table + " Set " + DBIssues.Description + " = " + issue.Description.ToDBObject() + " WHERE " + DBIssues.ID + "=" + issue.ID);
-                //_queries.Add("Update " + DBIssues.Table + " Set " + DBIssues.Remark + " = " + issue.Remark.ToDBObject() + " WHERE " + DBIssues.ID + "=" + issue.ID);
-                //_queries.Add("Update " + DBIssues.Table + " Set " + DBIssues.ProjectID + " = " + issue.ProjectID.ToDBObject() + " WHERE " + DBIssues.ID + "=" + issue.ID);
                 
             }
             else
@@ -702,11 +701,15 @@ namespace PDCore.Manager
 
             if (update)
             {
-                _queries.Add("Update " + DBUser.Table + " Set " + DBUser.FirstName + " = " + user.FirstName.ToDBObject() + " WHERE " + DBUser.ID + "=" + user.ID);
-                _queries.Add("Update " + DBUser.Table + " Set " + DBUser.LastName + " = " + user.LastName.ToDBObject() + " WHERE " + DBUser.ID + "=" + user.ID);
-                _queries.Add("Update " + DBUser.Table + " Set " + DBUser.Token + " = " + user.Token.ToDBObject() + " WHERE " + DBUser.ID + "=" + user.ID);
-                _queries.Add("Update " + DBUser.Table + " Set " + DBUser.isActive + " = " + user.isActive.ToDBObject() + " WHERE " + DBUser.ID + "=" + user.ID);
-                _queries.Add("Update " + DBUser.Table + " Set " + DBUser.MachineID + " = " + user.MachineID.ToDBObject() + " WHERE " + DBUser.ID + "=" + user.ID);
+                List<MySQLCommunicator.ColumnValuePair> values = new List<MySQLCommunicator.ColumnValuePair>();
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBUser.FirstName, Value = user.FirstName });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBUser.LastName, Value = user.LastName });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBUser.Token, Value = user.Token });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBUser.isActive, Value = user.isActive });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBUser.MachineID, Value = user.MachineID });
+
+
+                _queries.Add(MySQLCommunicator.BuildUpdateQuery(DBUser.Table, values, new MySQLCommunicator.ColumnValuePair() { Culumn = DBUser.ID, Value = user.ID }));
 
             }
             else

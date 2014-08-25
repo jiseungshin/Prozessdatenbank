@@ -205,7 +205,7 @@ namespace OE110Prozessdatenbank.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Soll der Vorgnag wirklich beendet werden? ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Soll der Vorgang wirklich beendet werden? ähnelt.
         /// </summary>
         internal static string q_TerminateReference {
             get {
