@@ -1119,13 +1119,16 @@ namespace PDCore.Manager
 
             if (update)
             {
+                List<MySQLCommunicator.ColumnValuePair> values = new List<MySQLCommunicator.ColumnValuePair>();
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBCoatingCemecon.Abnormalities, Value = Process.Abnormalities });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBCoatingCemecon.CoatingProcessID, Value = Process.CoatingProcessID });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBCoatingCemecon.Date, Value = Process.Date });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBCoatingCemecon.Remark, Value = Process.Remark });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBCoatingCemecon.UserID, Value = Process.UserID });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBCoatingCemecon.ProcessNumber, Value = Process.Processnumber });
 
-                _queries.Add("Update " + DBCoatingCemecon.Table + " Set " + DBCoatingCemecon.Abnormalities + " = " + Process.Abnormalities.ToDBObject() + " WHERE " + DBCoatingCemecon.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBCoatingCemecon.Table + " Set " + DBCoatingCemecon.CoatingProcessID + " = " + Process.CoatingProcessID.ToDBObject() + " WHERE " + DBCoatingCemecon.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBCoatingCemecon.Table + " Set " + DBCoatingCemecon.Date + " = " + Process.Date.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + " WHERE " + DBCoatingCemecon.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBCoatingCemecon.Table + " Set " + DBCoatingCemecon.Remark + " = " + Process.Remark.ToDBObject() + " WHERE " + DBCoatingCemecon.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBCoatingCemecon.Table + " Set " + DBCoatingCemecon.UserID + " = " + Process.UserID.ToDBObject() + " WHERE " + DBCoatingCemecon.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBCoatingCemecon.Table + " Set " + DBCoatingCemecon.ProcessNumber + " = " + Process.Processnumber.ToDBObject() + " WHERE " + DBCoatingCemecon.ID + "=" + Process.ID);
+                _queries.Add(MySQLCommunicator.BuildUpdateQuery(DBCoatingCemecon.Table, values, new MySQLCommunicator.ColumnValuePair() { Culumn = DBCoatingCemecon.ID, Value = Process.ID }));
+                
                 foreach (Workpiece wp in Process.Workpieces)
                 {
                     _queries.Add("Update " + DBProcessReferences.Table + " Set " + DBProcessReferences.ProjectID + " = " + process.ProjectID.ToDBObject() + " WHERE " + DBProcessReferences.RefNumber + "=" + wp.CurrentReferenceNumber);
@@ -1180,16 +1183,19 @@ namespace PDCore.Manager
             if (update)
             {
 
-                _queries.Add("Update " + DBExpCemeCon.Table + " Set " + DBExpCemeCon.Atmosphere + " = " + Process.Atmosphere.ToDBObject() + " WHERE " + DBExpCemeCon.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpCemeCon.Table + " Set " + DBExpCemeCon.Duration + " = " + Process.Duration.ToDBObject() + " WHERE " + DBExpCemeCon.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpCemeCon.Table + " Set " + DBExpCemeCon.Date + " = " + Process.Date.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + " WHERE " + DBExpCemeCon.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpCemeCon.Table + " Set " + DBExpCemeCon.Remark + " = " + Process.Remark.ToDBObject() + " WHERE " + DBExpCemeCon.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpCemeCon.Table + " Set " + DBExpCemeCon.UserID + " = " + Process.UserID.ToDBObject() + " WHERE " + DBExpCemeCon.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpCemeCon.Table + " Set " + DBExpCemeCon.GlassID + " = " + Process.GlassID.ToDBObject() + " WHERE " + DBExpCemeCon.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpCemeCon.Table + " Set " + DBExpCemeCon.Pressure + " = " + Process.Pressure.ToDBObject() + " WHERE " + DBExpCemeCon.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpCemeCon.Table + " Set " + DBExpCemeCon.ProcessID + " = " + Process.ProcessID.ToDBObject() + " WHERE " + DBExpCemeCon.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpCemeCon.Table + " Set " + DBExpCemeCon.ResultID + " = " + Process.ResultID.ToDBObject() + " WHERE " + DBExpCemeCon.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpCemeCon.Table + " Set " + DBExpCemeCon.Temperature + " = " + Process.Temperature.ToDBObject() + " WHERE " + DBExpCemeCon.ID + "=" + Process.ID);
+                List<MySQLCommunicator.ColumnValuePair> values_p = new List<MySQLCommunicator.ColumnValuePair>();
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpCemeCon.Atmosphere, Value = Process.Atmosphere });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpCemeCon.Date, Value = Process.Date });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpCemeCon.Remark, Value = Process.Remark });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpCemeCon.UserID, Value = Process.UserID });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpCemeCon.GlassID, Value = Process.GlassID });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpCemeCon.Pressure, Value = Process.Pressure });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpCemeCon.ProcessID, Value = Process.ProcessID });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpCemeCon.ResultID, Value = Process.ResultID });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpCemeCon.Temperature, Value = Process.Temperature });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpCemeCon.Duration, Value = Process.Duration });
+
+                _queries.Add(MySQLCommunicator.BuildUpdateQuery(DBExpCemeCon.Table, values_p, new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpCemeCon.ID, Value = Process.ID }));
 
                 _queries.AddRange(updateProcessQuality(process));
 
@@ -1271,23 +1277,24 @@ namespace PDCore.Manager
 
             if (update)
             {
-                _queries.Add("Update " + DBExpTestStation.Table + " Set " + DBExpTestStation.Atmosphere + " = " + Process.Atmosphere.ToDBObject() + " WHERE " + DBExpTestStation.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpTestStation.Table + " Set " + DBExpTestStation.Duration + " = " + Process.Duration.ToDBObject() + " WHERE " + DBExpTestStation.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpTestStation.Table + " Set " + DBExpTestStation.Date + " = " + Process.Date.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + " WHERE " + DBExpTestStation.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpTestStation.Table + " Set " + DBExpTestStation.Remark + " = " + Process.Remark.ToDBObject() + " WHERE " + DBExpTestStation.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpTestStation.Table + " Set " + DBExpTestStation.UserID + " = " + Process.UserID.ToDBObject() + " WHERE " + DBExpTestStation.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpTestStation.Table + " Set " + DBExpTestStation.GlassID + " = " + Process.GlassID.ToDBObject() + " WHERE " + DBExpTestStation.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpTestStation.Table + " Set " + DBExpTestStation.CellTemperature + " = " + Process.Celltemperature.ToDBObject() + " WHERE " + DBExpTestStation.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpTestStation.Table + " Set " + DBExpTestStation.CoolingTemperature + " = " + Process.CoolingTempretaure.ToDBObject() + " WHERE " + DBExpTestStation.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpTestStation.Table + " Set " + DBExpTestStation.Cycles + " = " + Process.Cycles.ToDBObject() + " WHERE " + DBExpTestStation.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpTestStation.Table + " Set " + DBExpTestStation.MaxForce + " = " + Process.MaxForce.ToDBObject() + " WHERE " + DBExpTestStation.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpTestStation.Table + " Set " + DBExpTestStation.PenDepth + " = " + Process.PenDepth.ToDBObject() + " WHERE " + DBExpTestStation.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpTestStation.Table + " Set " + DBExpTestStation.PressFeed + " = " + Process.PressFedd.ToDBObject() + " WHERE " + DBExpTestStation.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpTestStation.Table + " Set " + DBExpTestStation.PressTemperature + " = " + Process.PressTemperature.ToDBObject() + " WHERE " + DBExpTestStation.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpTestStation.Table + " Set " + DBExpTestStation.SecForce + " = " + Process.SecondForce.ToDBObject() + " WHERE " + DBExpTestStation.ID + "=" + Process.ID);
 
+                List<MySQLCommunicator.ColumnValuePair> values_p = new List<MySQLCommunicator.ColumnValuePair>();
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpTestStation.Atmosphere, Value = Process.Atmosphere });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpTestStation.Date, Value = Process.Date });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpTestStation.Remark, Value = Process.Remark });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpTestStation.UserID, Value = Process.UserID });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpTestStation.GlassID, Value = Process.GlassID });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpTestStation.CellTemperature, Value = Process.Celltemperature });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpTestStation.CoolingTemperature, Value = Process.CoolingTempretaure });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpTestStation.Cycles, Value = Process.Cycles });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpTestStation.MaxForce, Value = Process.MaxForce });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpTestStation.PenDepth, Value = Process.PenDepth });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpTestStation.PressFeed, Value = Process.PressFedd });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpTestStation.PressTemperature, Value = Process.PressTemperature });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpTestStation.SecForce, Value = Process.SecondForce });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpTestStation.Duration, Value = Process.Duration });
 
-
+                _queries.Add(MySQLCommunicator.BuildUpdateQuery(DBExpTestStation.Table, values_p, new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpTestStation.ID, Value = Process.ID }));
 
                 foreach (Workpiece wp in Process.Workpieces)
                 {
@@ -1382,9 +1389,16 @@ namespace PDCore.Manager
 
             if (update)
             {
-                _queries.Add("Update " + DBExpOther.Table + " Set " + DBExpOther.Date + " = " + Process.Date.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + " WHERE " + DBExpOther.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpOther.Table + " Set " + DBExpOther.Remark + " = " + Process.Remark.ToDBObject() + " WHERE " + DBExpOther.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpOther.Table + " Set " + DBExpOther.UserID + " = " + Process.UserID.ToDBObject() + " WHERE " + DBExpOther.ID + "=" + Process.ID);
+                List<MySQLCommunicator.ColumnValuePair> values_p = new List<MySQLCommunicator.ColumnValuePair>();
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpOther.Date, Value = Process.Date });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpOther.Remark, Value = Process.Remark });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpOther.UserID, Value = Process.UserID });
+
+                _queries.Add(MySQLCommunicator.BuildUpdateQuery(DBExpOther.Table, values_p, new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpOther.ID, Value = Process.ID }));
+
+                //_queries.Add("Update " + DBExpOther.Table + " Set " + DBExpOther.Date + " = " + Process.Date.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + " WHERE " + DBExpOther.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBExpOther.Table + " Set " + DBExpOther.Remark + " = " + Process.Remark.ToDBObject() + " WHERE " + DBExpOther.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBExpOther.Table + " Set " + DBExpOther.UserID + " = " + Process.UserID.ToDBObject() + " WHERE " + DBExpOther.ID + "=" + Process.ID);
             }
             else
             {
@@ -1657,20 +1671,38 @@ namespace PDCore.Manager
             {
                 _queries.AddRange(updateProcessQuality(Process));
 
-                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Atmosphere + " = " + Process.Atmosphere.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Date + " = " + Process.Date.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Remark + " = " + Process.Remark.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.UserID + " = " + Process.UserID.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.GlassID + " = " + Process.GlassID.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.ResultID + " = " + Process.ResultID.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Cycles + " = " + Process.Cycles.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Force + " = " + Process.Force.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.PressTime + " = " + Process.PressTime.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.ProgramTitle + " = " + Process.ProgramTitle.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.RegionOfInterest + " = " + Process.ROI.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Tmax + " = " + Process.Tmax.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Tmin + " = " + Process.Tmin.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.TOut + " = " + Process.TOut.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                List<MySQLCommunicator.ColumnValuePair> values_p = new List<MySQLCommunicator.ColumnValuePair>();
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpMoore.Atmosphere, Value = Process.Atmosphere });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpMoore.Date, Value = Process.Date });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpMoore.Remark, Value = Process.Remark });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpMoore.UserID, Value = Process.UserID });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpMoore.GlassID, Value = Process.GlassID });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpMoore.ResultID, Value = Process.ResultID });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpMoore.Cycles, Value = Process.Cycles });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpMoore.Force, Value = Process.Force });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpMoore.PressTime, Value = Process.PressTime });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpMoore.ProgramTitle, Value = Process.ProgramTitle });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpMoore.RegionOfInterest, Value = Process.ROI });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpMoore.Tmax, Value = Process.Tmax });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpMoore.Tmin, Value = Process.Tmin });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpMoore.TOut, Value = Process.TOut });
+
+                _queries.Add(MySQLCommunicator.BuildUpdateQuery(DBExpMoore.Table, values_p, new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpMoore.ID, Value = Process.ID }));
+
+                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Atmosphere + " = " + Process.Atmosphere.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Date + " = " + Process.Date.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Remark + " = " + Process.Remark.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.UserID + " = " + Process.UserID.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.GlassID + " = " + Process.GlassID.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.ResultID + " = " + Process.ResultID.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Cycles + " = " + Process.Cycles.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Force + " = " + Process.Force.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.PressTime + " = " + Process.PressTime.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.ProgramTitle + " = " + Process.ProgramTitle.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.RegionOfInterest + " = " + Process.ROI.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Tmax + " = " + Process.Tmax.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Tmin + " = " + Process.Tmin.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.TOut + " = " + Process.TOut.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
 
                 foreach (Workpiece wp in Process.Workpieces)
                 {
@@ -1794,11 +1826,20 @@ namespace PDCore.Manager
             if (update)
             {
 
-                _queries.Add("Update " + DBDeCoatingCemecon.Table + " Set " + DBDeCoatingCemecon.CoatingProcessID + " = " + Process.CoatingProcessID.ToDBObject() + " WHERE " + DBDeCoatingCemecon.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBDeCoatingCemecon.Table + " Set " + DBDeCoatingCemecon.Date + " = " + Process.Date.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + " WHERE " + DBDeCoatingCemecon.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBDeCoatingCemecon.Table + " Set " + DBDeCoatingCemecon.Remark + " = " + Process.Remark.ToDBObject() + " WHERE " + DBDeCoatingCemecon.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBDeCoatingCemecon.Table + " Set " + DBDeCoatingCemecon.UserID + " = " + Process.UserID.ToDBObject() + " WHERE " + DBDeCoatingCemecon.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBDeCoatingCemecon.Table + " Set " + DBDeCoatingCemecon.ProcessNumber + " = " + Process.Processnumber.ToDBObject() + " WHERE " + DBDeCoatingCemecon.ID + "=" + Process.ID);
+                List<MySQLCommunicator.ColumnValuePair> values = new List<MySQLCommunicator.ColumnValuePair>();
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBDeCoatingCemecon.CoatingProcessID, Value = Process.CoatingProcessID });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBDeCoatingCemecon.Date, Value = Process.Date });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBDeCoatingCemecon.Remark, Value = Process.Remark });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBDeCoatingCemecon.UserID, Value = Process.UserID });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBDeCoatingCemecon.ProcessNumber, Value = Process.Processnumber });
+
+                _queries.Add(MySQLCommunicator.BuildUpdateQuery(DBDeCoatingCemecon.Table, values, new MySQLCommunicator.ColumnValuePair() { Culumn = DBDeCoatingCemecon.ID, Value = Process.ID }));
+
+                //_queries.Add("Update " + DBDeCoatingCemecon.Table + " Set " + DBDeCoatingCemecon.CoatingProcessID + " = " + Process.CoatingProcessID.ToDBObject() + " WHERE " + DBDeCoatingCemecon.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBDeCoatingCemecon.Table + " Set " + DBDeCoatingCemecon.Date + " = " + Process.Date.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + " WHERE " + DBDeCoatingCemecon.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBDeCoatingCemecon.Table + " Set " + DBDeCoatingCemecon.Remark + " = " + Process.Remark.ToDBObject() + " WHERE " + DBDeCoatingCemecon.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBDeCoatingCemecon.Table + " Set " + DBDeCoatingCemecon.UserID + " = " + Process.UserID.ToDBObject() + " WHERE " + DBDeCoatingCemecon.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBDeCoatingCemecon.Table + " Set " + DBDeCoatingCemecon.ProcessNumber + " = " + Process.Processnumber.ToDBObject() + " WHERE " + DBDeCoatingCemecon.ID + "=" + Process.ID);
 
             }
             else
@@ -1851,13 +1892,24 @@ namespace PDCore.Manager
             if (update)
             {
 
-                _queries.Add("Update " + DBCoatingCemeconProcess.Table + " Set " + DBCoatingCemeconProcess.Date + " = " + Process.Date.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + " WHERE " + DBCoatingCemeconProcess.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBCoatingCemeconProcess.Table + " Set " + DBCoatingCemeconProcess.AdherentLayer + " = " + Process.AdherentLayer.GetValueOrDefault().ID.ToDBObject() + " WHERE " + DBCoatingCemeconProcess.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBCoatingCemeconProcess.Table + " Set " + DBCoatingCemeconProcess.ProtectiveLayer + " = " + Process.ProtectiveLayer.GetValueOrDefault().ID.ToDBObject() + " WHERE " + DBCoatingCemeconProcess.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBCoatingCemeconProcess.Table + " Set " + DBCoatingCemeconProcess.Thickness + " = " + Process.Thickness.ToDBObject() + " WHERE " + DBCoatingCemeconProcess.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBCoatingCemeconProcess.Table + " Set " + DBCoatingCemeconProcess.ProgramNumber + " = " + Process.ProgramNumber.ToDBObject() + " WHERE " + DBCoatingCemeconProcess.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBCoatingCemeconProcess.Table + " Set " + DBCoatingCemeconProcess.Remark + " = " + Process.Remark.ToDBObject() + " WHERE " + DBCoatingCemeconProcess.ID + "=" + Process.ID);
-                _queries.Add("Update " + DBCoatingCemeconProcess.Table + " Set " + DBCoatingCemeconProcess.IsDecoating + " = " + Process.isDecoating.ToDBObject() + " WHERE " + DBCoatingCemeconProcess.ID + "=" + Process.ID);
+                List<MySQLCommunicator.ColumnValuePair> values = new List<MySQLCommunicator.ColumnValuePair>();
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBCoatingCemeconProcess.Date, Value = Process.Date });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBCoatingCemeconProcess.AdherentLayer, Value = Process.AdherentLayer.GetValueOrDefault() });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBCoatingCemeconProcess.ProtectiveLayer, Value = Process.ProtectiveLayer.GetValueOrDefault() });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBCoatingCemeconProcess.Thickness, Value = Process.Thickness });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBCoatingCemeconProcess.ProgramNumber, Value = Process.ProgramNumber });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBCoatingCemeconProcess.Remark, Value = Process.Remark });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBCoatingCemeconProcess.IsDecoating, Value = Process.isDecoating });
+
+                _queries.Add(MySQLCommunicator.BuildUpdateQuery(DBCoatingCemeconProcess.Table, values, new MySQLCommunicator.ColumnValuePair() { Culumn = DBCoatingCemeconProcess.ID, Value = Process.ID }));
+
+                //_queries.Add("Update " + DBCoatingCemeconProcess.Table + " Set " + DBCoatingCemeconProcess.Date + " = " + Process.Date.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + " WHERE " + DBCoatingCemeconProcess.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBCoatingCemeconProcess.Table + " Set " + DBCoatingCemeconProcess.AdherentLayer + " = " + Process.AdherentLayer.GetValueOrDefault().ID.ToDBObject() + " WHERE " + DBCoatingCemeconProcess.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBCoatingCemeconProcess.Table + " Set " + DBCoatingCemeconProcess.ProtectiveLayer + " = " + Process.ProtectiveLayer.GetValueOrDefault().ID.ToDBObject() + " WHERE " + DBCoatingCemeconProcess.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBCoatingCemeconProcess.Table + " Set " + DBCoatingCemeconProcess.Thickness + " = " + Process.Thickness.ToDBObject() + " WHERE " + DBCoatingCemeconProcess.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBCoatingCemeconProcess.Table + " Set " + DBCoatingCemeconProcess.ProgramNumber + " = " + Process.ProgramNumber.ToDBObject() + " WHERE " + DBCoatingCemeconProcess.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBCoatingCemeconProcess.Table + " Set " + DBCoatingCemeconProcess.Remark + " = " + Process.Remark.ToDBObject() + " WHERE " + DBCoatingCemeconProcess.ID + "=" + Process.ID);
+                //_queries.Add("Update " + DBCoatingCemeconProcess.Table + " Set " + DBCoatingCemeconProcess.IsDecoating + " = " + Process.isDecoating.ToDBObject() + " WHERE " + DBCoatingCemeconProcess.ID + "=" + Process.ID);
 
             }
             else
@@ -1970,10 +2022,19 @@ namespace PDCore.Manager
                     //update
                 else
                 {
-                    _queries.Add("Update " + DBAnalyses.Table + " Set " + DBAnalyses.Started + " = " + ana.Started.ToDBObject() + " WHERE " + DBAnalyses.ID + "=" + ana.ID);
-                    _queries.Add("Update " + DBAnalyses.Table + " Set " + DBAnalyses.Finished + " = " + ana.Finished.ToDBObject() + " WHERE " + DBAnalyses.ID + "=" + ana.ID);
-                    _queries.Add("Update " + DBAnalyses.Table + " Set " + DBAnalyses.UserID+ " = " + ana.User.ID+ " WHERE " + DBAnalyses.ID + "=" + ana.ID);
-                    _queries.Add("Update " + DBAnalyses.Table + " Set " + DBAnalyses.isTerminated + " = " + ana.terminated + " WHERE " + DBAnalyses.ID + "=" + ana.ID);
+
+                    List<MySQLCommunicator.ColumnValuePair> values = new List<MySQLCommunicator.ColumnValuePair>();
+                    values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBAnalyses.Started, Value = ana.Started });
+                    values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBAnalyses.Finished, Value = ana.Finished });
+                    values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBAnalyses.UserID, Value = ana.User.ID });
+                    values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBAnalyses.isTerminated, Value = ana.terminated });
+
+                    _queries.Add(MySQLCommunicator.BuildUpdateQuery(DBAnalyses.Table, values, new MySQLCommunicator.ColumnValuePair() { Culumn = DBAnalyses.ID, Value = ana.ID }));
+                    
+                    //_queries.Add("Update " + DBAnalyses.Table + " Set " + DBAnalyses.Started + " = " + ana.Started.ToDBObject() + " WHERE " + DBAnalyses.ID + "=" + ana.ID);
+                    //_queries.Add("Update " + DBAnalyses.Table + " Set " + DBAnalyses.Finished + " = " + ana.Finished.ToDBObject() + " WHERE " + DBAnalyses.ID + "=" + ana.ID);
+                    //_queries.Add("Update " + DBAnalyses.Table + " Set " + DBAnalyses.UserID+ " = " + ana.User.ID+ " WHERE " + DBAnalyses.ID + "=" + ana.ID);
+                    //_queries.Add("Update " + DBAnalyses.Table + " Set " + DBAnalyses.isTerminated + " = " + ana.terminated + " WHERE " + DBAnalyses.ID + "=" + ana.ID);
                 }
             
             }
