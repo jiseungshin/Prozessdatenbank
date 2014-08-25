@@ -230,7 +230,7 @@ namespace OE110Prozessdatenbank.MainViews
 
                  if (status == DBEnum.EnumReference.CANCELLED || status == DBEnum.EnumReference.TERMINATED)
                  {
-                     MessageBox.Show(Messages.e_cannnotDoNextTry, "Hinweis", MessageBoxButton.OK, MessageBoxImage.Error);
+                     MessageBox.Show(Messages.e_cannotCancelProcess, "Hinweis", MessageBoxButton.OK, MessageBoxImage.Error);
 
                  }
                  else
@@ -238,7 +238,7 @@ namespace OE110Prozessdatenbank.MainViews
                      if (MessageBox.Show(Messages.q_TerminateReference, "Vorgang beenden", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                      {
                          int ID = Convert.ToInt32(((listview).SelectedItem as DataRowView)[DBProcessReferences.RefNumber]);
-                         PDCore.Manager.ProcessManager.Instance.OverrideReferenceStatus(PDCore.Manager.ObjectManager.Instance.getWorkpieceByReference(ID), DBEnum.EnumReference.CANCELLED);
+                         PDCore.Manager.ProcessManager.Instance.OverrideReferenceStatus(PDCore.Manager.ObjectManager.Instance.getWorkpieceByReference(ID), DBEnum.EnumReference.TERMINATED);
                      }
                  }
             }
