@@ -84,7 +84,7 @@ namespace OE110Prozessdatenbank.ViewModels
             NotifyPropertyChanged("Issues");
         }
 
-        public ObservableCollection<User> Users { get { return new ObservableCollection<PDCore.BusinessObjects.User>(ObjectManager.Instance.Users); } }
+        public ObservableCollection<User> Users { get { return new ObservableCollection<PDCore.BusinessObjects.User>(ObjectManager.Instance.Users.FindAll(item => item.isActive)); } }
         public ObservableCollection<Glass> Glasses { get { return new ObservableCollection<Glass>(ObjectManager.Instance.Glasses); } }
 
         public DateTime Date

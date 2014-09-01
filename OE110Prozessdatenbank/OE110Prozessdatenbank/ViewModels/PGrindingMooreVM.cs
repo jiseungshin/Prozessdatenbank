@@ -51,7 +51,7 @@ namespace OE110Prozessdatenbank.ViewModels
         #region get/set
 
         public RelayCommand SaveProcess { get; set; }
-        public ObservableCollection<User> Users { get { return new ObservableCollection<PDCore.BusinessObjects.User>(ObjectManager.Instance.Users); } }
+        public ObservableCollection<User> Users { get { return new ObservableCollection<PDCore.BusinessObjects.User>(ObjectManager.Instance.Users.FindAll(item => item.isActive)); } }
         public ObservableCollection<Project> Projects { get { return new ObservableCollection<PDCore.BusinessObjects.Project>(ObjectManager.Instance.Projects); } }
 
         public DateTime Date { get { return m_process.Date; } set { m_process.Date = value; } }

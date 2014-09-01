@@ -44,7 +44,7 @@ namespace OE110Prozessdatenbank.ViewModels
             SaveProcess = new RelayCommand(Save, CanSave);
         }
 
-        public ObservableCollection<User> Users { get { return new ObservableCollection<PDCore.BusinessObjects.User>(ObjectManager.Instance.Users); } }
+        public ObservableCollection<User> Users { get { return new ObservableCollection<PDCore.BusinessObjects.User>(ObjectManager.Instance.Users.FindAll(item => item.isActive)); } }
         public ObservableCollection<Project> Projects { get { return new ObservableCollection<PDCore.BusinessObjects.Project>(ObjectManager.Instance.Projects); } }
         public ObservableCollection<Issue> Issues { get { return new ObservableCollection<Issue>(ObjectManager.Instance.Issues); } }
 
