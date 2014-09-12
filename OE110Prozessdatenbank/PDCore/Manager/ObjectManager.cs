@@ -284,6 +284,19 @@ namespace PDCore.Manager
             foreach (DataRow row in _ds.Tables[0].Rows)
             {
                 mm = new Material() { ID = row.Field<int>(DBMAterial.ID), Name = row.Field<string>(DBMAterial.Name) };
+                
+                //Frank spezial Status aufgeschlüsselt für Werkstückverwaltung
+                string Status = row.Field<string>(DBWorkpieces.Status);
+
+                DataSet _dsStatus = _myCommunicator.getDataSet("SELECT Status FROM " + DBProcessReferences.Table + " WHERE " + DBProcessReferences.WorkpiceID + "=" + row.Field<int>(DBWorkpieces.ID));// + " AND 'Status' not in ('terminated') AND 'Status' not in ('cancelled')");
+                if (_dsStatus.Tables[0].Rows.Count>0)
+                {
+                    foreach (DataRow rowStatus in _dsStatus.Tables[0].Rows)
+                    {
+                        Status = rowStatus.Field<string>(DBProcessReferences.Status);
+                    }
+                }
+
                 m_worlpieces.Add(new Workpiece()
                 {
                     ID = row.Field<int>(DBWorkpieces.ID),
@@ -294,7 +307,7 @@ namespace PDCore.Manager
                     Geometry = row.Field<string>(DBWorkpieces.Geometry),
                     isOneWay = row.Field<bool>(DBWorkpieces.isOneWay),
                     KindOfProbe = row.Field<string>(DBWorkpieces.KindOfProbe),
-                    Status = row.Field<string>(DBWorkpieces.Status),
+                    Status = Status,//row.Field<string>(DBWorkpieces.Status),
                     isActive = row.Field<bool>(DBWorkpieces.isActive),
                     InitiatorID = row.Field<int?>(DBWorkpieces.Initiator_ID),
                     Remark = row.Field<string>(DBWorkpieces.Remark)
