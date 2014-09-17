@@ -1898,8 +1898,8 @@ namespace PDCore.Manager
 
                 List<MySQLCommunicator.ColumnValuePair> values = new List<MySQLCommunicator.ColumnValuePair>();
                 values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBCoatingCemeconProcess.Date, Value = Process.Date });
-                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBCoatingCemeconProcess.AdherentLayer, Value = Process.AdherentLayer.GetValueOrDefault() });
-                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBCoatingCemeconProcess.ProtectiveLayer, Value = Process.ProtectiveLayer.GetValueOrDefault() });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBCoatingCemeconProcess.AdherentLayer, Value = Process.AdherentLayer.GetValueOrDefault().ID });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBCoatingCemeconProcess.ProtectiveLayer, Value = Process.ProtectiveLayer.GetValueOrDefault().ID });
                 values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBCoatingCemeconProcess.Thickness, Value = Process.Thickness });
                 values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBCoatingCemeconProcess.ProgramNumber, Value = Process.ProgramNumber });
                 values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBCoatingCemeconProcess.Remark, Value = Process.Remark });
