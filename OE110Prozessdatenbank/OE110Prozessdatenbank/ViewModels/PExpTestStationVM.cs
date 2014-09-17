@@ -306,6 +306,9 @@ namespace OE110Prozessdatenbank.ViewModels
         public int? Cycles
         { get { return m_process.Cycles; } set { m_process.Cycles = value; } }
 
+        public double? NitrogenRate
+        { get { return m_process.NitrogenRate; } set { m_process.NitrogenRate = value; } }
+
 
         public RelayCommand SaveProcess { get; set; }
 

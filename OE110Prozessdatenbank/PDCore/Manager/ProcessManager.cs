@@ -546,6 +546,7 @@ namespace PDCore.Manager
             _p.LeftWorkpieceID = _dr.Field<int?>(DBExpTestStation.LeftWPID);
             _p.CenterWorkpieceID = _dr.Field<int?>(DBExpTestStation.CenterWPID);
             _p.RightWorkpieceID = _dr.Field<int?>(DBExpTestStation.RightWPID);
+            _p.NitrogenRate = _dr.Field<double?>(DBExpTestStation.NitrogenRate);
 
             _p.ProjectID = _dr2.Field<int?>(DBProcessReferences.ProjectID);
             _p.IssueID = _dr2.Field<int?>(DBProcessReferences.IssueID);
@@ -1293,6 +1294,7 @@ namespace PDCore.Manager
                 values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpTestStation.PressTemperature, Value = Process.PressTemperature });
                 values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpTestStation.SecForce, Value = Process.SecondForce });
                 values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpTestStation.Duration, Value = Process.Duration });
+                values_p.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpTestStation.NitrogenRate, Value = Process.NitrogenRate });
 
                 _queries.Add(MySQLCommunicator.BuildUpdateQuery(DBExpTestStation.Table, values_p, new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpTestStation.ID, Value = Process.ID }));
 
@@ -1357,6 +1359,7 @@ namespace PDCore.Manager
                                                                           DBExpTestStation.LeftWPID + "," +
                                                                           DBExpTestStation.CenterWPID + "," +
                                                                           DBExpTestStation.RightWPID + "," +
+                                                                          DBExpTestStation.NitrogenRate + "," +
                                                                           DBExpTestStation.Remark + ") Values (" +
                                                                              _pro + "," +
                                                                              Process.UserID.ToDBObject() + "," +
@@ -1375,6 +1378,7 @@ namespace PDCore.Manager
                                                                              Process.LeftWorkpieceID.ToDBObject() + "," +
                                                                              Process.CenterWorkpieceID.ToDBObject() + "," +
                                                                              Process.RightWorkpieceID.ToDBObject() + "," +
+                                                                             Process.NitrogenRate.ToDBObject() + "," +
                                                                              Process.Remark.ToDBObject() + ")");
             }
 

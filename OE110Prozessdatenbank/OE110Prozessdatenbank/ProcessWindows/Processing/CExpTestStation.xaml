@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Height="723.716" Width="907" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Title="Versuchsstand">
+             mc:Ignorable="d" Height="767" Width="907" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Title="Versuchsstand">
     <Grid Background="White">
 
         <DatePicker SelectedDate="{Binding Date}" Margin="179,33,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="253"/>
@@ -50,12 +50,12 @@
         <TextBox HorizontalAlignment="Left" Height="23" Margin="179,479,0,0" TextWrapping="Wrap" Text="{Binding PenDepth}" VerticalAlignment="Top" Width="253"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="179,510,0,0" TextWrapping="Wrap" Text="{Binding Duration}" PreviewTextInput="TextBox_PreviewDecimalTextInput" VerticalAlignment="Top" Width="253"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="179,541,0,0" TextWrapping="Wrap" Text="{Binding Atmosphere}" VerticalAlignment="Top" Width="253"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,572,0,0" TextWrapping="Wrap" Text="{Binding Cycles}" PreviewTextInput="TextBox_PreviewDecimalTextInput" VerticalAlignment="Top" Width="253"/>
-        <TextBox x:Name="tb_remark" Height="69" Margin="179,608,0,0" TextWrapping="Wrap" Text="{Binding Remark}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="253"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,605,0,0" TextWrapping="Wrap" Text="{Binding Cycles}" PreviewTextInput="TextBox_PreviewDecimalTextInput" VerticalAlignment="Top" Width="253"/>
+        <TextBox x:Name="tb_remark" Height="69" Margin="179,641,0,0" TextWrapping="Wrap" Text="{Binding Remark}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="253"/>
 
         <Label Content="Bearbeiter *" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
         <Label Content="Datum" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Width="110"/>
-        <Label Content="Bemerkung" HorizontalAlignment="Left" Margin="10,608,0,0" VerticalAlignment="Top" Width="110"/>
+        <Label Content="Bemerkung" HorizontalAlignment="Left" Margin="10,641,0,0" VerticalAlignment="Top" Width="110"/>
         <Label Content="Glas" HorizontalAlignment="Left" Margin="10,266,0,0" VerticalAlignment="Top" Width="151"/>
         <Label Content="Kammertemperatur [°C ] *" HorizontalAlignment="Left" Margin="10,289,0,0" VerticalAlignment="Top" Width="164" FontWeight="Bold"/>
         <Label Content="Presstemperatur [°C] *" HorizontalAlignment="Left" Margin="10,320,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
@@ -66,7 +66,7 @@
         <Label Content="Max. Eindringtiefe [mm]" HorizontalAlignment="Left" Margin="10,475,0,0" VerticalAlignment="Top" Width="151"/>
         <Label Content="Pressdauer [s] *" HorizontalAlignment="Left" Margin="10,506,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
         <Label Content="Atmosphäre *" HorizontalAlignment="Left" Margin="10,537,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
-        <Label Content="Anzahl Presszyklen *" HorizontalAlignment="Left" Margin="10,568,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
+        <Label Content="Anzahl Presszyklen *" HorizontalAlignment="Left" Margin="10,601,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
         <Label Content="Werkstück außen" HorizontalAlignment="Left" Margin="10,213,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
 
         <Grid x:Name="g_quality" Height="455" Margin="445,63,10,0" VerticalAlignment="Top">
@@ -85,6 +85,8 @@
         <Label Content="Fragestellung/&#xD;&#xA;Versuchsreihe *" HorizontalAlignment="Left" Margin="10,112,0,0" VerticalAlignment="Top" Width="177" FontWeight="Bold"/>
         <ComboBox x:Name="cb_project" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description" Margin="179,90,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="253"/>
         <ComboBox x:Name="cb_Issue" ItemsSource="{Binding Issues}" SelectedItem="{Binding Issue}" DisplayMemberPath="Description" Margin="179,117,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="253"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,569,0,0" TextWrapping="Wrap" Text="{Binding NitrogenRate}" VerticalAlignment="Top" Width="253"/>
+        <Label Content="Stickstoff [bar] *" HorizontalAlignment="Left" Margin="10,565,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
 
     </Grid>
 </Window>
