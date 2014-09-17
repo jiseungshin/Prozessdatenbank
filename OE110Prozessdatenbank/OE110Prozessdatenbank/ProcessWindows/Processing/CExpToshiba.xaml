@@ -28,6 +28,11 @@
                     <Label Content="{Binding LowerWorkpiece.Label}" HorizontalAlignment="Left" Margin="162,158,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.342,-2.192"/>
                     <Label Content="{Binding Glass.VisualName}" HorizontalAlignment="Left" Margin="162,184,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.342,-2.192"/>
                     <Label Content="{Binding LensName}" HorizontalAlignment="Left" Margin="162,210,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.342,-2.192"/>
+                    <Button HorizontalAlignment="Right" Margin="0,216,10,0" VerticalAlignment="Top" Width="31" Click="Button_Click_1">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/OE110Prozessdatenbank;component/Icons/Edit_16xLG.png" Height="16" HorizontalAlignment="Left" Margin="0,0,0,0"></Image>
+                        </StackPanel>
+                    </Button>
 
 
                 </Grid>

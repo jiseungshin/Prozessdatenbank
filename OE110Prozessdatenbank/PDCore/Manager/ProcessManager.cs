@@ -1496,6 +1496,7 @@ namespace PDCore.Manager
                 values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpToshiba.OutpL, Value = Process.InputData.OutpL });
                 values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpToshiba.OutpU, Value = Process.InputData.OutpU });
 
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpToshiba.GlassName, Value = Process.GlassName });
                 #endregion
 
 
@@ -1650,6 +1651,99 @@ namespace PDCore.Manager
 
                 //TODO: MachineData speichen
 
+                 _queries.Add(saveProcessQuality(process));
+
+                 _queries.Add("INSERT INTO " + DBExpToshibaMachineData.Table + " (" + DBExpToshibaMachineData.PID + "," +
+                                                                                        DBExpToshibaMachineData.G1_lower + "," +
+                                                                                        DBExpToshibaMachineData.G1_lower_quali + "," +
+                                                                                        DBExpToshibaMachineData.G1_upper + "," +
+                                                                                        DBExpToshibaMachineData.G1_upper_quali + "," +
+                                                                                        DBExpToshibaMachineData.G3_lower + "," +
+                                                                                        DBExpToshibaMachineData.G3_lower_quali + "," +
+                                                                                        DBExpToshibaMachineData.G3_upper + "," +
+                                                                                        DBExpToshibaMachineData.G3_upper_quali + "," +
+                                                                                        DBExpToshibaMachineData.G4_lower + "," +
+                                                                                        DBExpToshibaMachineData.G4_lower_quali + "," +
+                                                                                        DBExpToshibaMachineData.G4_upper + "," +
+                                                                                        DBExpToshibaMachineData.G4_upper_quali + "," +
+                                                                                        DBExpToshibaMachineData.Gv_lower + "," +
+                                                                                        DBExpToshibaMachineData.Gv_lower_quali + "," +
+                                                                                        DBExpToshibaMachineData.Gv_upper + "," +
+                                                                                        DBExpToshibaMachineData.Gv_upper_quali + "," +
+                                                                                        DBExpToshibaMachineData.P1 + "," +
+                                                                                        DBExpToshibaMachineData.P2 + "," +
+                                                                                        DBExpToshibaMachineData.P3 + "," +
+                                                                                        DBExpToshibaMachineData.PT1 + "," + 
+                                                                                        DBExpToshibaMachineData.ST1 + "," +
+                                                                                        DBExpToshibaMachineData.ST2 + "," +
+                                                                                        DBExpToshibaMachineData.T_press_av + "," +
+                                                                                        DBExpToshibaMachineData.T_press_G + "," +
+                                                                                        DBExpToshibaMachineData.T_press_G_quali + "," +
+                                                                                        DBExpToshibaMachineData.T_start_lower + "," +
+                                                                                        DBExpToshibaMachineData.T_start_upper + "," +
+                                                                                        DBExpToshibaMachineData.T1_lower + "," +
+                                                                                        DBExpToshibaMachineData.T1_upper + "," +
+                                                                                        DBExpToshibaMachineData.T1u_lower + "," +
+                                                                                        DBExpToshibaMachineData.T1u_upper + "," +
+                                                                                        DBExpToshibaMachineData.T2_lower + "," +
+                                                                                        DBExpToshibaMachineData.T2_upper + "," +
+                                                                                        DBExpToshibaMachineData.T3_lower + "," +
+                                                                                        DBExpToshibaMachineData.T3_upper + "," +
+                                                                                        DBExpToshibaMachineData.T4_lower + "," +
+                                                                                        DBExpToshibaMachineData.T4_upper + "," +
+                                                                                        DBExpToshibaMachineData.T5_lower + "," +
+                                                                                        DBExpToshibaMachineData.T5_upper + "," +
+                                                                                        DBExpToshibaMachineData.Tv_lower + "," +
+                                                                                        DBExpToshibaMachineData.Tv_upper + "," +
+                                                                                        DBExpToshibaMachineData.Tvu_lower + "," +
+                                                                                        DBExpToshibaMachineData.Tvu_upper + ") Values (" +
+
+                                                                                    _pro + "," +
+                                                                                    Process.MachinaData.G1_lower.ToDBObject() + "," +
+                                                                                    Process.MachinaData.G1_lower_quali.ToDBObject() + "," +
+                                                                                    Process.MachinaData.G1_upper.ToDBObject() + "," +
+                                                                                    Process.MachinaData.G1_upper_quali.ToDBObject() + "," +
+                                                                                    Process.MachinaData.G3_lower.ToDBObject() + "," +
+                                                                                    Process.MachinaData.G3_lower_quali.ToDBObject() + "," +
+                                                                                    Process.MachinaData.G3_upper.ToDBObject() + "," +
+                                                                                    Process.MachinaData.G3_upper_quali.ToDBObject() + "," +
+                                                                                    Process.MachinaData.G4_lower.ToDBObject() + "," +
+                                                                                    Process.MachinaData.G4_lower_quali.ToDBObject() + "," +
+                                                                                    Process.MachinaData.G4_upper.ToDBObject() + "," +
+                                                                                    Process.MachinaData.G4_upper_quali.ToDBObject() + "," +
+                                                                                    Process.MachinaData.Gv_lower.ToDBObject() + "," +
+                                                                                    Process.MachinaData.Gv_lower_quali.ToDBObject() + "," +
+                                                                                    Process.MachinaData.Gv_upper.ToDBObject() + "," +
+                                                                                    Process.MachinaData.Gv_upper_quali.ToDBObject() + "," +
+                                                                                    Process.MachinaData.P1.ToDBObject() + "," +
+                                                                                    Process.MachinaData.P2.ToDBObject() + "," +
+                                                                                    Process.MachinaData.P3.ToDBObject() + "," +
+                                                                                    Process.MachinaData.PT1.ToDBObject() + "," +
+                                                                                    Process.MachinaData.ST1.ToDBObject() + "," +
+                                                                                    Process.MachinaData.ST2.ToDBObject() + "," +
+                                                                                    Process.MachinaData.T_press_av.ToDBObject() + "," +
+                                                                                    Process.MachinaData.T_press_G.ToDBObject() + "," +
+                                                                                    Process.MachinaData.T_press_G_quali.ToDBObject() + "," +
+                                                                                    Process.MachinaData.T_start_lower.ToDBObject() + "," +
+                                                                                    Process.MachinaData.T_start_upper.ToDBObject() + "," +
+                                                                                    Process.MachinaData.T1_lower.ToDBObject() + "," +
+                                                                                    Process.MachinaData.T1_upper.ToDBObject() + "," +
+                                                                                    Process.MachinaData.T1u_lower.ToDBObject() + "," +
+                                                                                    Process.MachinaData.T1u_upper.ToDBObject() + "," +
+                                                                                    Process.MachinaData.T2_lower.ToDBObject() + "," +
+                                                                                    Process.MachinaData.T2_upper.ToDBObject() + "," +
+                                                                                    Process.MachinaData.T3_lower.ToDBObject() + "," +
+                                                                                    Process.MachinaData.T3_upper.ToDBObject() + "," +
+                                                                                    Process.MachinaData.T4_lower.ToDBObject() + "," +
+                                                                                    Process.MachinaData.T4_upper.ToDBObject() + "," +
+                                                                                    Process.MachinaData.T5_lower.ToDBObject() + "," +
+                                                                                    Process.MachinaData.T5_upper.ToDBObject() + "," +
+                                                                                    Process.MachinaData.Tv_lower.ToDBObject() + "," +
+                                                                                    Process.MachinaData.Tv_upper.ToDBObject() + "," +
+                                                                                    Process.MachinaData.Tvu_lower.ToDBObject() + "," +
+                                                                                    Process.MachinaData.Tvu_upper.ToDBObject() + ")");
+
+
                 bool success = _myCommunicator.executeTransactedQueries(_queries);
 
                 if (success)
@@ -1662,6 +1756,127 @@ namespace PDCore.Manager
             }
 
             return false;
+        }
+
+        public void ImportToshibaMData()
+        {
+
+            List<string> _queries = new List<string>();
+            int PID = 0;
+            foreach (string path in System.IO.Directory.GetFiles(@"Data\Toshiba\"))
+            {
+                int idx = path.LastIndexOf('\\');
+                string PII = path.Remove(0, idx+1);
+                PID = Convert.ToInt32(PII.Replace(".mon", ""));
+                //System.Windows.MessageBox.Show(PID.ToString());
+                var file = PDCore.ToshibaImport.IO.getMonFileData(path);
+                PToshiba Process = PDCore.ToshibaImport.Analytics.AnalyseProcess(file);
+
+
+
+
+
+                _queries.Add("INSERT INTO " + DBExpToshibaMachineData.Table + " (" + DBExpToshibaMachineData.PID + "," +
+                                                                                   DBExpToshibaMachineData.G1_lower + "," +
+                                                                                   DBExpToshibaMachineData.G1_lower_quali + "," +
+                                                                                   DBExpToshibaMachineData.G1_upper + "," +
+                                                                                   DBExpToshibaMachineData.G1_upper_quali + "," +
+                                                                                   DBExpToshibaMachineData.G3_lower + "," +
+                                                                                   DBExpToshibaMachineData.G3_lower_quali + "," +
+                                                                                   DBExpToshibaMachineData.G3_upper + "," +
+                                                                                   DBExpToshibaMachineData.G3_upper_quali + "," +
+                                                                                   DBExpToshibaMachineData.G4_lower + "," +
+                                                                                   DBExpToshibaMachineData.G4_lower_quali + "," +
+                                                                                   DBExpToshibaMachineData.G4_upper + "," +
+                                                                                   DBExpToshibaMachineData.G4_upper_quali + "," +
+                                                                                   DBExpToshibaMachineData.Gv_lower + "," +
+                                                                                   DBExpToshibaMachineData.Gv_lower_quali + "," +
+                                                                                   DBExpToshibaMachineData.Gv_upper + "," +
+                                                                                   DBExpToshibaMachineData.Gv_upper_quali + "," +
+                                                                                   DBExpToshibaMachineData.P1 + "," +
+                                                                                   DBExpToshibaMachineData.P2 + "," +
+                                                                                   DBExpToshibaMachineData.P3 + "," +
+                                                                                   DBExpToshibaMachineData.PT1 + "," +
+                                                                                   DBExpToshibaMachineData.ST1 + "," +
+                                                                                   DBExpToshibaMachineData.ST2 + "," +
+                                                                                   DBExpToshibaMachineData.T_press_av + "," +
+                                                                                   DBExpToshibaMachineData.T_press_G + "," +
+                                                                                   DBExpToshibaMachineData.T_press_G_quali + "," +
+                                                                                   DBExpToshibaMachineData.T_start_lower + "," +
+                                                                                   DBExpToshibaMachineData.T_start_upper + "," +
+                                                                                   DBExpToshibaMachineData.T1_lower + "," +
+                                                                                   DBExpToshibaMachineData.T1_upper + "," +
+                                                                                   DBExpToshibaMachineData.T1u_lower + "," +
+                                                                                   DBExpToshibaMachineData.T1u_upper + "," +
+                                                                                   DBExpToshibaMachineData.T2_lower + "," +
+                                                                                   DBExpToshibaMachineData.T2_upper + "," +
+                                                                                   DBExpToshibaMachineData.T3_lower + "," +
+                                                                                   DBExpToshibaMachineData.T3_upper + "," +
+                                                                                   DBExpToshibaMachineData.T4_lower + "," +
+                                                                                   DBExpToshibaMachineData.T4_upper + "," +
+                                                                                   DBExpToshibaMachineData.T5_lower + "," +
+                                                                                   DBExpToshibaMachineData.T5_upper + "," +
+                                                                                   DBExpToshibaMachineData.Tv_lower + "," +
+                                                                                   DBExpToshibaMachineData.Tv_upper + "," +
+                                                                                   DBExpToshibaMachineData.Tvu_lower + "," +
+                                                                                   DBExpToshibaMachineData.Tvu_upper + ") Values (" +
+
+                                                                               PID + "," +
+                                                                               Process.MachinaData.G1_lower.ToDBObject() + "," +
+                                                                               Process.MachinaData.G1_lower_quali.ToDBObject() + "," +
+                                                                               Process.MachinaData.G1_upper.ToDBObject() + "," +
+                                                                               Process.MachinaData.G1_upper_quali.ToDBObject() + "," +
+                                                                               Process.MachinaData.G3_lower.ToDBObject() + "," +
+                                                                               Process.MachinaData.G3_lower_quali.ToDBObject() + "," +
+                                                                               Process.MachinaData.G3_upper.ToDBObject() + "," +
+                                                                               Process.MachinaData.G3_upper_quali.ToDBObject() + "," +
+                                                                               Process.MachinaData.G4_lower.ToDBObject() + "," +
+                                                                               Process.MachinaData.G4_lower_quali.ToDBObject() + "," +
+                                                                               Process.MachinaData.G4_upper.ToDBObject() + "," +
+                                                                               Process.MachinaData.G4_upper_quali.ToDBObject() + "," +
+                                                                               Process.MachinaData.Gv_lower.ToDBObject() + "," +
+                                                                               Process.MachinaData.Gv_lower_quali.ToDBObject() + "," +
+                                                                               Process.MachinaData.Gv_upper.ToDBObject() + "," +
+                                                                               Process.MachinaData.Gv_upper_quali.ToDBObject() + "," +
+                                                                               Process.MachinaData.P1.ToDBObject() + "," +
+                                                                               Process.MachinaData.P2.ToDBObject() + "," +
+                                                                               Process.MachinaData.P3.ToDBObject() + "," +
+                                                                               Process.MachinaData.PT1.ToDBObject() + "," +
+                                                                               Process.MachinaData.ST1.ToDBObject() + "," +
+                                                                               Process.MachinaData.ST2.ToDBObject() + "," +
+                                                                               Process.MachinaData.T_press_av.ToDBObject() + "," +
+                                                                               Process.MachinaData.T_press_G.ToDBObject() + "," +
+                                                                               Process.MachinaData.T_press_G_quali.ToDBObject() + "," +
+                                                                               Process.MachinaData.T_start_lower.ToDBObject() + "," +
+                                                                               Process.MachinaData.T_start_upper.ToDBObject() + "," +
+                                                                               Process.MachinaData.T1_lower.ToDBObject() + "," +
+                                                                               Process.MachinaData.T1_upper.ToDBObject() + "," +
+                                                                               Process.MachinaData.T1u_lower.ToDBObject() + "," +
+                                                                               Process.MachinaData.T1u_upper.ToDBObject() + "," +
+                                                                               Process.MachinaData.T2_lower.ToDBObject() + "," +
+                                                                               Process.MachinaData.T2_upper.ToDBObject() + "," +
+                                                                               Process.MachinaData.T3_lower.ToDBObject() + "," +
+                                                                               Process.MachinaData.T3_upper.ToDBObject() + "," +
+                                                                               Process.MachinaData.T4_lower.ToDBObject() + "," +
+                                                                               Process.MachinaData.T4_upper.ToDBObject() + "," +
+                                                                               Process.MachinaData.T5_lower.ToDBObject() + "," +
+                                                                               Process.MachinaData.T5_upper.ToDBObject() + "," +
+                                                                               Process.MachinaData.Tv_lower.ToDBObject() + "," +
+                                                                               Process.MachinaData.Tv_upper.ToDBObject() + "," +
+                                                                               Process.MachinaData.Tvu_lower.ToDBObject() + "," +
+                                                                               Process.MachinaData.Tvu_upper.ToDBObject() + ")");
+
+
+            }
+
+
+
+            
+            
+            
+
+            bool success = _myCommunicator.executeTransactedQueries(_queries);
+
         }
 
         private void saveExpMooreProcess(BaseProcess process, bool update)

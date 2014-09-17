@@ -374,15 +374,30 @@ namespace PDCore.Database
             {
                 return "NULL";
             }
+
             else
             {
                 if (obj is bool)
                 {
                     return obj.ToString();
                 }
-                if (obj is int || obj is double)
+                if (obj is int)
                 {
                     return obj.ToString().Replace(',', '.');
+                }
+                if (obj is double )
+                {
+                    if (Double.IsNaN((double)obj))
+                        return "NULL";
+                    else
+                    return obj.ToString().Replace(',', '.');
+                }
+                if (obj is double?)
+                {
+                    if (Double.IsNaN((double)obj))
+                        return "NULL";
+                    else
+                        return obj.ToString().Replace(',', '.');
                 }
                 if (obj is DateTime)
                 {

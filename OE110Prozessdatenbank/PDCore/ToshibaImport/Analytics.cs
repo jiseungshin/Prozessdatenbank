@@ -53,7 +53,7 @@ namespace PDCore.ToshibaImport
                         process.MachinaData.Tvu_upper = result.TminUpper;
 
                         process.MachinaData.T1u_lower = result.TmaxLower;
-                        process.MachinaData.T1u_lower = result.TmaxLower;
+                        process.MachinaData.T1u_upper = result.TmaxUpper;
 
                         process.MachinaData.G1_lower = result.TRateLower;
                         process.MachinaData.G1_upper = result.TRateUpper;
@@ -71,6 +71,7 @@ namespace PDCore.ToshibaImport
 
                         process.MachinaData.T1_lower = result.TmaxLower;
                         process.MachinaData.T1_upper = result.TmaxUpper;
+                        process.MachinaData.ST1 = result.Duration;
 
                         process.InputData.T1 = ((result.TUpper_Last + result.TLower_Last) / 2);
                         process.InputData.ST1 = result.Duration;
@@ -85,7 +86,7 @@ namespace PDCore.ToshibaImport
 
                         process.MachinaData.P1 = result.PAverage;
                         process.MachinaData.PT1 = result.PressTime;
-                        process.MachinaData.ST1 = result.Duration;
+                        process.MachinaData.ST2 = result.Duration;
 
                         process.InputData.P1 = Math.Round(result.PAverage, PressRound);
                         process.InputData.PT1 = result.PressTime;
@@ -120,6 +121,9 @@ namespace PDCore.ToshibaImport
 
                         process.MachinaData.T3_lower = result.TmaxLower;
                         process.MachinaData.T3_upper = result.TmaxLower;
+
+                        process.MachinaData.T4_lower = result.TChangeLower;
+                        process.MachinaData.T4_upper = result.TChangeUpper;
 
                         process.MachinaData.G4_lower = result.TRateLower;
                         process.MachinaData.G4_upper = result.TRateUpper;
