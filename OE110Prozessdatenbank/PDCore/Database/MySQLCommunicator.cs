@@ -1,4 +1,9 @@
-﻿using System;
+﻿//**********************************************
+// MySQL-Kommuniaktionsklasse
+//**********************************************
+
+
+using System;
 using System.Data;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
@@ -31,6 +36,9 @@ namespace PDCore.Database
 
         #region get/set
 
+        /// <summary>
+        /// Name des Datenbankservers oder IP-Adresse
+        /// </summary>
         public string Server
         {
             get { return m_server; }
@@ -41,6 +49,9 @@ namespace PDCore.Database
             }
         }
 
+        /// <summary>
+        /// Name der Datenbank
+        /// </summary>
         public string Database
         {
             get { return m_database; }
@@ -51,6 +62,9 @@ namespace PDCore.Database
             }
         }
 
+        /// <summary>
+        /// Datenbankbenuter
+        /// </summary>
         public string User
         {
             get { return m_user; }
@@ -61,6 +75,9 @@ namespace PDCore.Database
             }
         }
 
+        /// <summary>
+        /// Passwort des Datenbankbenutzers
+        /// </summary>
         public string Password
         {
             get { return m_password; }
@@ -73,6 +90,10 @@ namespace PDCore.Database
 
         #endregion
 
+        /// <summary>
+        /// Versucht eine Verbindung zur Datenbank aufzubauen
+        /// </summary>
+        /// <returns>True, wenn Verbindungsparameter korrekt</returns>
         public override bool checkConnection()
         {
             MySqlConnection m_con = null;
@@ -100,6 +121,11 @@ namespace PDCore.Database
             
         }
 
+        /// <summary>
+        /// Stellt anhand einer gültigen Query ein Dataset zur Verfügung
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
         public DataSet getDataSet(string query)
         {
             MySqlConnection m_mySqlConnection = null;
@@ -133,6 +159,11 @@ namespace PDCore.Database
             }
         }
 
+        /// <summary>
+        /// Fürht eine einzelne SQL-Anfrage aus
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
         public override long executeQuery(string query)
         {
             MySqlConnection m_mySqlConnection = null;
@@ -169,6 +200,11 @@ namespace PDCore.Database
 
         }
 
+        /// <summary>
+        /// Ermittelt die Anzahl eines in der Anfrage festgelegten Datenfeldes einer Tabelle
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
         public int getNumberOf(string query)
         {
             MySqlConnection m_mySqlConnection = null;
