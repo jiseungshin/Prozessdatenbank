@@ -1,4 +1,14 @@
-﻿using System;
+﻿//*********************************************************************************
+// DBModel.cs : Datenbankabstraktionsklassen
+//
+// Statische Klassen stellen Datenbankfeldnamen als statische Strings bereit.
+// Bei Namensänderung in Datenbank müssen die entsprechenden Felder hier angepasst
+// werden
+//
+// Autor      : Kilian Hammesfahr
+//*********************************************************************************
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
