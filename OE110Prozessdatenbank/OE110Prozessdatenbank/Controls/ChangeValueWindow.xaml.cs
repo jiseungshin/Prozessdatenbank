@@ -20,14 +20,26 @@ namespace OE110Prozessdatenbank.Controls
     public partial class ChangeValueWindow : Window
     {
         ViewModels.BaseViewModel m_vm;
+
+        string m_ViewModelType = "";
+        System.Reflection.PropertyInfo m_prop;
+
+
         public ChangeValueWindow(ViewModels.BaseViewModel vm, string variable)
         {
+
             InitializeComponent();
             m_vm = vm;
+            m_ViewModelType = vm.GetType().Name;
+
+            System.Reflection.PropertyInfo m_prop = typeof(ViewModels.PToshibaVM).GetProperty(variable);
+
             this.Title = "Neuen Wert eingeben";
             ViewModels.PToshibaVM vvv = m_vm as ViewModels.PToshibaVM;
-            Val = vvv.LensName;
+            Val = m_prop.GetValue(variable).ToString();
 
+            MessageBox.Show(vm.GetType().Name);
+            
             DataContext = this;
         }
 
