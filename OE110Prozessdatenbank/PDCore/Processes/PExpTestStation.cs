@@ -14,6 +14,7 @@ namespace PDCore.Processes
             Date = DateTime.Now;
             Workpieces = new List<BusinessObjects.Workpiece>();
             Quality = new BusinessObjects.ProcessQuality();
+            NitrogenRate = 2.0;
         }
 
         public int? GlassID { get; set; }
@@ -30,6 +31,7 @@ namespace PDCore.Processes
         public int? LeftWorkpieceID { get; set; }
         public int? CenterWorkpieceID { get; set; }
         public int? RightWorkpieceID { get; set; }
+        public double? NitrogenRate { get; set; }
 
 
     }

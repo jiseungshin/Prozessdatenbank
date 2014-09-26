@@ -59,21 +59,39 @@ namespace OE110Prozessdatenbank.ObjectWindows
 
     public class VMCoatingProcesses : ViewModels.BaseViewModel
     {
+        private string m_filter = "";
+        PCoatingCemeconProcess.Layer m_dummyLayer;
 
         public VMCoatingProcesses()
         {
             ProcessManager.Instance.update();
             ProcessManager.Instance.newProcesses += Instance_newProcesses;
+
+            //Dummy-Layer für die Filterfunktion da leere Layer in daten Null-Exception auslösen
+            m_dummyLayer = new PCoatingCemeconProcess.Layer();
+            m_dummyLayer.Structure = "XXX";
         }
 
         public ObservableCollection<PCoatingCemeconProcess> Processes
         {
-            get { return new ObservableCollection<PCoatingCemeconProcess>(ProcessManager.Instance.CemeConStandardProcesses); }
+            get
+            {
+                if (m_filter == "")
+                    return new ObservableCollection<PCoatingCemeconProcess>(ProcessManager.Instance.CemeConStandardProcesses);
+                else
+                    return new ObservableCollection<PCoatingCemeconProcess>(ProcessManager.Instance.CemeConStandardProcesses.Where(item => item.ProgramNumber.ToString().Contains(Filter)));
+            }
         }
 
         void Instance_newProcesses()
         {
             NotifyPropertyChanged("Processes");
+        }
+
+        public string Filter
+        {
+            get { return m_filter; }
+            set { m_filter = value; NotifyPropertyChanged("Processes"); }
         }
     }
 }

@@ -331,6 +331,7 @@ namespace PDCore.Database
         public static string LeftWPID { get { return "LeftWP_ID"; } }
         public static string CenterWPID { get { return "CenterWP_ID"; } }
         public static string RightWPID { get { return "RightWP_ID"; } }
+        public static string NitrogenRate { get { return "NitrogenRate"; } }
     }
 
     public static class DBExpMoore

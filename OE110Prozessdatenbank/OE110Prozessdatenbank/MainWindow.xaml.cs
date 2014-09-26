@@ -429,6 +429,11 @@ namespace OE110Prozessdatenbank
             {
                 new ObjectWindows.ProjectHistory().ShowDialog();
             }
+
+            if (e.Key == Key.D && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                new debugWindow().ShowDialog();
+            }
         }
 
        

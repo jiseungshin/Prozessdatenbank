@@ -65,5 +65,10 @@ namespace OE110Prozessdatenbank.ProcessWindows
         {
 
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            new Controls.ChangeValueWindow(m_vm,"").ShowDialog();
+        }
     }
 }

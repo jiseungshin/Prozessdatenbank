@@ -7,7 +7,7 @@
         <local:DateConverter x:Key="dateConv"></local:DateConverter>
     </Window.Resources>
     <Grid>
-        <ListView Name="LV_Processes" Margin="10,49,10,10" ItemsSource="{Binding Processes, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" MouseDoubleClick="LV_Processes_DoubleClick">
+        <ListView Name="LV_Processes" Margin="10,80,10,10" ItemsSource="{Binding Processes, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" MouseDoubleClick="LV_Processes_DoubleClick">
             <ListView.Background>
                 <LinearGradientBrush>
                     <GradientStop  Offset="0" Color="#FFE8E8E8"/>
@@ -69,5 +69,7 @@
                 </Button>
             </ToolBar>
         </ToolBarTray>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="65,49,0,0" TextWrapping="Wrap" Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="154"/>
+        <Label Content="Suche" HorizontalAlignment="Left" Margin="7,49,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

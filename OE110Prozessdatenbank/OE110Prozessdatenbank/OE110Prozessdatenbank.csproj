@@ -67,8 +67,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\ChangeValueWindow.xaml.cs">
+      <DependentUpon>ChangeValueWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PostProcessingPicker.xaml.cs">
       <DependentUpon>PostProcessingPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="debugWindow.xaml.cs">
+      <DependentUpon>debugWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SortAdorner.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
@@ -254,11 +260,19 @@
     <Compile Include="ViewModels\PToshibaVM.cs" />
     <Compile Include="ViewModels\PTurningMooreVM.cs" />
     <Compile Include="ViewModels\QualityVM.cs" />
+    <Page Include="Controls\ChangeValueWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\PostProcessingPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ReferencePicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="debugWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
