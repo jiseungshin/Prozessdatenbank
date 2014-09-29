@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using PDCore.BusinessObjects;
 using PDCore.Manager;
-using PDCore.BusinessObjects;
 using System.Collections.ObjectModel;
 
 namespace OE110Prozessdatenbank.ObjectWindows

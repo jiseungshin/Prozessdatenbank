@@ -61,7 +61,16 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public RelayCommand SaveProcess { get; set; }
 
-        public ObservableCollection<User> Users { get { return new ObservableCollection<PDCore.BusinessObjects.User>(ObjectManager.Instance.Users.FindAll(item => item.isActive)); } }
+        public ObservableCollection<User> Users
+        {
+            get
+            {
+                if (m_update)
+                    return new ObservableCollection<PDCore.BusinessObjects.User>(ObjectManager.Instance.Users);
+                else
+                    return new ObservableCollection<PDCore.BusinessObjects.User>(ObjectManager.Instance.Users.FindAll(item => item.isActive));
+            }
+        }
         public ObservableCollection<Project> Projects { get { return new ObservableCollection<PDCore.BusinessObjects.Project>(ObjectManager.Instance.Projects); } }
         public ObservableCollection<PCoatingCemeconProcess> Processes { get { return new ObservableCollection<PCoatingCemeconProcess>(ProcessManager.Instance.CemeConStandardProcesses); } }
 

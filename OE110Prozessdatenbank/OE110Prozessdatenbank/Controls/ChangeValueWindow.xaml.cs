@@ -36,9 +36,10 @@ namespace OE110Prozessdatenbank.Controls
 
             this.Title = "Neuen Wert eingeben";
             ViewModels.PToshibaVM vvv = m_vm as ViewModels.PToshibaVM;
-            Val = m_prop.GetValue(variable).ToString();
+            //Val = m_prop.GetValue(variable).ToString();
 
-            MessageBox.Show(vm.GetType().Name);
+            //MessageBox.Show(vm.GetType().Name);
+            Val = vvv.LensName;
             
             DataContext = this;
         }

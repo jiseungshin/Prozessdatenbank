@@ -185,7 +185,16 @@ namespace OE110Prozessdatenbank.ViewModels
 
         #endregion
 
-        public ObservableCollection<User> Users { get { return new ObservableCollection<PDCore.BusinessObjects.User>(ObjectManager.Instance.Users.FindAll(item => item.isActive)); } }
+        public ObservableCollection<User> Users
+        {
+            get
+            {
+                if (m_update)
+                    return new ObservableCollection<PDCore.BusinessObjects.User>(ObjectManager.Instance.Users);
+                else
+                    return new ObservableCollection<PDCore.BusinessObjects.User>(ObjectManager.Instance.Users.FindAll(item => item.isActive));
+            }
+        }
         public ObservableCollection<Project> Projects { get { return new ObservableCollection<PDCore.BusinessObjects.Project>(ObjectManager.Instance.Projects); } }
         public ObservableCollection<Issue> Issues {  get { return m_issues; } } 
         public ObservableCollection<Glass> Glasses { get { return new ObservableCollection<Glass>(ObjectManager.Instance.Glasses); } }
