@@ -76,6 +76,12 @@
     <Compile Include="debugWindow.xaml.cs">
       <DependentUpon>debugWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ObjectWindows\AddPhoenixProcess.xaml.cs">
+      <DependentUpon>AddPhoenixProcess.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ObjectWindows\PhoenixProcessAdministration.xaml.cs">
+      <DependentUpon>PhoenixProcessAdministration.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SortAdorner.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Controls\ReferencePicker.xaml.cs">
@@ -239,6 +245,7 @@
     <Compile Include="ViewModels\F_PostProcessingVM.cs" />
     <Compile Include="ViewModels\MonFileVM.cs" />
     <Compile Include="ViewModels\OMaterialVM.cs" />
+    <Compile Include="ViewModels\OPheonixProcessVM.cs" />
     <Compile Include="ViewModels\OProjectVM.cs" />
     <Compile Include="ViewModels\OGlassVM.cs" />
     <Compile Include="ViewModels\OReferenceVM.cs" />
@@ -300,6 +307,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="ObjectWindows\AddPhoenixProcess.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ObjectWindows\AddWorkpiece.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -323,6 +334,10 @@
     <Page Include="ObjectWindows\IssuePicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ObjectWindows\PhoenixProcessAdministration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ObjectWindows\ProjectHistory.xaml">
       <SubType>Designer</SubType>

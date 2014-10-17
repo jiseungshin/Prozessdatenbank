@@ -436,6 +436,11 @@ namespace OE110Prozessdatenbank
             }
         }
 
+        private void mbt_PhoenixProcessAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            new ObjectWindows.PhoenixProcessAdministration().ShowDialog();
+        }
+
        
 
 

@@ -90,7 +90,7 @@
             </MenuItem>
             <MenuItem Header="Prozesse" Height="26">
                 <MenuItem Header="Beschichtungsprozesse" Click="mbt_CoatingAdmin_Click"></MenuItem>
-                <MenuItem Header="Polierprozesse (Phoenix)"></MenuItem>
+                <MenuItem Header="Polierprozesse (Phoenix)" Click="mbt_PhoenixProcessAdmin_Click"></MenuItem>
             </MenuItem>
             
 

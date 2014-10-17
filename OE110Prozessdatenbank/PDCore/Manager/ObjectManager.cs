@@ -252,7 +252,11 @@ namespace PDCore.Manager
 
             foreach (DataRow row in _ds.Tables[0].Rows)
             {
-                m_PhoenixProcesses.Add(new PGrindingPhoenixProcess() { ID = row.Field<int>(DBPhoenixProcesses.ID), Description = row.Field<string>(DBPhoenixProcesses.Description) });
+                m_PhoenixProcesses.Add(new PGrindingPhoenixProcess() { 
+                                    ID = row.Field<int>(DBPhoenixProcesses.ID), 
+                                    Description = row.Field<string>(DBPhoenixProcesses.Description),
+                                    Remark = row.Field<string>(DBPhoenixProcesses.Remark),
+                                    Ra = row.Field<double>(DBPhoenixProcesses.Ra)});
             }
         }
 
@@ -930,6 +934,34 @@ namespace PDCore.Manager
 
                 #endregion
 
+            }
+
+            _myCommunicator.executeTransactedQueries(_queries);
+        }
+
+        public void savePheonixProcess(PGrindingPhoenixProcess process, bool update)
+        {
+            List<string> _queries = new List<string>();
+            if (update)
+            {
+                List<MySQLCommunicator.ColumnValuePair> values = new List<MySQLCommunicator.ColumnValuePair>();
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBPhoenixProcesses.Description, Value = process.Description });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBPhoenixProcesses.Remark, Value = process.Remark });
+                values.Add(new MySQLCommunicator.ColumnValuePair() { Culumn = DBPhoenixProcesses.Ra, Value = process.Ra });
+
+
+                _queries.Add(MySQLCommunicator.BuildUpdateQuery(DBPhoenixProcesses.Table, values, new MySQLCommunicator.ColumnValuePair() { Culumn = DBPhoenixProcesses.ID, Value = process.ID }));
+            }
+            else
+            {
+                _queries.Add("INSERT INTO " + DBPhoenixProcesses.Table + " (" + DBPhoenixProcesses.ID + "," +
+                                                                               DBPhoenixProcesses.Description + "," +
+                                                                               DBPhoenixProcesses.Ra + "," +
+                                                                               DBPhoenixProcesses.Remark + ") Values (" +
+                                                                                process.ID.ToDBObject() + "," +
+                                                                                process.Description.ToDBObject() + "," +
+                                                                                process.Ra.ToDBObject() + "," +
+                                                                                 process.Remark.ToDBObject() + ")");
             }
 
             _myCommunicator.executeTransactedQueries(_queries);

@@ -8,6 +8,12 @@ namespace PDCore.Processes
 {
     public class PGrindingPhoenixProcess : BaseProcess
     {
+        public PGrindingPhoenixProcess()
+        {
+            Description = "";
+        }
+
         public string Description { get; set; }
+        public double Ra { get; set; }
     }
 }

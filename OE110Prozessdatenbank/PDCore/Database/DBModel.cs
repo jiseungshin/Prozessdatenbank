@@ -238,6 +238,9 @@ namespace PDCore.Database
         public static string Table { get { return "Grinding_PhoenixProcesses"; } }
         public static string ID { get { return "GrindingPhoenixProcesses_ID"; } }
         public static string Description { get { return "Name"; } }
+        public static string Ra { get { return "Ra"; } }
+        public static string Remark { get { return "Remark"; } }
+
     }
 
     public static class DBCoatingCemecon
