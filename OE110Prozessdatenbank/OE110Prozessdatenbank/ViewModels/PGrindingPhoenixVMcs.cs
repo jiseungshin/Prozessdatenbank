@@ -26,6 +26,7 @@ namespace OE110Prozessdatenbank.ViewModels
             ObjectManager.Instance.update(DBProjects.Table);
             ObjectManager.Instance.update(DBIssues.Table);
             ObjectManager.Instance.update(DBWorkpieces.Table);
+            ObjectManager.Instance.update(DBPhoenixProcesses.Table);
 
             SaveProcess = new RelayCommand(Save, CanSave);
             m_update = update;

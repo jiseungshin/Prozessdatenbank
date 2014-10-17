@@ -147,6 +147,8 @@ namespace PDCore.Manager
                 getCoatedWorkpieces();
                 
             }
+            if (Table == DBPhoenixProcesses.Table)
+                getPhoenixProcesses();
 
             if (Table == DBMachine.Table)
                 getMachines();
