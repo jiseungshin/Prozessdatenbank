@@ -28,5 +28,10 @@ namespace OE110Prozessdatenbank
         {
             PDCore.Manager.ProcessManager.Instance.ImportToshibaMData();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            PDCore.Manager.ProcessManager.Instance.insertReferences();
+        }
     }
 }

@@ -4,6 +4,7 @@
         Title="debugWindow" Height="300" Width="300">
     <Grid>
         <Button Content="Import Toshiba M-Data" HorizontalAlignment="Left" Margin="69,43,0,0" VerticalAlignment="Top" Width="147" Click="Button_Click"/>
+        <Button Content="insert References" HorizontalAlignment="Left" Margin="69,110,0,0" VerticalAlignment="Top" Width="132" Click="Button_Click_1"/>
 
     </Grid>
 </Window>

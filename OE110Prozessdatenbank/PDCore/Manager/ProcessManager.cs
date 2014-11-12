@@ -1758,6 +1758,7 @@ namespace PDCore.Manager
             return false;
         }
 
+        //Nur zu initialen Gebrauch!!! Keine Produktiv-Funktion
         public void ImportToshibaMData()
         {
 
@@ -1877,6 +1878,80 @@ namespace PDCore.Manager
 
             bool success = _myCommunicator.executeTransactedQueries(_queries);
 
+        }
+
+        public void insertReferences()
+        {
+            //-------------------------------------------------------------------------------
+            //Toshiba
+            //-------------------------------------------------------------------------------
+            DataSet _ds =_myCommunicator.getDataSet("SELECT * FROM " + DBExpToshiba.Table);
+
+            int LowerRef;
+            int UpperRef;
+
+            int finalUpper;
+            int finallower;
+
+            List<string> _queries = new List<string>();
+
+            int i = 0;
+
+            foreach(DataRow dr in _ds.Tables[0].Rows)
+            {
+                int PID = dr.Field<int>(DBExpToshiba.ID);
+                int UpperWP = dr.Field<int>(DBExpToshiba.UpperWPID);
+                int LowerWP = dr.Field<int>(DBExpToshiba.LowerWPID);
+
+                DataSet _ds2 = _myCommunicator.getDataSet("SELECT * FROM " + DBProcessReferenceRelation.Table + " where " + DBProcessReferenceRelation.PID + " = " + PID);
+
+                LowerRef = _ds2.Tables[0].Rows[0].Field<int>(DBProcessReferenceRelation.RefNumber);
+                UpperRef = _ds2.Tables[0].Rows[1].Field<int>(DBProcessReferenceRelation.RefNumber);
+
+                DataSet _ds3 = _myCommunicator.getDataSet("SELECT * FROM " + DBProcessReferences.Table + " where " + DBProcessReferences.RefNumber + " = " + UpperRef);
+                DataSet _ds4 = _myCommunicator.getDataSet("SELECT * FROM " + DBProcessReferences.Table + " where " + DBProcessReferences.RefNumber + " = " + LowerRef);
+
+                int finalUpperWP = _ds3.Tables[0].Rows[0].Field<int>(DBProcessReferences.WorkpiceID);
+                int finallowerWP = _ds4.Tables[0].Rows[0].Field<int>(DBProcessReferences.WorkpiceID);
+
+                if (finallowerWP== LowerWP)
+                {
+                    finallower = LowerRef;
+                    finalUpper = UpperRef;
+                }
+
+                else
+                {
+                    finalUpper = LowerRef;
+                    finallower = UpperRef;
+                }                
+
+                _queries.Add("update " + DBExpToshiba.Table + " set " + DBExpToshiba.UpperRef + "=" + finalUpper + "," + DBExpToshiba.LowerRef + "=" + finallower +" where "+DBExpToshiba.ID +"="+PID);
+
+            }
+
+            //-------------------------------------------------------------------------------
+
+            //EXP_Moore
+
+            //-------------------------------------------------------------------------------
+            //Cemecon
+            //-------------------------------------------------------------------------------
+            _ds = _myCommunicator.getDataSet("SELECT * FROM " + DBCoatingCemecon.Table);
+
+            foreach (DataRow dr in _ds.Tables[0].Rows)
+            {
+                int PID = dr.Field<int>(DBCoatingCemecon.ID);
+
+                DataSet _ds2 = _myCommunicator.getDataSet("SELECT * FROM " + DBProcessReferenceRelation.Table + " where " + DBProcessReferenceRelation.PID + " = " + PID);
+                
+                int _ref = _ds2.Tables[0].Rows[0].Field<int>(DBProcessReferenceRelation.RefNumber);
+                _queries.Add("update " + DBCoatingCemecon.Table + " set " + DBCoatingCemecon.Reference + "=" + _ref + " where " + DBCoatingCemecon.ID + "=" + PID);
+            }
+
+            //-------------------------------------------------------------------------------
+
+            _myCommunicator.executeTransactedQueries(_queries);
         }
 
         private void saveExpMooreProcess(BaseProcess process, bool update)

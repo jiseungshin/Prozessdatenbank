@@ -253,6 +253,7 @@ namespace PDCore.Database
         public static string Abnormalities { get { return "Abnormalities"; } }
         public static string Remark { get { return "Remark"; } }
         public static string ProcessNumber { get { return "ProcessNumber"; } }
+        public static string Reference { get { return "Reference"; } }
     }
 
     public static class DBDeCoatingCemecon
@@ -422,6 +423,10 @@ namespace PDCore.Database
         public static string N2L_CC { get { return "N2L_CC"; } }
         public static string OutpU { get { return "OutpU"; } }
         public static string OutpL { get { return "OutpL"; } }
+
+        public static string UpperRef { get { return "UpperReference"; } }
+
+        public static string LowerRef { get { return "LowerReference"; } }
     }
 
     public static class DBExpToshibaMachineData
