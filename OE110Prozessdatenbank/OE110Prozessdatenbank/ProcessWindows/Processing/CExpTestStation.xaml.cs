@@ -27,7 +27,7 @@ namespace OE110Prozessdatenbank.ProcessWindows
             m_vm = new ViewModels.PExpTestStationVM(ID);
             DataContext = m_vm;
 
-            cb_Glass.IsEnabled = false;
+            cb_Glass.IsEnabled = true;
             cb_WPLeft.IsEnabled = false;
             cb_WPRight.IsEnabled = false;
             cb_WPCenter.IsEnabled = false;

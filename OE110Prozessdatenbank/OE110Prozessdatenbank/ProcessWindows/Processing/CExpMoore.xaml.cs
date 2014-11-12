@@ -40,7 +40,7 @@ namespace OE110Prozessdatenbank.ProcessWindows
 
             bt_findLower.Visibility = System.Windows.Visibility.Hidden;
             bt_findUpper.Visibility = System.Windows.Visibility.Hidden;
-            cb_glass.IsEnabled = false;
+            cb_glass.IsEnabled = true;
             
         }
 
