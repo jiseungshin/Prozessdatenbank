@@ -140,7 +140,7 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public bool CanSave()
         {
-            if (m_analysis.User!=null && m_analysis.Started != null)
+            if (m_analysis.User!=null && m_analysis.Started != null && !String.IsNullOrEmpty(m_analysis.Description))
                 return true;
             else
                 return false;
