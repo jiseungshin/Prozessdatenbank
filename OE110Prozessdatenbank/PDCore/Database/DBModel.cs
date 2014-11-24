@@ -358,6 +358,9 @@ namespace PDCore.Database
         public static string Force { get { return "PressForce"; } }
         public static string PressTime { get { return "PressTime"; } }
         public static string Cycles { get { return "Cycles"; } }
+        public static string UpperReference { get { return "UpperReference"; } }
+        public static string LowerReference { get { return "LowerReference"; } }
+
     }
 
     public static class DBAnalyses

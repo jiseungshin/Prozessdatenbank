@@ -115,7 +115,7 @@ namespace PDCore.ToshibaImport
 
                         break;
                     case 7:
-                        result = analyse_4567(step);
+                        result = analyse_7(step);
                         process.MachinaData.T5_lower = result.TminLower;
                         process.MachinaData.T5_upper = result.TminUpper;
 
@@ -285,6 +285,91 @@ namespace PDCore.ToshibaImport
             {
                 _result.TChangeUpper = _result.TUpper_First;
                 _result.TChangeLower = _result.TUpper_First;
+            }
+
+
+            return _result;
+        }
+
+        private static AnalyseResults analyse_7(MonFile.ProcessStep step)
+        {
+            AnalyseResults _result = new AnalyseResults();
+
+            double[] time = new double[step.MeasuringPoints.Count];
+            double[] tUpper = new double[step.MeasuringPoints.Count];
+            double[] tLower = new double[step.MeasuringPoints.Count];
+            double[] press = new double[step.MeasuringPoints.Count];
+            double[] pos = new double[step.MeasuringPoints.Count];
+
+            for (int i = 0; i < step.MeasuringPoints.Count; i++)
+            {
+                time[i] = step.MeasuringPoints[i].TimePass;
+                tUpper[i] = step.MeasuringPoints[i].UTemp1;
+                tLower[i] = step.MeasuringPoints[i].LTemp1;
+                press[i] = step.MeasuringPoints[i].PressZ;
+                pos[i] = step.MeasuringPoints[i].PosZ;
+            }
+
+            _result.TmaxUpper = Enumerable.Range(0, tUpper.Length).Max(i => tUpper[i]);
+            _result.TminUpper = Enumerable.Range(0, tUpper.Length).Min(i => tUpper[i]);
+            _result.TAverageUpper = tUpper.Average();
+
+            _result.TmaxLower = Enumerable.Range(0, tLower.Length).Max(i => tLower[i]);
+            _result.TminLower = Enumerable.Range(0, tLower.Length).Min(i => tLower[i]);
+            _result.TAverageLower = tLower.Average();
+
+            _result.Pmin = Enumerable.Range(0, press.Length).Min(i => press[i]);
+            _result.Pmax = Enumerable.Range(0, press.Length).Max(i => press[i]);
+
+            _result.Posmin = Enumerable.Range(0, pos.Length).Min(i => pos[i]);
+            _result.Posmax = Enumerable.Range(0, pos.Length).Max(i => pos[i]);
+
+            double a1, a2, a3;
+            double b1, b2, b3;
+            double c1, c2, c3;
+
+            LinearRegression(time, tUpper, 0, time.Length, out c1, out b1, out a1);
+            _result.TRateUpper = Math.Round(a1, 4); _result.TRateUpperQuality = Math.Round(c1, 4);
+
+            LinearRegression(time, tLower, 0, time.Length, out c2, out b2, out a2);
+            _result.TRateLower = Math.Round(a2, 4); _result.TRateLowerQuality = Math.Round(c2, 4);
+
+            LinearRegression(time, pos, 0, time.Length, out c3, out b3, out a3);
+            _result.PosRate = Math.Round(a3, 4);
+
+            _result.TUpper_First = tUpper[0]; _result.TUpper_Last = tUpper[tUpper.Length - 1];
+            _result.TLower_First = tLower[0]; _result.TLower_Last = tLower[tLower.Length - 1];
+
+            _result.Duration = Convert.ToInt32(time[time.Length - 1] - time[0]);
+
+            //int cutCount = Convert.ToInt32(step.MeasuringPoints.Count * pAverageEdgeCutFactor);
+            //_result.PAverage = Enumerable.Range(cutCount, press.Length - 2 * cutCount).Select(i => press[i]).Average();
+
+            _result.PAverage = press.GroupBy(item => item).OrderByDescending(g => g.Count()).Select(g => g.Key).First();
+
+            _result.PressTime = press.Where(item => Math.Abs(item) > (_result.PAverage - (_result.PAverage * 0.05))).Count();
+
+            int abovePAverageCount = press.Where(item => item > _result.PAverage).Count();
+
+
+            try
+            {
+                int changetime = _result.Duration - (_result.Duration - _result.PressTime);
+                _result.TChangeUpper = tUpper[changetime];
+                _result.TChangeLower = tLower[changetime];
+            }
+            catch
+            {
+                _result.TChangeUpper = _result.TUpper_First;
+                _result.TChangeLower = _result.TLower_First;
+            }
+
+            if (abovePAverageCount <= 15)
+            {
+                _result.TChangeUpper = _result.TUpper_First;
+                _result.TChangeLower = _result.TLower_First;
+                _result.PressTime = 0;
+                _result.PAverage = 0;
             }
 
 

@@ -198,7 +198,8 @@ namespace OE110Prozessdatenbank.ViewModels
             m_vm = new MonFileVM(m_process.File);
 
         }
-
+        public int PID
+        { get { return m_process.ID; } }
 
         public PToshiba Process
         { get { return m_process; } }

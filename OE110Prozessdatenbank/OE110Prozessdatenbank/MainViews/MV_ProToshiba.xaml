@@ -90,7 +90,7 @@
                 </Style>
             </ListView.ItemContainerStyle>
             <ListView.View>
-                <GridView>
+                <GridView><GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=Exp_Toshiba_ID}" Width="130"/>
                     <GridViewColumn Header="Datum" DisplayMemberBinding="{Binding Path=Date, Converter={StaticResource DateConverter}}" Width="130"/>
                     <GridViewColumn Header="Bearbeiter" DisplayMemberBinding="{Binding Path=Token}" Width="90"/>
                     <GridViewColumn Header="Werkstück untere Achse" DisplayMemberBinding="{Binding Path=Lower}" Width="150"/>

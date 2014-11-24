@@ -1903,6 +1903,7 @@ namespace PDCore.Manager
                 int UpperWP = dr.Field<int>(DBExpToshiba.UpperWPID);
                 int LowerWP = dr.Field<int>(DBExpToshiba.LowerWPID);
 
+                //get references by PID
                 DataSet _ds2 = _myCommunicator.getDataSet("SELECT * FROM " + DBProcessReferenceRelation.Table + " where " + DBProcessReferenceRelation.PID + " = " + PID);
 
                 LowerRef = _ds2.Tables[0].Rows[0].Field<int>(DBProcessReferenceRelation.RefNumber);
@@ -1933,6 +1934,69 @@ namespace PDCore.Manager
             //-------------------------------------------------------------------------------
 
             //EXP_Moore
+            DataSet _dsMoore = _myCommunicator.getDataSet("SELECT * FROM " + DBExpMoore.Table);
+
+            foreach (DataRow dr in _dsMoore.Tables[0].Rows)
+            {
+                int PID = dr.Field<int>(DBExpMoore.ID);
+                int? UpperWP = dr.Field<int?>(DBExpMoore.UpperWorkpieceID);
+                int? LowerWP = dr.Field<int?>(DBExpMoore.LowerWorkpieceID);
+
+                //get references by PID
+                DataSet _ds2 = _myCommunicator.getDataSet("SELECT * FROM " + DBProcessReferenceRelation.Table + " where " + DBProcessReferenceRelation.PID + " = " + PID);
+
+                if (LowerWP != null)
+                {
+
+                    DataSet _dsLowerReferences = _myCommunicator.getDataSet("SELECT * FROM " + DBProcessReferences.Table + " where " + DBProcessReferences.WorkpiceID + " = " + LowerWP);
+
+                    int? LowerReferenceNumber = null;
+ 
+                    foreach(DataRow cand in _ds2.Tables[0].Rows)
+                    {
+                        int reference = cand.Field<int>(DBProcessReferenceRelation.RefNumber);
+                        foreach(DataRow candReference in _dsLowerReferences.Tables[0].Rows)
+                        {
+                            if (reference == candReference.Field<int>(DBProcessReferences.RefNumber))
+                            {
+                                LowerReferenceNumber = reference;
+                                break;
+                            }
+                        }
+                        if (LowerReferenceNumber != null)
+                            break;
+                    }
+
+                    _queries.Add("update " + DBExpMoore.Table + " set " + DBExpMoore.LowerReference + "=" + LowerReferenceNumber.ToDBObject() + " where " + DBExpMoore.ID + "=" + PID);
+                }
+
+
+                if (UpperWP != null)
+                {
+
+                    DataSet _dsUpperReferences = _myCommunicator.getDataSet("SELECT * FROM " + DBProcessReferences.Table + " where " + DBProcessReferences.WorkpiceID + " = " + UpperWP);
+
+                    int? UpperReferenceNumber = null;
+
+                    foreach (DataRow cand in _ds2.Tables[0].Rows)
+                    {
+                        int reference = cand.Field<int>(DBProcessReferenceRelation.RefNumber);
+                        foreach (DataRow candReference in _dsUpperReferences.Tables[0].Rows)
+                        {
+                            if (reference == candReference.Field<int>(DBProcessReferences.RefNumber))
+                            {
+                                UpperReferenceNumber = reference;
+                                break;
+                            }
+                        }
+                        if (UpperReferenceNumber != null)
+                            break;
+                    }
+
+                    _queries.Add("update " + DBExpMoore.Table + " set " + DBExpMoore.UpperReference + "=" + UpperReferenceNumber.ToDBObject() + " where " + DBExpMoore.ID + "=" + PID);
+                }
+            }
+
 
             //-------------------------------------------------------------------------------
             //Cemecon
