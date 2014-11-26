@@ -26,7 +26,7 @@ namespace OE110Prozessdatenbank.ViewModels
 
         private ObservableCollection<Issue> m_issues = new ObservableCollection<Issue>();
 
-        public PToshibaImportVM(List<PToshiba> processes)
+        public PToshibaImportVM(List<PExpToshiba> processes)
         {
             m_ProcessVms = new List<PToshibaVM>();
             //if (UserManager.CurrentUser != null)
@@ -67,7 +67,7 @@ namespace OE110Prozessdatenbank.ViewModels
 
         public RelayCommand Import { get; set; }
 
-        public void addProcess(PToshiba process, int index)
+        public void addProcess(PExpToshiba process, int index)
         {
             if (UpperWP != null)
             {

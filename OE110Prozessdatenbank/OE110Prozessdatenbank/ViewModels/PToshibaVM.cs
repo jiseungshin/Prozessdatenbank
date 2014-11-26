@@ -15,13 +15,13 @@ namespace OE110Prozessdatenbank.ViewModels
 {
     public class PToshibaVM : BaseViewModel
     {
-        public PToshiba m_process;
+        public PExpToshiba m_process;
         public PlotModel plotModelT;
         public PlotModel plotModelP;
 
         public ViewModels.MonFileVM m_vm;
 
-        public PToshibaVM(PToshiba process)
+        public PToshibaVM(PExpToshiba process)
         {
             m_process = process;
             plotModelT = new OxyPlot.PlotModel();
@@ -109,7 +109,7 @@ namespace OE110Prozessdatenbank.ViewModels
 
             SaveProcess = new RelayCommand(Save, CanSave);
 
-            m_process = ProcessManager.Instance.getProcess(PID, 34) as PToshiba;
+            m_process = ProcessManager.Instance.getProcess(PID, 34) as PExpToshiba;
             
             //try getting mon-file from local directory
             try
@@ -201,7 +201,7 @@ namespace OE110Prozessdatenbank.ViewModels
         public int PID
         { get { return m_process.ID; } }
 
-        public PToshiba Process
+        public PExpToshiba Process
         { get { return m_process; } }
         public ViewModels.MonFileVM MonVM
         { get { return m_vm; } }

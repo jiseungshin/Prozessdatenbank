@@ -11,10 +11,10 @@ namespace PDCore.ToshibaImport
     {
         private static int PressRound = 1;
 
-        public static PToshiba AnalyseProcess(MonFile File)
+        public static PExpToshiba AnalyseProcess(MonFile File)
         {
             AnalyseResults result;
-            PToshiba process = new PToshiba();
+            PExpToshiba process = new PExpToshiba();
 
             process.Date = File.StartTime;
 

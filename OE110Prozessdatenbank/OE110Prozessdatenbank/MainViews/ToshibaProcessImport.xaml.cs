@@ -60,7 +60,7 @@ namespace OE110Prozessdatenbank.MainWindows
                 {
 
                     var file = PDCore.ToshibaImport.IO.getMonFileData(path);
-                    PToshiba process = PDCore.ToshibaImport.Analytics.AnalyseProcess(file);
+                    PExpToshiba process = PDCore.ToshibaImport.Analytics.AnalyseProcess(file);
                     process.File = file;
 
                     m_vm.addProcess(process, id);
@@ -109,7 +109,7 @@ namespace OE110Prozessdatenbank.MainWindows
         {
             if (MessageBox.Show(Properties.Messages.q_importToshiba, "Hinweis", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                List<PToshiba> processes = new List<PToshiba>();
+                List<PExpToshiba> processes = new List<PExpToshiba>();
                 foreach (var pvm in m_vm.Processes)
                 {
                     processes.Add(pvm.Process);

@@ -60,7 +60,7 @@ namespace Fixes
                 PID = Convert.ToInt32(PII.Replace(".mon", ""));
                 //System.Windows.MessageBox.Show(PID.ToString());
                 var file = PDCore.ToshibaImport.IO.getMonFileData(path);
-                PToshiba Process = PDCore.ToshibaImport.Analytics.AnalyseProcess(file);
+                PExpToshiba Process = PDCore.ToshibaImport.Analytics.AnalyseProcess(file);
 
 
 

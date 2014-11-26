@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PDCore.Processes
 {
-    public class PToshiba : BaseProcess
+    public class PExpToshiba : BaseProcess
     {
-        public PToshiba()
+        public PExpToshiba()
         {
             UserID = -1;
             Workpieces = new List<BusinessObjects.Workpiece>();

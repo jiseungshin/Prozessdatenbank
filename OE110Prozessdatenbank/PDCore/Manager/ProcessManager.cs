@@ -646,7 +646,7 @@ namespace PDCore.Manager
 
 
 
-            PToshiba _p = new PToshiba();
+            PExpToshiba _p = new PExpToshiba();
 
             //get Workpieces 
             for (int i = 0; i < _references.Count; i++)
@@ -1433,7 +1433,7 @@ namespace PDCore.Manager
             _myCommunicator.executeTransactedQueries(_queries);
         }
 
-        public bool importToshibaProcesses(List<PToshiba> processes)
+        public bool importToshibaProcesses(List<PExpToshiba> processes)
         {
 
 
@@ -1451,7 +1451,7 @@ namespace PDCore.Manager
             List<string> _queries = new List<string>();
             List<MySQLCommunicator.ColumnValuePair> values = new List<MySQLCommunicator.ColumnValuePair>();
 
-            PToshiba Process = process as PToshiba;
+            PExpToshiba Process = process as PExpToshiba;
 
             if (update)
             {
@@ -1788,20 +1788,6 @@ namespace PDCore.Manager
 
                 _queries.Add(MySQLCommunicator.BuildUpdateQuery(DBExpMoore.Table, values_p, new MySQLCommunicator.ColumnValuePair() { Culumn = DBExpMoore.ID, Value = Process.ID }));
 
-                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Atmosphere + " = " + Process.Atmosphere.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Date + " = " + Process.Date.ToString("yyyy-MM-dd HH:mm:ss").ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Remark + " = " + Process.Remark.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.UserID + " = " + Process.UserID.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.GlassID + " = " + Process.GlassID.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.ResultID + " = " + Process.ResultID.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Cycles + " = " + Process.Cycles.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Force + " = " + Process.Force.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.PressTime + " = " + Process.PressTime.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.ProgramTitle + " = " + Process.ProgramTitle.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.RegionOfInterest + " = " + Process.ROI.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Tmax + " = " + Process.Tmax.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.Tmin + " = " + Process.Tmin.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
-                //_queries.Add("Update " + DBExpMoore.Table + " Set " + DBExpMoore.TOut + " = " + Process.TOut.ToDBObject() + " WHERE " + DBExpMoore.ID + "=" + Process.ID);
 
                 foreach (Workpiece wp in Process.Workpieces)
                 {

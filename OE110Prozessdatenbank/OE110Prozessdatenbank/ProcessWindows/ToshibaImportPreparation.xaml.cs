@@ -49,7 +49,7 @@ namespace OE110Prozessdatenbank.ProcessWindows
                 {
 
                     var file = PDCore.ToshibaImport.IO.getMonFileData(path);
-                    PToshiba process = PDCore.ToshibaImport.Analytics.AnalyseProcess(file);
+                    PExpToshiba process = PDCore.ToshibaImport.Analytics.AnalyseProcess(file);
                     process.File = file;
 
                     m_vm.addProcess(process, id);
