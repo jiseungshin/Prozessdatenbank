@@ -364,7 +364,7 @@ namespace PDCore.ToshibaImport
                 _result.TChangeLower = _result.TLower_First;
             }
 
-            if (abovePAverageCount <= 15)
+            if (abovePAverageCount <= 5)
             {
                 _result.TChangeUpper = _result.TUpper_First;
                 _result.TChangeLower = _result.TLower_First;
