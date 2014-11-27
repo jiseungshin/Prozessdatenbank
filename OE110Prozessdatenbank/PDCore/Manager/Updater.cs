@@ -75,7 +75,15 @@ namespace PDCore.Manager
         int i = 0;
         private void OnChanged(object source, FileSystemEventArgs e)
         {
-            OnUpdateTrigger();           
+            if (i == 0)
+            {
+                OnUpdateTrigger();
+                i++;
+            }
+            else
+            {
+                i = 0;
+            }
         }
     }
 }

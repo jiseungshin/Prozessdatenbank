@@ -88,12 +88,12 @@ namespace OE110Prozessdatenbank
         {
             g_selector.Visibility = System.Windows.Visibility.Visible;
             Cursor = Cursors.Wait;
-            m_grindingControl = new MainViews.MV_Grinding();
-            m_coatingControl = new MainViews.MV_Coating();
-            m_processingControlTest = new MainViews.MV_ProTestStation();
-            m_processingControlMoore = new MainViews.MV_ProMoore();
-            m_analysingControl = new MainViews.MV_PostProcessing();
-            m_processingControlToshiba = new MainViews.MV_ProToshiba();
+            //m_grindingControl = new MainViews.MV_Grinding();
+            //m_coatingControl = new MainViews.MV_Coating();
+            //m_processingControlTest = new MainViews.MV_ProTestStation();
+            //m_processingControlMoore = new MainViews.MV_ProMoore();
+            //m_analysingControl = new MainViews.MV_PostProcessing();
+            //m_processingControlToshiba = new MainViews.MV_ProToshiba();
             
             if (PDCore.Manager.UserManager.CurrentUser!=null)
             {

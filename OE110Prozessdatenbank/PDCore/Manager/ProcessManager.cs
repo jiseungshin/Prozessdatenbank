@@ -142,7 +142,7 @@ namespace PDCore.Manager
                 case "PDCore.Processes.PDECoatingCemecon":
                     saveDeCoatingCemeconProcess(process, update);
                     break;
-                case "PDCore.Processes.PToshiba":
+                case "PDCore.Processes.PExpToshiba":
                     saveExpToshibaProcess(process, update);
                     break;
             }

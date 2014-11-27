@@ -90,18 +90,36 @@
                 </Style>
             </ListView.ItemContainerStyle>
             <ListView.View>
-                <GridView><GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=Exp_Toshiba_ID}" Width="130"/>
-                    <GridViewColumn Header="Datum" DisplayMemberBinding="{Binding Path=Date, Converter={StaticResource DateConverter}}" Width="130"/>
-                    <GridViewColumn Header="Bearbeiter" DisplayMemberBinding="{Binding Path=Token}" Width="90"/>
-                    <GridViewColumn Header="Werkstück untere Achse" DisplayMemberBinding="{Binding Path=Lower}" Width="150"/>
-                    <GridViewColumn Header="Werkstück obere Achse" DisplayMemberBinding="{Binding Path=Upper}" Width="150"/>
-                    <GridViewColumn Header="Glassorte" DisplayMemberBinding="{Binding Glass_Name,Converter={StaticResource NullToString}}" Width="90"/>
-                    <GridViewColumn Header="Glasbezeichnung" DisplayMemberBinding="{Binding GlassName,Converter={StaticResource NullToString}}" Width="110"/>
+                <GridView><GridViewColumn Header="ID" DisplayMemberBinding="{Binding Exp_Toshiba_ID}" Width="130"/>
+                    <GridViewColumn Header="Datum" DisplayMemberBinding="{Binding Date, Converter={StaticResource DateConverter}}" Width="130"/>
+                    <GridViewColumn Header="Bearbeiter" DisplayMemberBinding="{Binding Token}" Width="90"/>
+                    <GridViewColumn Header="Werkstück untere Achse" Width="300">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Width="300">
+                                    <Label Content="{Binding LowerWPLabel}"></Label>
+                                    <Label Content="{Binding LowerProtective}"></Label>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Werkstück untere Achse" Width="300">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Width="300">
+                                    <Label Content="{Binding UpperWPLabel}"></Label>
+                                    <Label Content="{Binding UpperProtective}"></Label>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Glassorte" DisplayMemberBinding="{Binding GlassName,Converter={StaticResource NullToString}}" Width="90"/>
+                    <GridViewColumn Header="Glasbezeichnung" DisplayMemberBinding="{Binding LensName,Converter={StaticResource NullToString}}" Width="110"/>
                     <GridViewColumn Header="PV" Width="30">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Width="30">
-                                    <Ellipse x:Name="rb_g" HorizontalAlignment="Left" Fill="{Binding Glass_PV_Category, Converter={StaticResource PVConv}}" Height="12" Margin="4,0,0,0" Stroke="#FF4D4D4D" VerticalAlignment="Top" Width="12"/>
+                                    <Ellipse x:Name="rb_g" HorizontalAlignment="Left" Fill="{Binding PV, Converter={StaticResource PVConv}}" Height="12" Margin="4,0,0,0" Stroke="#FF4D4D4D" VerticalAlignment="Top" Width="12"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -111,7 +129,7 @@
             </ListView.View>
         </ListView>
         <Label Content="Suche:" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" IsEnabled="False" Height="23" Margin="59,49,0,0" TextWrapping="Wrap" Text="{Binding Filter,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="185"/>
+        <TextBox HorizontalAlignment="Left" IsEnabled="True" Height="23" Margin="59,49,0,0" TextWrapping="Wrap" Text="{Binding Filter,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="185"/>
         <ComboBox HorizontalAlignment="Left" Margin="249,49,0,0" ItemsSource="{Binding FilterCriteria}" SelectedItem="{Binding Criterium}" DisplayMemberPath="Name" VerticalAlignment="Top" Width="151"/>
     </Grid>
 </UserControl>

@@ -80,6 +80,7 @@ namespace OE110Prozessdatenbank.MainViews
 
         private string m_filter = "";
         private FilterCriteria m_criteria = ProcessManager.Instance.FilterCriteria[0];
+        private DataSet m_processedData;
         public VMProcessingToshiba()
         {
             ProcessManager.Instance.newProcesses += Instance_newProcesses;
@@ -112,7 +113,7 @@ namespace OE110Prozessdatenbank.MainViews
             {
                 if (value != "")
                 {
-                    m_filter = " WHERE " + m_criteria.DatabaseField + " LIKE ('%" + value + "%')";
+                    m_filter = " WHERE " + DBExpToshibaView.UpperWP + " LIKE ('%" + value + "%')";
                 }
                 else
                     m_filter = value;

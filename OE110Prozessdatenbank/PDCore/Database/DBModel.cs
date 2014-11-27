@@ -432,6 +432,8 @@ namespace PDCore.Database
         public static string LowerRef { get { return "LowerReference"; } }
     }
 
+   
+
     public static class DBExpToshibaMachineData
     {
         public static string Table { get { return "Exp_Toshiba_MData"; } }
@@ -481,6 +483,20 @@ namespace PDCore.Database
         public static string T_start_upper { get { return "T_start_upper"; } }
         public static string T_start_lower { get { return "T_start_lower"; } }
 
+    }
+
+    public static class DBExpToshibaView
+    {
+        public static string View { get { return "ExpToshibaView"; } }
+        public static string ID { get { return "Exp_Toshiba_ID"; } }
+        public static string UpperWP { get { return "UpperWPLabel"; } }
+        public static string LowerWP { get { return "LowerWPLabel"; } }
+        public static string LensName { get { return "LensName"; } }
+        public static string GlassName { get { return "GlassName"; } }
+        public static string UserToken { get { return "Token"; } }
+        public static string UpperLayerProtective { get { return "UpperProtective"; } }
+        public static string LowerLayerProective { get { return "LowerProtective"; } }
+        public static string PV { get { return "PV"; } }
     }
 
     public static class DBEnum
